@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Programme fiscal">
+  <!-- Même grammaire que l'icône du simulateur de retraite : le carré de la
+       charte, et un tracé Lucide 1.46.0 (ISC) posé sur la grille de 24 au trait
+       de 2. Ici « percent » : le programme fiscal tient dans un taux. -->
+  <rect width="32" height="32" rx="7" fill="#7a2e1e"/>
+  <g transform="translate(4 4)" fill="none" stroke="#fbfaf7" stroke-width="2"
+     stroke-linecap="round" stroke-linejoin="round">
+    <path d="M19 5 5 19" />
+    <circle cx="6.5" cy="6.5" r="2.5" />
+    <circle cx="17.5" cy="17.5" r="2.5" />
+  </g>
+</svg>
