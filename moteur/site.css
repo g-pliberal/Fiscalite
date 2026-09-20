@@ -1,0 +1,92 @@
+/* Les quelques règles propres au site du programme fiscal.
+   Elles sont chargées APRÈS moteur/style.css, qui vient tel quel du dépôt
+   retraitecomptenotionelle : c'est le seul point de contact prévu par cette
+   feuille — « un hôte qui voudrait ajuster une couleur les redéfinit dans une
+   feuille chargée après celle-ci ». Rien n'est modifié dans style.css, pour
+   qu'une mise à jour de la charte se recopie sans conflit. */
+
+/* Le simulateur de la page Revenus : trois champs, un résultat. Il est posé
+   sur du crème, comme tout ce qu'on remplit sur ce site-là. */
+.calculette .champs {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(11rem, 100%), 1fr));
+  gap: 1rem 1.25rem; margin: 1.25rem 0 0; align-items: end;
+}
+.calculette label { display: block; font-size: 0.85rem; font-weight: 700;
+                    letter-spacing: 0.06em; text-transform: uppercase; }
+.calculette input {
+  width: 100%; margin-top: 0.35rem; padding: 0.7rem 0.8rem;
+  font-size: 1.0625rem; font-variant-numeric: tabular-nums; border-radius: 0;
+  font-family: inherit;
+}
+/* Le résultat partage la frise des « repères » de la charte, mais sur crème :
+   les filets et l'or doivent y passer aux teintes sombres, sans quoi l'or sur
+   crème tomberait sous le plancher de contraste. */
+.creme .fiches.reperes { border-color: var(--creme-trait); }
+.creme .fiches.reperes .fiche { box-shadow: 1px 0 0 var(--creme-trait); }
+.creme .fiches.reperes .fiche .valeur { color: var(--sur-creme); }
+.creme .fiches.reperes .fiche .etiquette { color: var(--sur-creme-doux); }
+
+/* Le solde du simulateur : bénéficiaire net ou contributeur net. La couleur ne
+   porte pas seule l'information — le signe du montant et la mention écrite la
+   portent aussi —, elle ne fait que la confirmer. */
+.calculette .sens { font-weight: 700; }
+
+/* Une objection et sa réponse. C'est la structure de `section.cle` de la
+   charte, dont ces pages ne gardent que la question et le texte. */
+.objection > .question { margin: 0; }
+.objection > .reponse > p:first-child { margin-top: 0.5rem; }
+
+/* Les deux colonnes d'un « avant / après » : ce qui est supprimé, ce qui le
+   remplace. Elles doivent se lire d'un coup d'œil, donc côte à côte tant que
+   la place le permet. */
+.bascules {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(19rem, 100%), 1fr));
+  gap: 1.5rem; margin: 2rem 0;
+}
+.bascules > .colonne { background: var(--fond-carte); border-top: 3px solid var(--trait-champ);
+                       padding: 1.25rem 1.4rem; }
+.bascules > .colonne.cible { border-top-color: var(--or); }
+.bascules > .colonne > h3 { margin-top: 0; }
+.bascules > .colonne > ul { margin-bottom: 0; }
+
+/* Le glossaire : un terme, sa définition. Une liste de définitions reste une
+   liste de définitions — c'est ce que `<dl>` dit —, mais le terme doit se
+   détacher de sa définition sans compter sur le seul gras. */
+.glossaire { margin: 2rem 0; }
+.glossaire > dt {
+  margin-top: 1.5rem; padding-top: 0.9rem; border-top: 1px solid var(--trait);
+  font-weight: 900; text-transform: uppercase; letter-spacing: -0.01em;
+  font-size: 1.0625rem;
+}
+.glossaire > dd { margin: 0.4rem 0 0; max-width: 46rem; color: var(--texte-doux); }
+
+/* La « précision » d'un repère posé sur du crème. La charte la peint en
+   `--texte-doux`, un crème atténué mesuré POUR LE VERT PROFOND : sur crème, il
+   tombe à 1,3:1 et le texte disparaît. Les autres textes secondaires du panneau
+   crème sont déjà repris par la charte (`.discret`, `.aide`, `.calcul`,
+   `label`) ; celui-là ne l'était pas, parce que la frise des repères n'y
+   figurait jusqu'ici jamais. */
+.creme .fiches.reperes .fiche .precision { color: var(--sur-creme-doux); }
+
+/* Le titre d'un pilier est un lien vers la page qui le détaille. Il garde la
+   composition de la charte — serif, filet au-dessus — et ne s'annonce pas par
+   un soulignement permanent, qui hacherait les huit promesses : le survol et
+   le focus le donnent, et la carte entière dit déjà qu'on peut cliquer. */
+.engagements .promesse a {
+  color: inherit; text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.engagements .promesse a:hover,
+.engagements .promesse a:focus-visible {
+  color: var(--or); border-bottom-color: var(--or);
+}
+
+/* Onze onglets ne tiennent pas sur un téléphone : ils s'y replient sur quatre
+   rangées, soit près d'un quart de l'écran — et la charte le dit elle-même,
+   « un bandeau collé qui mange un quart de l'écran ne colle plus rien
+   d'utile ». Sous 48 rem il cesse donc d'être collé : on le retrouve en
+   remontant, et l'écran entier sert à lire. Au-dessus, il reste collé, parce
+   qu'il n'y prend qu'une rangée. */
+@media (max-width: 48rem) {
+  header.bandeau { position: static; }
+}

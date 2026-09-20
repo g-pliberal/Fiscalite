@@ -1,0 +1,4 @@
+# Rien à ignorer ici sauf ce que Python laisse derrière lui : les pages du
+# site, elles, sont versionnées à dessein (voir README.md).
+__pycache__/
+*.pyc

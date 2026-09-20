@@ -1,0 +1,28 @@
+# Le site est fait de fichiers écrits par un script ET versionnés : servir la
+# page ne demande rien, mais rien ne garantit non plus que le .html du dépôt
+# corresponde encore au script. C'est ce que ce contrôle vérifie, à chaque
+# poussée — avec la vérification des liens et des ancres, qu'un site statique
+# n'a aucun compilateur pour lui signaler.
+
+name: Vérifier les pages
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verifier:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Les pages sont-elles à jour ?
+        run: python scripts/construire_site.py --verifier
+      - name: Balises, liens, ancres, ressources
+        run: python scripts/verifier_pages.py

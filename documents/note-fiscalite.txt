@@ -1,0 +1,882 @@
+Note interne — Chapitre Fiscalité
+Remettre à plat le système fiscal français pour libérer le
+travail, la production et la croissance
+1. Objet de la note
+La présente note fixe la doctrine fiscale du programme.
+Elle ne propose pas une réforme paramétrique de la fiscalité française, mais une remise à
+plat complète du système fiscal. L’objectif est de sortir d’un modèle illisible, instable et
+anti-productif pour construire une architecture simple, lisible, pro-croissance et compatible
+avec un État social recentré sur l’universel.
+La fiscalité française actuelle cumule trop souvent les défauts suivants :
+● elle taxe lourdement le travail ;
+● elle pénalise la production avant même le bénéfice ;
+● elle multiplie les niches, exonérations, régimes spéciaux et effets de seuil ;
+● elle empile fiscalité nationale, sociale et locale sans responsabilité claire ;
+● elle entretient une redistribution opaque ;
+● elle décourage la mobilité résidentielle, l’investissement productif et l’augmentation
+de l’offre foncière ;
+● elle donne à l’État le pouvoir de définir en permanence ce qui serait socialement ou
+économiquement désirable.
+Notre réforme fiscale repose sur une idée centrale :
+L’impôt doit financer la solidarité nationale et les biens publics, non
+organiser l’économie à la place des individus.
+Le programme fiscal doit donc être compris comme une réforme pro-croissance avant d’être
+une réforme de rendement. La baisse durable de la pression fiscale globale ne peut venir
+que d’un État moins dépensier, d’une économie plus productive et d’assiettes fiscales moins
+destructrices.
+
+2. Principes directeurs
+
+2.1. Séparer clairement impôt, cotisation et
+redistribution
+Le système actuel mélange trois logiques qui devraient être distinguées.
+L’impôt
+L’impôt finance :
+● les missions régaliennes ;
+● les biens publics ;
+● la solidarité nationale ;
+● le revenu universel ;
+● le socle universel de santé ;
+● les dépenses publiques non individualisables.
+Il doit être large, simple, transparent et économiquement peu distorsif.
+Les cotisations
+Les cotisations ne doivent financer que des droits contributifs.
+Une cotisation est légitime lorsqu’elle ouvre un droit individualisable : retraite contributive,
+assurance chômage contributive, indemnités journalières, prestations liées à une carrière ou
+à une activité professionnelle.
+À l’inverse, lorsqu’un prélèvement ne crée pas de droit individualisé, il doit être assumé
+comme un impôt et intégré à l’impôt général.
+La redistribution
+La redistribution doit être simple, automatique et visible.
+Elle ne doit plus reposer principalement sur des taux différenciés, des niches fiscales, des
+prestations conditionnelles ou des effets de seuil. Elle doit passer d’abord par le revenu
+universel.
+Le couple central du nouveau système sera donc :
+Impôt proportionnel + revenu universel.
+Chacun contribue en proportion de ses revenus ; chacun reçoit une part universelle de la
+solidarité nationale. Le système devient progressif non par la complexité du barème, mais
+par le versement forfaitaire du revenu universel.
+
+2.2. Taxer moins les bases productives
+
+La réforme vise à déplacer la fiscalité hors des bases les plus nocives :
+● travail ;
+● production ;
+● investissement productif ;
+● mobilité résidentielle ;
+● électricité bas-carbone ;
+● transmission d’entreprise productive.
+Elle assume en contrepartie une fiscalité plus claire sur :
+● la consommation ;
+● les revenus larges ;
+● la rente foncière ;
+● les externalités carbone ;
+● les transmissions patrimoniales reçues.
+La doctrine peut se résumer ainsi :
+Taxer moins ce qui produit, davantage ce qui relève de la rente, et
+redistribuer simplement.
+
+2.3. Supprimer l’illusion de la gratuité
+Un système fiscal sain doit rendre visibles les coûts.
+La fiche de paie doit faire apparaître le coût total du travail. Les impôts locaux doivent être
+compréhensibles. Le financement du réseau électrique ne doit pas être dissimulé dans des
+taxes absurdes sur le kWh. La fiscalité carbone doit être assumée comme un signal-prix et
+redistribuée explicitement.
+La transparence fiscale est une condition de la responsabilité démocratique.
+
+3. Architecture cible du système fiscal
+La réforme repose sur huit piliers :
+1. fusion de l’IR, de la CSG et de la CRDS dans un impôt proportionnel unique ;
+2. TVA à taux unique cible de 25 % ;
+3. revenu universel indexé sur la croissance réelle par habitant ;
+4. Land Value Tax nationale sur la valeur du foncier ;
+5. suppression immédiate des impôts les plus nocifs ;
+6. impôt sur les sociétés simplifié et progressivement abaissé ;
+
+7. fiscalité carbone lisible avec dividende carbone ;
+8. fiscalité des transmissions fondée sur le receveur.
+
+4. Impôt proportionnel sur les revenus
+4.1. Fusion IR-CSG-CRDS
+L’impôt sur le revenu, la CSG et la CRDS seront fusionnés dans un impôt proportionnel
+unique sur les revenus personnels.
+Cette fusion est centrale. Il ne s’agit pas d’ajouter un nouvel impôt, mais de remplacer un
+ensemble de prélèvements superposés par un impôt général lisible.
+L’impôt proportionnel remplacera notamment :
+● l’impôt sur le revenu ;
+● la CSG ;
+● la CRDS ;
+● les prélèvements sociaux non contributifs sur les revenus du capital.
+La CSG et la CRDS ne finançant pas de droits contributifs individualisés, elles relèvent de
+l’impôt général et doivent être assumées comme telles.
+
+4.2. Taux cible
+Le taux exact sera déterminé par le bouclage budgétaire général.
+L’objectif politique est de maintenir ce taux sous les 30 %, grâce :
+● à l’élargissement de l’assiette ;
+● à la fusion IR-CSG-CRDS ;
+● à la suppression des niches ;
+● à la TVA à taux unique ;
+● à la LVT ;
+● à la réforme des prestations sociales autour du revenu universel ;
+● à la réduction des dépenses publiques non prioritaires.
+Le taux ne doit donc pas être fixé dogmatiquement avant le chiffrage complet, mais la
+contrainte politique est claire :
+un impôt proportionnel large, lisible, et si possible inférieur à 30 %.
+
+4.3. Assiette
+L’impôt proportionnel portera sur l’ensemble des revenus personnels :
+● salaires ;
+● revenus indépendants ;
+● pensions ;
+● revenus de remplacement imposables ;
+● dividendes ;
+● intérêts ;
+● revenus fonciers nets ;
+● plus-values mobilières réalisées ;
+● revenus professionnels et assimilés ;
+● distributions de sociétés ;
+● revenus étrangers imposables en France selon les conventions fiscales.
+À revenu économique équivalent, le traitement fiscal doit être équivalent.
+La réforme doit limiter les arbitrages artificiels entre salaire, dividende, plus-value, revenu
+professionnel ou revenu patrimonial.
+
+4.4. Individualisation complète
+Le foyer fiscal est supprimé comme unité de base de l’impôt sur le revenu.
+L’impôt proportionnel est strictement individuel.
+La politique familiale ne disparaît pas, mais elle est traitée explicitement par :
+● le revenu universel enfant ;
+● un éventuel crédit familial ;
+● des dispositifs dédiés aux familles monoparentales ;
+● une redistribution horizontale assumée entre ménages sans enfant et ménages avec
+enfants.
+Cette individualisation maximale simplifie le système et évite de faire dépendre l’imposition
+d’un individu de la situation conjugale ou patrimoniale de son foyer.
+
+4.5. Plus-values mobilières
+Les plus-values mobilières seront imposées :
+● à la réalisation ;
+● au taux proportionnel ;
+
+● sur les gains nets ;
+● avec report des moins-values ;
+● sur une base réelle après inflation pour les détentions longues.
+L’objectif est de taxer les gains effectifs sans pénaliser artificiellement l’épargne longue par
+l’inflation.
+
+4.6. Revenus fonciers
+Les revenus locatifs restent imposés comme les autres revenus, mais uniquement sur une
+base nette.
+La LVT taxe la rente foncière attachée au terrain ; l’impôt proportionnel taxe le revenu
+effectivement encaissé après charges.
+Ainsi, pour éviter la double imposition de la rente foncière :
+● la LVT est déductible du revenu locatif imposable ;
+● les charges réelles sont déductibles ;
+● l’entretien et la gestion sont déductibles ;
+● l’amortissement du bâti peut être pris en compte ;
+● le terrain lui-même n’est pas amortissable.
+Formulation de principe :
+Le sol est taxé comme une rente ; le loyer net est taxé comme un revenu.
+
+5. Revenu universel et progressivité
+réelle
+5.1. Le revenu universel recrée la progressivité
+La suppression du barème progressif ne signifie pas la disparition de la progressivité.
+La progressivité est assurée par le revenu universel.
+Exemple stylisé avec un revenu universel adulte de 600 €/mois, soit 7 200 €/an, et un impôt
+proportionnel de 25 % :
+Revenu Impôt RU Solde fiscal-social Taux net effectif
+annuel net
+
+0 € 0 € +7 200 € +7 200 € bénéficiaire net
+10 000 € -2 500 € +7 200 € +4 700 € bénéficiaire net
+20 000 € -5 000 € +7 200 € +2 200 € bénéficiaire net
+30 000 € -7 500 € +7 200 € -300 € 1 %
+50 000 € -12 500 € +7 200 € -5 300 € 10,6 %
+100 000 € -25 000 € +7 200 € -17 800 € 17,8 %
+200 000 € -50 000 € +7 200 € -42 800 € 21,4 %
+Le taux marginal est constant, mais le taux moyen augmente avec le revenu.
+Le système est donc redistributif sans être confiscatoire, et sans créer de trappes à
+inactivité.
+
+5.2. Indexation du RU
+Le revenu universel sera indexé sur le PIB réel par habitant, lissé sur trois ans.
+Cette règle poursuit trois objectifs :
+1. donner à chaque citoyen un intérêt direct à la croissance ;
+2. éviter une indexation automatique sur l’inflation qui rigidifierait la dépense publique ;
+3. lier la progression du revenu universel à la prospérité réelle du pays.
+Le RU ne sera donc pas automatiquement indexé sur les prix.
+En cas de choc inflationniste exceptionnel, le Parlement restera souverain pour voter une
+revalorisation exceptionnelle, mais celle-ci devra être explicite, financée et temporaire.
+Formule politique :
+Le revenu universel est une part de la prospérité commune, pas une
+dépense indexée sans limite.
+
+6. TVA à taux unique cible de 25 %
+6.1. Principe
+
+La TVA doit devenir un grand impôt universel de rendement, à taux unique cible de 25 %.
+L’objectif n’est pas d’augmenter aveuglément la fiscalité sur la consommation, mais de
+remplacer une partie des impôts les plus nocifs sur le travail, la production et la mobilité par
+un impôt plus large, plus simple et plus difficile à éviter.
+La TVA à taux unique permet :
+● de supprimer les arbitrages sectoriels ;
+● de réduire les niches déguisées ;
+● de limiter le lobbying fiscal ;
+● de rendre la fiscalité plus lisible ;
+● d’éviter que l’État définisse politiquement ce qui serait ou non “de première
+nécessité”.
+La doctrine est claire :
+À terme, l’État n’a pas vocation à définir par la TVA ce qui est essentiel ou
+non. La justice sociale doit passer par le revenu universel, non par une
+mosaïque de taux réduits.
+
+6.2. Transition
+La convergence vers un taux unique de 25 % doit être progressive, notamment le temps que
+le revenu universel monte pleinement en charge.
+Les taux réduits existants seront donc appelés à disparaître, mais leur extinction pourra être
+lissée.
+Il ne s’agit pas de conserver des exceptions permanentes, mais d’éviter un choc de prix
+brutal sur certains biens aujourd’hui fortement subventionnés fiscalement.
+La compensation sociale ne se fera pas par le maintien indéfini de taux réduits, mais par le
+RU.
+
+7. Land Value Tax
+7.1. Principe
+La fiscalité immobilière actuelle est l’un des exemples les plus nets d’empilement inefficace.
+Elle taxe :
+
+● la détention ;
+● la transaction ;
+● la transmission ;
+● la construction ;
+● les loyers ;
+● les plus-values ;
+● la vacance ;
+● les résidences secondaires ;
+● parfois l’investissement ou la rénovation.
+Elle pénalise la mobilité, freine la circulation du foncier et favorise les situations acquises.
+Le programme remplace cette logique par une Land Value Tax, ou taxe sur la valeur du
+foncier nu.
+La LVT taxe la valeur du terrain, non celle du bâtiment.
+Elle ne pénalise donc pas :
+● la construction ;
+● la rénovation ;
+● la densification ;
+● l’entretien ;
+● l’investissement productif sur le terrain.
+Elle taxe la rente d’emplacement, créée par la rareté du sol, les infrastructures publiques,
+l’urbanisme et l’attractivité collective.
+
+7.2. Taux cible
+Le taux cible de travail est fixé à 2 % de la valeur du foncier nu.
+Ce taux pourra être ajusté selon le bouclage budgétaire et la qualité du cadastre foncier.
+L’ordre de grandeur de rendement visé est d’environ 120 Md€ à terme, sous réserve
+d’évaluation.
+
+7.3. Taux national, recette partagée et péréquation
+La LVT aura un taux national.
+Son produit pourra être partagé entre l’État et les collectivités territoriales, avec un
+mécanisme de péréquation.
+
+La fiscalité locale fera l’objet d’un chapitre dédié, mais le principe est déjà fixé :
+La LVT doit être nationale dans son taux, mais compatible avec une
+ressource locale lisible et péréquée.
+Cela évite que les communes les plus riches en foncier captent seules toute la rente, et que
+chaque collectivité négocie ses propres exceptions.
+
+7.4. Suppression de la fiscalité immobilière existante
+La LVT a vocation à remplacer l’essentiel de la fiscalité immobilière actuelle.
+Sont supprimés :
+● droits de mutation à titre onéreux ;
+● taxation spécifique des plus-values immobilières ;
+● taxe d’habitation sur résidences secondaires ;
+● taxes sur logements vacants ;
+● surtaxes locales sur résidences secondaires ;
+● IFI ;
+● fiscalités immobilières redondantes ;
+● fiscalité spécifique de détention remplacée par la LVT.
+Les locations de courte durée ne font pas l’objet d’une fiscalité spéciale de détention : elles
+sont taxées comme une activité économique normale.
+Les nuisances éventuelles liées aux locations touristiques relèvent de l’urbanisme, de la
+police locale ou de la réglementation économique, non d’un empilement de micro-taxes.
+
+7.5. Suppression immédiate des DMTO
+Les droits de mutation à titre onéreux sont parmi les impôts les plus nocifs du système
+français.
+Ils taxent la mobilité résidentielle, freinent les déménagements, réduisent la fluidité du
+marché du logement et pénalisent les ménages qui doivent changer de lieu de vie ou
+d’emploi.
+Ils seront supprimés immédiatement.
+Les frais strictement administratifs et les émoluments réglementés des notaires seront
+traités séparément.
+Il ne faut donc pas parler de “suppression des frais de notaire”, mais de :
+
+suppression des droits de mutation à titre onéreux.
+
+7.6. Plus-values immobilières
+La taxation spécifique des plus-values immobilières est supprimée.
+Avec une LVT forte, la rente foncière est déjà taxée chaque année. Maintenir une taxation
+spécifique des plus-values reviendrait à réintroduire un empilement contradictoire.
+La baisse de la valeur du foncier induite par la LVT réduira par ailleurs une partie des
+plus-values latentes.
+Si la réforme provoque un surcroît de ventes, c’est un effet positif : le but est précisément de
+faire circuler le foncier et de réduire la rétention spéculative.
+
+7.7. Propriétaires à faible revenu
+La LVT doit rester aussi pure que possible. Il ne faut pas créer d’exonérations permanentes
+selon le revenu, car cela permettrait à des propriétaires riches en foncier mais pauvres en
+revenu de conserver indéfiniment des terrains rares sans en supporter le coût d’opportunité.
+En revanche, une transition humaine est nécessaire.
+Le programme prévoit :
+● un report de paiement pendant les cinq premières années de mise en place ;
+● puis, à terme, la possibilité de bénéficier de jusqu’à deux ans de crédit en cas de
+mise en vente du bien ;
+● une créance fiscale garantie sur le bien en cas de report ;
+● récupération à la vente ou à la succession.
+L’objectif n’est pas de brutaliser les ménages, mais de faire circuler le foncier à terme.
+
+7.8. Foncier agricole, forestier et naturel
+La LVT s’applique aussi au foncier non bâti, selon sa valeur réelle.
+Il faut éviter les exonérations permanentes qui recréeraient une fiscalité mitée. En revanche,
+certains terrains fournissent des services écologiques réels : stockage de carbone,
+biodiversité, gestion de l’eau, protection des sols.
+Ces services peuvent être rémunérés explicitement.
+
+La doctrine est donc :
+pas d’exonération fiscale opaque, mais une rémunération budgétée et
+conditionnée des services écosystémiques réels.
+Exemples :
+Terrain Traitement
+Terrain agricole productif LVT sur valeur agricole réelle
+Forêt exploitée durablement LVT + paiement possible pour services écologiques
+Zone humide protégée LVT faible si valeur économique faible + rémunération
+écologique possible
+Terrain constructible non bâti en LVT pleine
+zone tendue
+Friche spéculative LVT pleine
+
+8. Suppression des impôts de
+production
+8.1. Principe
+Une entreprise ne doit pas être taxée parce qu’elle produit.
+Elle doit être imposée lorsqu’elle réalise un bénéfice, distribue un revenu, consomme une
+ressource rare ou génère une externalité.
+Les impôts de production sont particulièrement destructeurs parce qu’ils frappent l’activité
+avant même qu’elle ne soit rentable. Ils pénalisent l’industrie, les marges faibles, les
+entreprises en croissance et les activités capitalistiques.
+Le programme assume donc la suppression immédiate des impôts de production les plus
+nocifs.
+
+8.2. Suppressions immédiates
+Seront supprimées immédiatement :
+● la C3S ;
+
+● la CVAE résiduelle.
+Ces impôts taxent le chiffre d’affaires ou la valeur ajoutée productive, indépendamment de la
+rentabilité effective de l’entreprise.
+Ils sont incompatibles avec une stratégie de réindustrialisation et de croissance.
+
+8.3. CFE et fiscalité locale économique
+La CFE sera traitée dans le cadre de la bascule vers la LVT professionnelle et de la réforme
+de la fiscalité locale.
+L’objectif est de ne plus taxer l’existence d’une activité productive, mais la valeur foncière
+réellement occupée.
+Les taxes sectorielles sur chiffre d’affaires feront l’objet d’un audit général, avec suppression
+par défaut sauf justification claire liée à une externalité.
+
+9. Impôt sur les sociétés
+9.1. Point de départ
+L’impôt sur les sociétés est maintenu au départ autour de son niveau actuel, soit environ 25
+%.
+Il doit ensuite converger vers une cible de 15 à 20 %.
+Cette baisse doit être financée par :
+● la suppression ou réduction massive des niches ;
+● l’élargissement de l’assiette ;
+● la stabilité fiscale ;
+● la croissance de l’investissement et des bases imposables.
+
+9.2. Suppression des niches et du CIR à terme
+Un IS plus bas suppose une assiette plus propre.
+Le programme assume donc la suppression ou le recentrage massif des niches d’IS,
+notamment du crédit d’impôt recherche.
+
+À terme, le CIR doit être supprimé.
+L’innovation doit être financée par des instruments assumés :
+● commande publique ;
+● concours technologiques ;
+● achats publics innovants ;
+● marchés de précommercialisation ;
+● agences de financement de rupture ;
+● partenariats de recherche évalués.
+La doctrine :
+Mieux vaut un IS bas et une commande publique stratégique qu’un IS
+élevé mité par des niches fiscales permanentes.
+
+9.3. Articulation IS / dividendes
+Les bénéfices distribués seront imposés deux fois :
+1. à l’IS ;
+2. puis, en cas de distribution, à l’impôt proportionnel personnel.
+La baisse progressive de l’IS vers 15-20 % vise à éviter une taxation combinée excessive du
+capital productif.
+L’objectif n’est pas d’exonérer le capital, mais de ne pas pénaliser l’investissement productif
+par rapport à la consommation immédiate ou à la rente foncière.
+
+10. Fiscalité carbone
+10.1. Principe
+La fiscalité carbone doit fournir un signal-prix crédible, stable et lisible.
+L’objectif n’est pas de planifier d’en haut la transition écologique, secteur par secteur,
+technologie par technologie. L’objectif est d’envoyer aux ménages et aux entreprises un prix
+prévisible du carbone, afin que la transition se fasse autant que possible par adaptation
+organique :
+● substitution technologique ;
+● électrification des usages ;
+● efficacité énergétique ;
+
+● innovation ;
+● sobriété choisie ;
+● investissement privé ;
+● adaptation des chaînes de valeur.
+Le prix du carbone doit donc remplacer autant que possible la logique de normes,
+interdictions, subventions contradictoires et planification administrative.
+
+10.2. Prix plancher carbone
+Le programme défend un prix plancher carbone pluriannuel.
+La cible doctrinale de long terme est de l’ordre de 200 €/tCO₂.
+Cette cible doit être comprise comme une boussole, non comme un choc fiscal immédiat.
+Elle est cohérente avec l’ordre de grandeur déjà atteint implicitement par la fiscalité des
+carburants routiers, mais doit être appliquée de manière plus lisible, plus homogène et
+mieux redistribuée.
+Le prix plancher pourra compléter le marché européen du carbone lorsque celui-ci est
+insuffisant ou trop instable.
+
+10.3. Flexibilité et compétitivité
+La fiscalité carbone doit éviter les contournements par délocalisation.
+Une taxe carbone qui déplace les émissions plutôt que de les réduire ne rend service ni à
+l’économie ni au climat.
+Le programme assume donc une approche flexible :
+● priorité au marché carbone européen lorsque c’est possible ;
+● mécanismes d’ajustement aux frontières lorsque nécessaire ;
+● prise en compte des secteurs exposés à la concurrence internationale ;
+● trajectoire prévisible plutôt que chocs soudains ;
+● suppression des exemptions injustifiées mais prudence sur les risques de fuite
+carbone ;
+● coordination européenne autant que possible.
+La doctrine :
+Un bon prix carbone doit orienter les choix économiques, pas organiser la
+désindustrialisation.
+
+10.4. Dividende carbone
+Les recettes carbone seront reversées aux citoyens sous forme de dividende carbone.
+Ce dividende sera :
+● affiché séparément ;
+● versé avec le revenu universel ;
+● strictement fonction des recettes carbone collectées ;
+● non indexé indépendamment.
+Si les émissions baissent et que les recettes carbone diminuent, le dividende carbone
+diminue aussi. L’État ne devient donc pas dépendant de la fiscalité carbone pour financer
+ses dépenses permanentes.
+Ce mécanisme répond à l’objection sociale contre la fiscalité carbone :
+Le prix carbone renchérit les usages fossiles, mais sa recette est rendue
+aux citoyens.
+Les ménages modestes, qui émettent généralement moins que les ménages aisés, peuvent
+ainsi être bénéficiaires nets du dispositif.
+
+11. Fiscalité de l’électricité et
+financement des réseaux
+11.1. Pas de taxe spécifique sur l’électricité
+L’électricité bas-carbone ne doit pas être pénalisée fiscalement.
+Elle ne supportera donc pas de taxe spécifique de rendement hors TVA.
+La fiscalité énergétique doit distinguer clairement :
+● les énergies fossiles, qui émettent du CO₂ ;
+● l’électricité bas-carbone, qui permet de décarboner les usages.
+La doctrine :
+Le signal-prix doit favoriser l’électrification bas-carbone, non la pénaliser.
+
+11.2. Réseau électrique
+Les coûts de réseau ne doivent pas être financés principalement par une taxation
+proportionnelle au kWh consommé, car cela pénalise l’électrification et favorise certains
+comportements de contournement.
+Le financement devra reposer principalement sur :
+● une part fixe ;
+● la puissance souscrite ;
+● la capacité d’accès au réseau ;
+● éventuellement une contribution budgétaire de l’État lorsque l’intérêt général le
+justifie.
+Ce modèle permet de faire contribuer équitablement les autoconsommateurs, qui utilisent le
+réseau comme assurance collective, sans les exonérer de fait du coût de l’infrastructure.
+Formulation :
+Le réseau est une infrastructure de puissance et de sécurité
+d’approvisionnement ; son coût ne doit pas être dissimulé dans une
+pénalisation du kWh décarboné.
+
+12. Fiscalité des successions et
+donations
+12.1. Principe général
+Les donations et successions seront fusionnées dans un même régime.
+Elles seront imposées chez le receveur, non selon le lien de parenté.
+Chaque individu disposera d’un compte de réception patrimoniale sur l’ensemble de sa vie.
+Ce compte bénéficiera d’un abattement universel de 100 000 €.
+Au-delà, les transmissions reçues seront imposées au taux proportionnel commun.
+Formulation :
+Ce qui compte n’est pas le lien familial avec le donateur, mais le montant
+reçu par l’individu au cours de sa vie.
+
+12.2. Effets attendus
+Cette réforme permet :
+● de simplifier radicalement les droits de succession ;
+● de supprimer les écarts arbitraires selon le lien familial ;
+● de protéger les petites transmissions ;
+● de favoriser indirectement les familles nombreuses, chaque enfant disposant de son
+propre abattement ;
+● d’éviter les taux confiscatoires ;
+● de réduire les incitations à l’exil patrimonial ;
+● de mieux traiter les transmissions hors cadre familial traditionnel.
+
+12.3. Actifs illiquides
+Pour les actifs illiquides, l’impôt pourra être étalé ou reporté :
+● résidence principale ;
+● terres agricoles ;
+● forêts ;
+● parts d’entreprise non cotée ;
+● biens professionnels ;
+● actifs difficiles à vendre sans destruction de valeur.
+L’impôt pourra être garanti par une créance sur l’actif, récupérée à la cession ou à la
+succession suivante.
+Le but est d’éviter les ventes forcées tout en maintenant le principe d’imposition.
+
+13. Transmission d’entreprise
+13.1. Protéger l’entreprise productive
+La transmission d’une entreprise ne doit pas provoquer la vente forcée d’une activité
+productive.
+Mais elle ne doit pas devenir un véhicule d’optimisation permettant de transformer une
+fortune patrimoniale en transmission exonérée.
+La doctrine distingue donc :
+● actifs professionnels nécessaires à l’exploitation ;
+
+● actifs patrimoniaux passifs logés dans une société.
+Le régime favorable ne concerne que les premiers.
+
+13.2. Carry-over basis
+Le programme retient une logique de carry-over basis.
+Lorsqu’une entreprise est transmise :
+● il n’y a pas d’imposition immédiate si l’activité est conservée ;
+● le receveur reprend la base fiscale historique du donateur ;
+● la plus-value latente n’est pas effacée ;
+● l’imposition est reportée jusqu’à la cession.
+Ce mécanisme évite de tuer les entreprises au moment de la transmission, tout en
+empêchant l’effacement fiscal pur et simple des plus-values latentes.
+
+13.3. Cession
+En cas de cession :
+● la plus-value latente est imposée selon le régime commun ;
+● la plus-value créée après transmission est imposée chez le receveur ;
+● un étalement peut être prévu si la cession répond à un motif économique légitime.
+Sont des motifs économiques légitimes :
+● cession à un salarié ou repreneur industriel ;
+● restructuration nécessaire ;
+● recapitalisation ;
+● cession partielle pour régler une dette fiscale ;
+● sauvegarde de l’activité.
+En revanche, les cessions purement patrimoniales ne bénéficient pas d’un régime
+préférentiel automatique.
+
+13.4. Anti-abus
+Le régime favorable exclut :
+● holdings patrimoniales passives ;
+
+● immobilier locatif logé artificiellement dans une société ;
+● portefeuilles financiers passifs ;
+● trésorerie excessive non nécessaire à l’exploitation ;
+● actifs de jouissance ;
+● structures sans substance économique.
+Formule :
+On protège l’entreprise productive, pas l’enveloppe patrimoniale.
+
+14. Épargne retraite : Compte Retraite
+Universel Capitalisé
+14.1. Principe
+Le programme crée un Compte Retraite Universel Capitalisé, ou CRUC.
+Le CRUC est destiné à accompagner la montée en puissance d’un pilier de retraite par
+capitalisation, en complément du socle de répartition.
+Il doit être :
+● simple ;
+● portable ;
+● universel ;
+● peu coûteux ;
+● fiscalement stable ;
+● investi à long terme ;
+● accessible à tous les statuts.
+
+14.2. Régime fiscal TEE
+Le CRUC fonctionne selon un modèle TEE :
+Étape Traitement fiscal
+Versement Revenu déjà taxé
+Capitalisation Exonérée
+Sortie Exonérée
+
+L’État ne taxe donc l’épargne retraite qu’une seule fois.
+Ce modèle est plus lisible qu’un régime d’exonération à l’entrée, qui peut être perçu comme
+une niche pour hauts revenus.
+Formulation :
+Vous avez payé l’impôt une fois ; l’épargne longue vous appartient.
+
+14.3. Fonctionnement
+Le CRUC sera :
+● ouvert automatiquement à chaque adulte ;
+● alimenté par versements volontaires ;
+● abondable par l’employeur ;
+● portable entre statuts ;
+● investi par défaut dans des fonds diversifiés à horizon de retraite ;
+● assorti de frais plafonnés ;
+● soumis à des règles de sortie retraite.
+Pour les salariés, une adhésion par défaut avec possibilité de sortie pourra être envisagée.
+Cela permet une montée en puissance progressive sans obligation brutale.
+
+15. Exit tax
+Dans un système fiscal compétitif, stable et modéré, l’exit tax devient inutile.
+Elle sera supprimée.
+L’objectif n’est pas de retenir les contribuables par la menace, mais par l’attractivité du
+système fiscal.
+Les dispositifs anti-fraude de droit commun resteront applicables aux montages artificiels
+dépourvus de substance économique.
+Formulation :
+Un pays fiscalement compétitif n’a pas besoin de construire des murs à la
+sortie.
+
+16. Fiscalité des non-résidents
+La suppression de l’exit tax ne signifie pas l’abandon de toute souveraineté fiscale.
+Resteront imposés en France, selon les conventions fiscales applicables :
+● revenus de source française ;
+● foncier situé en France ;
+● entreprises imposables en France ;
+● établissements stables ;
+● transmissions portant sur des actifs français ou reçues par des résidents français
+selon les règles à définir.
+La doctrine est simple :
+Pas de fiscalité punitive du départ, mais une imposition normale des
+bases économiques françaises.
+
+17. Fiche de paie et transparence du coût
+du travail
+La réforme fiscale doit s’accompagner d’une refonte de la fiche de paie.
+La distinction entre cotisations salariales et patronales entretient une illusion : le salarié ne
+voit pas le coût total de son emploi.
+La fiche de paie cible doit afficher :
+Niveau Signification
+Salaire complet Coût total payé par l’employeur
+Cotisations contributives Droits individualisables ouverts
+Impôt général Financement de la solidarité et des biens
+publics
+Revenu universel Transfert universel reçu
+Salaire disponible Revenu réellement disponible
+Le citoyen doit pouvoir comprendre :
+● ce que coûte son emploi ;
+
+● ce qui finance ses droits ;
+● ce qui finance la solidarité ;
+● ce qu’il reçoit de la solidarité nationale.
+
+18. Fiscalité locale
+La fiscalité locale fera l’objet d’un chapitre dédié.
+La présente note fixe toutefois trois principes :
+1. la LVT deviendra une ressource centrale du nouveau système ;
+2. son taux sera national ;
+3. son produit sera partagé ou péréqué pour éviter l’explosion des inégalités
+territoriales.
+La suppression immédiate des DMTO devra être compensée dans le cadre de la réforme
+d’ensemble des collectivités territoriales.
+L’objectif est de faire le ménage dans l’empilement actuel, où le citoyen ne sait plus qui taxe,
+qui dépense et qui décide.
+
+19. Trajectoire de transition
+La réforme doit distinguer deux catégories d’impôts :
+1. les impôts très nocifs à supprimer immédiatement ;
+2. les impôts à faire converger progressivement vers le système cible.
+19.1. Suppressions immédiates
+Sont supprimés immédiatement :
+● DMTO ;
+● C3S ;
+● CVAE résiduelle ;
+● exit tax ;
+● fiscalité spécifique des plus-values immobilières ;
+● premières petites taxes redondantes et à faible rendement.
+19.2. Convergence progressive
+
+Convergent progressivement :
+● TVA vers taux unique cible de 25 % ;
+● LVT vers taux cible de 2 % ;
+● IS vers 15-20 % ;
+● suppression des niches ;
+● extinction du CIR ;
+● réforme de la fiscalité locale ;
+● financement des réseaux électriques par part fixe de puissance ;
+● bascule des cotisations non contributives vers l’impôt général.
+
+19.3. Séquence indicative
+Année 1
+● suppression DMTO ;
+● suppression C3S ;
+● suppression CVAE résiduelle ;
+● suppression exit tax ;
+● lancement du cadastre foncier économique ;
+● préparation administrative de la LVT ;
+● audit des niches fiscales ;
+● première réforme de la fiche de paie ;
+● annonce de la trajectoire TVA/LVT/IS/carbone.
+Années 2 et 3
+● montée en charge progressive de la LVT ;
+● convergence de la TVA vers le taux unique ;
+● mise en place du revenu universel ;
+● fusion IR-CSG-CRDS ;
+● suppression progressive des niches ;
+● réforme de la fiscalité locale ;
+● bascule des financements santé universels vers l’impôt ;
+● montée en puissance du CRUC ;
+● introduction du dividende carbone.
+Années 4 et 5
+● IS convergeant vers 15-20 % ;
+● extinction du CIR ;
+● stabilisation du système fiscal ;
+● évaluation de la LVT ;
+● baisse possible du taux proportionnel si croissance et dépenses le permettent ;
+● simplification résiduelle.
+
+20. Ordres de grandeur budgétaires
+Les montants ci-dessous constituent des masses de travail à consolider.
+Poste Ordre de grandeur / orientation
+Impôt proportionnel Taux à calibrer, objectif <30 %
+IR-CSG-CRDS
+TVA taux unique 25 % Rendement majeur, supérieur au système actuel selon
+assiette
+LVT 2 % Environ 120 Md€ cible à évaluer
+IS Maintien initial autour de 25 %, cible 15-20 %
+Suppression DMTO Coût brut important, assumé pour mobilité
+Suppression C3S Coût brut limité mais effet pro-production fort
+Suppression CVAE résiduelle Cohérence pro-production
+Dividende carbone Ne pèse pas sur budget net : recette reversée
+CRUC Coût fiscal limité en TEE, puisque versements non
+déductibles
+Successions/donations Rendement à calibrer selon abattement et taux
+Le bouclage budgétaire ne doit pas être recherché impôt par impôt, mais au niveau du
+système global :
+● hausse d’assiettes larges ;
+● suppression d’impôts nocifs ;
+● simplification ;
+● réduction des niches ;
+● meilleure croissance potentielle ;
+● réforme de la dépense sociale ;
+● stabilisation fiscale.
+
+21. Réponses aux objections principales
+
+Objection 1 : “La TVA à 25 % est injuste”
+Réponse :
+La TVA prise isolément peut être régressive. Mais notre système ne la prend pas isolément :
+elle finance un revenu universel.
+La justice sociale ne passe plus par des taux réduits invisibles, mais par un transfert
+monétaire explicite.
+Un ménage modeste reçoit le RU et le dividende carbone. Il est donc protégé directement,
+plutôt que par l’espoir incertain qu’un taux réduit soit intégralement répercuté dans les prix.
+
+Objection 2 : “L’impôt proportionnel n’est pas
+progressif”
+Réponse :
+Le taux est proportionnel, mais le système est progressif.
+Le RU transforme l’ensemble impôt + transfert en système progressif. Les bas revenus sont
+bénéficiaires nets, les hauts revenus contributeurs nets.
+La progressivité est simplement rendue lisible.
+
+Objection 3 : “La LVT va faire exploser les charges des
+propriétaires”
+Réponse :
+La LVT remplace des impôts existants : taxe foncière, DMTO, IFI, taxes sur la vacance,
+fiscalité des plus-values, etc.
+Elle ne s’ajoute pas à l’ancien système.
+Par ailleurs, elle taxe la valeur du terrain, non le bâtiment. Elle ne pénalise donc pas la
+construction, la rénovation ou la densification.
+Des mécanismes de report sont prévus pour les premières années et en cas de mise en
+vente du bien.
+
+Objection 4 : “Les propriétaires vont répercuter la LVT
+sur les loyers”
+Réponse :
+Une taxe sur le foncier pur ne se répercute pas comme une taxe ordinaire.
+Le propriétaire ne peut pas augmenter le loyer simplement parce que son impôt augmente :
+le loyer dépend de la demande solvable et de l’offre disponible.
+À long terme, la LVT se capitalise principalement dans la valeur du terrain. Elle réduit le prix
+du foncier et incite à mieux utiliser les terrains rares.
+
+Objection 5 : “Supprimer les DMTO coûte trop cher”
+Réponse :
+Les DMTO sont l’un des impôts les plus destructeurs : ils bloquent la mobilité résidentielle,
+freinent les transactions et pénalisent le changement d’emploi ou de logement.
+Leur suppression immédiate est un choix pro-croissance et pro-mobilité.
+La compensation sera traitée dans la réforme globale des collectivités territoriales.
+
+Objection 6 : “La fiscalité carbone pénalise les
+modestes”
+Réponse :
+La recette carbone est reversée sous forme de dividende carbone.
+Les ménages modestes étant en moyenne moins émetteurs que les ménages aisés, ils
+peuvent être bénéficiaires nets.
+Le signal-prix est maintenu, mais la recette est rendue aux citoyens.
+
+Objection 7 : “La baisse de l’IS est un cadeau aux
+entreprises”
+Réponse :
+
+La baisse de l’IS accompagne la suppression des niches.
+Le système cible est plus simple : moins de niches, moins d’optimisation, taux plus bas,
+assiette plus large.
+Ce n’est pas un cadeau sectoriel, mais une stratégie pro-investissement.
+
+Objection 8 : “La suppression de l’exit tax favorise
+l’exil fiscal”
+Réponse :
+L’exit tax est un aveu d’échec : elle tente de retenir les contribuables par la contrainte.
+Notre objectif est inverse : rendre le système fiscal suffisamment compétitif et stable pour
+que les contribuables n’aient pas intérêt à partir.
+Les montages artificiels resteront combattus par les règles anti-fraude de droit commun.
+
+22. Formule synthétique pour le
+programme
+Version courte :
+Nous remettrons à plat le système fiscal français. L’impôt sur le revenu, la CSG
+et la CRDS seront fusionnés dans un impôt proportionnel unique, rendu
+progressif par le revenu universel. La TVA convergera vers un taux unique, car
+la justice sociale doit passer par des transferts explicites plutôt que par des
+niches invisibles. La fiscalité immobilière sera remplacée par une taxe sur la
+valeur du foncier, afin de taxer la rente plutôt que la construction. Les impôts de
+production les plus nocifs seront supprimés immédiatement. L’impôt sur les
+sociétés sera simplifié et progressivement abaissé. La fiscalité carbone
+reposera sur un signal-prix clair et redistribué sous forme de dividende carbone.
+Les successions seront imposées chez le receveur avec un abattement
+universel. L’objectif est simple : taxer moins le travail, moins la production et
+moins l’investissement productif ; taxer mieux la rente, la consommation et les
+externalités ; rendre la solidarité lisible et universelle.
+Version politique :
+
+Moins d’impôts sur ceux qui travaillent, produisent et investissent ; plus
+de clarté sur ce que chacun paie et reçoit ; une fiscalité qui cesse de punir
+la croissance.
+
+23. Doctrine finale
+Le programme fiscal repose sur une conviction :
+La fiscalité française ne peut pas être sauvée par une niche de plus ou un
+taux de plus. Elle doit être reconstruite.
+Le nouveau système fiscal doit être :
+● simple ;
+● stable ;
+● individualisé ;
+● pro-croissance ;
+● anti-rente ;
+● favorable à la production ;
+● compatible avec un revenu universel ;
+● compatible avec la transition énergétique ;
+● respectueux de la liberté économique ;
+● lisible par chaque citoyen.
+La formule doctrinale finale est :
+Taxer moins le travail, moins la production, moins l’investissement
+productif ; taxer mieux la consommation, la rente foncière et le carbone ;
+redistribuer simplement par le revenu universel et le dividende carbone.
