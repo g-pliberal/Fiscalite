@@ -1,0 +1,191 @@
+#!/usr/bin/env python3
+"""Le bouclage budgétaire du programme, en un tableau qu'on peut refaire.
+
+La note dit, à juste titre, que « le bouclage budgétaire ne doit pas être
+recherché impôt par impôt, mais au niveau du système global ». Encore faut-il
+l'avoir fait une fois au niveau du système global : tant qu'il ne l'est pas,
+l'objectif « taux proportionnel sous 30 % » et l'exemple « revenu universel de
+600 € » sont deux promesses dont personne, au parti, ne sait si elles tiennent
+ensemble — et c'est le premier calcul qu'un adversaire refera.
+
+Ce script le fait. Il ne prétend pas remplacer un chiffrage : il rend
+reproductible un ordre de grandeur, pour qu'une discussion porte sur les
+hypothèses plutôt que sur les conclusions.
+
+    python scripts/bouclage.py
+
+Les montants sont en milliards d'euros, en année pleine, à comportements
+inchangés. Ce sont des ORDRES DE GRANDEUR publics (voies et moyens, comptes de
+la Nation, rapports de la Cour des comptes), arrondis, à remplacer par les
+séries officielles datées avant toute publication. Chacun est isolé dans une
+constante nommée, précisément pour qu'on puisse le contester ligne à ligne.
+"""
+
+from __future__ import annotations
+
+# --- Démographie ------------------------------------------------------------
+
+ADULTES = 53.0   # millions de personnes de 18 ans et plus
+MINEURS = 13.8   # millions de moins de 18 ans
+
+# --- Ce que l'impôt proportionnel doit remplacer -----------------------------
+# La fusion ne crée pas de recette : elle en reprend. Ces quatre lignes sont ce
+# que le nouvel impôt doit lever avant même d'avoir financé quoi que ce soit.
+
+IMPOT_SUR_LE_REVENU = 87.0
+CSG = 145.0
+CRDS = 9.0
+PRELEVEMENT_DE_SOLIDARITE = 12.0   # prélèvements sociaux non contributifs sur le capital
+
+A_REMPLACER = IMPOT_SUR_LE_REVENU + CSG + CRDS + PRELEVEMENT_DE_SOLIDARITE
+
+# --- L'assiette du nouvel impôt ---------------------------------------------
+# « L'ensemble des revenus personnels » : activité, remplacement, capital.
+# L'assiette de la CSG en donne la mesure, une fois les niches retirées.
+
+REVENUS_D_ACTIVITE = 1000.0
+PENSIONS_ET_REMPLACEMENT = 400.0
+REVENUS_DU_CAPITAL = 200.0
+
+ASSIETTE = REVENUS_D_ACTIVITE + PENSIONS_ET_REMPLACEMENT + REVENUS_DU_CAPITAL
+
+# --- Les recettes perdues ----------------------------------------------------
+
+C3S = 5.5
+CVAE_RESIDUELLE = 5.0
+IMPOTS_DE_PRODUCTION = C3S + CVAE_RESIDUELLE
+
+BAISSE_DE_L_IS = 18.0          # de 25 % à 17,5 % sur un IS net d'environ 60 Md€
+NICHES_ET_CIR_RECUPERES = 12.0  # CIR ~7, autres niches d'IS ~5
+COUT_NET_DE_L_IS = BAISSE_DE_L_IS - NICHES_ET_CIR_RECUPERES
+
+# --- Les recettes nouvelles hors impôt proportionnel -------------------------
+
+GAIN_TVA_TAUX_UNIQUE = 68.0
+"""Passage à 25 % : alignement des taux réduits (~+25) et des 20 % vers 25 %
+(~+55), moins une élasticité de la consommation de l'ordre de 15 %."""
+
+# La LVT, elle, ne rapporte rien de net : elle remplace. Ce qu'elle remplace :
+FISCALITE_IMMOBILIERE_SUPPRIMEE = 45.0 + 19.0 + 2.0 + 2.0 + 3.0
+"""Taxes foncières ~45, DMTO ~19, IFI ~2, plus-values immobilières ~2,
+taxe d'habitation sur les résidences secondaires ~3."""
+
+
+def rendement_de_la_lvt(valeur_des_terrains: float, taux: float,
+                        actualisation: float) -> tuple[float, float]:
+    """Rendement stationnaire de la LVT, et perte de valeur du terrain.
+
+    Une taxe annuelle sur un actif dont le rendement est `actualisation` se
+    capitalise NÉGATIVEMENT dans son prix : le terrain ne vaut plus que la rente
+    qui reste après impôt. C'est l'argument même du programme — « la LVT se
+    capitalise principalement dans la valeur du terrain » — et il a une
+    conséquence que la note ne tire pas : l'assiette de la LVT n'est pas la
+    valeur d'aujourd'hui, c'est la valeur d'après la réforme.
+    """
+    assiette_apres = valeur_des_terrains * actualisation / (actualisation + taux)
+    return taux * assiette_apres, assiette_apres / valeur_des_terrains - 1.0
+
+
+def boucler(ru_adulte: float, ru_enfant: float, prestations_remplacees: float,
+            rendement_lvt: float) -> tuple[float, float, float]:
+    """Coût du revenu universel, montant à lever, et taux qui en résulte."""
+    cout_du_ru = (ADULTES * ru_adulte + MINEURS * ru_enfant) * 12 / 1000
+    trou_immobilier = FISCALITE_IMMOBILIERE_SUPPRIMEE - rendement_lvt
+    a_lever = (A_REMPLACER + cout_du_ru - prestations_remplacees
+               - GAIN_TVA_TAUX_UNIQUE + IMPOTS_DE_PRODUCTION
+               + COUT_NET_DE_L_IS + trou_immobilier)
+    return cout_du_ru, a_lever, a_lever / ASSIETTE
+
+
+# Les prestations que le revenu universel peut réellement absorber. La borne
+# haute suppose qu'il remplace l'AAH, l'ASPA et les APL — c'est-à-dire qu'un
+# allocataire de l'AAH passe d'environ 1 000 € à 600 €. Tant que le programme
+# n'a pas tranché, les deux bornes sont à tenir.
+PRESTATIONS_BORNE_HAUTE = 91.0   # RSA 12, prime d'activité 11, AAH 14, ASPA 4,
+                                 # famille 32, APL 16, bourses 2
+PRESTATIONS_BORNE_BASSE = 55.0   # RSA, prime d'activité et prestations familiales seules
+
+SCENARIOS = (
+    ("La note telle qu'elle est écrite (LVT à 120 Md€)",       600, 300, PRESTATIONS_BORNE_HAUTE, 120.0),
+    ("La même, LVT à son rendement vraisemblable",             600, 300, PRESTATIONS_BORNE_HAUTE,  45.0),
+    ("La même, sans revenu universel enfant chiffré",          600,   0, PRESTATIONS_BORNE_HAUTE,  45.0),
+    ("La même, AAH / ASPA / APL maintenues au-dessus du RU",   600,   0, PRESTATIONS_BORNE_BASSE,  45.0),
+    ("RU de 500 €, RU enfant de 200 €",                        500, 200, PRESTATIONS_BORNE_HAUTE,  45.0),
+    ("RU de 450 €, RU enfant de 150 €",                        450, 150, PRESTATIONS_BORNE_HAUTE,  45.0),
+)
+
+
+# --- Successions : ce que le taux unique change, reçu par reçu ---------------
+# La note promet de « protéger les petites transmissions » et d'« éviter les
+# taux confiscatoires ». Les deux phrases sont vérifiables, et il vaut mieux les
+# vérifier soi-même : l'abattement de 100 000 € est ici viager et unique, là où
+# le droit actuel le rouvre par parent et tous les quinze ans.
+
+BAREME_LIGNE_DIRECTE = ((8_072, .05), (12_109, .10), (15_932, .15),
+                        (552_324, .20), (902_838, .30), (1_805_677, .40),
+                        (float("inf"), .45))
+
+ABATTEMENT = 100_000
+
+
+def droits_actuels(recu_d_un_parent: float) -> float:
+    """Droits de succession en ligne directe, droit actuel, pour un parent."""
+    imposable = max(0.0, recu_d_un_parent - ABATTEMENT)
+    droits, bas = 0.0, 0.0
+    for haut, taux in BAREME_LIGNE_DIRECTE:
+        if imposable <= bas:
+            break
+        droits += (min(imposable, haut) - bas) * taux
+        bas = haut
+    return droits
+
+
+def droits_cibles(recu_dans_la_vie: float, taux: float) -> float:
+    """Droits dans le système cible : un abattement viager, puis le taux commun."""
+    return max(0.0, recu_dans_la_vie - ABATTEMENT) * taux
+
+
+def comparer_les_successions(taux: float = 0.34) -> None:
+    print(f"\nSuccessions — un enfant unique, deux parents, taux commun de {taux:.0%}\n")
+    print(f"{'reçu':>12} {'droit actuel':>14} {'':>7} {'système cible':>14} {'':>7} {'écart':>14}")
+    for recu in (100_000, 200_000, 400_000, 600_000, 1_000_000, 2_000_000,
+                 3_000_000, 5_000_000, 7_000_000, 10_000_000, 20_000_000):
+        actuel = 2 * droits_actuels(recu / 2)
+        cible = droits_cibles(recu, taux)
+        print(f"{recu:>12,.0f} {actuel:>14,.0f} {actuel / recu:>6.1%} "
+              f"{cible:>14,.0f} {cible / recu:>6.1%} {cible - actuel:>+14,.0f}")
+    print("\n  Le point de bascule est autour de 5 M€ reçus : en dessous le système")
+    print("  cible impose davantage, au-dessus il impose moins.")
+
+
+def main() -> None:
+    print("Bouclage du système cible — milliards d'euros, année pleine\n")
+    print(f"  À remplacer (IR + CSG + CRDS + prélèvement de solidarité) : {A_REMPLACER:.0f}")
+    print(f"  Assiette du nouvel impôt                                  : {ASSIETTE:.0f}")
+    print(f"  Gain de la TVA à taux unique                              : {GAIN_TVA_TAUX_UNIQUE:.0f}")
+    print(f"  Fiscalité immobilière que la LVT doit remplacer           : {FISCALITE_IMMOBILIERE_SUPPRIMEE:.0f}")
+    print(f"  Impôts de production supprimés                            : {IMPOTS_DE_PRODUCTION:.1f}")
+    print(f"  Coût net de la baisse de l'IS                             : {COUT_NET_DE_L_IS:.0f}\n")
+
+    largeur = max(len(nom) for nom, *_ in SCENARIOS)
+    print(f"{'':{largeur}}   {'coût du RU':>11} {'à lever':>9} {'taux':>7}")
+    for nom, ru_a, ru_e, prestations, lvt in SCENARIOS:
+        cout, a_lever, taux = boucler(ru_a, ru_e, prestations, lvt)
+        alerte = "" if taux < 0.30 else "   ← au-dessus de l'objectif"
+        print(f"{nom:{largeur}}   {cout:>11.0f} {a_lever:>9.0f} {taux:>7.1%}{alerte}")
+
+    print("\nLa LVT : d'où sortiraient 120 Md€ ?\n")
+    valeur_des_terrains = 3500.0
+    print(f"  Valeur des terrains, avant réforme : {valeur_des_terrains:.0f} Md€")
+    for actualisation in (0.03, 0.035, 0.04):
+        rendement, perte = rendement_de_la_lvt(valeur_des_terrains, 0.02, actualisation)
+        print(f"  actualisation à {actualisation:.1%} : rendement {rendement:.0f} Md€"
+              f"  (valeur du terrain {perte:+.0%})")
+    print(f"\n  Assiette qu'il faudrait pour 120 Md€ à 2 % : {120 / 0.02:.0f} Md€,"
+          f" soit {120 / 0.02 / valeur_des_terrains:.1f} fois la valeur des terrains.")
+
+    comparer_les_successions()
+
+
+if __name__ == "__main__":
+    main()

@@ -77,6 +77,25 @@ feuille de style et des polices, qu'un navigateur refuse de lire depuis
 python -m http.server 8000
 ```
 
+## Ce qui n'est pas sur le site
+
+`documents/revue-critique.md` est un document de travail interne : il liste ce
+qu'un adversaire attaquera dans ce chapitre, dans l'ordre où il le fera, et ce
+qu'il faut avoir fait avant lui. Il n'est pas publié — aucune page n'y renvoie —
+et il n'engage pas le programme.
+
+Les ordres de grandeur qu'il cite sortent de `scripts/bouclage.py`, qui refait
+le bouclage budgétaire du système cible hypothèse par hypothèse. Chaque montant
+y est isolé dans une constante nommée, pour qu'une discussion porte sur les
+hypothèses plutôt que sur les conclusions.
+
+```sh
+python scripts/bouclage.py
+```
+
+Ce script ne produit rien pour le site et n'entre pas dans les vérifications :
+c'est un outil de travail, pas une pièce du dépôt publié.
+
 ## Licences
 
 * Code sous **Apache 2.0** (voir `LICENSE`), comme le dépôt dont la charte est
