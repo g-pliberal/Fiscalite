@@ -60,20 +60,30 @@ class Reforme:
 
 CIBLE = Reforme("Le programme tel qu'il est écrit — RU 600 € / taux 34 %", 0.34, 600, 300)
 VARIANTE = Reforme("La variante « sous 30 % » — RU 480 € / taux 30 %", 0.30, 480, 240)
-CORRIGEE = Reforme("Le programme corrigé — RU 600 €, taux unique de 34,5 %, suppléments maintenus",
-                   0.345, 600, 300, supplements=True)
-"""Le taux qui boucle se situe entre 33,5 % — ce que donne `bouclage.py` — et
-34,5 %, ce que donne l'agrégation de ce modèle-ci une fois retranché du besoin
-ce que la LVT prend désormais aux entreprises. Deux calibrations indépendantes qui se rejoignent à trois dixièmes de
+CORRIGEE = Reforme("Le programme corrigé — RU 600 €, taux de 33 %, tranche à 40 % au-delà de 400 000 €",
+                   0.33, 600, 300, seuil_haut=400_000, taux_haut=0.40,
+                   supplements=True)
+"""Le taux qui boucle se situe entre 32,4 % — ce que donne `bouclage.py` — et
+32,9 %, ce que donne l'agrégation de ce modèle-ci une fois retranché du besoin
+ce que la LVT et la TVA prennent désormais aux entreprises. Un demi-point
+d'écart entre deux calibrations indépendantes : c'est le plus serré qu'on ait
+obtenu. Deux calibrations indépendantes qui se rejoignent à trois dixièmes de
 point : c'est le meilleur contrôle dont on dispose. On retient la borne haute : d'un programme accusé de ne pas être chiffré, l'erreur coûteuse
 est celle qui laisse un trou, pas celle qui laisse une marge.
 
-Et la tranche supérieure, que la revue critique réclamait, s'avère inutile : le
-sommet de la distribution acquitte aujourd'hui 30,5 % de ses revenus, le
-prélèvement forfaitaire abritant l'essentiel de son capital. Un taux unique à
-36 % est donc pour lui une hausse, sans qu'on ait à écorner la doctrine. C'est
-le taux de base, et non une tranche, qui répond à l'objection du cadeau aux
-plus aisés."""
+La tranche supérieure, elle, fait retour — et l'aller-retour est instructif. À
+36,5 % elle était inutile : le sommet acquitte aujourd'hui 30,2 % de ses
+revenus, le prélèvement forfaitaire abritant l'essentiel de son capital, si
+bien qu'un taux commun plus élevé lui était déjà une hausse. À 33 %, cette
+marge disparaît et le centile supérieur redevient gagnant de 1,2 %, le revenu
+universel qu'il perçoit dépassant le surcroît d'impôt qu'il acquitte.
+
+Une tranche de 40 % au-delà de 400 000 € le ramène à +0,1 %, c'est-à-dire à
+zéro. Elle rapporte 2,4 Md€, ce qui est négligeable, et c'est bien le
+signe qu'elle ne sert pas au rendement : elle sert à ce que le sommet ne gagne
+pas. Le prix à payer est doctrinal — « un impôt, un taux » devient « un impôt,
+deux taux » —, et c'est le prix d'avoir baissé le taux de base de trois points
+et demi."""
 
 PRIX_CARBONE_ACTUEL = 90.0
 """Prix implicite moyen du carbone sur les usages des ménages aujourd'hui :
@@ -453,7 +463,7 @@ CAS_TYPES = [
 
     Cas(menage_type("Célibataire au SMIC, zone tendue", 1, 0, salaire=21_000, parts=1,
                     prestations=3_600, part_taxable=.55, taux_tva=.160, epargne=0.00,
-                    co2=3.0, prestations_maintenues=2_700),
+                    co2=3.0, prestations_maintenues=2_400),
         "Locataire. Un adulte seul ne touche qu'un revenu universel.",
         note="aide au logement attachée au logement, non à la personne"),
 

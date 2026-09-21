@@ -431,3 +431,45 @@ estimation que je n'avais pas cherché à vérifier. Le contrôle qui l'a rattra
 n'est pas un contrôle interne — aucun des trois n'y était sensible, puisque le
 modèle était cohérent avec sa propre erreur. Il a fallu aller chercher la
 donnée. C'est le seul remède, et il n'a pas de substitut.
+
+
+---
+
+## 12. Troisième passe de sourçage : deux estimations de plus, et le taux à 33 %
+
+La leçon du §11 — une estimation peut très bien être publiée quelque part — a
+été appliquée systématiquement aux constantes qui restaient.
+
+**Le gain de la TVA à taux unique se calcule.** La Cour des comptes établit deux
+choses : 65 % de l'assiette de TVA relève du taux normal, et les taux réduits
+coûtent au moins 47 Md€ (2021). Avec les 208,8 Md€ de recettes 2025, ces deux
+contraintes déterminent l'assiette — 1 308 Md€ — et le taux réduit moyen —
+8,5 %, ce qui recoupe le mélange réel de 10, 5,5 et 2,1 %. C'est ce recoupement
+qui donne confiance. Un taux unique de 25 % rapporterait 118 Md€ mécaniquement ;
+on retient **95** après un abattement d'un cinquième. Nous portions 80, estimés.
+
+**Les DMTO passent de 16 à 13 Md€.** Les départements en ont perçu 9,9 en 2024
+selon l'Observatoire des finances locales ; l'estimation précédente datait d'un
+marché plus actif.
+
+**Le taux tombe à 33 %**, et les deux modèles n'ont jamais été aussi
+proches — 32,4 % et 32,9 %, un demi-point d'écart.
+
+**Mais la tranche supérieure fait retour, et l'aller-retour est le résultat le
+plus instructif de tout l'exercice.** À 36,5 % elle était inutile : le sommet
+acquitte 30,2 % de ses revenus, si bien qu'un taux commun plus élevé lui était
+déjà une hausse. À 33 %, cette marge disparaît et le centile supérieur redevient
+gagnant de 1,2 %, le revenu universel qu'il perçoit dépassant le surcroît
+d'impôt qu'il acquitte. Une tranche de 40 % au-delà de 400 000 € le ramène à
+zéro. Elle ne rapporte que 2,4 Md€ : elle ne sert pas au rendement, elle sert à
+ce que le sommet ne gagne pas.
+
+**Ce que cela dit du programme.** Baisser le taux de base a un prix doctrinal —
+« un impôt, un taux » devient « un impôt, deux taux ». C'est un arbitrage réel,
+et il n'apparaît que lorsqu'on a sourcé assez de chiffres pour que le taux de
+base descende. Aucune intuition ne l'aurait donné.
+
+**Une source citée sans lien.** Le site de la Cour des comptes était
+indisponible au moment de la publication. Les deux chiffres sont attribués, le
+lien est absent, et la page le dit. On ne publie pas un lien qu'on n'a pas
+ouvert — c'est précisément ce qui a produit l'erreur du §11.

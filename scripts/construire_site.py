@@ -258,7 +258,7 @@ def piliers_frise() -> str:
 ACCUEIL = "\n".join([
     '<div class="fiches reperes">',
     '  <div class="fiche"><p class="etiquette">Impôt sur les revenus</p>'
-    '<p class="valeur">34,5 %</p>'
+    '<p class="valeur">33 %</p>'
     '<p class="precision">Un seul taux, proportionnel, à la place de l’IR, de la '
     'CSG et de la CRDS. C’est le taux que donne notre chiffrage, et non un '
     'objectif d’affichage.</p></div>',
@@ -337,7 +337,7 @@ ACCUEIL = "\n".join([
             + '<p class="actions"><a class="bouton" href="calendrier.html">'
               "Voir le calendrier complet</a></p>"),
     section("depense", "Un chapitre fiscal ne tient pas tout seul",
-            "<p>Un taux de 34,5 % ne baisse que si la dépense publique cesse de "
+            "<p>Un taux de 33 % ne baisse que si la dépense publique cesse de "
             "croître plus vite que les prix. Nous ne renvoyons donc pas cette "
             "question à plus tard&nbsp;: le <strong>chapitre Dépense "
             "publique</strong> fixe une règle — la dépense ne progresse pas de "
@@ -474,7 +474,7 @@ REVENUS = "\n".join([
             + "<p>La CSG et la CRDS ne financent pas de droits contributifs "
               "individualisés&nbsp;: elles relèvent de l’impôt général, et doivent "
               "être assumées comme telles.</p>"),
-    section("taux", "Un taux de 34,5 %, et pourquoi nous ne disons plus 30 %",
+    section("taux", "Un taux de 33 %, et pourquoi nous ne disons plus 30 %",
             "<p>La note fixait un objectif politique&nbsp;: maintenir le taux "
             "<strong>sous les 30 %</strong>, grâce à l’élargissement de "
             "l’assiette, à la suppression des niches, à la TVA à taux unique, "
@@ -485,12 +485,12 @@ REVENUS = "\n".join([
             "par an&nbsp;; le nouvel impôt doit en outre lever ce que l’impôt "
             "sur le revenu, la CSG et la CRDS lèvent aujourd’hui. En face, les "
             "prestations remplacées et le gain de la TVA à taux unique ne "
-            "couvrent pas l’écart. Le taux d’équilibre se situe entre 33,5 % "
-            "et 34,5 %.</p>"
+            "couvrent pas l’écart. Le taux d’équilibre se situe entre 32,4 % "
+            "et 33 %.</p>"
             + '<div class="note vigilance"><p>Nous aurions pu garder « moins de '
               '30 % » jusqu’à ce qu’un contradicteur refasse l’addition. Un '
               'chiffre de tract tient une campagne&nbsp;; il ne tient pas un '
-              'débat. Nous publions donc 34,5 %, et le calcul avec.</p></div>'
+              'débat. Nous publions donc 33 %, et le calcul avec.</p></div>'
             + "<p>Ce taux reste plus lisible que l’empilement qu’il remplace, "
               "et surtout il ne se lit pas seul&nbsp;: c’est le couple impôt + "
               "revenu universel qui fait le système, et c’est lui qu’il faut "
@@ -775,7 +775,7 @@ FONCIER = "\n".join([
               'était de notre fait, non de celui de la note.</p></div>'
             + "<p>Deux conséquences suivent, et la première est heureuse. La "
               "LVT rapporte assez pour que le taux de l’impôt proportionnel "
-              "descende de 36,5 à <strong>34,5 %</strong>&nbsp;: deux points "
+              "descende de 36,5 à <strong>33 %</strong>&nbsp;: deux points "
               "d’impôt sur le revenu tenaient à une ligne de comptabilité "
               "nationale que nous n’avions pas ouverte. La seconde l’est "
               "moins&nbsp;: la LVT prélève davantage qu’elle ne remplace, de "
@@ -1087,7 +1087,7 @@ TRANSMISSIONS = "\n".join([
             + "<p>Chaque individu disposera d’un <strong>compte de réception "
               "patrimoniale</strong> sur l’ensemble de sa vie, doté d’un "
               "<strong>abattement universel de 200 000 €</strong>. Au-delà, les "
-              "transmissions reçues sont imposées au taux commun de 34,5 %, puis "
+              "transmissions reçues sont imposées au taux commun de 33 %, puis "
               "à <strong>45 % au-delà de 2 millions d’euros</strong> reçus dans "
               "une vie.</p>"
             + '<div class="note vigilance"><p>La note fixait cet abattement à '
@@ -1107,11 +1107,11 @@ TRANSMISSIONS = "\n".join([
                 ["Reçu par enfant", "Droits aujourd’hui", "Système cible", "Écart"],
                 [["150 000 €", "0 €", "0 €", "—"],
                  ["200 000 €", "0 €", "0 €", "—"],
-                 ["300 000 €", "16 389 €", "34 500 €", "+18 111 €"],
-                 ["400 000 €", "36 389 €", "69 000 €", "+32 611 €"],
-                 ["1 000 000 €", "156 389 €", "276 000 €", "+119 611 €"],
-                 ["4 000 000 €", "1 234 789 €", "1 521 000 €", "+286 211 €"],
-                 ["20 000 000 €", "8 434 789 €", "8 721 000 €", "+286 211 €"]],
+                 ["300 000 €", "16 389 €", "33 000 €", "+16 611 €"],
+                 ["400 000 €", "36 389 €", "66 000 €", "+29 611 €"],
+                 ["1 000 000 €", "156 389 €", "264 000 €", "+107 611 €"],
+                 ["4 000 000 €", "1 234 789 €", "1 494 000 €", "+259 211 €"],
+                 ["20 000 000 €", "8 434 789 €", "8 694 000 €", "+259 211 €"]],
                 legende="Ligne directe, droit en vigueur contre système cible. "
                         "La transmission médiane — la maison de famille partagée "
                         "entre deux enfants — reste non imposée, comme "
@@ -1275,7 +1275,7 @@ TABLE_PAIE = tableau(
 
 TABLE_MASSES = tableau(
     ["Poste", "Ordre de grandeur / orientation"],
-    [["Impôt proportionnel IR-CSG-CRDS", "34,5 %, d’après notre chiffrage"],
+    [["Impôt proportionnel IR-CSG-CRDS", "33 %, d’après notre chiffrage"],
      ["TVA à taux unique de 25 %",
       "Rendement majeur, supérieur au système actuel selon l’assiette"],
      ["LVT à 2 %", "Environ 120 Md€ visés, à évaluer"],
@@ -1393,11 +1393,12 @@ OBJECTIONS_TEXTE = [
      "contributeurs nets. La progressivité est simplement rendue "
      "<a href=\"revenus.html#progressivite\">lisible</a>.</p>"
      "<p>La <a href=\"qui-gagne.html\">table par décile</a> le montre&nbsp;: "
-     "les six premiers déciles gagnent, les quatre derniers contribuent, et le "
-     "millime supérieur paie davantage qu’aujourd’hui — parce qu’il acquitte "
-     "aujourd’hui 30,5 % de ses revenus, le prélèvement forfaitaire abritant "
-     "l’essentiel de son capital. Un taux unique à 34,5 % est pour lui une "
-     "hausse, sans qu’il ait fallu ajouter une tranche.</p>"),
+     "les sept premiers déciles gagnent ou sont à l’équilibre, les trois "
+     "derniers contribuent, et le millime supérieur paie 8,5 % de son revenu "
+     "disponible en plus. Une <strong>tranche de 40 % au-delà de "
+     "400 000 €</strong> s’ajoute au taux commun pour que le sommet ne gagne "
+     "pas à la réforme&nbsp;: deux taux, là où le droit actuel en aligne cinq "
+     "et un prélèvement forfaitaire par-dessus.</p>"),
     ("La LVT va faire exploser les charges des propriétaires",
      "<p>La LVT <strong>remplace</strong> des impôts existants&nbsp;: taxe foncière, "
      "DMTO, IFI, taxes sur la vacance, fiscalité des plus-values. Elle ne s’ajoute "
@@ -1571,28 +1572,28 @@ GLOSSAIRE = "\n".join([
 
 # Décile, solde annuel en euros, part du revenu disponible en points.
 SOLDES_PAR_DECILE = [
-    ("D1", 3949, 23.7), ("D2", 3107, 14.3), ("D3", 440, 1.5), ("D4", 349, 1.0),
-    ("D5", 342, 0.9), ("D6", -366, -0.9), ("D7", -809, -1.7), ("D8", -2424, -4.2),
-    ("D9", -3600, -5.1), ("D10", -3289, -2.7),
+    ("D1", 4125, 24.8), ("D2", 3394, 15.6), ("D3", 823, 2.7), ("D4", 828, 2.5),
+    ("D5", 917, 2.4), ("D6", 319, 0.7), ("D7", 4, 0.0), ("D8", -1436, -2.5),
+    ("D9", -2325, -3.3), ("D10", -784, -0.6),
 ]
 SOLDES_AU_SOMMET = [
-    ("Dernier décile, hors 1 %", -5082, -4.8),
-    ("Le centile supérieur", -3077, -1.0),
-    ("Le millime supérieur", -33735, -3.1),
+    ("Dernier décile, hors 1 %", -3042, -2.9),
+    ("Le centile supérieur", 393, 0.1),
+    ("Le millime supérieur", -93405, -8.5),
 ]
 
 # Ménage, revenu disponible actuel, solde, part.
 SOLDES_PAR_MENAGE = [
-    ("Couple, deux enfants, deux SMIC", 42197, 6059, 14.4),
-    ("Retraité seul, 1 400 €/mois", 16111, 1015, 6.3),
+    ("Couple, deux enfants, deux SMIC", 42197, 6689, 15.9),
+    ("Retraité seul, 1 400 €/mois", 16111, 1267, 7.9),
     ("Allocataire de l’AAH", 12000, 18, 0.2),
-    ("Propriétaire âgé à Paris, faible revenu", 18221, 8764, 48.1),
-    ("Célibataire au SMIC, en zone tendue", 22555, 228, 1.0),
-    ("Agriculteur propriétaire de ses terres", 30450, 5705, 18.7),
-    ("Ménage rural, gaz et deux voitures", 44016, 5527, 12.6),
-    ("Cadre célibataire, 80 000 €", 59276, -2378, -4.0),
-    ("Dirigeant de PME, 160 000 €", 123809, -3976, -3.2),
-    ("Héritier de 400 000 €", 31258, -644, -2.1),
+    ("Propriétaire âgé à Paris, faible revenu", 18221, 9049, 49.7),
+    ("Célibataire au SMIC, en zone tendue", 22555, 243, 1.1),
+    ("Agriculteur propriétaire de ses terres", 30450, 6185, 20.3),
+    ("Ménage rural, gaz et deux voitures", 44016, 6217, 14.1),
+    ("Cadre célibataire, 80 000 €", 59276, -1178, -2.0),
+    ("Dirigeant de PME, 160 000 €", 123809, -1576, -1.3),
+    ("Héritier de 400 000 €", 31258, -74, -0.2),
 ]
 
 
@@ -1769,7 +1770,7 @@ FORMULAIRE = """<form id="formulaire" novalidate>
     comme des cibles de travail, et vous pouvez les déplacer.</p>
     <div class="champs">
       <p><label for="taux-impot">Impôt proportionnel (%)</label>
-      <input type="number" id="taux-impot" name="taux" value="34.5" min="0" max="60"
+      <input type="number" id="taux-impot" name="taux" value="33" min="0" max="60"
              step="0.5" inputmode="decimal"></p>
       <p><label for="ru">Revenu universel (€/mois)</label>
       <input type="number" id="ru" name="ru" value="600" min="0" max="5000"
@@ -1930,7 +1931,7 @@ QUI_GAGNE = "\n".join([
             + tableau(
                 ["Ce que nous disions", "Ce que nous disons"],
                 [["Un taux « sous 30 % »",
-                  "<strong>34,5 %</strong> — un taux sous 30 % ne finance pas un "
+                  "<strong>33 %</strong> — un taux sous 30 % ne finance pas un "
                   "revenu universel de 600 €, et le prétendre aurait coûté plus "
                   "cher que le reconnaître."],
                  ["Le revenu universel remplace les prestations",
@@ -1941,6 +1942,10 @@ QUI_GAGNE = "\n".join([
                  ["Le revenu universel suit la croissance",
                   "Il suit la croissance <strong>et ne recule jamais</strong> : "
                   "un cliquet en euros courants, et un plancher d’inflation."],
+                 ["Un taux unique, sans tranche supérieure",
+                  "<strong>Une tranche de 40 % au-delà de 400 000 €</strong> — "
+                  "nécessaire dès lors que le taux de base descend à 33 %, "
+                  "faute de quoi le centile supérieur gagnerait à la réforme."],
                  ["Un abattement successoral de 100 000 €",
                   "<strong>200 000 €</strong> — les 100 000 € du droit actuel "
                   "s’entendent <em>par parent</em>, et nous en avions fait un "
@@ -1957,22 +1962,30 @@ QUI_GAGNE = "\n".join([
                   "<a href=\"revenus.html#logement\">le détail</a>."]],
                 legende="Trois corrections issues du chiffrage. Le détail du "
                         "calcul est public, et refaisable.")
-            + encadre("", "<p>Le taux qui équilibre se situe entre 33,5 % et "
-                          "34,5 %, selon qu’on l’établit par le bouclage "
+            + encadre("", "<p>Le taux qui équilibre se situe entre 32,4 % et "
+                          "33 %, selon qu’on l’établit par le bouclage "
                           "d’ensemble ou par l’agrégation des ménages. Nous "
                           "publions la borne haute. D’un programme "
                           "accusé de ne pas être chiffré, l’erreur qui coûte "
                           "est celle qui laisse un trou, pas celle qui laisse "
                           "une marge.</p>")
-            + "<p>Une quatrième correction a été envisagée puis écartée, et il "
-              "vaut mieux dire pourquoi. Nous avons étudié une tranche "
-              "supérieure, pour éviter que le haut de la distribution ne "
-              "profite de la réforme. Elle s’est révélée <strong>inutile</strong> : "
-              "le millime supérieur acquitte aujourd’hui 30,5 % de ses revenus, "
-              "parce que le prélèvement forfaitaire abrite l’essentiel de son "
-              "capital. Un taux unique à 34,5 % est donc, pour lui, une hausse. "
-              "C’est le taux commun qui répond au soupçon de cadeau, et la "
-              "doctrine — un impôt, un taux — en sort intacte.</p>"),
+            + "<p>Une cinquième correction mérite son paragraphe, parce que nous "
+              "l’avons d’abord écartée puis reprise. Une <strong>tranche de "
+              "40 % au-delà de 400 000 €</strong> s’ajoute au taux commun.</p>"
+            + "<p>Quand notre chiffrage donnait 36,5 %, elle était inutile&nbsp;: "
+              "le sommet acquitte aujourd’hui 30,2 % de ses revenus, le "
+              "prélèvement forfaitaire abritant l’essentiel de son capital, si "
+              "bien qu’un taux commun plus élevé lui était déjà une hausse. À "
+              "33 %, cette marge disparaît et le centile supérieur redevient "
+              "gagnant de 1,2 % — le revenu universel qu’il perçoit dépassant "
+              "le surcroît d’impôt qu’il acquitte.</p>"
+            + "<p>La tranche le ramène à zéro. Elle ne rapporte que 2,4 "
+              "milliards, et c’est le signe qu’elle ne sert pas au "
+              "rendement&nbsp;: elle sert à ce que le sommet ne gagne pas. Son "
+              "prix est doctrinal — « un impôt, un taux » devient « un impôt, "
+              "deux taux » —, et c’est le prix d’avoir baissé le taux de base "
+              "de trois points et demi. Nous préférons ce prix-là à un taux "
+              "plus élevé pour tous.</p>"),
 
     section("deciles", "Par décile",
             "<p>Les déciles rangent les ménages du plus modeste au plus aisé, "
@@ -2034,7 +2047,7 @@ QUI_GAGNE = "\n".join([
             "programme qui prétend n’en faire aucun se fait démentir par le "
             "premier journaliste venu. Voici les nôtres.</p>"
             + liste([
-                "<strong>Les cinq derniers déciles</strong>, de 0,9 % à 5,1 % "
+                "<strong>Les trois derniers déciles</strong>, de 0,6 % à 3,3 % "
                 "de leur revenu disponible. C’est le choix assumé d’un système "
                 "où la solidarité passe par un transfert visible plutôt que "
                 "par des niches invisibles.",
@@ -2055,7 +2068,7 @@ QUI_GAGNE = "\n".join([
                 "faire baisser le prix du sol.",
                 "<strong>Les héritiers, au-dessus de 200 000 € reçus.</strong> "
                 "La transmission médiane reste non imposée, comme aujourd’hui. "
-                "Au-delà, les droits augmentent&nbsp;: 69 000 € sur 400 000 € "
+                "Au-delà, les droits augmentent&nbsp;: 66 000 € sur 400 000 € "
                 "reçus, contre 36 389 € aujourd’hui. C’est la contrepartie de "
                 "l’abattement qui cesse de se rouvrir tous les quinze ans et "
                 "des régimes de faveur que nous fermons&nbsp;; c’est un choix, "
@@ -2122,8 +2135,9 @@ def taux_moyens() -> str:
     soit répartie selon les facultés. Ce qui doit donc croître, c'est le taux
     MOYEN — et il croît, sur tout le domaine, sans exception."""
     lignes = []
-    for revenu in (0, 10_000, 20_000, 30_000, 50_000, 100_000, 200_000, 1_000_000):
-        impot = revenu * 0.345
+    for revenu in (0, 10_000, 21_800, 30_000, 50_000, 100_000, 400_000, 1_000_000):
+        haut = max(0, revenu - 400_000)
+        impot = (revenu - haut) * 0.33 + haut * 0.40
         net = impot - 7_200
         taux = "—" if revenu == 0 else part_lue(net / revenu * 100)
         lignes.append([
@@ -2133,9 +2147,10 @@ def taux_moyens() -> str:
             taux,
         ])
     return tableau(
-        ["Revenu annuel", "Impôt à 34,5 %", "Après le revenu universel", "Taux moyen"],
+        ["Revenu annuel", "Impôt dû", "Après le revenu universel", "Taux moyen"],
         lignes,
-        legende="Impôt proportionnel de 34,5 % et revenu universel de 600 € par "
+        legende="Impôt de 33 %, porté à 40 % au-delà de 400 000 €, et revenu "
+                "universel de 600 € par "
                 "mois. Le taux marginal ne bouge pas ; le taux moyen croît de "
                 "−36 % à +36 %, sans un seul palier où il reculerait.")
 
@@ -2183,9 +2198,9 @@ SOLIDITE = "\n".join([
               "impôt par impôt. Ce qui doit donc croître avec le revenu, c’est "
               "le <strong>taux moyen</strong>. Le voici.</p>"
             + taux_moyens()
-            + "<p>Un ménage sans revenu reçoit 7 200 €. À 20 000 €, il ne paie "
+            + "<p>Un ménage sans revenu reçoit 7 200 €. À 21 800 €, il ne paie "
               "ni ne reçoit. Au-delà, sa contribution nette croît "
-              "continûment jusqu’à s’approcher de 34,5 % sans jamais l’atteindre. "
+              "continûment, sans un seul palier où elle recule. "
               "Le système est donc progressif au sens où l’article 13 l’entend, "
               "et il l’est davantage que l’actuel dans le bas de la "
               "distribution&nbsp;: un smicard célibataire acquitte aujourd’hui "
@@ -2504,7 +2519,7 @@ DEPENSE = "\n".join([
             + '<div class="note vigilance"><p>Conséquence que nous préférons '
               'écrire nous-mêmes&nbsp;: <strong>le déficit ne repasse sous 3 % '
               'qu’en quatrième année, et de justesse.</strong> Une baisse du '
-              'taux de 34,5 % n’est donc envisageable qu’en toute fin de '
+              'taux de 33 % n’est donc envisageable qu’en toute fin de '
               'quinquennat, à condition que le retour sous le seuil soit '
               'durable. Sur les comptes de 2024, la même règle ne l’aurait pas '
               'permise du tout : un demi-point de déficit de départ déplace la '
@@ -2809,10 +2824,18 @@ SOURCES = "\n".join([
                   "Il n’existe pas d’évaluation publique du foncier nu séparé "
                   "du bâti. La note annonçait 120 Md€ ; notre calcul en donne "
                   "45, et c’est le plus grand écart du programme."],
-                 ["Gain de la TVA à taux unique", "80 Md€",
-                  "Dépend de l’élasticité de la consommation, que nous "
-                  "retenons à 15 %. Recoupé par le modèle par décile, qui "
-                  "donne 74 Md€ pour les seuls ménages."],
+                 ["Gain de la TVA à taux unique", "95 Md€",
+                  "<strong>Calculé, non estimé</strong> : deux contraintes de "
+                  "de la Cour des comptes — 65 % de "
+                  "l’assiette au taux normal, au moins 47 Md€ de manque à "
+                  "gagner sur les taux réduits — déterminent l’assiette "
+                  "(1 308 Md€) et le taux réduit moyen (8,5 %, ce qui recoupe "
+                  "le mélange réel de 10, 5,5 et 2,1 %). Reste estimé "
+                  "l’abattement d’un cinquième pour comportements, fraude et "
+                  "achats transfrontaliers. <em>Seule source de cette page "
+                  "citée sans lien : le site de la Cour des comptes était "
+                  "indisponible au moment de la publication, et nous ne "
+                  "publions pas un lien que nous n’avons pas ouvert.</em>"],
                  ["Partage de la protection sociale entre retraites et reste",
                   "410 et 300 Md€",
                   "La ventilation par fonction donne 693 Md€ de protection "
@@ -2827,9 +2850,11 @@ SOURCES = "\n".join([
 
                  ["Prélèvement de solidarité sur le capital", "12 Md€",
                   "Ne figure pas isolément dans les comptes nationaux."],
-                 ["Droits de mutation à titre onéreux", "16 Md€",
-                  "Très sensibles au volume des transactions, donc à l’année "
-                  "retenue."],
+                 ["Droits de mutation à titre onéreux", "13 Md€",
+                  "Les départements en ont perçu 9,9 Md€ en 2024 selon "
+                  "l’Observatoire des finances locales ; s’y ajoutent la part "
+                  "communale et les frais d’assiette. L’estimation précédente, "
+                  "16 Md€, datait d’un marché plus actif."],
                  ["Le modèle par décile et les dix cas types", "—",
                   "Treize ménages moyens, et non une microsimulation. Mais il "
                   "est désormais confronté décile par décile à l’enquête "
@@ -2878,7 +2903,7 @@ SOURCES = "\n".join([
             "montre vaut mieux qu’un programme qui n’en a jamais eu.</p>"
             + tableau(
                 ["Ce que nous disions", "Ce que nous disons", "Pourquoi"],
-                [["Taux proportionnel « sous 30 % »", "34,5 %",
+                [["Taux proportionnel « sous 30 % »", "33 %",
                   "Le bouclage, une fois fait, ne le permettait pas."],
                  ["LVT : « environ 120 Md€ »", "45 Md€",
                   "L’assiette supposée dépassait de moitié la valeur des "
@@ -2900,8 +2925,11 @@ SOURCES = "\n".join([
                   "valeur des terrains estimée à 3 500 Md€. Les comptes de "
                   "patrimoine la donnent à 8 230. Notre correction était plus "
                   "fausse que l’erreur qu’elle corrigeait."],
-                 ["Taux proportionnel : 36,5 %", "34,5 %",
+                 ["Taux proportionnel : 36,5 %", "33 %",
                   "Conséquence directe de la ligne précédente."],
+                 ["Gain de la TVA : 80 Md€", "95 Md€",
+                  "Estimé, et bas d’un cinquième ; il se calcule à partir de "
+                  "deux chiffres publiés par la Cour des comptes."],
                  ["Profil des prestations par décile",
                   "Redressé sur l’enquête",
                   "Nous les concentrions trop sur le premier décile, où "
@@ -3119,7 +3147,7 @@ PAGES = [
      "L’impôt sur le revenu, la CSG et la CRDS fusionnent dans un impôt "
      "proportionnel unique. Le barème disparaît, la progressivité reste&nbsp;: "
      "c’est le revenu universel qui la porte.",
-     "Fusion IR-CSG-CRDS en un impôt proportionnel de 34,5 %, assiette large, "
+     "Fusion IR-CSG-CRDS en un impôt proportionnel de 33 %, assiette large, "
      "individualisation complète, et revenu universel : le calcul, chiffre par "
      "chiffre.",
      REVENUS),

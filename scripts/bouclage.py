@@ -76,17 +76,22 @@ COUT_NET_DE_L_IS = BAISSE_DE_L_IS - NICHES_ET_CIR_RECUPERES
 
 # --- Les recettes nouvelles hors impôt proportionnel -------------------------
 
-GAIN_TVA_TAUX_UNIQUE = 80.0
-"""ESTIMÉ, à partir des 208,8 Md€ de TVA 2025 (Insee). Passage à 25 % :
-alignement des taux réduits et relèvement du taux normal, moins une élasticité
-de la consommation de l'ordre de 15 %. C'est la plus grosse des estimations non
-sourcées, et celle qu'un chiffrage officiel devra reprendre en premier.
+GAIN_TVA_TAUX_UNIQUE = 95.0
+"""CALCULÉ, et non plus estimé, à partir de trois chiffres publiés.
 
-Elle est recoupée par `scripts/qui_gagne.py`, qui calcule séparément ce que les
-seuls MÉNAGES y perdent : 74 Md€. Le solde revient aux redevables qui ne
-déduisent pas la TVA — banques, assurances, associations. La première version
-de cette constante portait 68, soit moins que la part des ménages seuls : c'est
-ce recoupement qui l'a fait voir."""
+La Cour des comptes établit que 65 % de l'assiette de TVA relève du taux normal
+et que les taux réduits coûtent au moins 47 Md€ (2021). Avec les 208,8 Md€ de
+recettes 2025, ces deux contraintes déterminent l'assiette — 1 308 Md€ — et le
+taux réduit moyen — 8,5 %, ce qui recoupe le mélange réel de 10, 5,5 et 2,1 %.
+C'est ce recoupement qui donne confiance dans la construction.
+
+Un taux unique de 25 % sur cette assiette rapporterait 118 Md€ de plus
+mécaniquement. On retient 95, soit un abattement d'un cinquième au titre des
+comportements, de la fraude — que la Cour chiffre déjà à 10 Md€ par an — et des
+achats transfrontaliers, qu'un des taux les plus élevés d'Europe encouragerait.
+
+La version précédente portait 80 Md€, estimés. C'était bas de près d'un
+cinquième."""
 
 TERRAINS_TOTAL = 8_229.8
 """Valeur des terrains, économie totale. Insee, comptes de patrimoine 2024.
@@ -103,9 +108,12 @@ l'État se paierait à lui-même et la recette ne financerait rien."""
 TERRAINS_HORS_APU = TERRAINS_TOTAL - TERRAINS_APU
 
 # Ce que la LVT remplace :
-FISCALITE_IMMOBILIERE_SUPPRIMEE = 44.2 + 16.0 + 2.7 + 2.0 + 3.0
-"""Taxes foncières 44,2 et IFI 2,7 (Insee 2025) ; DMTO ~16, plus-values
-immobilières ~2 et taxe d'habitation sur les résidences secondaires ~3, estimés."""
+FISCALITE_IMMOBILIERE_SUPPRIMEE = 44.2 + 13.0 + 2.7 + 2.0 + 3.0
+"""Taxes foncières 44,2 et IFI 2,7 (Insee 2025). DMTO 13 : les départements en
+ont perçu 9,9 Md€ en 2024 selon l'Observatoire des finances locales, auxquels
+s'ajoutent la part communale et les frais d'assiette — l'estimation précédente,
+16 Md€, datait d'un marché immobilier plus actif. Plus-values immobilières ~2 et
+taxe d'habitation sur les résidences secondaires ~3 restent estimées."""
 
 
 def rendement_de_la_lvt(valeur_des_terrains: float, taux: float,
