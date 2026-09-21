@@ -463,7 +463,7 @@ CAS_TYPES = [
     Cas(menage_type("Héritier de 400 000 €", 1, 0, salaire=38_000, parts=1,
                     part_taxable=.70, taux_tva=.170, epargne=0.10, co2=5.0),
         "Salarié ordinaire, une succession reçue dans l'année.",
-        note="succession : 36 389 € aujourd'hui contre 102 000 € au taux commun"),
+        note="succession : 36 389 € aujourd'hui contre 72 000 € après relèvement de l'abattement viager à 200 000 €"),
 ]
 
 

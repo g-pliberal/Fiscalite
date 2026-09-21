@@ -88,17 +88,27 @@ droits de succession sur la maison de vos parents » et « ils font économiser
 transmissions » et « éviter les taux confiscatoires ». La contradiction est
 documentable en une capture d'écran.
 
-**Ce qu'il faut faire.** Trois corrections, toutes peu coûteuses :
+**Fait.** Les trois corrections sont appliquées, et la première avait une
+justification plus simple que celle que j'avançais :
 
-- **Relever l'abattement viager à 250 000 €** (l'ordre de grandeur d'un
-  patrimoine médian transmis). Le discours « protéger les petites
-  transmissions » redevient vrai.
-- **Ajouter un second taux au-delà d'un seuil élevé** — par exemple 45 % au-delà
-  de 2 M€ reçus dans la vie. Deux taux sur un compte viager restent infiniment
-  plus simples que le barème actuel × six liens de parenté, et l'attaque
-  « cadeau aux héritiers de 20 M€ » tombe.
-- **Publier le tableau ci-dessus**, corrigé. Un programme qui montre lui-même
-  qui paie plus ne peut plus être accusé de l'avoir caché.
+- **Abattement viager porté à 200 000 €**, non parce que c'est l'ordre de
+  grandeur d'un patrimoine médian, mais parce que **les 100 000 € du droit
+  actuel s'entendent par parent**. Un enfant qui hérite de ses deux parents en
+  a deux. L'abattement viager en remplace deux : il en vaut deux. La règle se
+  dit en une phrase, et c'est ce qui la rend défendable.
+- **Second taux de 45 % au-delà de 2 M€ reçus dans la vie.** Résultat vérifié
+  par balayage de 50 000 € à 100 M€ : *aucune transmission en ligne directe
+  n'est imposée moins qu'aujourd'hui.* L'attaque « cadeau aux grands
+  héritages » ne tombe pas par un argument, elle tombe par le calcul.
+- **Le tableau est publié** sur `transmissions.html`, écarts compris — y
+  compris le fait qu'au-dessus de 200 000 € reçus, les droits augmentent.
+
+Une asymétrie mérite d'être notée, parce qu'elle sera relevée : une seconde
+tranche est nécessaire ici alors qu'elle ne l'était pas pour les revenus. Elle
+s'explique en une ligne. Le sommet acquitte aujourd'hui 30,5 % de ses *revenus*
+— un taux commun de 36 % lui est donc déjà une hausse. Il acquitte jusqu'à 45 %
+de ce qu'il *reçoit* — le même taux commun lui serait un cadeau. Le principe ne
+change pas, seule la conclusion diffère.
 
 Et rappeler ce que la réforme améliore vraiment, qui est aujourd'hui tu : un
 neveu paie 55 %, un tiers 60 %, avec un abattement de 1 594 €. Le système cible
@@ -347,8 +357,8 @@ figurer dans le programme, avec les décisions citées, avant qu'on la réclame.
 
 **Avant toute communication publique**
 
-1. Faire et publier le bouclage d'ensemble ; trancher entre « sous 30 % » et
-   « 600 € » (§1).
+1. ~~Faire et publier le bouclage d'ensemble ; trancher entre « sous 30 % » et
+   « 600 € »~~ — fait : 36 %, publié avec le calcul (§1).
 2. Corriger les 120 Md€ de LVT et trancher le sort de la taxe foncière (§3).
 3. Relever l'abattement successoral et ajouter un taux supérieur (§2).
 4. Écrire la liste de ce que le RU remplace, et des suppléments qui subsistent (§6).

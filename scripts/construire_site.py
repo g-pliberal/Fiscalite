@@ -230,7 +230,7 @@ PILIERS = [
      "carbone.html"),
     ("08", "Imposer celui qui reçoit",
      "Successions et donations fusionnées, imposées chez le receveur, avec un "
-     "abattement universel de 100 000 € sur la vie entière.",
+     "abattement universel de 200 000 € sur la vie entière.",
      "transmissions.html"),
 ]
 
@@ -1023,7 +1023,8 @@ TABLE_CRUC = tableau(
 )
 
 TRANSMISSIONS = "\n".join([
-    plan([("receveur", "Imposer le receveur"), ("effets", "Ce que ça change"),
+    plan([("receveur", "Imposer le receveur"), ("comparaison", "La comparaison"),
+          ("hors-ligne", "Hors ligne directe"), ("effets", "Ce que ça change"),
           ("illiquides", "Actifs illiquides"), ("entreprise", "Transmission d’entreprise"),
           ("cruc", "Épargne retraite (CRUC)"), ("exit", "Exit tax"),
           ("non-residents", "Non-résidents")]),
@@ -1033,19 +1034,81 @@ TRANSMISSIONS = "\n".join([
             "lien de parenté.</p>"
             + "<p>Chaque individu disposera d’un <strong>compte de réception "
               "patrimoniale</strong> sur l’ensemble de sa vie, doté d’un "
-              "<strong>abattement universel de 100 000 €</strong>. Au-delà, les "
-              "transmissions reçues sont imposées au taux proportionnel commun — le "
-              "même que celui des revenus.</p>"
+              "<strong>abattement universel de 200 000 €</strong>. Au-delà, les "
+              "transmissions reçues sont imposées au taux commun de 36 %, puis "
+              "à <strong>45 % au-delà de 2 millions d’euros</strong> reçus dans "
+              "une vie.</p>"
+            + '<div class="note vigilance"><p>La note fixait cet abattement à '
+              '100 000 €, par symétrie avec le droit actuel. C’était une erreur '
+              'de lecture&nbsp;: aujourd’hui, 100 000 € s’entendent <em>par '
+              'parent</em>. Un enfant qui hérite de son père et de sa mère en a '
+              'donc deux. L’abattement viager en remplace deux&nbsp;: il en '
+              'vaut deux.</p></div>'
             + encadre("", "<p>Ce qui compte n’est pas le lien familial avec le "
                           "donateur, mais le montant reçu par l’individu au cours "
                           "de sa vie.</p>")),
+
+    section("comparaison", "Ce que vous paieriez, et ce que vous payez",
+            "<p>Deux parents, un enfant qui reçoit la moitié de chacun&nbsp;: "
+            "la structure dans laquelle on hérite vraiment.</p>"
+            + tableau(
+                ["Reçu par enfant", "Droits aujourd’hui", "Système cible", "Écart"],
+                [["150 000 €", "0 €", "0 €", "—"],
+                 ["200 000 €", "0 €", "0 €", "—"],
+                 ["300 000 €", "16 389 €", "36 000 €", "+19 611 €"],
+                 ["400 000 €", "36 389 €", "72 000 €", "+35 611 €"],
+                 ["1 000 000 €", "156 389 €", "288 000 €", "+131 611 €"],
+                 ["4 000 000 €", "1 234 789 €", "1 548 000 €", "+313 211 €"],
+                 ["20 000 000 €", "8 434 789 €", "8 748 000 €", "+313 211 €"]],
+                legende="Ligne directe, droit en vigueur contre système cible. "
+                        "La transmission médiane — la maison de famille partagée "
+                        "entre deux enfants — reste non imposée, comme "
+                        "aujourd’hui.")
+            + "<p>Deux choses se lisent dans ce tableau, et nous les assumons "
+              "toutes les deux.</p>"
+            + "<p><strong>Aucune transmission en ligne directe n’est imposée "
+              "moins qu’aujourd’hui</strong>, de 50 000 € à 100 millions. Le "
+              "soupçon de cadeau aux grands héritages ne tient pas, et il ne "
+              "tient pas parce que le calcul le dit.</p>"
+            + "<p><strong>Au-dessus de 200 000 € reçus, les transmissions "
+              "paient davantage.</strong> C’est la contrepartie de ce que nous "
+              "fermons&nbsp;: l’abattement qui se rouvre tous les quinze ans, "
+              "l’assurance-vie, les régimes de faveur — autant de dispositifs "
+              "dont profite surtout celui qui a les moyens d’organiser sa "
+              "transmission à l’avance. Nous préférons un abattement plus "
+              "large pour tous à des portes dérobées pour quelques-uns.</p>"
+            + encadre("", "<p>Nous taxons davantage ce qu’on reçoit sans "
+                          "l’avoir gagné, pour taxer moins ce qu’on gagne en "
+                          "travaillant.</p>")),
+
+    section("hors-ligne", "Les vrais gagnants : tous ceux qui ne sont pas des enfants",
+            "<p>C’est l’effet le plus spectaculaire de la réforme, et celui "
+            "dont on parle le moins. Aujourd’hui, ce que vous payez dépend "
+            "moins de ce que vous recevez que de votre lien avec le "
+            "défunt.</p>"
+            + tableau(
+                ["Qui reçoit 200 000 €", "Aujourd’hui", "Système cible"],
+                [["Un enfant", "0 €", "0 €"],
+                 ["Un neveu ou une nièce", "105 618 €", "0 €"],
+                 ["Un beau-fils, un filleul, un ami, un concubin",
+                  "119 044 €", "0 €"]],
+                legende="Un neveu supporte aujourd’hui 55 % après un abattement "
+                        "de 7 967 € ; une personne sans lien de parenté, 60 % "
+                        "après 1 594 €. Le système cible ne connaît que le "
+                        "montant reçu.")
+            + "<p>Familles recomposées, couples sans enfant, personnes seules, "
+              "fratries, amitiés d’une vie&nbsp;: le droit actuel les traite "
+              "comme des étrangers, et leur prend la moitié de ce qu’on leur "
+              "laisse. Le nôtre leur applique la règle commune.</p>"),
     section("effets", "Ce que ça change",
             liste(["simplifier radicalement les droits de succession&nbsp;;",
                    "supprimer les écarts arbitraires selon le lien familial&nbsp;;",
-                   "protéger les petites transmissions&nbsp;;",
+                   "laisser la transmission médiane non imposée, comme "
+                   "aujourd’hui&nbsp;;",
                    "favoriser indirectement les familles nombreuses, chaque enfant "
                    "disposant de son propre abattement&nbsp;;",
-                   "éviter les taux confiscatoires&nbsp;;",
+                   "ramener au taux commun ce que le droit actuel taxe à "
+                   "55 ou 60 % hors ligne directe&nbsp;;",
                    "réduire les incitations à l’exil patrimonial&nbsp;;",
                    "mieux traiter les transmissions hors cadre familial "
                    "traditionnel."])),
@@ -1822,6 +1885,14 @@ QUI_GAGNE = "\n".join([
                  ["Le revenu universel suit la croissance",
                   "Il suit la croissance <strong>et ne recule jamais</strong> : "
                   "un cliquet en euros courants, et un plancher d’inflation."],
+                 ["Un abattement successoral de 100 000 €",
+                  "<strong>200 000 €</strong> — les 100 000 € du droit actuel "
+                  "s’entendent <em>par parent</em>, et nous en avions fait un "
+                  "abattement viager unique. Nous divisions par deux ce dont "
+                  "dispose un enfant qui hérite de ses deux parents, sans "
+                  "l’avoir voulu ni l’avoir dit — "
+                  "<a href=\"transmissions.html#comparaison\">la "
+                  "comparaison</a>."],
                  ["L’aide au logement est maintenue",
                   "Elle est maintenue <strong>et refaite</strong> : attachée au "
                   "logement et non à la personne, forfaitaire par zone plutôt "
@@ -1912,13 +1983,16 @@ QUI_GAGNE = "\n".join([
                 "Cela ne figure dans aucune colonne ci-dessus, parce que ce "
                 "n’est pas un flux annuel — mais c’est réel, et c’est le but : "
                 "faire baisser le prix du sol.",
-                "<strong>Les héritiers de patrimoines moyens.</strong> Notre "
-                "abattement de 100 000 € sur la vie entière est plus strict "
-                "que le droit actuel, qui le rouvre par parent et tous les "
-                "quinze ans. Sur une transmission de 400 000 €, les droits "
-                "passeraient de 36 000 à 102 000 €. Ce point n’est pas encore "
-                "arbitré, et il ne figure pas dans les tableaux ci-dessus : "
-                "une succession n’est pas un revenu annuel.",
+                "<strong>Les héritiers, au-dessus de 200 000 € reçus.</strong> "
+                "La transmission médiane reste non imposée, comme aujourd’hui. "
+                "Au-delà, les droits augmentent&nbsp;: 72 000 € sur 400 000 € "
+                "reçus, contre 36 389 € aujourd’hui. C’est la contrepartie de "
+                "l’abattement qui cesse de se rouvrir tous les quinze ans et "
+                "des régimes de faveur que nous fermons&nbsp;; c’est un choix, "
+                "et il est <a href=\"transmissions.html#comparaison\">chiffré "
+                "ligne à ligne</a>. Rien de tout cela ne figure dans les "
+                "tableaux ci-dessus : une succession n’est pas un revenu "
+                "annuel.",
             ])),
 
     section("methode", "D’où viennent ces chiffres",
@@ -2027,10 +2101,10 @@ PAGES = [
     ("transmissions.html", "Transmissions et épargne",
      "Ce qui compte,<br> c’est ce que vous recevez",
      "Successions et donations fusionnées et imposées chez le receveur, avec un "
-     "abattement universel de 100 000 € sur la vie entière&nbsp;; l’entreprise "
+     "abattement universel de 200 000 € sur la vie entière&nbsp;; l’entreprise "
      "productive protégée&nbsp;; l’épargne retraite taxée une seule fois.",
      "Successions et donations imposées chez le receveur avec abattement "
-     "universel de 100 000 €, carry-over basis pour la transmission "
+     "universel de 200 000 €, carry-over basis pour la transmission "
      "d’entreprise, Compte Retraite Universel Capitalisé, suppression de l’exit "
      "tax.",
      TRANSMISSIONS),

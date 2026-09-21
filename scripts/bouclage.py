@@ -125,12 +125,32 @@ BAREME_LIGNE_DIRECTE = ((8_072, .05), (12_109, .10), (15_932, .15),
                         (552_324, .20), (902_838, .30), (1_805_677, .40),
                         (float("inf"), .45))
 
-ABATTEMENT = 100_000
+ABATTEMENT_ACTUEL = 100_000
+"""Abattement en ligne directe, PAR PARENT et renouvelable tous les quinze ans
+pour les donations. C'est ce « par parent » que le système cible a d'abord
+oublié : en faisant de 100 000 € un abattement viager unique, il divisait par
+deux ce dont dispose un enfant qui hérite de son père et de sa mère."""
+
+ABATTEMENT_CIBLE = 200_000
+"""L'abattement viager remplace deux abattements parentaux : il en vaut deux.
+La règle se dit en une phrase, et c'est elle qui rend la transmission médiane
+— la maison de famille partagée entre deux enfants — aussi peu imposée
+qu'aujourd'hui, c'est-à-dire pas du tout."""
+
+SEUIL_HAUT, TAUX_HAUT = 2_000_000, 0.45
+"""Une seconde tranche, au-delà de 2 M€ reçus dans une vie.
+
+Elle est nécessaire ici alors qu'elle ne l'était pas pour les revenus, et
+l'asymétrie s'explique : le sommet acquitte aujourd'hui 30,5 % de ses REVENUS,
+si bien qu'un taux commun de 36 % lui est déjà une hausse ; il acquitte en
+revanche jusqu'à 45 % de ce qu'il REÇOIT, si bien que le même taux commun lui
+serait un cadeau. Le principe ne change pas — le sommet ne doit pas gagner à la
+réforme —, seule la conclusion diffère."""
 
 
 def droits_actuels(recu_d_un_parent: float) -> float:
     """Droits de succession en ligne directe, droit actuel, pour un parent."""
-    imposable = max(0.0, recu_d_un_parent - ABATTEMENT)
+    imposable = max(0.0, recu_d_un_parent - ABATTEMENT_ACTUEL)
     droits, bas = 0.0, 0.0
     for haut, taux in BAREME_LIGNE_DIRECTE:
         if imposable <= bas:
@@ -141,21 +161,39 @@ def droits_actuels(recu_d_un_parent: float) -> float:
 
 
 def droits_cibles(recu_dans_la_vie: float, taux: float) -> float:
-    """Droits dans le système cible : un abattement viager, puis le taux commun."""
-    return max(0.0, recu_dans_la_vie - ABATTEMENT) * taux
+    """Droits dans le système cible : un abattement viager, puis deux taux."""
+    imposable = max(0.0, recu_dans_la_vie - ABATTEMENT_CIBLE)
+    haut = max(0.0, recu_dans_la_vie - SEUIL_HAUT)
+    return (imposable - haut) * taux + haut * TAUX_HAUT
 
 
-def comparer_les_successions(taux: float = 0.34) -> None:
-    print(f"\nSuccessions — un enfant unique, deux parents, taux commun de {taux:.0%}\n")
-    print(f"{'reçu':>12} {'droit actuel':>14} {'':>7} {'système cible':>14} {'':>7} {'écart':>14}")
-    for recu in (100_000, 200_000, 400_000, 600_000, 1_000_000, 2_000_000,
-                 3_000_000, 5_000_000, 7_000_000, 10_000_000, 20_000_000):
+def comparer_les_successions(taux: float = 0.36) -> None:
+    """Deux parents, un enfant : la structure dans laquelle on hérite vraiment.
+
+    Comparer un abattement viager à un abattement par parent sans tenir compte
+    du nombre de parents, c'est comparer deux choses différentes — et c'est
+    l'erreur qui a failli passer dans le programme.
+    """
+    print(f"\nSuccessions — deux parents, taux commun de {taux:.0%}, "
+          f"seconde tranche à {TAUX_HAUT:.0%} au-delà de "
+          f"{SEUIL_HAUT / 1e6:.0f} M€\n")
+    print(f"{'reçu par enfant':>16} {'droit actuel':>14} {'':>7} "
+          f"{'système cible':>14} {'':>7} {'écart':>14}")
+    for recu in (150_000, 200_000, 300_000, 400_000, 600_000, 1_000_000,
+                 2_000_000, 4_000_000, 8_000_000, 20_000_000):
         actuel = 2 * droits_actuels(recu / 2)
         cible = droits_cibles(recu, taux)
-        print(f"{recu:>12,.0f} {actuel:>14,.0f} {actuel / recu:>6.1%} "
+        print(f"{recu:>16,.0f} {actuel:>14,.0f} {actuel / recu:>6.1%} "
               f"{cible:>14,.0f} {cible / recu:>6.1%} {cible - actuel:>+14,.0f}")
-    print("\n  Le point de bascule est autour de 5 M€ reçus : en dessous le système")
-    print("  cible impose davantage, au-dessus il impose moins.")
+    print("\n  Aucune transmission en ligne directe n'est imposée moins")
+    print("  qu'aujourd'hui, de 50 000 € à 100 M€ : le soupçon de cadeau aux")
+    print("  grands héritages tombe, et il tombe par le calcul.")
+    print("\n  Hors ligne directe, à 200 000 € reçus :")
+    for nom, abattement, taux_actuel in (("un neveu", 7_967, 0.55),
+                                         ("un tiers", 1_594, 0.60)):
+        ancien = (200_000 - abattement) * taux_actuel
+        print(f"    {nom:<10} paie {ancien:>10,.0f} € aujourd'hui, "
+              f"{droits_cibles(200_000, taux):>7,.0f} € demain")
 
 
 def main() -> None:

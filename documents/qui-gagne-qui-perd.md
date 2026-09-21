@@ -262,3 +262,55 @@ de ressources que le programme conserve, et c'est une exception à assumer : le
 coût du logement varie du simple au triple selon le territoire, et aucun
 transfert national uniforme ne l'égalise sans coûter trois fois plus. Le remède
 de fond reste la LVT, qui fait baisser le prix du sol. L'aide est le pont.
+
+---
+
+## 8. La succession moyenne, et l'erreur de lecture qui la frappait
+
+Le dernier point ouvert de la revue critique, et le seul où les deux attaques —
+« cadeau aux grandes fortunes » et « vous triplez les droits sur la maison de
+vos parents » — étaient **toutes deux exactes**.
+
+**L'erreur était une erreur de lecture.** La note fixait l'abattement viager à
+100 000 €, par symétrie avec le droit en vigueur. Mais les 100 000 € du droit
+en vigueur s'entendent **par parent**. Un enfant qui hérite de son père et de sa
+mère en a deux, et le programme lui en laissait un. Il divisait par deux, sans
+l'avoir voulu ni l'avoir dit, ce dont dispose la quasi-totalité des héritiers.
+
+Comparer les deux systèmes sur un héritier à donateur unique — ce que faisait
+mon propre tableau du §2 de la revue — masquait exactement cela. La bonne
+structure de comparaison est : deux parents, chaque enfant reçoit la moitié de
+chacun.
+
+| Reçu par enfant | Aujourd'hui | Abattement à 100 k€ | Abattement à 200 k€ |
+| ---: | ---: | ---: | ---: |
+| 200 000 € | 0 € | 36 000 € | **0 €** |
+| 400 000 € | 36 389 € | 108 000 € | 72 000 € |
+| 1 000 000 € | 156 389 € | 324 000 € | 288 000 € |
+
+**Retenu : abattement viager de 200 000 €, taux commun de 36 %, puis 45 % au-delà
+de 2 M€ reçus dans la vie.** La règle se dit en une phrase — *l'abattement
+viager remplace deux abattements parentaux, il en vaut deux* — et c'est ce qui
+la rend défendable.
+
+**Vérification par balayage, de 50 000 € à 100 M€ : aucune transmission en ligne
+directe n'est imposée moins qu'aujourd'hui.** Le soupçon de cadeau aux grands
+héritages ne tombe pas par un argument, il tombe par le calcul. La seconde
+tranche est ce qui l'assure : sans elle, la réforme allégeait les transmissions
+au-dessus de 6 M€ environ.
+
+**Ce qui augmente, et qu'il faut assumer.** Au-dessus de 200 000 € reçus, les
+droits montent — 72 000 € sur 400 000 € reçus contre 36 389 € aujourd'hui. C'est
+la contrepartie de ce qui se ferme : l'abattement qui se rouvre tous les quinze
+ans, l'assurance-vie, les régimes de faveur. Autant de dispositifs dont profite
+surtout celui qui a les moyens d'organiser sa transmission à l'avance. La
+formule : *nous taxons davantage ce qu'on reçoit sans l'avoir gagné, pour taxer
+moins ce qu'on gagne en travaillant.*
+
+**Et l'argument qui n'était écrit nulle part.** Un neveu qui reçoit 200 000 €
+paie aujourd'hui 105 618 € ; un beau-fils, un filleul, un concubin, un ami :
+119 044 €. Dans le système cible, tous paient **zéro**, comme un enfant. Familles
+recomposées, couples sans enfant, personnes seules, fratries — le droit actuel
+les traite en étrangers et leur prend la moitié de ce qu'on leur laisse. C'est
+l'effet le plus spectaculaire de la réforme, et celui dont le programme ne
+parlait pas.
