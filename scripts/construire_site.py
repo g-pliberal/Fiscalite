@@ -54,6 +54,7 @@ GROUPES = [
         ("simulateur.html", "Simulateur"),
         ("qui-gagne.html", "Qui gagne, qui perd"),
         ("solidite.html", "Solidité juridique"),
+        ("depense.html", "Dépense publique"),
         ("calendrier.html", "Calendrier"),
         ("objections.html", "Objections"),
         ("glossaire.html", "Glossaire"),
@@ -100,8 +101,8 @@ def pied() -> str:
     vient le texte, ce qui y est arrêté et ce qui ne l'est pas.
     """
     return f"""<footer>
-  <p><strong>Ce site n'est pas un texte de loi.</strong> Il présente le chapitre
-  Fiscalité du programme du Parti libéral français. Les taux et les rendements
+  <p><strong>Ce site n'est pas un texte de loi.</strong> Il présente les chapitres
+  Fiscalité et Dépense publique du programme du Parti libéral français. Les taux et les rendements
   qui y figurent sont des <em>cibles de travail</em> et des ordres de grandeur à
   consolider : la note dont ces pages sont tirées le dit elle-même, le bouclage
   budgétaire n'est pas fait impôt par impôt mais au niveau du système entier.</p>
@@ -333,6 +334,19 @@ ACCUEIL = "\n".join([
             ])
             + '<p class="actions"><a class="bouton" href="calendrier.html">'
               "Voir le calendrier complet</a></p>"),
+    section("depense", "Un chapitre fiscal ne tient pas tout seul",
+            "<p>Un taux de 36 % ne baisse que si la dépense publique cesse de "
+            "croître plus vite que les prix. Nous ne renvoyons donc pas cette "
+            "question à plus tard&nbsp;: le <strong>chapitre Dépense "
+            "publique</strong> fixe une règle — la dépense ne progresse pas de "
+            "plus de 2 % par an, et le taux ne baisse pas avant que le déficit "
+            "soit sous 3 %.</p>"
+            + "<p>Il dit aussi ce qu’il ne sait pas encore&nbsp;: sur nos "
+              "propres hypothèses, cela ne se produit pas dans le quinquennat, "
+              "et 23 des 111 milliards d’effort de la cinquième année ne sont "
+              "pas encore identifiés. Nous préférons l’écrire.</p>"
+            + '<p class="actions"><a class="bouton" href="depense.html">'
+              "Lire le chapitre Dépense publique</a></p>"),
     section("doctrine", "La formule",
             encadre("", "<p>Taxer moins le travail, moins la production, moins "
                         "l’investissement productif&nbsp;; taxer mieux la "
@@ -1297,7 +1311,11 @@ CALENDRIER = "\n".join([
                    "extinction du CIR&nbsp;;",
                    "stabilisation du système fiscal&nbsp;;",
                    "évaluation de la LVT&nbsp;;",
-                   "baisse possible du taux proportionnel si la croissance et les "
+                   "baisse du taux proportionnel <strong>si et seulement si</strong> "
+                   "le déficit est passé sous 3 % — voir le "
+                   "<a href=\"depense.html#regle\">chapitre Dépense "
+                   "publique</a>&nbsp;; sur nos hypothèses, pas avant la "
+                   "sixième année. Croissance et les "
                    "dépenses le permettent&nbsp;;",
                    "simplification résiduelle."])
             + '<div class="note"><p>La stabilité est un élément du programme, pas '
@@ -2310,6 +2328,269 @@ SOLIDITE = "\n".join([
 ])
 
 
+
+# -- dépense publique --------------------------------------------------------
+#
+# Le chapitre Fiscalité renvoie six fois à celui-ci — « État moins dépensier »,
+# « État social recentré », « réforme de la dépense sociale », compensation des
+# collectivités, financement de la santé universelle, « baisse possible du taux
+# si la croissance et les dépenses le permettent ». Tant qu'il n'existait pas,
+# la fiscalité portait seule des promesses qu'elle ne pouvait pas tenir.
+#
+# Les chiffres viennent de `scripts/depense.py`. C'est un chapitre où l'on peut
+# toujours écrire un nombre d'économies plus grand : la page dit donc d'abord
+# ce qu'il faudrait, puis de combien les mesures qu'on sait nommer restent en
+# dessous.
+
+MASSES = [
+    ("Retraites", 380), ("Santé", 250),
+    ("Fonctionnement des administrations", 250),
+    ("Autres prestations sociales", 230),
+    ("Enseignement et recherche", 175),
+    ("Soutien à l’économie et investissement", 175),
+    ("Régalien : défense, sécurité, justice", 155),
+    ("Charge de la dette", 55),
+]
+
+
+def barres_de_masses(postes: list[tuple[str, int]], total: int) -> str:
+    """Où va l'argent : huit masses, une seule couleur.
+
+    Une seule série, donc une seule couleur : peindre chaque barre selon sa
+    longueur doublerait l'encodage et brûlerait le seul canal libre. Les barres
+    sont rangées par taille décroissante, parce que la question posée est « quoi
+    d'abord » et qu'un ordre alphabétique ne la sert pas.
+    """
+    # La barre la plus longue doit laisser tenir, après elle, son montant PUIS
+    # sa part — sans quoi c'est la plus importante des huit qu'on rogne. La
+    # réserve est mesurée sur ce qui vient après, pas choisie au jugé.
+    gauche, reserve = 300, 164
+    droite = 760 - reserve
+    echelle = (droite - gauche) / max(m for _, m in postes)
+    haut_ligne, epaisseur, marge = 34, 16, 14
+    parties, y = [], marge
+    for nom, montant in postes:
+        largeur = montant * echelle
+        rayon = min(4, largeur)
+        parties.append(
+            f'<path class="marque" d="M{gauche} {y} h{largeur - rayon:.1f} '
+            f'a{rayon} {rayon} 0 0 1 {rayon} {rayon} v{epaisseur - 2 * rayon} '
+            f'a{rayon} {rayon} 0 0 1 {-rayon} {rayon} h{-(largeur - rayon):.1f} z"/>')
+        parties.append(f'<text class="nom" x="{gauche - 14}" y="{y + 12}" '
+                       f'text-anchor="end">{escape(nom)}</text>')
+        parties.append(f'<text class="mesure" x="{gauche + largeur + 10:.1f}" '
+                       f'y="{y + 12}">{montant}\u202fMd€</text>')
+        parties.append(f'<text class="part" x="{gauche + largeur + 76:.1f}" '
+                       f'y="{y + 12}">'
+                       + f"{montant / total * 100:.0f}".replace(".", ",")
+                       + '\u202f%</text>')
+        y += haut_ligne
+    hauteur = y + 6
+    axe = (f'<line class="axe" x1="{gauche}" x2="{gauche}" y1="{marge - 6}" '
+           f'y2="{hauteur - 12}"/>')
+    return (f'<figure class="masses"><div class="defilant" tabindex="0">'
+            f'<svg viewBox="0 0 760 {hauteur}" role="img" aria-label="'
+            f'Répartition de la dépense publique : retraites 380 Md€, santé '
+            f'250, fonctionnement des administrations 250, autres prestations '
+            f'sociales 230, enseignement et recherche 175, soutien à '
+            f'l\u2019économie 175, régalien 155, charge de la dette 55.">'
+            f'{axe}{"".join(parties)}</svg></div>'
+            f'<figcaption>Les huit masses de la dépense publique, {total}\u202fMd€ '
+            f'au total, soit 57\u202f% du produit intérieur brut. Ordres de '
+            f'grandeur reconstitués à partir des données publiques, à '
+            f'consolider.</figcaption></figure>')
+
+
+DEPENSE = "\n".join([
+    plan([("ou", "Où va l’argent"), ("regle", "La règle"),
+          ("effort", "Ce qu’elle exige"), ("leviers", "Les leviers"),
+          ("pas", "Ce que nous ne coupons pas"),
+          ("renvois", "Les six renvois"), ("manque", "Ce qui manque")]),
+
+    section("ou", "Où va l’argent",
+            "<p>La dépense publique française atteint <strong>1 670 milliards "
+            "d’euros</strong>, soit 57 % de la richesse produite. Les recettes "
+            "en couvrent 1 500&nbsp;: il manque <strong>170 milliards</strong> "
+            "chaque année, que nous empruntons.</p>"
+            "<p>Aucune proposition d’économie ne se juge sans cette carte. La "
+            "voici, en huit masses plutôt qu’en six cents lignes.</p>"
+            + barres_de_masses(MASSES, 1670)
+            + "<p>Deux lectures s’imposent d’emblée. <strong>Les trois quarts "
+              "de la dépense sont sociaux, éducatifs ou régaliens</strong> — "
+              "c’est-à-dire difficiles à réduire sans toucher à ce que les "
+              "Français attendent de l’État. Et <strong>la charge de la dette, "
+              "55 milliards aujourd’hui, en atteindra 75 d’ici cinq ans</strong> "
+              "du seul fait des taux&nbsp;: c’est le poste qui croît le plus "
+              "vite, et le seul qu’aucune réforme ne peut ralentir une fois "
+              "la dette contractée.</p>"),
+
+    section("regle", "Une règle, plutôt qu’une liste",
+            "<p>Les programmes annoncent des économies. Ils devraient annoncer "
+            "une règle&nbsp;: une liste se négocie ligne à ligne jusqu’à "
+            "disparaître, une règle contraint la totalité de la dépense et se "
+            "vérifie chaque année.</p>"
+            + encadre("La règle du programme",
+                      "<p>La dépense publique ne progresse pas de plus de "
+                      "<strong>2 % par an en valeur</strong> — soit à peu près "
+                      "l’inflation — jusqu’à ce que le déficit soit durablement "
+                      "sous 3 % du produit intérieur brut. "
+                      "<strong>Le taux de l’impôt proportionnel ne baisse pas "
+                      "avant.</strong></p>")
+            + "<p>Cette règle ne réduit pas la dépense&nbsp;: elle cesse de la "
+              "laisser croître plus vite que les prix. C’est déjà considérable, "
+              "parce que sa pente spontanée est d’environ 3,2 % par an.</p>"
+            + tableau(
+                ["Année", "Dépense", "Part du PIB", "Déficit", "Part du PIB"],
+                [["1", "1 703 Md€", "56,6 %", "158 Md€", "5,3 %"],
+                 ["2", "1 737 Md€", "56,1 %", "145 Md€", "4,7 %"],
+                 ["3", "1 772 Md€", "55,5 %", "132 Md€", "4,1 %"],
+                 ["4", "1 808 Md€", "55,0 %", "118 Md€", "3,6 %"],
+                 ["5", "1 844 Md€", "54,4 %", "103 Md€", "3,0 %"]],
+                legende="Croissance réelle supposée de 1,2 % et inflation de "
+                        "1,8 % par an, à prélèvements obligatoires constants. "
+                        "Ce sont nos hypothèses, et elles sont discutables : "
+                        "le calcul est public et se refait avec d’autres.")
+            + '<div class="note vigilance"><p>Conséquence que nous préférons '
+              'écrire nous-mêmes&nbsp;: <strong>sur nos propres hypothèses, le '
+              'déficit ne repasse pas sous 3 % avant la sixième année.</strong> '
+              'Le taux de 36 % ne baissera donc pas pendant le quinquennat. '
+              'Promettre l’inverse aurait été plus agréable et moins '
+              'vrai.</p></div>'),
+
+    section("effort", "Ce que la règle exige vraiment",
+            "<p>Un effort ne se mesure pas par rapport à zéro, mais par rapport "
+            "à la pente. La dépense progresse spontanément d’environ 3,2 % par "
+            "an&nbsp;: vieillissement, dépense de santé, et charge de la dette. "
+            "Tenir 2 % suppose donc de combler, chaque année, l’écart qui se "
+            "creuse entre les deux.</p>"
+            + tableau(
+                ["Année", "Dépense tendancielle", "Dépense sous la règle",
+                 "Écart à combler"],
+                [["1", "1 723 Md€", "1 703 Md€", "20 Md€"],
+                 ["3", "1 835 Md€", "1 772 Md€", "63 Md€"],
+                 ["5", "1 955 Md€", "1 844 Md€", "111 Md€"]],
+                legende="L’écart n’est pas une économie de 111 Md€ sur la "
+                        "dépense d’aujourd’hui : c’est 111 Md€ de dépense "
+                        "future qui n’aura pas lieu. La distinction est celle "
+                        "que les débats budgétaires confondent le plus "
+                        "souvent.")),
+
+    section("leviers", "Les leviers, et ce qu’ils pèsent",
+            "<p>Voici les sept que nous savons nommer, avec leur rendement à "
+            "cinq ans et, dans la même colonne, ce que nous pensons de leur "
+            "solidité. Un levier dont on ne dit pas la fragilité n’est pas un "
+            "chiffrage, c’est une affiche.</p>"
+            + tableau(
+                ["Levier", "À cinq ans", "Ce que nous en pensons"],
+                [["Santé : progression de l’objectif de dépense à l’inflation",
+                  "25 Md€",
+                  "La plus lourde et la moins spectaculaire. Il ne s’agit pas "
+                  "de réduire la dépense de santé, mais de cesser de la "
+                  "laisser croître deux points au-dessus des prix."],
+                 ["Retraites : le compte notionnel stabilise la dépense",
+                  "20 Md€",
+                  "Premier poste de dépense publique. Le mécanisme relève du "
+                  "chapitre Retraites ; celui-ci n’en reprend que l’effet."],
+                 ["Aides aux entreprises : audit général, suppression par défaut",
+                  "20 Md€",
+                  "Prolongement direct de la doctrine fiscale. Chaque "
+                  "dispositif a sa filière et son défenseur : l’exécution sera "
+                  "plus dure que le principe."],
+                 ["Millefeuille territorial : une strate en moins", "10 Md€",
+                  "Les économies de fusion territoriale sont régulièrement "
+                  "annoncées et rarement constatées. Nous retenons un montant "
+                  "prudent, et nous doutons."],
+                 ["Effectifs : un départ sur trois non remplacé, hors régalien "
+                  "et enseignement", "5 Md€",
+                  "Environ vingt mille postes par an. Rendement modeste et "
+                  "certain — l’inverse des deux lignes précédentes."],
+                 ["Opérateurs et agences : fusions et suppressions", "5 Md€",
+                  "Plus d’un millier d’opérateurs. Le gain budgétaire est "
+                  "faible ; le gain de lisibilité ne l’est pas."],
+                 ["Gestion des prestations : le revenu universel remplace six "
+                  "guichets", "3 Md€",
+                  "Conséquence mécanique du chapitre Fiscalité : un versement "
+                  "automatique coûte moins à gérer que six prestations sous "
+                  "condition."],
+                 ["<strong>Total</strong>", "<strong>88 Md€</strong>",
+                  "<strong>Soit 79 % de l’écart à combler en cinquième "
+                  "année.</strong>"]],
+                legende="Rendements à l’horizon de cinq ans, en année pleine.")
+            + '<div class="note vigilance"><p><strong>Il manque 23 milliards, '
+              'et nous ne savons pas encore où ils tomberont.</strong> C’est le '
+              'nombre qui décide de la sincérité de ce chapitre. Nous préférons '
+              'l’écrire que d’allonger la liste au jugé — un programme qui '
+              'boucle à l’euro près sur la dépense publique est un programme '
+              'qui n’a pas été chiffré.</p></div>'),
+
+    section("pas", "Ce que nous ne coupons pas",
+            "<p>Un chapitre dépense se juge autant à ce qu’il protège qu’à ce "
+            "qu’il réduit. Quatre engagements, et ils contraignent le "
+            "reste&nbsp;:</p>"
+            + liste([
+                "<strong>Le régalien.</strong> Défense, sécurité, justice, "
+                "diplomatie : 155 Md€, et ce sont les premières missions de "
+                "l’État. Elles sont exclues de la règle du non-remplacement.",
+                "<strong>L’enseignement.</strong> Exclu lui aussi du "
+                "non-remplacement. On ne redresse pas une économie en "
+                "réduisant ce qui la rend productive vingt ans plus tard.",
+                "<strong>Le montant du revenu universel</strong> et des trois "
+                "suppléments qui subsistent — handicap, logement, autonomie. "
+                "Ils sont le socle du système fiscal : les raboter reviendrait "
+                "à défaire la réforme par la dépense.",
+                "<strong>Le niveau de la dépense de santé.</strong> Nous en "
+                "ralentissons la croissance ; nous ne la réduisons pas.",
+            ])),
+
+    section("renvois", "Les six renvois du chapitre Fiscalité",
+            "<p>Le chapitre Fiscalité s’appuie six fois sur celui-ci. Voici ce "
+            "qu’il y trouve.</p>"
+            + tableau(
+                ["Ce que la fiscalité suppose", "Ce que ce chapitre répond"],
+                [["« Un État moins dépensier »",
+                  "La règle des 2 % : de 57,2 % à 54,4 % du PIB en cinq ans."],
+                 ["« Un État social recentré sur l’universel »",
+                  "Le revenu universel remplace six prestations ; trois "
+                  "suppléments subsistent, et la liste est close."],
+                 ["« La réforme de la dépense sociale »",
+                  "Retraites par le compte notionnel, santé par une règle de "
+                  "progression, prestations par le revenu universel."],
+                 ["La compensation des collectivités",
+                  "La part locale d’assiette de la <i>Land Value Tax</i>, et "
+                  "une compensation de la première année écrite dans le texte "
+                  "qui supprime les droits de mutation."],
+                 ["« La bascule des financements santé vers l’impôt »",
+                  "Un socle universel financé par l’impôt général, lisible et "
+                  "sans cotisation non contributive. Le périmètre du socle "
+                  "reste à écrire : c’est un chapitre à lui seul."],
+                 ["« Une baisse possible du taux »",
+                  "Pas avant que le déficit soit sous 3 %. Sur nos hypothèses, "
+                  "pas dans le quinquennat."]],
+                legende="Les six renvois, et l’état de chaque réponse.")),
+
+    section("manque", "Ce qui manque encore",
+            "<p>Trois chantiers restent ouverts, et les nommer vaut mieux que "
+            "les laisser découvrir.</p>"
+            + liste([
+                "<strong>Les 23 milliards non identifiés</strong> de la "
+                "cinquième année.",
+                "<strong>Le périmètre du socle universel de santé.</strong> "
+                "Ce que l’impôt couvre, ce que l’assurance complémentaire "
+                "couvre, et ce qui reste à la charge du patient : c’est la "
+                "question la plus lourde du chapitre, et elle mérite son "
+                "propre texte.",
+                "<strong>La dette.</strong> Ramener le déficit sous 3 % "
+                "stabilise la dette autour de 110 % du PIB ; cela ne la réduit "
+                "pas. Un programme qui prétendrait la faire refluer en cinq "
+                "ans mentirait.",
+            ])
+            + encadre("", "<p>Nous taxons moins le travail, la production et "
+                          "l’investissement. Nous ne prétendons pas pouvoir "
+                          "taxer moins tout court avant d’avoir cessé "
+                          "d’emprunter.</p>")),
+])
+
+
 PAGES = [
     ("index.html", "Programme fiscal — Parti libéral français",
      "Taxer moins le travail,<br> mieux la rente,<br> et redistribuer simplement",
@@ -2412,6 +2693,16 @@ PAGES = [
      "1789, individualisation, Land Value Tax et faculté contributive, "
      "autonomie financière des collectivités, droit de l’Union.",
      SOLIDITE),
+    ("depense.html", "Dépense publique",
+     "Une règle,<br> plutôt qu’une liste",
+     "La dépense ne progresse pas de plus de 2 % par an jusqu’à ce que le "
+     "déficit passe sous 3 %, et le taux de l’impôt ne baisse pas avant. Ce "
+     "que cela exige, et les 23 milliards que nous ne savons pas encore où "
+     "prendre.",
+     "Chapitre Dépense publique : où vont les 1 670 Md€, la règle de "
+     "progression à 2 %, les sept leviers chiffrés et l’écart qui reste à "
+     "combler.",
+     DEPENSE),
     ("calendrier.html", "Mise en œuvre",
      "Cinq ans,<br> et ce qui tombe dès la première année",
      "Ce qui est supprimé immédiatement, ce qui converge progressivement, et les "

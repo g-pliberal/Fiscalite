@@ -168,3 +168,24 @@
   margin-top: 0.75rem; font-size: 0.9375rem; color: var(--texte-doux);
   max-width: 46rem;
 }
+
+/* La composition de la dépense publique : une seule série, donc une seule
+   couleur — colorer chaque barre selon sa longueur doublerait l'encodage et
+   brûlerait le seul canal libre. On prend `--serie-3` et non l'or, réservé
+   aux liens et aux appels, ni le vert et le rose, qui sur ce site veulent dire
+   « gagné » et « perdu » : une part de budget ne gagne ni ne perd. */
+.masses { margin: 2rem 0; }
+.masses svg { display: block; width: 100%; height: auto; min-width: 30rem; }
+.masses text { font-family: inherit; }
+.masses .marque { fill: var(--serie-3); }
+.masses .axe { stroke: var(--trait-champ); stroke-width: 1; }
+.masses .nom { fill: var(--texte); font-size: 13px; }
+.masses .mesure {
+  fill: var(--texte); font-size: 13px; font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.masses .part { fill: var(--texte-tres-doux); font-size: 12px; }
+.masses figcaption {
+  margin-top: 0.75rem; font-size: 0.9375rem; color: var(--texte-doux);
+  max-width: 46rem;
+}

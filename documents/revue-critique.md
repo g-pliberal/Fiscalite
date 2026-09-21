@@ -307,7 +307,9 @@ menti : il prouve qu'on corrige.
 (« État moins dépensier », « État social recentré », « réforme de la dépense
 sociale », compensation des collectivités, financement de la santé universelle).
 Tant qu'il n'existe pas, la fiscalité porte seule des promesses qu'elle ne peut
-pas tenir.
+pas tenir. — **Écrit depuis** : `depense.html`, et les six renvois y ont chacun
+leur réponse. Il reste un chantier que ce chapitre ouvre sans le refermer : le
+périmètre du socle universel de santé, qui mérite son propre texte.
 
 ## 9. Cinq points techniques qui feront perdre une semaine chacun
 
