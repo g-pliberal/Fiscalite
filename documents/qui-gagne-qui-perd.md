@@ -123,8 +123,8 @@ supérieure**.
 
 | | D1 | D2 | D3 | D4 | D5 | D6 | D7 | D8 | D9 | D10 | Top 1 % | Top 0,1 % |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Solde | +1 253 | +886 | +1 244 | +928 | +792 | −165 | −1 278 | −2 628 | −3 787 | −3 635 | −5 054 | −41 810 |
-| % dispo | +6,2 % | +3,6 % | +4,4 % | +2,9 % | +2,2 % | −0,4 % | −2,6 % | −4,6 % | −5,4 % | −3,0 % | −1,7 % | −3,8 % |
+| Solde | +3 805 | +2 874 | +155 | +20 | −27 | −788 | −1 278 | −2 628 | −3 787 | −3 635 | −5 054 | −41 810 |
+| % dispo | +22,8 % | +13,2 % | +0,5 % | +0,1 % | −0,1 % | −1,8 % | −2,6 % | −4,6 % | −5,4 % | −3,0 % | −1,7 % | −3,8 % |
 
 Gain décroissant du premier au sixième décile, perte croissante ensuite : le
 profil d'une réforme redistributive ordinaire, qui se défend en une phrase.
@@ -348,3 +348,45 @@ trois dixièmes de point.
 
 Reste ce que ce travail ne peut pas faire : ce n'est toujours pas une
 microsimulation. Les treize ménages moyens sont mieux calibrés, pas remplacés.
+
+
+---
+
+## 10. Le troisième contrôle : la confrontation à l'enquête
+
+Le modèle avait deux contrôles : il retrouvait les masses nationales, et ses
+deux routes de calibration se rejoignaient. Aucun des deux ne disait rien de sa
+**forme**. Il en a maintenant un troisième, et c'est lui qui a le plus appris.
+
+L'enquête Revenus fiscaux et sociaux publie, par décile de niveau de vie, le
+revenu initial et le revenu disponible médians du ménage — exactement les deux
+grandeurs du modèle, mais construites sur données individuelles.
+
+L'égalité n'est pas attendue : l'enquête publie des médianes, le modèle porte
+des moyennes. Ce qu'on vérifie est une **signature** — écart positif, minimal au
+centre, croissant vers les extrêmes.
+
+**Au premier essai, la signature n'y était pas.** Le modèle donnait au premier
+décile un revenu disponible supérieur de 52 % à celui de l'enquête, quand le
+centre ne s'en écartait que de 2 %. La composition des ménages n'était pas en
+cause : reconstruite depuis les unités de consommation implicites de l'enquête,
+elle reproduit à l'identique le profil que je portais. C'étaient les
+**prestations**, que je concentrais trop sur le tout premier décile.
+
+**La correction change la forme des résultats**, et dans un sens que je
+n'attendais pas. Le premier décile gagne désormais 22,8 % de son revenu
+disponible, le deuxième 13,2 %, et les trois suivants sont à l'équilibre. La
+raison tient à un fait que le débat public ignore : *le tout premier décile
+reçoit aujourd'hui moins de prestations que le bas-milieu*, parce qu'on y trouve
+des retraités à petite pension et des personnes hors de tout dispositif. Un
+revenu universel leur apporte beaucoup, précisément parce qu'ils ont peu à
+perdre.
+
+C'est le meilleur argument du programme, et c'est une enquête publique qui me
+l'a donné — contre ma propre calibration.
+
+**Ce qui reste irréductible.** Ce n'est toujours pas une microsimulation : les
+données individuelles de l'ERFS ne sont pas publiques. Le modèle est confronté à
+l'enquête, il ne la remplace pas. Les écarts de +25 % au premier décile et
++23 % au dernier sont attendus mais non démontrés : seule une microsimulation
+dirait s'ils sont bien l'effet de l'asymétrie et non d'un biais résiduel.

@@ -298,12 +298,12 @@ MENAGES_PAR_DECILE = 30.9e6 / 10
 
 DECILES = [
     #          ad   enf   revenu  prest   csg    ir   taxable  tva  éparg  terrain   co2
-    Menage("D1",  1.40, 0.45,  11_700, 9_500, .080, .000, .76, .155, -0.12,  11_700, 4.0, prestations_maintenues=3_600),
-    Menage("D2",  1.45, 0.48,  19_100, 7_000, .080, .000, .78, .157, -0.07,  19_500, 4.5, prestations_maintenues=2_600),
-    Menage("D3",  1.55, 0.47,  25_500, 5_000, .097, .000, .79, .160, -0.03,  29_500, 5.0, prestations_maintenues=1_750),
-    Menage("D4",  1.60, 0.46,  31_900, 3_200, .097, .003, .80, .163,  0.00,  40_500, 5.5, prestations_maintenues=1_050),
-    Menage("D5",  1.70, 0.46,  38_300, 2_000, .097, .007, .81, .166,  0.03,  52_000, 6.0, prestations_maintenues=640),
-    Menage("D6",  1.75, 0.45,  45_700, 1_200, .097, .013, .82, .169,  0.06,  64_500, 6.5, prestations_maintenues=370),
+    Menage("D1",  1.40, 0.45,  11_700, 5_900, .080, .000, .76, .155, -0.12,  11_700, 4.0, prestations_maintenues=2_300),
+    Menage("D2",  1.45, 0.48,  19_100, 4_200, .080, .000, .78, .157, -0.07,  19_500, 4.5, prestations_maintenues=1_600),
+    Menage("D3",  1.55, 0.47,  25_500, 7_200, .097, .000, .79, .160, -0.03,  29_500, 5.0, prestations_maintenues=3_000),
+    Menage("D4",  1.60, 0.46,  31_900, 5_000, .097, .003, .80, .163,  0.00,  40_500, 5.5, prestations_maintenues=2_050),
+    Menage("D5",  1.70, 0.46,  38_300, 3_400, .097, .007, .81, .166,  0.03,  52_000, 6.0, prestations_maintenues=1_300),
+    Menage("D6",  1.75, 0.45,  45_700, 2_200, .097, .013, .82, .169,  0.06,  64_500, 6.5, prestations_maintenues=800),
     Menage("D7",  1.80, 0.44,  54_200,   700, .097, .023, .83, .172,  0.09,  80_500, 7.0, prestations_maintenues=210),
     Menage("D8",  1.85, 0.44,  65_900,   400, .097, .040, .84, .175,  0.13, 102_000, 7.5, prestations_maintenues=115),
     Menage("D9",  1.90, 0.43,  85_000,   200, .108, .064, .85, .178,  0.18, 138_500, 8.5, prestations_maintenues=58),
@@ -549,8 +549,51 @@ def controle() -> None:
           f" {reconstitue:.1%} reconstitué depuis le barème.")
 
 
+# --- Troisième contrôle : l'enquête ---------------------------------------
+# Les deux premiers contrôles vérifient que le modèle retrouve des MASSES. Ils
+# ne disent rien de sa forme. Celui-ci la confronte, décile par décile, à
+# l'enquête Revenus fiscaux et sociaux 2023 — qui est, elle, construite sur
+# données individuelles.
+#
+# On ne peut pas en attendre l'égalité : l'enquête publie des MÉDIANES, le
+# modèle porte des MOYENNES. L'écart attendu est donc positif, minimal au
+# centre de la distribution et croissant vers les extrêmes, là où la queue
+# est la plus longue. C'est cette SIGNATURE qu'on vérifie, et non un zéro.
+
+ERFS_2023 = [
+    # décile, revenu initial médian, revenu disponible médian, du ménage
+    ("D1", 8_850, 12_810), ("D2", 17_040, 18_170), ("D3", 24_140, 26_360),
+    ("D4", 30_340, 30_890), ("D5", 37_670, 35_340), ("D6", 44_340, 40_250),
+    ("D7", 50_420, 45_070), ("D8", 59_000, 51_590), ("D9", 72_550, 61_630),
+    ("D10", 120_930, 96_350),
+]
+"""Insee-DGFiP-Cnaf-Cnav-CCMSA, ERFS 2023. Le dernier décile est la moyenne de
+ses deux demi-déciles publiés, faute d'une médiane d'ensemble."""
+
+REEVALUATION = 1.042   # euros 2023 -> euros 2025
+
+
+def controle_erfs() -> None:
+    print("\nTroisième contrôle — confrontation à l'enquête ERFS 2023\n")
+    print(f"{'':>5} {'revenu initial':>20} {'revenu disponible':>20}")
+    print(f"{'':>5} {'modèle':>9} {'écart':>10} {'modèle':>9} {'écart':>10}")
+    ecarts = []
+    for m, (_, initial, dispo) in zip(DECILES, ERFS_2023):
+        ei = m.revenu / (initial * REEVALUATION) - 1
+        ed = m.disponible_actuel() / (dispo * REEVALUATION) - 1
+        ecarts.append(ed)
+        print(f"{m.nom:>5} {m.revenu:>9,.0f} {ei:>+10.0%} "
+              f"{m.disponible_actuel():>9,.0f} {ed:>+10.0%}")
+    centre = max(abs(e) for e in ecarts[2:8])
+    forme = (ecarts[0] > ecarts[4] and ecarts[9] > ecarts[4] and centre < 0.12)
+    print(f"\n  Signature attendue : écart minimal au centre, croissant aux "
+          f"extrêmes.\n  Observée : {'oui' if forme else 'NON'} "
+          f"(écart maximal du centre : {centre:.0%})")
+
+
 def main() -> None:
     controle()
+    controle_erfs()
     for reforme in (CIBLE, VARIANTE, CORRIGEE):
         table_par_decile(reforme)
     table_des_cas(CIBLE)

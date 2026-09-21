@@ -1543,8 +1543,8 @@ GLOSSAIRE = "\n".join([
 
 # Décile, solde annuel en euros, part du revenu disponible en points.
 SOLDES_PAR_DECILE = [
-    ("D1", 1253, 6.2), ("D2", 886, 3.6), ("D3", 1244, 4.4), ("D4", 928, 2.9),
-    ("D5", 792, 2.2), ("D6", -165, -0.4), ("D7", -1278, -2.6), ("D8", -2628, -4.6),
+    ("D1", 3805, 22.8), ("D2", 2874, 13.2), ("D3", 155, 0.5), ("D4", 20, 0.1),
+    ("D5", -27, -0.1), ("D6", -788, -1.8), ("D7", -1278, -2.6), ("D8", -2628, -4.6),
     ("D9", -3787, -5.4), ("D10", -3635, -3.0),
 ]
 SOLDES_AU_SOMMET = [
@@ -1965,11 +1965,17 @@ QUI_GAGNE = "\n".join([
                         "les lire. Les trois dernières lignes ouvrent le "
                         "dernier décile : elles ne s’ajoutent pas aux dix "
                         "premières, elles les détaillent.")
-            + "<p>Le profil est celui d’une réforme redistributive ordinaire : "
-              "les six premiers déciles y gagnent, les quatre derniers y "
-              "contribuent. Le septième est à l’équilibre, à moins d’un point "
-              "près — c’est la charnière, et nous ne prétendons pas la "
-              "connaître au dixième de point.</p>"),
+            + "<p>Le profil est franchement redistributif, et il l’est plus que "
+              "nous ne le pensions&nbsp;: les deux premiers déciles gagnent de "
+              "13 à 23 % de leur revenu disponible, les trois suivants sont à "
+              "l’équilibre, et la contribution croît ensuite. Cette forme "
+              "n’est pas un choix d’affichage — elle nous a été imposée par "
+              "les données, et elle tient à un fait que le débat public "
+              "ignore&nbsp;: le tout premier décile reçoit aujourd’hui <em>moins</em> "
+              "de prestations que le bas-milieu, parce qu’on y trouve des "
+              "retraités à petite pension et des personnes hors de tout "
+              "dispositif. Un revenu universel leur apporte beaucoup, "
+              "précisément parce qu’ils ont peu à perdre.</p>"),
 
     section("menages", "Dix ménages",
             "<p>Un décile est une moyenne, et personne ne vit dans une "
@@ -1994,7 +2000,7 @@ QUI_GAGNE = "\n".join([
             "programme qui prétend n’en faire aucun se fait démentir par le "
             "premier journaliste venu. Voici les nôtres.</p>"
             + liste([
-                "<strong>Les quatre derniers déciles</strong>, de 0,9 % à 6 % "
+                "<strong>Les cinq derniers déciles</strong>, de 1,8 % à 5,4 % "
                 "de leur revenu disponible. C’est le choix assumé d’un système "
                 "où la solidarité passe par un transfert visible plutôt que "
                 "par des niches invisibles.",
@@ -2347,13 +2353,13 @@ SOLIDITE = "\n".join([
 # dessous.
 
 MASSES = [
-    ("Retraites", 390), ("Santé", 258),
-    ("Fonctionnement des administrations", 256),
-    ("Autres prestations sociales", 236),
-    ("Enseignement et recherche", 180),
-    ("Soutien à l’économie et investissement", 179),
-    ("Régalien : défense, sécurité, justice", 159),
-    ("Charge de la dette", 56),
+    ("Retraites", 410), ("Autres prestations sociales", 300),
+    ("Santé", 268), ("Affaires économiques", 170),
+    ("Enseignement", 153),
+    ("Services publics généraux, hors dette", 124),
+    ("Culture, logement, environnement", 118),
+    ("Défense, ordre et sécurité", 109),
+    ("Charge de la dette", 62),
 ]
 
 
@@ -2394,15 +2400,17 @@ def barres_de_masses(postes: list[tuple[str, int]], total: int) -> str:
            f'y2="{hauteur - 12}"/>')
     return (f'<figure class="masses"><div class="defilant" tabindex="0">'
             f'<svg viewBox="0 0 760 {hauteur}" role="img" aria-label="'
-            f'Répartition de la dépense publique : retraites 380 Md€, santé '
-            f'250, fonctionnement des administrations 250, autres prestations '
-            f'sociales 230, enseignement et recherche 175, soutien à '
-            f'l\u2019économie 175, régalien 155, charge de la dette 55.">'
+            f'Répartition de la dépense publique par fonction : retraites '
+            f'410 Md€, autres prestations sociales 300, santé 268, affaires '
+            f'économiques 170, enseignement 153, services publics généraux '
+            f'124, culture logement environnement 118, défense et sécurité '
+            f'109, charge de la dette 62.">'
             f'{axe}{"".join(parties)}</svg></div>'
-            f'<figcaption>Les huit masses de la dépense publique, {total}\u202fMd€ '
-            f'au total, soit 57\u202f% du produit intérieur brut. Ordres de '
-            f'grandeur reconstitués à partir des données publiques, à '
-            f'consolider.</figcaption></figure>')
+            f'<figcaption>La dépense publique ventilée par fonction, '
+            f'{total}\u202fMd€ au total, soit 57,3\u202f% du produit intérieur '
+            f'brut. Source : Insee, comptes de la Nation 2024, reproportionnés '
+            f'au total 2025. Seul le partage entre retraites et autres '
+            f'prestations est estimé.</figcaption></figure>')
 
 
 DEPENSE = "\n".join([
@@ -2422,7 +2430,7 @@ DEPENSE = "\n".join([
             "5,8 % en 2024 et de 5,1 % en 2025. Raisonner sur l’année "
             "précédente aurait décalé nos conclusions de deux ans.</p>"
             "<p>Aucune proposition d’économie ne se juge sans cette carte. La "
-            "voici, en huit masses plutôt qu’en six cents lignes.</p>"
+            "voici, telle que l’Insee la ventile par fonction.</p>"
             + barres_de_masses(MASSES, 1714)
             + "<p>Deux lectures s’imposent d’emblée. <strong>Les trois quarts "
               "de la dépense sont sociaux, éducatifs ou régaliens</strong> — "
@@ -2504,9 +2512,13 @@ DEPENSE = "\n".join([
                   "chapitre Retraites ; celui-ci n’en reprend que l’effet."],
                  ["Aides aux entreprises : audit général, suppression par défaut",
                   "20 Md€",
-                  "Prolongement direct de la doctrine fiscale. Chaque "
-                  "dispositif a sa filière et son défenseur : l’exécution sera "
-                  "plus dure que le principe."],
+                  "La commission d’enquête du Sénat de 2025 chiffre ces aides "
+                  "à <strong>211 Md€ au sens large et 108 Md€ au sens "
+                  "strict</strong>, dont plus de 43 Md€ de dépenses fiscales "
+                  "réparties en 255 dispositifs. Nous n’en visons qu’un "
+                  "cinquième : le principe est simple, l’exécution le sera "
+                  "moins, chaque dispositif ayant sa filière et son "
+                  "défenseur."],
                  ["Millefeuille territorial : une strate en moins", "10 Md€",
                   "Les économies de fusion territoriale sont régulièrement "
                   "annoncées et rarement constatées. Nous retenons un montant "
@@ -2618,6 +2630,10 @@ DEPENSE = "\n".join([
 DREES = ("https://drees.solidarites-sante.gouv.fr/publications-communique-de-"
          "presse-documents-de-reference/panoramas-de-la-drees/241120-Panorama-CNS24")
 
+SENAT_AIDES = "https://www.senat.fr/rap/r24-808-1/r24-808-125.html"
+SENAT_PAYS_BAS = "https://www.senat.fr/lc/lc340/lc340.html"
+INSEE_ERFS = "https://www.insee.fr/fr/statistiques/8731692"
+INSEE_COFOG = "https://www.insee.fr/fr/statistiques/8735252"
 INSEE_APU = "https://www.insee.fr/fr/statistiques/8956575"
 INSEE_IMPOTS = "https://www.insee.fr/fr/statistiques/2381408"
 CC_2012 = "https://www.conseil-constitutionnel.fr/decision/2012/2012662DC.htm"
@@ -2627,7 +2643,8 @@ SOURCES = "\n".join([
     plan([("principe", "Le principe"), ("comptes", "Finances publiques"),
           ("impots", "Rendement des impôts"), ("sante-source", "Santé"),
           ("droit", "Décisions citées"),
-          ("estime", "Ce que nous estimons"), ("errata", "Errata")]),
+          ("estime", "Ce que nous estimons"), ("enquete", "Face à l’enquête"),
+          ("errata", "Errata")]),
 
     section("principe", "Un chiffre sans millésime n’est pas un chiffre",
             "<p>Tout nombre qui figure sur ce site relève de l’une de deux "
@@ -2660,7 +2677,15 @@ SOURCES = "\n".join([
                  ["Dette publique", "3 460,5 Md€ — 115,6 % du PIB", "2025",
                   f'<a href="{INSEE_APU}">Insee</a>'],
                  ["Taux de prélèvements obligatoires", "43,6 % du PIB", "2025",
-                  f'<a href="{INSEE_APU}">Insee</a>']],
+                  f'<a href="{INSEE_APU}">Insee</a>'],
+                 ["Dépense par fonction : protection sociale 693 Md€, santé "
+                  "261, services généraux 181 dont 60 de charge de la dette",
+                  "1 672 Md€ au total", "2024",
+                  f'<a href="{INSEE_COFOG}">Insee, dépenses par fonction</a>'],
+                 ["Revenu initial et revenu disponible médians, par décile",
+                  "voir la page Qui gagne, qui perd", "2023",
+                  f'<a href="{INSEE_ERFS}">Insee, enquête Revenus fiscaux et '
+                  f'sociaux</a>']],
                 legende="Comptes nationaux, base 2020, données provisoires. "
                         "Le déficit 2024 s’élevait à 5,8 % : le millésime "
                         "déplace de deux ans la date à laquelle notre règle "
@@ -2701,7 +2726,10 @@ SOURCES = "\n".join([
                  ["Dépense moyenne par habitant", "3 723 €", "2024",
                   f'<a href="{DREES}">DREES</a>'],
                  ["Reste à charge des ménages", "7,2 % de la CSBM", "2022",
-                  f'<a href="{DREES}">DREES</a>']],
+                  f'<a href="{DREES}">DREES</a>'],
+                 ["Panier de soins fixé par voie réglementaire sur avis d’un "
+                  "institut indépendant (Pays-Bas)", "depuis 2006", "2024",
+                  f'<a href="{SENAT_PAYS_BAS}">Sénat, législation comparée</a>']],
                 legende="Le reste à charge français est le plus bas des pays "
                         "développés : c’est ce chiffre qui interdit de "
                         "présenter le socle universel comme une réforme "
@@ -2747,13 +2775,17 @@ SOURCES = "\n".join([
                   "Dépend de l’élasticité de la consommation, que nous "
                   "retenons à 15 %. Recoupé par le modèle par décile, qui "
                   "donne 74 Md€ pour les seuls ménages."],
-                 ["Ventilation de la dépense en huit masses", "1 714 Md€",
-                  "Le total est sourcé ; sa décomposition est reconstituée à "
-                  "partir des données par fonction. C’est la partie la plus "
-                  "fragile du chapitre Dépense publique."],
+                 ["Partage de la protection sociale entre retraites et reste",
+                  "410 et 300 Md€",
+                  "La ventilation par fonction donne 693 Md€ de protection "
+                  "sociale sans publier ce partage. C’est désormais la seule "
+                  "ligne estimée du chapitre Dépense publique."],
                  ["Les sept leviers d’économies", "88 Md€ à cinq ans",
                   "Chacun porte son degré de solidité sur la page qui les "
-                  "expose. Aucun ne repose sur une évaluation officielle."],
+                  "expose. Un seul s’adosse désormais à un chiffrage "
+                  "officiel : les aides aux entreprises, que la "
+                  f'<a href="{SENAT_AIDES}">commission d’enquête du Sénat</a> '
+                  "évalue à 211 Md€ au sens large et 108 au sens strict."],
                  ["Valeur des terrains", "3 500 Md€ avant réforme",
                   "Reconstituée à partir des comptes de patrimoine."],
                  ["Prélèvement de solidarité sur le capital", "12 Md€",
@@ -2762,11 +2794,46 @@ SOURCES = "\n".join([
                   "Très sensibles au volume des transactions, donc à l’année "
                   "retenue."],
                  ["Le modèle par décile et les dix cas types", "—",
-                  "Treize ménages moyens calibrés à la main, et non une "
-                  "microsimulation. Ses contrôles d’agrégation sont publiés "
-                  "avec lui."]],
+                  "Treize ménages moyens, et non une microsimulation. Mais il "
+                  "est désormais confronté décile par décile à l’enquête "
+                  "Revenus fiscaux et sociaux, qui est construite sur données "
+                  "individuelles : voir ci-dessous."]],
                 legende="Huit estimations, dont trois pèsent assez pour "
                         "déplacer le taux de l’impôt proportionnel.")),
+
+    section("enquete", "Le modèle par décile, confronté à l’enquête",
+            "<p>Nos tableaux reposent sur treize ménages moyens. Ce n’est pas "
+            "une microsimulation, et nous ne pouvons pas en faire une&nbsp;: "
+            "les données individuelles ne sont pas publiques. Mais on peut "
+            "confronter le modèle à une enquête qui, elle, l’est — l’enquête "
+            "Revenus fiscaux et sociaux, construite sur les déclarations "
+            "réelles.</p>"
+            "<p>L’égalité n’est pas attendue&nbsp;: l’enquête publie des "
+            "<strong>médianes</strong>, le modèle porte des "
+            "<strong>moyennes</strong>. L’écart doit donc être positif, "
+            "minimal au centre de la distribution et croissant vers les "
+            "extrêmes, là où la queue est longue. C’est cette signature qu’on "
+            "vérifie, et non un zéro.</p>"
+            + tableau(
+                ["Décile", "Revenu initial (modèle / enquête)", "Écart",
+                 "Revenu disponible", "Écart"],
+                [["D1", "11 700 / 9 222 €", "+27 %", "16 664 / 13 348 €", "+25 %"],
+                 ["D3", "25 500 / 25 154 €", "+1 %", "30 226 / 27 467 €", "+10 %"],
+                 ["D5", "38 300 / 39 252 €", "−2 %", "37 717 / 36 824 €", "+2 %"],
+                 ["D7", "54 200 / 52 538 €", "+3 %", "48 396 / 46 963 €", "+3 %"],
+                 ["D9", "85 000 / 75 597 €", "+12 %", "70 580 / 64 218 €", "+10 %"],
+                 ["D10", "167 000 / 126 009 €", "+33 %", "123 012 / 100 397 €",
+                  "+23 %"]],
+                legende="Enquête Revenus fiscaux et sociaux 2023, réévaluée en "
+                        "euros 2025. Un décile sur deux ; le contrôle complet "
+                        "s’imprime à chaque exécution de qui_gagne.py.")
+            + "<p>La signature est celle qu’on attendait. Elle ne l’était pas "
+              "au premier essai&nbsp;: le modèle donnait au premier décile un "
+              "revenu disponible supérieur de moitié à celui de l’enquête, "
+              "parce qu’il y concentrait trop de prestations. Le redressement "
+              "a changé la forme de nos résultats — c’est la principale "
+              "correction que cette confrontation a produite, et elle rend le "
+              "programme <em>plus</em> redistributif qu’il ne paraissait.</p>"),
 
     section("errata", "Errata",
             "<p>Ce que nous avons publié puis corrigé. Cette liste ne "
@@ -2790,7 +2857,12 @@ SOURCES = "\n".join([
                   "La France ne peut pas l’instituer seule."],
                  ["Impôt sur le revenu : 87 Md€", "103,6 Md€",
                   "Nous avions retenu la présentation budgétaire là où les "
-                  "comptes nationaux s’imposaient."]],
+                  "comptes nationaux s’imposaient."],
+                 ["Profil des prestations par décile",
+                  "Redressé sur l’enquête",
+                  "Nous les concentrions trop sur le premier décile, où "
+                  "dominent en réalité des ménages d’une personne hors de tout "
+                  "dispositif."]],
                 legende="Six corrections publiques. Trois viennent du "
                         "chiffrage, une du droit, une du droit de l’Union, et "
                         "la dernière d’une source mal choisie.")),
@@ -2955,6 +3027,16 @@ SANTE = "\n".join([
                 "financée</strong> dans le même texte que celui qui la "
                 "décide.",
             ])
+            + "<p>Cette procédure n’est pas une invention. Les "
+              f'<a href="{SENAT_PAYS_BAS}">Pays-Bas</a> fonctionnent ainsi '
+              "depuis leur réforme de 2006&nbsp;: l’assurance de base y couvre "
+              "un panier dont le contenu est fixé par voie réglementaire, sur "
+              "l’avis d’un institut indépendant, le <i>Zorginstituut "
+              "Nederland</i>. Le panier y exclut explicitement certains postes "
+              "— les lunettes, par exemple — et cette exclusion est écrite, "
+              "donc discutable, donc révisable. C’est exactement ce que nous "
+              "cherchons&nbsp;: non pas un périmètre plus étroit, mais un "
+              "périmètre <em>connu</em>.</p>"
             + encadre("", "<p>Un programme sérieux ne dit pas ce que "
                           "contiendra le panier dans dix ans. Il dit qui le "
                           "décidera, selon quelle règle, et devant qui il en "

@@ -50,18 +50,24 @@ effort — et non contre zéro, comme le font les programmes qui annoncent des
 # budgétaire ne le lui apprend pas.
 
 POSTES = [
-    ("Retraites", 390.0),
-    ("Santé", 258.0),
-    ("Fonctionnement des administrations", 256.0),
-    ("Autres prestations sociales", 236.0),
-    ("Enseignement et recherche", 180.0),
-    ("Soutien à l’économie et investissement", 179.0),
-    ("Régalien : défense, sécurité, justice, diplomatie", 159.0),
-    ("Charge de la dette", 56.1),
+    ("Retraites", 410.0),
+    ("Autres prestations sociales", 300.0),
+    ("Santé", 268.0),
+    ("Affaires économiques", 170.0),
+    ("Enseignement", 153.0),
+    ("Services publics généraux, hors dette", 124.0),
+    ("Culture, logement, environnement", 118.0),
+    ("Défense, ordre et sécurité", 109.0),
+    ("Charge de la dette", 62.0),
 ]
-"""ESTIMÉS. Le total est celui des comptes nationaux ; sa ventilation en huit
-masses est une reconstitution à partir des données par fonction, et elle est la
-partie la moins solide de ce script."""
+"""Ventilation par fonction (COFOG), Insee, comptes de la Nation 2024,
+reproportionnée au total 2025. Une seule ligne reste estimée : le partage de la
+protection sociale — 693 Md€ en 2024 — entre les retraites et le reste, que la
+publication ne donne pas directement.
+
+La charge de la dette s'élevait à 60 Md€ en 2024, après une hausse de 13,8 % en
+un an. C'est le poste qui croît le plus vite, et le seul qu'aucune réforme ne
+ralentit une fois la dette contractée."""
 
 
 @dataclass(frozen=True)
