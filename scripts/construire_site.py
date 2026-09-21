@@ -53,6 +53,7 @@ GROUPES = [
     ("Comprendre", [
         ("simulateur.html", "Simulateur"),
         ("qui-gagne.html", "Qui gagne, qui perd"),
+        ("solidite.html", "Solidité juridique"),
         ("calendrier.html", "Calendrier"),
         ("objections.html", "Objections"),
         ("glossaire.html", "Glossaire"),
@@ -790,11 +791,10 @@ FONCIER = "\n".join([
             "terrains rares sans en supporter le coût d’opportunité.</p>"
             + "<p>En revanche, une transition humaine est nécessaire. Le programme "
               "prévoit&nbsp;:</p>"
-            + liste(["un <strong>report de paiement</strong> pendant les cinq "
-                     "premières années de mise en place&nbsp;;",
-                     "puis, à terme, la possibilité de bénéficier de jusqu’à "
-                     "<strong>deux ans de crédit</strong> en cas de mise en vente "
-                     "du bien&nbsp;;",
+            + liste(["un <strong>report de paiement permanent et de "
+                     "droit</strong> pour la résidence principale, dès lors que "
+                     "les revenus du propriétaire sont inférieurs à un "
+                     "seuil&nbsp;;",
                      "une <strong>créance fiscale garantie</strong> sur le bien en "
                      "cas de report&nbsp;;",
                      "une récupération à la vente ou à la succession."])
@@ -812,9 +812,16 @@ FONCIER = "\n".join([
                           "écosystémiques réels.</p>")
             + TABLE_TERRAINS),
     section("local", "Un taux national, une recette partagée",
-            "<p>La LVT aura un <strong>taux national</strong>. Son produit pourra "
-            "être partagé entre l’État et les collectivités territoriales, avec un "
+            "<p>La LVT aura un <strong>taux national</strong>. Son produit est "
+            "partagé entre l’État et les collectivités territoriales, avec un "
             "mécanisme de péréquation.</p>"
+            + "<p>Le partage se fait par <strong>part locale d’assiette</strong> "
+              "et non par dotation&nbsp;: chaque collectivité reçoit le produit "
+              "de la valeur foncière située sur son territoire, corrigé par la "
+              "péréquation. La différence paraît technique&nbsp;; elle décide "
+              "en réalité de la <a href=\"solidite.html#collectivites\">"
+              "constitutionnalité du chapitre</a>, une dotation d’État ne "
+              "comptant pas comme ressource propre.</p>"
             + encadre("", "<p>La LVT doit être nationale dans son taux, mais "
                           "compatible avec une ressource locale lisible et "
                           "péréquée.</p>")
@@ -954,8 +961,9 @@ CARBONE = "\n".join([
             "assume donc une approche flexible&nbsp;:</p>"
             + liste(["priorité au marché carbone européen lorsque c’est "
                      "possible&nbsp;;",
-                     "mécanismes d’ajustement aux frontières lorsque "
-                     "nécessaire&nbsp;;",
+                     "le soutien au renforcement du mécanisme d’ajustement "
+                     "aux frontières <strong>européen</strong>, seul cadre où "
+                     "il puisse être décidé&nbsp;;",
                      "prise en compte des secteurs exposés à la concurrence "
                      "internationale&nbsp;;",
                      "trajectoire prévisible plutôt que chocs soudains&nbsp;;",
@@ -2032,6 +2040,276 @@ QUI_GAGNE = "\n".join([
 ])
 
 
+
+# -- solidité juridique ------------------------------------------------------
+#
+# Un programme fiscal qui ne dit pas s'il est applicable n'est pas un
+# programme, c'est une pétition. Cette page prend les sept objections qu'un
+# juriste opposera, et y répond — y compris là où la réponse est « nous ne
+# savons pas encore ».
+#
+# Elle est écrite avec une prudence particulière : une référence inexacte sur
+# une page de ce genre vaut mieux ne pas exister. Les décisions citées le sont
+# par leur numéro et leur objet ; les raisonnements qui en sont tirés sont les
+# nôtres, et la page le dit.
+
+def taux_moyens() -> str:
+    """Le taux moyen, revenu par revenu. C'est la pièce du dossier.
+
+    L'article 13 n'impose pas un barème progressif ; il impose que la charge
+    soit répartie selon les facultés. Ce qui doit donc croître, c'est le taux
+    MOYEN — et il croît, sur tout le domaine, sans exception."""
+    lignes = []
+    for revenu in (0, 10_000, 20_000, 30_000, 50_000, 100_000, 200_000, 1_000_000):
+        impot = revenu * 0.36
+        net = impot - 7_200
+        taux = "—" if revenu == 0 else part_lue(net / revenu * 100)
+        lignes.append([
+            f"{revenu:,.0f} €".replace(",", "\u202f"),
+            f"{impot:,.0f} €".replace(",", "\u202f"),
+            ("+" if net >= 0 else "\u2212") + f"{abs(net):,.0f} €".replace(",", "\u202f"),
+            taux,
+        ])
+    return tableau(
+        ["Revenu annuel", "Impôt à 36 %", "Après le revenu universel", "Taux moyen"],
+        lignes,
+        legende="Impôt proportionnel de 36 % et revenu universel de 600 € par "
+                "mois. Le taux marginal ne bouge pas ; le taux moyen croît de "
+                "−36 % à +35 %, sans un seul palier où il reculerait.")
+
+
+SOLIDITE = "\n".join([
+    plan([("methode", "Ce que fait cette page"), ("article-13", "Le taux unique"),
+          ("individualisation", "L’individualisation"), ("lvt", "La LVT"),
+          ("collectivites", "Les collectivités"), ("dette", "La dette sociale"),
+          ("union", "Le droit de l’Union"), ("inconnues", "Ce que nous ignorons")]),
+
+    section("methode", "Ce que fait cette page, et ce qu’elle ne fait pas",
+            "<p>Un programme fiscal qui ne dit pas s’il est applicable n’est pas "
+            "un programme, c’est une pétition. Nous avons donc pris les sept "
+            "objections qu’un juriste opposera à cette réforme, et nous y "
+            "répondons ici — y compris là où la réponse est « nous ne savons "
+            "pas encore ».</p>"
+            + '<div class="note vigilance"><p>Ceci est <strong>notre</strong> '
+              'analyse, pas une consultation. Les décisions citées le sont par '
+              'leur numéro et leur objet&nbsp;; les raisonnements qui en sont '
+              'tirés sont les nôtres, et ils ont vocation à être '
+              'contre-expertisés avant tout dépôt de texte. Nous publions '
+              'l’analyse plutôt que ses conclusions, pour qu’on puisse la '
+              'contredire.</p></div>'
+            + "<p>L’exercice a déjà produit trois changements dans le "
+              "programme, signalés au fil de la page&nbsp;: le report de la "
+              "<i>Land Value Tax</i> devient permanent et de droit, son produit "
+              "est réparti par part locale d’assiette et non par dotation, et "
+              "nous cessons d’annoncer un ajustement carbone aux frontières que "
+              "la France ne peut pas décider seule.</p>"),
+
+    section("article-13", "« En raison de leurs facultés » — le taux unique",
+            "<p>L’objection est la première qui viendra&nbsp;: un impôt "
+            "proportionnel serait contraire à l’exigence constitutionnelle de "
+            "progressivité. Elle repose sur une confusion.</p>"
+            + encadre("Article 13 de la Déclaration de 1789",
+                      "<p>« Pour l’entretien de la force publique, et pour les "
+                      "dépenses d’administration, une contribution commune est "
+                      "indispensable&nbsp;: elle doit être également répartie "
+                      "entre tous les citoyens, en raison de leurs "
+                      "facultés. »</p>")
+            + "<p>Le texte n’impose pas un barème progressif. Il impose que la "
+              "charge soit répartie <strong>en raison des facultés "
+              "contributives</strong>, et le Conseil constitutionnel apprécie "
+              "cette exigence sur l’imposition prise dans son ensemble, non "
+              "impôt par impôt. Ce qui doit donc croître avec le revenu, c’est "
+              "le <strong>taux moyen</strong>. Le voici.</p>"
+            + taux_moyens()
+            + "<p>Un ménage sans revenu reçoit 7 200 €. À 20 000 €, il ne paie "
+              "ni ne reçoit. Au-delà, sa contribution nette croît "
+              "continûment jusqu’à s’approcher de 36 % sans jamais l’atteindre. "
+              "Le système est donc progressif au sens où l’article 13 l’entend, "
+              "et il l’est davantage que l’actuel dans le bas de la "
+              "distribution&nbsp;: un smicard célibataire acquitte aujourd’hui "
+              "près de 10 % de CSG dès le premier euro.</p>"
+            + '<p><a class="bouton" href="qui-gagne.html">La démonstration par '
+              'décile</a></p>'),
+
+    section("individualisation", "L’individualisation, et le précédent de 2012",
+            "<p>C’est le risque le plus sérieux du programme, et nous ne le "
+            "minimisons pas.</p>"
+            "<p>Par sa décision <strong>n° 2012-662 DC</strong> du 29 décembre "
+            "2012, le Conseil constitutionnel a censuré la contribution "
+            "exceptionnelle sur les très hauts revenus d’activité, au motif "
+            "notamment qu’elle frappait les personnes une à une quand l’impôt "
+            "sur le revenu, lui, reste assis sur le foyer&nbsp;: deux ménages "
+            "disposant du même revenu total s’y trouvaient traités "
+            "différemment.</p>"
+            + "<p>Notre réponse tient en deux points, et le second est le plus "
+              "solide&nbsp;:</p>"
+            + liste([
+                "<strong>Ce qui a été censuré, c’est une incohérence, pas "
+                "l’individualisation.</strong> Un prélèvement individuel "
+                "superposé à un impôt familial produit, à revenu égal, deux "
+                "traitements différents. Notre système est individuel de bout "
+                "en bout&nbsp;: il n’y a plus de terme de comparaison "
+                "familial auquel se heurter.",
+                "<strong>Les charges de famille sont prises en compte, "
+                "autrement.</strong> Le quotient familial disparaît, le revenu "
+                "universel enfant le remplace — et il est versé, non déduit, "
+                "donc il vaut autant pour un revenu modeste que pour un revenu "
+                "élevé. C’est une prise en compte plus égale, pas une "
+                "disparition.",
+            ])
+            + "<p>Un point mérite d’être souligné parce qu’il joue pour "
+              "nous&nbsp;: par sa décision <strong>n° 2000-437 DC</strong> du "
+              "19 décembre 2000, le Conseil avait censuré une réduction "
+              "dégressive de CSG qui ne tenait compte ni des autres revenus du "
+              "contribuable ni des personnes à sa charge. Notre dispositif fait "
+              "exactement l’inverse&nbsp;: son assiette couvre tous les revenus "
+              "personnels, et le revenu universel enfant tient compte des "
+              "personnes à charge.</p>"
+            + '<div class="note vigilance"><p>Risque résiduel assumé&nbsp;: nul '
+              'ne peut garantir qu’un système intégralement individuel serait '
+              'validé. C’est la question que nous soumettrons en premier à la '
+              'contre-expertise.</p></div>'),
+
+    section("lvt", "La LVT, la faculté contributive, et un changement de programme",
+            "<p>Objection&nbsp;: une taxe annuelle de 2 % sur la valeur d’un "
+            "terrain frappe un patrimoine sans regarder le revenu de celui qui "
+            "le détient. Pour un propriétaire âgé et modeste, la charge peut "
+            "excéder ses facultés — et une imposition qui fait peser sur une "
+            "catégorie de contribuables une charge excessive au regard de leurs "
+            "facultés contributives est censurée.</p>"
+            + "<p>Trois éléments répondent, et le troisième est nouveau&nbsp;:</p>"
+            + liste([
+                "La détention d’un patrimoine <strong>confère par elle-même "
+                "une capacité contributive</strong> : c’est le fondement admis "
+                "de toute imposition du capital, et la LVT ne fait pas "
+                "exception.",
+                "La LVT <strong>remplace</strong> la taxe foncière, les droits "
+                "de mutation, l’IFI et la taxation des plus-values "
+                "immobilières. Elle ne s’ajoute pas&nbsp;: l’appréciation porte "
+                "sur le solde.",
+                "<strong>Le report de paiement devient permanent et de "
+                "droit</strong> pour la résidence principale d’un propriétaire "
+                "dont les revenus sont inférieurs à un seuil. La créance est "
+                "garantie sur le bien et recouvrée à la cession ou à la "
+                "succession. Personne n’est contraint de vendre&nbsp;: c’est "
+                "ce qui retire à l’objection son objet.",
+            ])
+            + '<div class="note"><p><strong>Ce que cette analyse a changé.</strong> '
+              'La note prévoyait un report limité aux cinq premières années, '
+              'puis à deux ans en cas de mise en vente. Un report qui expire '
+              'laisse revenir la charge excessive qu’il devait écarter&nbsp;; '
+              'un report permanent, garanti sur le bien, ne coûte rien à '
+              'l’État — qui est payé plus tard, pas moins — et ferme '
+              'l’objection.</p></div>'),
+
+    section("collectivites", "L’article 72-2, et un second changement",
+            encadre("Article 72-2, alinéa 3, de la Constitution",
+                    "<p>« Les recettes fiscales et les autres ressources "
+                    "propres des collectivités territoriales représentent, pour "
+                    "chaque catégorie de collectivités, une part déterminante "
+                    "de l’ensemble de leurs ressources. »</p>")
+            + "<p>Le programme supprime les droits de mutation — ressource "
+              "principale des départements — et remplace la taxe foncière par "
+              "une LVT à taux national. Remplacer des impôts locaux par une "
+              "dotation d’État ferait chuter le ratio d’autonomie financière, "
+              "et l’opération serait contestée sur ce fondement.</p>"
+            + "<p>La loi organique compte parmi les ressources propres le "
+              "produit des impositions dont la loi détermine, par collectivité, "
+              "le taux <strong>ou une part locale d’assiette</strong>. C’est "
+              "cette seconde branche qui sauve le dispositif — à condition de "
+              "le construire pour elle.</p>"
+            + '<div class="note"><p><strong>Ce que cette analyse a changé.</strong> '
+              'Le produit de la LVT ne sera pas réparti par dotation, mais par '
+              '<strong>part locale d’assiette</strong> : chaque collectivité '
+              'reçoit le produit de la valeur foncière située sur son '
+              'territoire, corrigé par la péréquation. La ressource reste une '
+              'ressource propre au sens de la loi organique, et le ratio '
+              'd’autonomie est préservé. La différence est technique&nbsp;; '
+              'elle décide de la constitutionnalité du chapitre.</p></div>'
+            + "<p>Reste la suppression des droits de mutation dès la première "
+              "année, avant que la LVT ne monte en charge. Le juge vérifie que "
+              "les ressources ne sont pas restreintes au point d’entraver la "
+              "libre administration des collectivités&nbsp;: la compensation "
+              "de cette première année doit donc être écrite dans le même "
+              "texte que la suppression, et non renvoyée à une réforme "
+              "ultérieure.</p>"),
+
+    section("dette", "La contribution au remboursement de la dette sociale",
+            "<p>La CRDS n’est pas un impôt comme un autre&nbsp;: elle est "
+            "affectée à l’amortissement de la dette sociale, et le cadre "
+            "organique interdit qu’un transfert de dette se fasse sans les "
+            "ressources correspondantes.</p>"
+            + "<p>La fusionner dans l’impôt général suppose donc, dans le même "
+              "texte, d’affecter à la caisse d’amortissement une ressource de "
+              "substitution d’un rendement au moins égal. Ce n’est pas un "
+              "obstacle&nbsp;: c’est un article à écrire, et il doit l’être "
+              "avant l’annonce, faute de quoi « ils suppriment le "
+              "remboursement de la dette sociale » se dira tout seul.</p>"),
+
+    section("union", "Le droit de l’Union, et une annonce que nous retirons",
+            tableau(
+                ["Mesure", "Ce que dit le droit de l’Union"],
+                [["TVA à taux unique de 25 %",
+                  "Compatible. La directive fixe un taux normal minimal de "
+                  "15 % et rend les taux réduits facultatifs : un taux unique "
+                  "est un choix ouvert."],
+                 ["Suppression de l’<i>exit tax</i>",
+                  "Sans difficulté. La Cour de justice a au contraire censuré "
+                  "des dispositifs de ce type (<i>de Lasteyrie du Saillant</i>, "
+                  "C-9/02) : les supprimer va dans le sens du droit de "
+                  "l’Union."],
+                 ["Prix plancher du carbone",
+                  "Possible en complément du marché européen, la fiscalité "
+                  "énergétique européenne fixant des minima et non des "
+                  "maxima."],
+                 ["Ajustement carbone aux frontières",
+                  "<strong>Hors de portée d’un État seul</strong> : la "
+                  "politique commerciale et le mécanisme d’ajustement relèvent "
+                  "de l’Union."],
+                 ["Successions imposées chez le receveur",
+                  "Plutôt plus conforme que le droit actuel : la Cour a censuré "
+                  "à plusieurs reprises des abattements successoraux réservés "
+                  "aux résidents. Un abattement universel, indifférent au lien "
+                  "et à la résidence, ne prête pas le même flanc."]],
+                legende="Les cinq points où le droit de l’Union est le plus "
+                        "souvent invoqué contre une réforme fiscale nationale.")
+            + '<div class="note"><p><strong>Ce que cette analyse a changé.</strong> '
+              'La note annonçait des « mécanismes d’ajustement aux frontières '
+              'lorsque nécessaire ». Nous retirons cette formule : la France ne '
+              'peut pas l’instituer seule. Nous disons désormais ce que nous '
+              'pouvons faire — soutenir et renforcer le mécanisme européen — et '
+              'non ce qu’un gouvernement français serait hors d’état de '
+              'tenir.</p></div>'),
+
+    section("inconnues", "Ce que nous ne savons pas encore",
+            "<p>Quatre questions restent ouvertes. Les taire serait "
+            "exactement ce que cette page a pour objet d’éviter.</p>"
+            + liste([
+                "<strong>L’individualisation intégrale tiendrait-elle&nbsp;?</strong> "
+                "Nous le pensons, pour les raisons dites plus haut. Nul ne peut "
+                "le garantir avant la décision.",
+                "<strong>Quel seuil de revenu ouvre le report de LVT de "
+                "droit&nbsp;?</strong> Trop bas, l’objection de la charge "
+                "excessive revient&nbsp;; trop haut, la LVT cesse de faire "
+                "circuler le foncier.",
+                "<strong>Le calendrier tient-il&nbsp;?</strong> L’évaluation "
+                "séparée du terrain et du bâti sur des dizaines de millions de "
+                "parcelles produira un contentieux de masse, et une procédure "
+                "de contestation doit être prévue avant le premier avis "
+                "d’imposition.",
+                "<strong>Le changement de régime porte-t-il atteinte à des "
+                "situations légalement acquises&nbsp;?</strong> Extinction du "
+                "crédit d’impôt recherche, régimes de faveur successoraux, "
+                "engagements en cours : chacun demande une clause de "
+                "transition, et chacune doit être rédigée.",
+            ])
+            + encadre("", "<p>Un programme solide n’est pas celui qui n’a aucun "
+                          "risque juridique. C’est celui qui les a listés "
+                          "lui-même, les a chiffrés quand c’est possible, et "
+                          "sait lesquels restent ouverts.</p>")),
+])
+
+
 PAGES = [
     ("index.html", "Programme fiscal — Parti libéral français",
      "Taxer moins le travail,<br> mieux la rente,<br> et redistribuer simplement",
@@ -2125,6 +2403,15 @@ PAGES = [
      "Qui gagne et qui perd au programme fiscal : le solde par décile et pour "
      "dix ménages types, tous canaux confondus, avec la méthode et ses limites.",
      QUI_GAGNE),
+    ("solidite.html", "Solidité juridique",
+     "Ce qui peut être voté,<br> et ce qui reste ouvert",
+     "Les sept objections qu’un juriste opposera à cette réforme, et nos "
+     "réponses — y compris les quatre questions auxquelles nous n’avons pas "
+     "encore de réponse certaine.",
+     "Solidité juridique du programme fiscal : article 13 de la Déclaration de "
+     "1789, individualisation, Land Value Tax et faculté contributive, "
+     "autonomie financière des collectivités, droit de l’Union.",
+     SOLIDITE),
     ("calendrier.html", "Mise en œuvre",
      "Cinq ans,<br> et ce qui tombe dès la première année",
      "Ce qui est supprimé immédiatement, ce qui converge progressivement, et les "

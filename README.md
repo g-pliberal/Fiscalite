@@ -1,7 +1,7 @@
 # Programme fiscal — Parti libéral français
 
 Le site qui présente le **chapitre Fiscalité** du programme aux électeurs :
-treize pages statiques, lisibles sans JavaScript, servies telles quelles.
+quatorze pages statiques, lisibles sans JavaScript, servies telles quelles.
 
 👉 `index.html` — ou, une fois publié,
 <https://g-pliberal.github.io/fiscalite/>
@@ -20,6 +20,7 @@ treize pages statiques, lisibles sans JavaScript, servies telles quelles.
 | `transmissions.html` | Successions imposées chez le receveur, transmission d'entreprise, CRUC, exit tax. |
 | `simulateur.html` | Les cinq canaux — impôt, transferts, TVA, foncier, énergie — calculés ensemble pour un ménage. |
 | `qui-gagne.html` | Le solde par décile et pour dix ménages types, les perdants compris, et la méthode. |
+| `solidite.html` | Les sept objections juridiques, les réponses, et les quatre questions encore ouvertes. |
 | `calendrier.html` | La trajectoire année par année, la fiche de paie cible, les ordres de grandeur. |
 | `objections.html` | Les huit objections, et les réponses. |
 | `glossaire.html` | Les vingt termes, en clair. |
@@ -65,8 +66,8 @@ recopiable en une commande.
 
 Les pages `.html` de la racine sont **écrites par un script** et versionnées :
 le site est statique, il n'y a rien à construire pour le servir. Le script
-existe parce que le bandeau de tête et le pied sont identiques sur treize pages,
-et que treize copies à la main dérivent toujours.
+existe parce que le bandeau de tête et le pied sont identiques sur quatorze pages,
+et que quatorze copies à la main dérivent toujours.
 
 ```sh
 python scripts/construire_site.py             # écrit les pages
