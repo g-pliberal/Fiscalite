@@ -390,3 +390,44 @@ données individuelles de l'ERFS ne sont pas publiques. Le modèle est confront�
 l'enquête, il ne la remplace pas. Les écarts de +25 % au premier décile et
 +23 % au dernier sont attendus mais non démontrés : seule une microsimulation
 dirait s'ils sont bien l'effet de l'asymétrie et non d'un biais résiduel.
+
+
+---
+
+## 11. La correction la plus coûteuse : je n'avais pas ouvert le bon tableau
+
+Au §3 de la revue critique, j'ai reproché à la note d'annoncer 120 Md€ de
+rendement pour la LVT et j'ai publié 45. Ce chiffre reposait sur une valeur des
+terrains que j'avais **estimée** à 3 500 Md€.
+
+Elle n'était pas à estimer. L'Insee la publie, ligne N211 du compte de
+patrimoine des secteurs institutionnels :
+
+| | Économie totale | Ménages | Sociétés | Administrations |
+| --- | ---: | ---: | ---: | ---: |
+| Terrains | **8 230** | **4 596** | 2 354 | 1 043 |
+| dont bâtis | 6 729 | 3 993 | 1 596 | 903 |
+| Logements | 5 977 | 4 807 | 1 026 | 87 |
+
+Hors terrains publics — les taxer serait circulaire — l'assiette est de
+7 187 Md€, ramenée à 4 570 par la capitalisation de la taxe. **Le rendement est
+de 91 Md€.** La note visait trop haut d'un tiers ; je visais deux fois trop bas.
+
+**Ce que cette seule ligne a déplacé :**
+
+- le taux de l'impôt proportionnel passe de 36,5 % à **34,5 %** ;
+- la LVT prélève 24 Md€ de plus qu'elle ne remplace, dont 10 sur les ménages :
+  le canal logement devient **négatif** pour les propriétaires, là où il était
+  positif ;
+- le propriétaire âgé de Paris bascule — et c'est le mécanisme de report
+  permanent, ajouté pour des raisons constitutionnelles, qui le rattrape : il
+  ne paie pas, une créance de 10 475 € par an court sur sa succession ;
+- la part du terrain dans la valeur d'un logement, que j'avais posée à 50 %,
+  ressort à **45 %** dans les comptes. Celle-là, je l'avais juste.
+
+**La leçon de méthode.** J'ai passé quatre tours à reprocher à la note ses
+chiffres non sourcés, puis j'ai publié une correction reposant sur une
+estimation que je n'avais pas cherché à vérifier. Le contrôle qui l'a rattrapée
+n'est pas un contrôle interne — aucun des trois n'y était sensible, puisque le
+modèle était cohérent avec sa propre erreur. Il a fallu aller chercher la
+donnée. C'est le seul remède, et il n'a pas de substitut.

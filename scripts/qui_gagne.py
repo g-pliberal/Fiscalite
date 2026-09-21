@@ -60,11 +60,11 @@ class Reforme:
 
 CIBLE = Reforme("Le programme tel qu'il est écrit — RU 600 € / taux 34 %", 0.34, 600, 300)
 VARIANTE = Reforme("La variante « sous 30 % » — RU 480 € / taux 30 %", 0.30, 480, 240)
-CORRIGEE = Reforme("Le programme corrigé — RU 600 €, taux unique de 36,5 %, suppléments maintenus",
-                   0.365, 600, 300, supplements=True)
-"""Le taux qui boucle vraiment se situe, sur les comptes nationaux 2025, entre
-36,2 % — ce que donne `bouclage.py` — et 36,5 %, ce que donne l'agrégation de ce
-modèle-ci. Deux calibrations indépendantes qui se rejoignent à trois dixièmes de
+CORRIGEE = Reforme("Le programme corrigé — RU 600 €, taux unique de 34,5 %, suppléments maintenus",
+                   0.345, 600, 300, supplements=True)
+"""Le taux qui boucle se situe entre 33,5 % — ce que donne `bouclage.py` — et
+34,5 %, ce que donne l'agrégation de ce modèle-ci une fois retranché du besoin
+ce que la LVT prend désormais aux entreprises. Deux calibrations indépendantes qui se rejoignent à trois dixièmes de
 point : c'est le meilleur contrôle dont on dispose. On retient la borne haute : d'un programme accusé de ne pas être chiffré, l'erreur coûteuse
 est celle qui laisse un trou, pas celle qui laisse une marge.
 
@@ -87,11 +87,13 @@ la réforme faite."""
 
 DECOTE_DU_TERRAIN = ACTUALISATION / (ACTUALISATION + 0.02)   # ~0,64
 
-TAUX_TAXE_FONCIERE = 0.012
-"""Taxe foncière des ménages, exprimée en part de la valeur du seul terrain.
-Calibré pour retrouver les ~30 Md€ que les ménages acquittent."""
+TAUX_TAXE_FONCIERE = 0.0068
+"""Taxe foncière des ménages, en part de la valeur du seul terrain. Calibré
+pour retrouver les ~30 Md€ qu'ils acquittent — sur une assiette foncière qui
+est désormais celle des comptes de patrimoine, 4 596 Md€, et non plus celle que
+j'avais estimée."""
 
-TAUX_DMTO = 0.0056
+TAUX_DMTO = 0.00317
 """DMTO annualisés : ~2,6 % de chance de déménager dans l'année, ~5,8 % de
 droits, sur un bien dont le terrain est la moitié. Annualiser est le seul moyen
 de faire figurer dans une table annuelle un impôt qu'on paie tous les dix ans —
@@ -184,6 +186,15 @@ class Menage:
     ifi: float = 0.0
     """Impôt sur la fortune immobilière acquitté aujourd'hui. Nul partout sauf
     au sommet — et c'est précisément pour cela qu'il faut le faire figurer."""
+    report_lvt: bool = False
+    """Le report de paiement, permanent et de droit, pour la résidence
+    principale d'un propriétaire dont les revenus sont inférieurs à un seuil.
+
+    Il ne s'agit pas d'une exonération : la créance est garantie sur le bien et
+    recouvrée à la cession ou à la succession. Mais ce n'est pas non plus un
+    flux de l'année, et le porter comme tel ferait apparaître un perdant là où
+    le programme a précisément prévu qu'il n'y en ait pas."""
+
     prestations_maintenues: float = 0.0
     """Ce que le revenu universel ne remplace pas : supplément handicap, aide au
     logement, allocation d'autonomie.
@@ -244,7 +255,13 @@ class Menage:
         return self.consommation_ht() * r.tva
 
     def lvt(self, r: Reforme) -> float:
+        if self.report_lvt:
+            return 0.0
         return self.terrain * DECOTE_DU_TERRAIN * r.lvt
+
+    def lvt_reportee(self, r: Reforme) -> float:
+        """Ce que le report fait courir chaque année, sans le faire payer."""
+        return self.terrain * DECOTE_DU_TERRAIN * r.lvt if self.report_lvt else 0.0
 
     def carbone_cible(self, r: Reforme) -> float:
         return self.co2 * r.carbone
@@ -277,7 +294,8 @@ def menage_type(nom: str, adultes: float, enfants: float, *, salaire: float = 0.
                 pension: float = 0.0, capital: float = 0.0, parts: float,
                 prestations: float = 0.0, part_taxable: float, taux_tva: float,
                 epargne: float, terrain: float = 0.0, co2: float = 0.0,
-                ifi: float = 0.0, prestations_maintenues: float = 0.0) -> Menage:
+                ifi: float = 0.0, report_lvt: bool = False,
+                prestations_maintenues: float = 0.0) -> Menage:
     """Un ménage décrit par ce qu'il gagne, pas par des taux effectifs posés.
 
     C'est la différence entre un cas type qu'on peut vérifier et un cas type
@@ -287,7 +305,7 @@ def menage_type(nom: str, adultes: float, enfants: float, *, salaire: float = 0.
     csg, ir = taux_actuels(salaire, pension, capital, parts, pension_reduite)
     return Menage(nom, adultes, enfants, salaire + pension + capital, prestations,
                   csg, ir, part_taxable, taux_tva, epargne, terrain, co2, ifi,
-                  prestations_maintenues)
+                  report_lvt, prestations_maintenues)
 
 
 # --- Les dix déciles ---------------------------------------------------------
@@ -305,9 +323,9 @@ DECILES = [
     Menage("D5",  1.70, 0.46,  38_300, 3_400, .097, .007, .81, .166,  0.03,  52_000, 6.0, prestations_maintenues=1_300),
     Menage("D6",  1.75, 0.45,  45_700, 2_200, .097, .013, .82, .169,  0.06,  64_500, 6.5, prestations_maintenues=800),
     Menage("D7",  1.80, 0.44,  54_200,   700, .097, .023, .83, .172,  0.09,  80_500, 7.0, prestations_maintenues=210),
-    Menage("D8",  1.85, 0.44,  65_900,   400, .097, .040, .84, .175,  0.13, 102_000, 7.5, prestations_maintenues=115),
-    Menage("D9",  1.90, 0.43,  85_000,   200, .108, .064, .85, .178,  0.18, 138_500, 8.5, prestations_maintenues=58),
-    Menage("D10", 2.00, 0.40, 167_000,   100, .120, .144, .87, .182,  0.28, 274_000, 10.5,
+    Menage("D8",  1.85, 0.44,  65_900,   400, .097, .040, .84, .175,  0.13, 224_000, 7.5, prestations_maintenues=115),
+    Menage("D9",  1.90, 0.43,  85_000,   200, .108, .064, .85, .178,  0.18, 304_100, 8.5, prestations_maintenues=58),
+    Menage("D10", 2.00, 0.40, 167_000,   100, .120, .144, .87, .182,  0.28, 601_600, 10.5,
            ifi=875, prestations_maintenues=29),
 ]
 # Le terrain porté par un décile est déjà pondéré par le taux de propriétaires
@@ -317,13 +335,13 @@ DECILES = [
 SOMMET = [
     menage_type("D10 hors 1 %", 2.00, 0.40, salaire=106_000, capital=30_000, parts=2.3,
                 prestations=100, part_taxable=.74, taux_tva=.182, epargne=0.29,
-                terrain=235_000, co2=10.0, prestations_maintenues=29),
+                terrain=430_000, co2=10.0, prestations_maintenues=29),
     menage_type("Top 1 %", 2.05, 0.40, salaire=266_000, capital=180_000, parts=2.0,
                 part_taxable=.76, taux_tva=.185, epargne=0.45,
-                terrain=700_000, co2=13.0, ifi=3_200),
+                terrain=1_281_000, co2=13.0, ifi=3_200),
     menage_type("Top 0,1 %", 2.10, 0.35, salaire=319_000, capital=1_275_000, parts=2.0,
                 part_taxable=.78, taux_tva=.185, epargne=0.70,
-                terrain=2_400_000, co2=18.0, ifi=32_000),
+                terrain=4_392_000, co2=18.0, ifi=32_000),
 ]
 """Le décile ne suffit pas : l'attaque portera sur le centile, et la réponse
 n'est pas la même. Le taux moyen d'imposition du haut de la distribution est
@@ -428,13 +446,14 @@ CAS_TYPES = [
 
     Cas(menage_type("Propriétaire âgé à Paris, faible revenu", 1, 0, pension=19_000,
                     parts=1, part_taxable=.70, taux_tva=.166, epargne=0.02,
-                    terrain=450_000, co2=3.5),
-        "Riche en foncier, pauvre en revenu : le ménage que la LVT fabrique.",
+                    terrain=823_000, co2=3.5, report_lvt=True),
+        "Riche en foncier, pauvre en revenu : le ménage que la LVT fabrique, "
+        "et le seul qui use du report permanent.",
         capital=True),
 
     Cas(menage_type("Célibataire au SMIC, zone tendue", 1, 0, salaire=21_000, parts=1,
                     prestations=3_600, part_taxable=.55, taux_tva=.160, epargne=0.00,
-                    co2=3.0, prestations_maintenues=2_900),
+                    co2=3.0, prestations_maintenues=2_700),
         "Locataire. Un adulte seul ne touche qu'un revenu universel.",
         note="aide au logement attachée au logement, non à la personne"),
 
@@ -488,6 +507,10 @@ def table_des_cas(r: Reforme) -> None:
         ligne = f"  {cas.menage.nom} — {cas.commentaire}"
         if cas.capital:
             ligne += f" Valeur du terrain : {cas.menage.perte_en_capital():+,.0f} €."
+        reportee = cas.menage.lvt_reportee(r)
+        if reportee:
+            ligne += (f" LVT reportée, non payée : {reportee:,.0f} € par an, "
+                      f"recouvrés sur la succession.")
         if cas.note:
             ligne += f" [{cas.note}]"
         print(ligne)
@@ -506,7 +529,7 @@ CIBLES_NATIONALES = {
     "Taxe foncière des ménages": 30,
     "IFI": 2.7,
     "DMTO des ménages": 14,
-    "Terrain détenu par les ménages": 2500,
+    "Terrain détenu par les ménages": 4596,
     "Adultes (millions)": 53.0,
     "Mineurs (millions)": 13.8,
 }

@@ -116,7 +116,17 @@ les ramène au taux commun. Pour les familles recomposées, les couples sans
 enfant, les beaux-enfants, c'est une baisse massive. C'est le meilleur argument
 du chapitre et il n'est écrit nulle part.
 
-## 3. Les 120 Md€ de LVT sont environ le double du possible
+## 3. ~~Les 120 Md€ de LVT sont environ le double du possible~~ — j'avais tort
+
+> **Correction.** Ce paragraphe était faux, et c'est la plus grosse erreur de
+> tout cet audit. J'estimais la valeur des terrains à 3 500 Md€ faute de
+> l'avoir cherchée : les comptes de patrimoine de l'Insee la publient, ligne
+> N211, à **8 230 Md€** (dont 4 596 aux ménages, 1 043 aux administrations).
+> Le rendement de la LVT est d'environ **91 Md€**, non 45. La note visait trop
+> haut d'un tiers ; je visais deux fois trop bas. Conséquence : le taux de
+> l'impôt proportionnel descend de 36,5 % à 34,5 %. Le texte d'origine est
+> conservé ci-dessous, parce qu'un audit qui efface ses erreurs ne vaut pas
+> mieux que le programme qu'il audite.
 
 La valeur de l'ensemble des terrains en France est de l'ordre de **3 500 Md€**.
 Les 120 Md€ annoncés à 2 % supposent une assiette de **6 000 Md€**, soit 1,7

@@ -88,7 +88,21 @@ déduisent pas la TVA — banques, assurances, associations. La première versio
 de cette constante portait 68, soit moins que la part des ménages seuls : c'est
 ce recoupement qui l'a fait voir."""
 
-# La LVT, elle, ne rapporte rien de net : elle remplace. Ce qu'elle remplace :
+TERRAINS_TOTAL = 8_229.8
+"""Valeur des terrains, économie totale. Insee, comptes de patrimoine 2024.
+
+Ce chiffre n'était pas une estimation à faire : il est publié, ligne N211 du
+compte de patrimoine des secteurs institutionnels. Je l'avais estimé à
+3 500 Md€ faute de l'avoir cherché, et l'erreur portait sur le poste le plus
+lourd du programme."""
+
+TERRAINS_APU = 1_042.6
+"""Terrains des administrations publiques. Les taxer serait circulaire :
+l'État se paierait à lui-même et la recette ne financerait rien."""
+
+TERRAINS_HORS_APU = TERRAINS_TOTAL - TERRAINS_APU
+
+# Ce que la LVT remplace :
 FISCALITE_IMMOBILIERE_SUPPRIMEE = 44.2 + 16.0 + 2.7 + 2.0 + 3.0
 """Taxes foncières 44,2 et IFI 2,7 (Insee 2025) ; DMTO ~16, plus-values
 immobilières ~2 et taxe d'habitation sur les résidences secondaires ~3, estimés."""
@@ -236,14 +250,18 @@ def main() -> None:
         print(f"{nom:{largeur}}   {cout:>11.0f} {a_lever:>9.0f} {taux:>7.1%}{alerte}")
 
     print("\nLa LVT : d'où sortiraient 120 Md€ ?\n")
-    valeur_des_terrains = 3500.0
-    print(f"  Valeur des terrains, avant réforme : {valeur_des_terrains:.0f} Md€")
+    valeur_des_terrains = TERRAINS_HORS_APU
+    print(f"  Valeur des terrains, hors administrations : "
+          f"{valeur_des_terrains:.0f} Md€")
     for actualisation in (0.03, 0.035, 0.04):
         rendement, perte = rendement_de_la_lvt(valeur_des_terrains, 0.02, actualisation)
         print(f"  actualisation à {actualisation:.1%} : rendement {rendement:.0f} Md€"
               f"  (valeur du terrain {perte:+.0%})")
-    print(f"\n  Assiette qu'il faudrait pour 120 Md€ à 2 % : {120 / 0.02:.0f} Md€,"
-          f" soit {120 / 0.02 / valeur_des_terrains:.1f} fois la valeur des terrains.")
+    print(f"\n  Pour 120 Md€ à 2 %, il faudrait une assiette de {120 / 0.02:.0f} Md€,"
+          f" soit {120 / 0.02 / valeur_des_terrains:.2f} fois les terrains taxables."
+          f"\n  La note visait donc trop haut d'environ un tiers — et la première"
+          f"\n  version de ce script, qui retenait 45 Md€ sur une assiette estimée"
+          f"\n  à 3 500 Md€, visait deux fois trop bas.")
 
     comparer_les_successions()
 
