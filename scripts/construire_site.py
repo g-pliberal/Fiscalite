@@ -441,7 +441,7 @@ TABLE_RU = tableau(
 REVENUS = "\n".join([
     plan([("fusion", "Fusion IR-CSG-CRDS"), ("taux", "Le taux"),
           ("assiette", "L’assiette"), ("individuel", "Individualisation"),
-          ("progressivite", "La progressivité"),
+          ("progressivite", "La progressivité"), ("logement", "Le logement"),
           ("indexation", "L’indexation du RU")]),
     section("fusion", "Un impôt à la place de trois",
             "<p>L’impôt sur le revenu, la CSG et la CRDS seront fusionnés dans un "
@@ -549,7 +549,70 @@ REVENUS = "\n".join([
                 legende="Trois suppléments subsistent. Un revenu universel "
                         "assorti de trois compléments explicites reste dix "
                         "fois plus simple que l’empilement actuel : la "
-                        "redistribution doit être lisible, pas unique.")),
+                        "redistribution doit être lisible, pas unique.")
+            + "<h3>Deux règles de calibrage, et pourquoi il a fallu les "
+              "écrire</h3>"
+            + "<p>Un supplément mal réglé protège sur le papier et laisse "
+              "perdre en pratique. Nos deux premières versions l’ont montré, "
+              "et les deux règles qui suivent en sont tirées.</p>"
+            + "<p><strong>Un supplément se calcule sur la position entière du "
+              "ménage, pas sur le seul écart avec le revenu universel.</strong> "
+              "Réglé sur cet écart seul, le supplément handicap laissait "
+              "l’allocataire de l’AAH perdre 482 € de TVA supplémentaire&nbsp;: "
+              "on avait protégé un canal sur cinq. Le supplément est désormais "
+              "fixé au montant qui laisse le ménage protégé à son niveau de "
+              "vie — ni gagnant, ni perdant.</p>"
+            + "<p><strong>L’aide au logement est attachée au logement, pas à la "
+              "personne.</strong> C’est la correction qui règle le sort du "
+              "célibataire, et elle mérite son paragraphe.</p>"
+            + '<p><a class="bouton" href="#logement">Le célibataire, et ce que '
+              'nous en avons appris</a></p>'),
+
+    section("logement", "Le logement, et le célibataire",
+            "<p>Le revenu universel double avec le nombre d’adultes. Un loyer, "
+            "non. C’est toute la difficulté, et nous ne l’avions pas vue.</p>"
+            "<p>Nos premiers chiffrages faisaient perdre 391 € par an à un "
+            "célibataire au SMIC en zone tendue, quand un couple aux mêmes "
+            "revenus par tête gagnait 454 € par adulte. L’écart ne venait ni "
+            "de l’impôt, ni de la zone tendue&nbsp;: il venait de ce que nous "
+            "transformions une prestation attachée au <strong>ménage</strong> "
+            "— l’aide au logement — en un transfert versé par "
+            "<strong>tête</strong>. Ce faisant, nous déplacions 600 € par "
+            "adulte du ménage d’une personne vers le couple.</p>"
+            + "<p>Un adulte seul sur deux ménages français&nbsp;: l’erreur "
+              "n’était pas marginale. Voici comment l’aide au logement est "
+              "construite&nbsp;:</p>"
+            + liste([
+                "<strong>Elle est attachée au logement</strong>, et partagée "
+                "entre les adultes qui y résident. Un loyer ne double pas "
+                "quand on est deux&nbsp;; l’aide non plus.",
+                "<strong>Elle est forfaitaire par zone</strong>, et non "
+                "indexée sur le loyer effectivement payé. Une aide qui suit le "
+                "loyer en finance une part&nbsp;: le bailleur en capte une "
+                "fraction substantielle, et c’est bien documenté. Dans un "
+                "programme qui entend <a href=\"foncier.html\">taxer la rente "
+                "foncière</a>, une aide qui la nourrit serait une "
+                "contradiction.",
+                "<strong>Elle ne demande que le nombre d’adultes à une "
+                "adresse</strong>, jamais la nature de leur relation. C’est la "
+                "fin du contrôle de la vie maritale, que nous reprochons au RSA "
+                "depuis toujours et que nous aurions réintroduit sans y "
+                "penser.",
+                "<strong>Elle est calée sur le ménage le plus exposé</strong> — "
+                "l’adulte seul en zone tendue —, de sorte que personne ne perde "
+                "à la réforme par ce canal.",
+            ])
+            + '<div class="note vigilance"><p>Elle reste une prestation sous '
+              'condition de ressources, et c’est la seule que le programme '
+              'conserve. Nous l’assumons&nbsp;: le coût du logement varie du '
+              'simple au triple selon le territoire, et un transfert national '
+              'uniforme ne peut pas l’égaliser sans coûter trois fois plus. Le '
+              'remède de fond est ailleurs — la <i>Land Value Tax</i> fait '
+              'baisser le prix du sol et la rente qu’il porte. L’aide est le '
+              'pont, pas la destination.</p></div>'
+            + encadre("", "<p>Le revenu universel se verse par tête, parce "
+                          "qu’on vit un par un. L’aide au logement se verse par "
+                          "logement, parce qu’on s’y loge ensemble.</p>")),
     encadre("", "<p>Ce tableau ne tient compte que de l’impôt et du revenu "
                 "universel. Le simulateur, lui, ajoute la TVA, le foncier et "
                 "l’énergie&nbsp;: c’est là que se lit votre cas réel.</p>"
@@ -651,7 +714,8 @@ FONCIER = "\n".join([
     plan([("pourquoi", "L’empilement actuel"), ("principe", "Le sol, pas le bâti"),
           ("taux", "Le taux"), ("remplace", "Ce qui disparaît"),
           ("dmto", "Les droits de mutation"), ("revenus-modestes", "Reports et garanties"),
-          ("agricole", "Foncier agricole et naturel"), ("local", "Taux national")]),
+          ("agricole", "Foncier agricole et naturel"), ("local", "Taux national"),
+          ("aides", "Les aides au logement")]),
     section("pourquoi", "Un empilement qui punit la construction",
             "<p>La fiscalité immobilière actuelle est l’un des exemples les plus "
             "nets d’empilement inefficace. Elle taxe la détention, la transaction, "
@@ -763,6 +827,27 @@ FONCIER = "\n".join([
               "ou péréqué pour éviter l’explosion des inégalités territoriales. La "
               "suppression immédiate des DMTO devra être compensée dans le cadre de "
               "la réforme d’ensemble des collectivités.</p>"),
+    section("aides", "Pourquoi l’aide au logement ne suit pas le loyer",
+            "<p>Une taxe sur la rente foncière et une aide qui la nourrit ne "
+            "peuvent pas coexister dans le même programme. C’est pourtant ce "
+            "que nous allions faire.</p>"
+            "<p>Une aide indexée sur le loyer effectivement payé solvabilise "
+            "la demande sans augmenter l’offre&nbsp;: là où le foncier est "
+            "rare, le bailleur en capte une fraction substantielle, et c’est "
+            "bien documenté pour l’aide personnalisée au logement. L’argent "
+            "public finit dans la rente que la <i>Land Value Tax</i> a "
+            "précisément pour objet de taxer.</p>"
+            + "<p>Notre aide au logement est donc <strong>forfaitaire par "
+              "zone</strong>, attachée au logement, et indifférente au loyer "
+              "que vous payez. Elle protège le locataire sans renchérir son "
+              "loyer, et elle laisse au signal-prix du sol le soin de faire "
+              "son travail.</p>"
+            + encadre("", "<p>Une aide qui suit le loyer finance le "
+                          "propriétaire. Une aide forfaitaire finance le "
+                          "locataire.</p>")
+            + '<p><a class="bouton" href="revenus.html#logement">Comment elle '
+              'est construite</a></p>'),
+
 ])
 
 
@@ -1367,12 +1452,12 @@ GLOSSAIRE = "\n".join([
 
 # Décile, solde annuel en euros, part du revenu disponible en points.
 SOLDES_PAR_DECILE = [
-    ("D1", 949, 4.8), ("D2", 957, 4.1), ("D3", 1602, 6.0), ("D4", 1502, 5.0),
-    ("D5", 1523, 4.4), ("D6", 681, 1.7), ("D7", -396, -0.9), ("D8", -1935, -3.5),
-    ("D9", -4088, -6.0), ("D10", -7436, -6.0),
+    ("D1", 1549, 7.9), ("D2", 1357, 5.8), ("D3", 1852, 6.9), ("D4", 1652, 5.5),
+    ("D5", 1613, 4.7), ("D6", 731, 1.8), ("D7", -366, -0.8), ("D8", -1920, -3.5),
+    ("D9", -4080, -6.0), ("D10", -7432, -6.0),
 ]
 SOLDES_AU_SOMMET = [
-    ("Dernier décile, hors 1 %", -5302, -5.3),
+    ("Dernier décile, hors 1 %", -5298, -5.2),
     ("Le centile supérieur", -8733, -3.0),
     ("Le millime supérieur", -37300, -3.6),
 ]
@@ -1381,15 +1466,30 @@ SOLDES_AU_SOMMET = [
 SOLDES_PAR_MENAGE = [
     ("Couple, deux enfants, deux SMIC", 42197, 5796, 13.7),
     ("Retraité seul, 1 400 €/mois", 16111, 1251, 7.8),
-    ("Allocataire de l’AAH", 12000, -482, -4.0),
+    ("Allocataire de l’AAH", 12000, 18, 0.2),
     ("Propriétaire âgé à Paris, faible revenu", 18221, 2467, 13.5),
-    ("Célibataire au SMIC, en zone tendue", 22559, -391, -1.7),
+    ("Célibataire au SMIC, en zone tendue", 22559, 9, 0.0),
     ("Agriculteur propriétaire de ses terres", 30450, 8277, 27.2),
     ("Ménage rural, gaz et deux voitures", 44016, 5409, 12.3),
     ("Cadre célibataire, 80 000 €", 60467, -4087, -6.8),
     ("Dirigeant de PME, 160 000 €", 124410, -5393, -4.3),
     ("Héritier de 400 000 €", 31542, -1510, -4.8),
 ]
+
+
+def part_lue(part: float) -> str:
+    """La part du revenu disponible, telle qu'on la lit.
+
+    Deux ménages sont tenus à l'équilibre par construction : le supplément qui
+    les protège est FIXÉ au montant qui annule leur solde. Écrire « +0,0 % »
+    ferait passer pour une coïncidence ce qui est une règle."""
+    # Un quart de point : en dessous, le solde vaut quelques dizaines d'euros
+    # sur l'année, et l'écrire au dixième de point donnerait à un arrondi
+    # l'allure d'un résultat.
+    if abs(part) < 0.25:
+        return "à l’équilibre"
+    signe = "+" if part >= 0 else "−"
+    return signe + f"{abs(part):.1f}".replace(".", ",") + " %"
 
 
 def barres_divergentes(lignes: list[tuple[str, int, float]],
@@ -1411,7 +1511,13 @@ def barres_divergentes(lignes: list[tuple[str, int, float]],
     """
     gauche, droite = 168, 736
     zero = (gauche + droite) / 2
-    echelle = (droite - gauche) / 2 / 7.5   # ±7,5 points d'amplitude
+    # L'échelle se déduit des données. Figée à une amplitude choisie d'avance,
+    # elle laissait la plus longue barre sortir du cadre dès que le chiffrage
+    # bougeait — et c'est arrivé. On réserve en outre de quoi poser l'étiquette
+    # au bout de cette plus longue barre, faute de quoi c'est elle qu'on rogne.
+    reserve = 62
+    amplitude = max(abs(part) for _, _, part in lignes + sommet) * 1.02
+    echelle = ((droite - gauche) / 2 - reserve) / amplitude
     haut_ligne, epaisseur = 27, 15          # 15 px de barre : sous le plafond de 24
     marge_haut, separateur = 16, 22
 
@@ -1715,7 +1821,13 @@ QUI_GAGNE = "\n".join([
                   "d’autonomie, qui subsistent au-dessus de lui."],
                  ["Le revenu universel suit la croissance",
                   "Il suit la croissance <strong>et ne recule jamais</strong> : "
-                  "un cliquet en euros courants, et un plancher d’inflation."]],
+                  "un cliquet en euros courants, et un plancher d’inflation."],
+                 ["L’aide au logement est maintenue",
+                  "Elle est maintenue <strong>et refaite</strong> : attachée au "
+                  "logement et non à la personne, forfaitaire par zone plutôt "
+                  "qu’indexée sur le loyer payé. Sans quoi nous faisions perdre "
+                  "391 € par an à un célibataire au SMIC — "
+                  "<a href=\"revenus.html#logement\">le détail</a>."]],
                 legende="Trois corrections issues du chiffrage. Le détail du "
                         "calcul est public, et refaisable.")
             + encadre("", "<p>Le taux qui équilibre se situe entre 35,5 % et "
@@ -1742,11 +1854,11 @@ QUI_GAGNE = "\n".join([
             + tableau(
                 ["Décile", "Solde annuel", "Part du revenu disponible"],
                 [[nom, f"{'+' if solde >= 0 else '−'}{abs(solde):,} €".replace(",", " "),
-                  f"{'+' if part >= 0 else '−'}{abs(part):.1f} %".replace(".", ",")]
+                  part_lue(part)]
                  for nom, solde, part in SOLDES_PAR_DECILE]
                 + [[f"<span class=\"dont\">{nom}</span>",
                     f"{'+' if solde >= 0 else '−'}{abs(solde):,} €".replace(",", " "),
-                    f"{'+' if part >= 0 else '−'}{abs(part):.1f} %".replace(".", ",")]
+                    part_lue(part)]
                    for nom, solde, part in SOLDES_AU_SOMMET],
                 legende="Les mêmes chiffres que la figure, pour qui préfère "
                         "les lire. Les trois dernières lignes ouvrent le "
@@ -1767,7 +1879,7 @@ QUI_GAGNE = "\n".join([
                 ["Ménage", "Revenu disponible aujourd’hui", "Solde", "Part"],
                 [[nom, f"{dispo:,} €".replace(",", " "),
                   f"{'+' if solde >= 0 else '−'}{abs(solde):,} €".replace(",", " "),
-                  f"{'+' if part >= 0 else '−'}{abs(part):.1f} %".replace(".", ",")]
+                  part_lue(part)]
                  for nom, dispo, solde, part in SOLDES_PAR_MENAGE],
                 legende="Le système actuel de chaque ménage est calculé depuis "
                         "le barème en vigueur : quotient familial, décote, "
@@ -1785,15 +1897,13 @@ QUI_GAGNE = "\n".join([
                 "de leur revenu disponible. C’est le choix assumé d’un système "
                 "où la solidarité passe par un transfert visible plutôt que "
                 "par des niches invisibles.",
-                "<strong>L’allocataire de l’AAH perd 482 € par an</strong>, et "
-                "c’est un défaut de calibrage que nous corrigerons : le "
-                "supplément handicap couvre l’écart avec le revenu universel, "
-                "pas la hausse de TVA. Il doit couvrir les deux.",
-                "<strong>Le célibataire au SMIC en zone tendue perd 391 €.</strong> "
-                "Un adulte seul ne reçoit qu’un revenu universel là où un "
-                "couple en reçoit deux. C’est la limite la plus nette de "
-                "l’individualisation, et elle appelle une réponse que nous "
-                "n’avons pas encore écrite.",
+                "<strong>Personne, parmi les ménages protégés.</strong> Deux "
+                "d’entre eux perdaient encore dans nos versions précédentes — "
+                "l’allocataire de l’AAH 482 € par an, le célibataire au SMIC "
+                "en zone tendue 391 €. Les deux sont désormais tenus à "
+                "l’équilibre, non par hasard mais par règle : un supplément "
+                "est <a href=\"revenus.html#logement\">fixé au montant qui "
+                "annule la perte</a>, tous canaux comptés.",
                 "<strong>Les propriétaires perdent de la valeur foncière.</strong> "
                 "La <i>Land Value Tax</i> se capitalise dans le prix du "
                 "terrain : environ un tiers de sa valeur, une fois. Un "

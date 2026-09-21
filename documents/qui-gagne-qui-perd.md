@@ -123,8 +123,8 @@ supérieure**.
 
 | | D1 | D2 | D3 | D4 | D5 | D6 | D7 | D8 | D9 | D10 | Top 1 % | Top 0,1 % |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Solde | +949 | +957 | +1 602 | +1 502 | +1 523 | +681 | −396 | −1 935 | −4 088 | −7 436 | −8 733 | −37 300 |
-| % dispo | +4,8 % | +4,1 % | +6,0 % | +5,0 % | +4,4 % | +1,7 % | −0,9 % | −3,5 % | −6,0 % | −6,0 % | −3,0 % | −3,6 % |
+| Solde | +1 549 | +1 357 | +1 852 | +1 652 | +1 613 | +731 | −366 | −1 920 | −4 080 | −7 432 | −8 733 | −37 300 |
+| % dispo | +7,9 % | +5,8 % | +6,9 % | +5,5 % | +4,7 % | +1,8 % | −0,8 % | −3,5 % | −6,0 % | −6,0 % | −3,0 % | −3,6 % |
 
 Gain décroissant du premier au sixième décile, perte croissante ensuite : le
 profil d'une réforme redistributive ordinaire, qui se défend en une phrase.
@@ -154,9 +154,9 @@ choisis pour flatter : quatre y perdent.
 | --- | ---: | ---: | ---: | ---: | ---: |
 | Couple, 2 enfants, deux SMIC | 42 197 | +5 436 | +12,9 % | +5 796 | +13,7 % |
 | Retraité seul, 1 400 €/mois | 16 111 | +1 587 | +9,9 % | +1 251 | +7,8 % |
-| **Allocataire de l'AAH** | 12 000 | **−5 282** | **−44,0 %** | −482 | −4,0 % |
+| **Allocataire de l'AAH** | 12 000 | **−5 282** | **−44,0 %** | +18 | à l'équilibre |
 | Propriétaire âgé à Paris, faible revenu | 18 221 | +2 847 | +15,6 % | +2 467 | +13,5 % |
-| **Célibataire au SMIC, zone tendue** | 22 559 | **−2 371** | **−10,5 %** | −391 | −1,7 % |
+| **Célibataire au SMIC, zone tendue** | 22 559 | **−2 371** | **−10,5 %** | +9 | à l'équilibre |
 | Agriculteur propriétaire de ses terres | 30 450 | +8 467 | +27,8 % | +8 277 | +27,2 % |
 | Ménage rural, gaz et deux voitures | 44 016 | +5 629 | +12,8 % | +5 409 | +12,3 % |
 | Cadre célibataire, 80 000 € | 60 467 | −2 487 | −4,1 % | −4 087 | −6,8 % |
@@ -174,16 +174,9 @@ la crédibilité sociale du programme, et il se règle par une ligne : le suppl�
 handicap survit au revenu universel. Tant que cette ligne n'est pas écrite, elle
 sera écrite par quelqu'un d'autre.
 
-*Le célibataire au SMIC en zone tendue perd 10,5 %.* Un adulte seul ne reçoit
-qu'un revenu universel là où un couple en reçoit deux, et l'aide au logement
-qu'il perd vaut la moitié de ce qu'il gagne. Le maintien de l'APL en zone tendue
-ne le ramène qu'à −1,7 % : il n'y a pas de marge, et l'individualisation atteint
-ici sa limite la plus nette. À traiter.
-
-*Et le supplément handicap est mal calibré.* Réglé pour couvrir l'écart entre
-l'AAH et le revenu universel, il laisse l'allocataire perdre les 482 € de TVA
-supplémentaire. Il doit couvrir les deux : c'est une ligne d'arithmétique, et
-c'est le dernier perdant qu'il reste à effacer.
+*Le célibataire au SMIC en zone tendue perdait 10,5 %, puis 1,7 %.* Il est
+maintenant à l'équilibre, et le §7 dit par quelle correction — qui n'est pas
+celle qu'on croit.
 
 *Le propriétaire âgé de Paris gagne 15,6 %… et perd 163 636 € de valeur de
 terrain.* C'est le cas où la table de flux et la réalité vécue divergent le plus.
@@ -221,5 +214,51 @@ le sens inverse de tout le reste. Voir `revue-critique.md`, §2.
    l'argument central de l'objection n° 2.
 6. **Refaire ces tables sur données individuelles** avant la campagne. Ce
    modèle dit où regarder ; il ne dit pas au centime, et la page le dit.
-7. **Traiter le célibataire en zone tendue.** C'est le dernier perdant que le
-   programme fabrique sans l'avoir voulu.
+7. ~~**Traiter le célibataire en zone tendue**~~ — fait, et la cause n'était
+   pas la zone tendue. Voir le §7.
+
+
+---
+
+## 7. Le célibataire, et la règle qu'il a fallu écrire
+
+Le dernier perdant identifié n'était pas un cas particulier : c'était une erreur
+de conception, et elle touchait un ménage français sur deux.
+
+**Le diagnostic.** À revenu identique par tête, un couple gagnait +454 € par
+adulte quand le célibataire perdait −391 €. Canal par canal, l'écart ne venait
+ni de l'impôt (161 €) ni de la TVA (84 €) : il venait des **transferts, pour
+600 € par adulte**.
+
+La cause est mécanique. *Le revenu universel double avec le nombre d'adultes ;
+un loyer, non.* En convertissant une prestation attachée au **ménage** — l'aide
+au logement — en un transfert versé par **tête**, le programme déplaçait 600 €
+par adulte du ménage d'une personne vers le couple. La zone tendue n'y était
+pour rien : elle ne faisait qu'amplifier le montant en jeu.
+
+**Deux règles en sortent**, et elles valent au-delà de ce cas :
+
+1. **Un supplément se calcule sur la position entière du ménage**, pas sur le
+   seul écart avec le revenu universel. Réglé sur cet écart, le supplément
+   handicap laissait l'allocataire de l'AAH perdre les 482 € de TVA : on avait
+   protégé un canal sur cinq.
+2. **Une aide au logement s'attache au logement**, et se partage entre les
+   adultes qui y résident. Trois conséquences, toutes bonnes : elle épouse
+   l'échelle d'équivalence sans qu'on ait à la décréter ; elle ne demande que
+   le *nombre* d'adultes à une adresse, jamais la nature de leur relation — donc
+   pas de contrôle de la vie maritale, que le programme reproche au RSA ; et
+   elle est **forfaitaire par zone**, non indexée sur le loyer payé, ce qui
+   l'empêche d'être captée par le bailleur. Une aide indexée sur le loyer
+   nourrit la rente que la LVT a pour objet de taxer : la contradiction était
+   dans le programme, et personne ne l'avait vue.
+
+**Le coût : nul.** Le recalibrage consomme 5 Md€, exactement la marge que le
+taux de 36 % portait déjà — le solde agrégé passe de +21 à +16 Md€, soit la
+neutralité visée. Les suppléments n'étaient pas sous-financés, ils étaient
+mal réglés.
+
+**Ce qui reste.** L'aide au logement demeure la seule prestation sous condition
+de ressources que le programme conserve, et c'est une exception à assumer : le
+coût du logement varie du simple au triple selon le territoire, et aucun
+transfert national uniforme ne l'égalise sans coûter trois fois plus. Le remède
+de fond reste la LVT, qui fait baisser le prix du sol. L'aide est le pont.

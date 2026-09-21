@@ -184,8 +184,20 @@ class Menage:
     au sommet — et c'est précisément pour cela qu'il faut le faire figurer."""
     prestations_maintenues: float = 0.0
     """Ce que le revenu universel ne remplace pas : supplément handicap, aide au
-    logement en zone tendue, allocation d'autonomie. Tant que le programme ne
-    tranche pas, c'est la ligne qui décide du sort de ses cas les plus exposés."""
+    logement, allocation d'autonomie.
+
+    Deux règles de calibrage, et le programme a d'abord manqué les deux.
+
+    Le supplément se calcule sur la position ENTIÈRE du ménage, pas sur le seul
+    écart avec le revenu universel. Réglé sur l'écart seul, il laissait
+    l'allocataire de l'AAH perdre les 482 € de TVA supplémentaire : on avait
+    protégé un canal sur cinq.
+
+    Et l'aide au logement est attachée au LOGEMENT, pas à la personne. Le revenu
+    universel double avec le nombre d'adultes ; un loyer, non. Convertir une
+    prestation par ménage en transfert par tête déplaçait 600 € par adulte du
+    ménage d'une personne vers le couple — c'est toute l'origine du sort réservé
+    au célibataire en zone tendue, et non la zone tendue elle-même."""
 
     # --- système actuel ---
     def impot_direct_actuel(self) -> float:
@@ -284,17 +296,17 @@ MENAGES_PAR_DECILE = 30.9e6 / 10
 
 DECILES = [
     #          ad   enf   revenu  prest   csg    ir   taxable  tva  éparg  terrain   co2
-    Menage("D1",  1.40, 0.45,  11_000, 9_500, .080, .000, .76, .155, -0.12,  11_000, 4.0, prestations_maintenues=3_000),
-    Menage("D2",  1.45, 0.48,  18_000, 7_000, .080, .000, .78, .157, -0.07,  19_500, 4.5, prestations_maintenues=2_200),
-    Menage("D3",  1.55, 0.47,  24_000, 5_000, .097, .000, .79, .160, -0.03,  29_500, 5.0, prestations_maintenues=1_500),
-    Menage("D4",  1.60, 0.46,  30_000, 3_200, .097, .002, .80, .163,  0.00,  40_500, 5.5, prestations_maintenues=900),
-    Menage("D5",  1.70, 0.46,  36_000, 2_000, .097, .005, .81, .166,  0.03,  52_000, 6.0, prestations_maintenues=550),
-    Menage("D6",  1.75, 0.45,  43_000, 1_200, .097, .010, .82, .169,  0.06,  64_500, 6.5, prestations_maintenues=320),
-    Menage("D7",  1.80, 0.44,  51_000,   700, .097, .018, .83, .172,  0.09,  80_500, 7.0, prestations_maintenues=180),
-    Menage("D8",  1.85, 0.44,  62_000,   400, .097, .030, .84, .175,  0.13, 102_000, 7.5, prestations_maintenues=100),
-    Menage("D9",  1.90, 0.43,  80_000,   200, .100, .050, .85, .178,  0.18, 138_500, 8.5, prestations_maintenues=50),
+    Menage("D1",  1.40, 0.45,  11_000, 9_500, .080, .000, .76, .155, -0.12,  11_000, 4.0, prestations_maintenues=3_600),
+    Menage("D2",  1.45, 0.48,  18_000, 7_000, .080, .000, .78, .157, -0.07,  19_500, 4.5, prestations_maintenues=2_600),
+    Menage("D3",  1.55, 0.47,  24_000, 5_000, .097, .000, .79, .160, -0.03,  29_500, 5.0, prestations_maintenues=1_750),
+    Menage("D4",  1.60, 0.46,  30_000, 3_200, .097, .002, .80, .163,  0.00,  40_500, 5.5, prestations_maintenues=1_050),
+    Menage("D5",  1.70, 0.46,  36_000, 2_000, .097, .005, .81, .166,  0.03,  52_000, 6.0, prestations_maintenues=640),
+    Menage("D6",  1.75, 0.45,  43_000, 1_200, .097, .010, .82, .169,  0.06,  64_500, 6.5, prestations_maintenues=370),
+    Menage("D7",  1.80, 0.44,  51_000,   700, .097, .018, .83, .172,  0.09,  80_500, 7.0, prestations_maintenues=210),
+    Menage("D8",  1.85, 0.44,  62_000,   400, .097, .030, .84, .175,  0.13, 102_000, 7.5, prestations_maintenues=115),
+    Menage("D9",  1.90, 0.43,  80_000,   200, .100, .050, .85, .178,  0.18, 138_500, 8.5, prestations_maintenues=58),
     Menage("D10", 2.00, 0.40, 163_000,   100, .110, .125, .87, .182,  0.28, 274_000, 10.5,
-           ifi=650, prestations_maintenues=25),
+           ifi=650, prestations_maintenues=29),
 ]
 # Le terrain porté par un décile est déjà pondéré par le taux de propriétaires
 # (de 25 % en D1 à 85 % en D10) : c'est une moyenne de décile, pas le patrimoine
@@ -303,7 +315,7 @@ DECILES = [
 SOMMET = [
     menage_type("D10 hors 1 %", 2.00, 0.40, salaire=100_000, capital=28_000, parts=2.3,
                 prestations=100, part_taxable=.74, taux_tva=.182, epargne=0.29,
-                terrain=235_000, co2=10.0, prestations_maintenues=25),
+                terrain=235_000, co2=10.0, prestations_maintenues=29),
     menage_type("Top 1 %", 2.05, 0.40, salaire=250_000, capital=170_000, parts=2.0,
                 part_taxable=.76, taux_tva=.185, epargne=0.45,
                 terrain=700_000, co2=13.0, ifi=3_200),
@@ -408,9 +420,9 @@ CAS_TYPES = [
 
     Cas(menage_type("Allocataire de l'AAH", 1, 0, parts=1, prestations=12_000,
                     part_taxable=.58, taux_tva=.155, epargne=0.00, co2=3.0,
-                    prestations_maintenues=4_800),
+                    prestations_maintenues=5_300),
         "Le cas qui décide à lui seul de la crédibilité sociale du programme.",
-        note="sans supplément handicap, il perd 4 800 € : c'est la ligne à trancher"),
+        note="le supplément handicap couvre aussi la hausse de TVA, et non le seul écart"),
 
     Cas(menage_type("Propriétaire âgé à Paris, faible revenu", 1, 0, pension=19_000,
                     parts=1, part_taxable=.70, taux_tva=.166, epargne=0.02,
@@ -420,9 +432,9 @@ CAS_TYPES = [
 
     Cas(menage_type("Célibataire au SMIC, zone tendue", 1, 0, salaire=21_000, parts=1,
                     prestations=3_600, part_taxable=.55, taux_tva=.160, epargne=0.00,
-                    co2=3.0, prestations_maintenues=2_400),
+                    co2=3.0, prestations_maintenues=2_800),
         "Locataire. Un adulte seul ne touche qu'un revenu universel.",
-        note="APL de zone tendue maintenue dans le scénario corrigé"),
+        note="aide au logement attachée au logement, non à la personne"),
 
     Cas(menage_type("Agriculteur propriétaire de ses terres", 2, 1, salaire=32_000,
                     parts=2.5, prestations=1_500, part_taxable=.68, taux_tva=.164,
