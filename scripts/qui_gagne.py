@@ -60,10 +60,12 @@ class Reforme:
 
 CIBLE = Reforme("Le programme tel qu'il est écrit — RU 600 € / taux 34 %", 0.34, 600, 300)
 VARIANTE = Reforme("La variante « sous 30 % » — RU 480 € / taux 30 %", 0.30, 480, 240)
-CORRIGEE = Reforme("Le programme corrigé — RU 600 €, taux unique de 36 %, suppléments maintenus",
-                   0.36, 600, 300, supplements=True)
-"""Le taux qui boucle vraiment se situe entre 35,5 % et 36 %. On retient la
-borne haute : d'un programme accusé de ne pas être chiffré, l'erreur coûteuse
+CORRIGEE = Reforme("Le programme corrigé — RU 600 €, taux unique de 36,5 %, suppléments maintenus",
+                   0.365, 600, 300, supplements=True)
+"""Le taux qui boucle vraiment se situe, sur les comptes nationaux 2025, entre
+36,2 % — ce que donne `bouclage.py` — et 36,5 %, ce que donne l'agrégation de ce
+modèle-ci. Deux calibrations indépendantes qui se rejoignent à trois dixièmes de
+point : c'est le meilleur contrôle dont on dispose. On retient la borne haute : d'un programme accusé de ne pas être chiffré, l'erreur coûteuse
 est celle qui laisse un trou, pas celle qui laisse une marge.
 
 Et la tranche supérieure, que la revue critique réclamait, s'avère inutile : le
@@ -107,7 +109,7 @@ BAREME_IR = ((11_294, .00), (28_797, .11), (82_341, .30), (177_106, .41),
 
 ABATTEMENT_SALAIRE = 0.10      # plafonné à 14 171 €
 ABATTEMENT_PENSION = 0.10      # plafonné à 4 321 €
-REDUCTIONS_ET_CREDITS = 0.20   # écart moyen entre impôt brut et impôt net
+REDUCTIONS_ET_CREDITS = 0.12   # écart moyen entre impôt brut et impôt net
 
 
 def impot_sur_le_revenu(salaire: float, pension: float, capital: float,
@@ -296,30 +298,30 @@ MENAGES_PAR_DECILE = 30.9e6 / 10
 
 DECILES = [
     #          ad   enf   revenu  prest   csg    ir   taxable  tva  éparg  terrain   co2
-    Menage("D1",  1.40, 0.45,  11_000, 9_500, .080, .000, .76, .155, -0.12,  11_000, 4.0, prestations_maintenues=3_600),
-    Menage("D2",  1.45, 0.48,  18_000, 7_000, .080, .000, .78, .157, -0.07,  19_500, 4.5, prestations_maintenues=2_600),
-    Menage("D3",  1.55, 0.47,  24_000, 5_000, .097, .000, .79, .160, -0.03,  29_500, 5.0, prestations_maintenues=1_750),
-    Menage("D4",  1.60, 0.46,  30_000, 3_200, .097, .002, .80, .163,  0.00,  40_500, 5.5, prestations_maintenues=1_050),
-    Menage("D5",  1.70, 0.46,  36_000, 2_000, .097, .005, .81, .166,  0.03,  52_000, 6.0, prestations_maintenues=640),
-    Menage("D6",  1.75, 0.45,  43_000, 1_200, .097, .010, .82, .169,  0.06,  64_500, 6.5, prestations_maintenues=370),
-    Menage("D7",  1.80, 0.44,  51_000,   700, .097, .018, .83, .172,  0.09,  80_500, 7.0, prestations_maintenues=210),
-    Menage("D8",  1.85, 0.44,  62_000,   400, .097, .030, .84, .175,  0.13, 102_000, 7.5, prestations_maintenues=115),
-    Menage("D9",  1.90, 0.43,  80_000,   200, .100, .050, .85, .178,  0.18, 138_500, 8.5, prestations_maintenues=58),
-    Menage("D10", 2.00, 0.40, 163_000,   100, .110, .125, .87, .182,  0.28, 274_000, 10.5,
-           ifi=650, prestations_maintenues=29),
+    Menage("D1",  1.40, 0.45,  11_700, 9_500, .080, .000, .76, .155, -0.12,  11_700, 4.0, prestations_maintenues=3_600),
+    Menage("D2",  1.45, 0.48,  19_100, 7_000, .080, .000, .78, .157, -0.07,  19_500, 4.5, prestations_maintenues=2_600),
+    Menage("D3",  1.55, 0.47,  25_500, 5_000, .097, .000, .79, .160, -0.03,  29_500, 5.0, prestations_maintenues=1_750),
+    Menage("D4",  1.60, 0.46,  31_900, 3_200, .097, .003, .80, .163,  0.00,  40_500, 5.5, prestations_maintenues=1_050),
+    Menage("D5",  1.70, 0.46,  38_300, 2_000, .097, .007, .81, .166,  0.03,  52_000, 6.0, prestations_maintenues=640),
+    Menage("D6",  1.75, 0.45,  45_700, 1_200, .097, .013, .82, .169,  0.06,  64_500, 6.5, prestations_maintenues=370),
+    Menage("D7",  1.80, 0.44,  54_200,   700, .097, .023, .83, .172,  0.09,  80_500, 7.0, prestations_maintenues=210),
+    Menage("D8",  1.85, 0.44,  65_900,   400, .097, .040, .84, .175,  0.13, 102_000, 7.5, prestations_maintenues=115),
+    Menage("D9",  1.90, 0.43,  85_000,   200, .108, .064, .85, .178,  0.18, 138_500, 8.5, prestations_maintenues=58),
+    Menage("D10", 2.00, 0.40, 167_000,   100, .120, .144, .87, .182,  0.28, 274_000, 10.5,
+           ifi=875, prestations_maintenues=29),
 ]
 # Le terrain porté par un décile est déjà pondéré par le taux de propriétaires
 # (de 25 % en D1 à 85 % en D10) : c'est une moyenne de décile, pas le patrimoine
 # d'un propriétaire. Un propriétaire de D1 paie quatre fois la ligne « logement ».
 
 SOMMET = [
-    menage_type("D10 hors 1 %", 2.00, 0.40, salaire=100_000, capital=28_000, parts=2.3,
+    menage_type("D10 hors 1 %", 2.00, 0.40, salaire=106_000, capital=30_000, parts=2.3,
                 prestations=100, part_taxable=.74, taux_tva=.182, epargne=0.29,
                 terrain=235_000, co2=10.0, prestations_maintenues=29),
-    menage_type("Top 1 %", 2.05, 0.40, salaire=250_000, capital=170_000, parts=2.0,
+    menage_type("Top 1 %", 2.05, 0.40, salaire=266_000, capital=180_000, parts=2.0,
                 part_taxable=.76, taux_tva=.185, epargne=0.45,
                 terrain=700_000, co2=13.0, ifi=3_200),
-    menage_type("Top 0,1 %", 2.10, 0.35, salaire=300_000, capital=1_200_000, parts=2.0,
+    menage_type("Top 0,1 %", 2.10, 0.35, salaire=319_000, capital=1_275_000, parts=2.0,
                 part_taxable=.78, taux_tva=.185, epargne=0.70,
                 terrain=2_400_000, co2=18.0, ifi=32_000),
 ]
@@ -432,7 +434,7 @@ CAS_TYPES = [
 
     Cas(menage_type("Célibataire au SMIC, zone tendue", 1, 0, salaire=21_000, parts=1,
                     prestations=3_600, part_taxable=.55, taux_tva=.160, epargne=0.00,
-                    co2=3.0, prestations_maintenues=2_800),
+                    co2=3.0, prestations_maintenues=2_900),
         "Locataire. Un adulte seul ne touche qu'un revenu universel.",
         note="aide au logement attachée au logement, non à la personne"),
 
@@ -496,13 +498,13 @@ def table_des_cas(r: Reforme) -> None:
 # tableau, la table par décile n'est qu'une opinion mise en colonnes.
 
 CIBLES_NATIONALES = {
-    "CSG + CRDS + prélèvements sociaux": 166,
-    "Impôt sur le revenu": 87,
+    "CSG + CRDS + prélèvements sociaux": 178,
+    "Impôt sur le revenu": 104,
     "Prestations remplaçables": 91,
-    "TVA acquittée par les ménages": 150,
-    "Consommation en espèces": 1280,
+    "TVA acquittée par les ménages": 157,
+    "Consommation en espèces": 1345,
     "Taxe foncière des ménages": 30,
-    "IFI": 2,
+    "IFI": 2.7,
     "DMTO des ménages": 14,
     "Terrain détenu par les ménages": 2500,
     "Adultes (millions)": 53.0,
@@ -533,8 +535,8 @@ def controle() -> None:
         drapeau = "" if abs(ecart) <= 0.06 else "   ← à recalibrer"
         print(f"  {nom:{largeur}} {eu:>8.1f}  contre {cible:>7.1f}  ({ecart:+.1%}){drapeau}")
     revenu = sum(m.revenu for m in DECILES) * n / 1e9
-    print(f"  {'Assiette du nouvel impôt':{largeur}} {revenu:>8.1f}  contre {1600:>7.1f}"
-          f"  ({revenu / 1600 - 1:+.1%})")
+    print(f"  {'Assiette du nouvel impôt':{largeur}} {revenu:>8.1f}  contre {1700:>7.1f}"
+          f"  ({revenu / 1700 - 1:+.1%})")
     # Deuxième contrôle, indépendant du premier : le dernier décile est calibré
     # sur les masses, ses deux sous-lignes sur le barème. Rien n'oblige les deux
     # routes à se rejoindre — si elles se rejoignent, aucune n'est de fantaisie.

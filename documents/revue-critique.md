@@ -296,7 +296,10 @@ est une attaque imparable contre un outil dont l'objet même est la transparence
 → Ajouter les trois volets manquants (consommation, foncier détenu, énergie),
 ou, à défaut, afficher au-dessus du résultat ce qu'il ne comprend pas.
 
-**Les sources.** Aucun chiffre du site n'est référencé. Pour un programme qui
+**Les sources.** ~~Aucun chiffre du site n'est référencé.~~ — `sources.html`
+sépare désormais ce qui est sourcé de ce qui est estimé, cite les deux décisions
+du Conseil constitutionnel avec leur considérant, et tient un errata de six
+corrections publiques. Pour mémoire, le texte d'origine : Pour un programme qui
 veut être « béton », chaque nombre doit porter sa source, son millésime et son
 lien : voies et moyens, comptes de la Nation, rapports de la Cour des comptes.
 → Une page `sources.html`, un appel de note par chiffre, et une page d'errata

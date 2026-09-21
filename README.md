@@ -1,7 +1,7 @@
 # Programme fiscal — Parti libéral français
 
 Le site qui présente les **chapitres Fiscalité et Dépense publique** du
-programme aux électeurs : quinze pages statiques, lisibles sans JavaScript, servies telles quelles.
+programme aux électeurs : dix-sept pages statiques, lisibles sans JavaScript, servies telles quelles.
 
 👉 `index.html` — ou, une fois publié,
 <https://g-pliberal.github.io/fiscalite/>
@@ -16,12 +16,14 @@ programme aux électeurs : quinze pages statiques, lisibles sans JavaScript, ser
 | `consommation.html` | La TVA à taux unique cible de 25 %, et sa transition. |
 | `foncier.html` | La *Land Value Tax*, les DMTO supprimés, les reports prévus. |
 | `entreprises.html` | Impôts de production supprimés, IS ramené vers 15-20 %, extinction du CIR. |
+| `sante.html` | Le socle universel de santé, la complémentaire rendue facultative, et qui fixe le panier. |
 | `carbone.html` | Prix plancher, dividende carbone, électricité et réseaux. |
 | `transmissions.html` | Successions imposées chez le receveur, transmission d'entreprise, CRUC, exit tax. |
 | `simulateur.html` | Les cinq canaux — impôt, transferts, TVA, foncier, énergie — calculés ensemble pour un ménage. |
 | `qui-gagne.html` | Le solde par décile et pour dix ménages types, les perdants compris, et la méthode. |
 | `solidite.html` | Les sept objections juridiques, les réponses, et les quatre questions encore ouvertes. |
-| `depense.html` | Où vont les 1 670 Md€, la règle des 2 %, les sept leviers et l'écart qui reste. |
+| `depense.html` | Où vont les 1 714 Md€, la règle des 2 %, les sept leviers et l'écart qui reste. |
+| `sources.html` | D'où vient chaque chiffre, ce qui est estimé, et les errata. |
 | `calendrier.html` | La trajectoire année par année, la fiche de paie cible, les ordres de grandeur. |
 | `objections.html` | Les huit objections, et les réponses. |
 | `glossaire.html` | Les vingt termes, en clair. |
@@ -67,8 +69,8 @@ recopiable en une commande.
 
 Les pages `.html` de la racine sont **écrites par un script** et versionnées :
 le site est statique, il n'y a rien à construire pour le servir. Le script
-existe parce que le bandeau de tête et le pied sont identiques sur quinze pages,
-et que quinze copies à la main dérivent toujours.
+existe parce que le bandeau de tête et le pied sont identiques sur dix-sept pages,
+et que dix-sept copies à la main dérivent toujours.
 
 ```sh
 python scripts/construire_site.py             # écrit les pages

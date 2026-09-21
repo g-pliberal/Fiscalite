@@ -25,10 +25,13 @@ from dataclasses import dataclass
 
 # --- Le point de départ ------------------------------------------------------
 
-PIB = 2_920.0
-DEPENSE = 1_670.0
-RECETTES = 1_500.0
-DETTE = 3_300.0
+# Comptes nationaux 2025 (Insee, base 2020, données provisoires). Voir
+# `sources.html`. Le déficit y est de 152,5 Md€, soit 5,1 % du PIB, après 5,8 %
+# en 2024 : partir de 2024 aurait surestimé d'un demi-point l'effort à fournir.
+PIB = 2_992.0
+DEPENSE = 1_714.1
+RECETTES = 1_561.6
+DETTE = 3_460.5
 
 CROISSANCE_REELLE = 0.012
 INFLATION = 0.018
@@ -47,15 +50,18 @@ effort — et non contre zéro, comme le font les programmes qui annoncent des
 # budgétaire ne le lui apprend pas.
 
 POSTES = [
-    ("Retraites", 380.0),
-    ("Santé", 250.0),
-    ("Fonctionnement des administrations", 250.0),
-    ("Autres prestations sociales", 230.0),
-    ("Enseignement et recherche", 175.0),
-    ("Soutien à l’économie et investissement", 175.0),
-    ("Régalien : défense, sécurité, justice, diplomatie", 155.0),
-    ("Charge de la dette", 55.0),
+    ("Retraites", 390.0),
+    ("Santé", 258.0),
+    ("Fonctionnement des administrations", 256.0),
+    ("Autres prestations sociales", 236.0),
+    ("Enseignement et recherche", 180.0),
+    ("Soutien à l’économie et investissement", 179.0),
+    ("Régalien : défense, sécurité, justice, diplomatie", 159.0),
+    ("Charge de la dette", 56.1),
 ]
+"""ESTIMÉS. Le total est celui des comptes nationaux ; sa ventilation en huit
+masses est une reconstitution à partir des données par fonction, et elle est la
+partie la moins solide de ce script."""
 
 
 @dataclass(frozen=True)
@@ -169,8 +175,13 @@ def main() -> None:
         quand = f"année {sous_trois}" if sous_trois else "pas avant huit ans"
         print(f"  règle à {regle:.1%} : déficit sous 3 % du PIB en {quand}")
     print("\n  La règle du programme : aucune baisse du taux avant que le")
-    print("  déficit ne soit durablement sous 3 %. Sur nos propres hypothèses,")
-    print("  cela ne se produit pas dans le quinquennat.")
+    print("  déficit ne soit DURABLEMENT sous 3 %. Sur les comptes 2025 et la")
+    print("  règle des 2 %, le seuil est franchi en quatrième année — une")
+    print("  baisse devient donc envisageable en fin de quinquennat, et pas")
+    print("  avant. Calculée sur les comptes 2024, la même règle ne l'aurait")
+    print("  pas permise : un demi-point de déficit de départ déplace la")
+    print("  conclusion de deux ans, ce qui dit assez ce que vaut un chiffrage")
+    print("  dont on ne date pas la source.")
 
 
 if __name__ == "__main__":

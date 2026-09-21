@@ -117,14 +117,14 @@ donc à abandonner, et il vaut mieux l'abandonner soi-même.
 ## 4. Le programme corrigé — et la tranche supérieure dont il n'a pas besoin
 
 Paramètres retenus, publiés sur `qui-gagne.html` : revenu universel de 600 €,
-**taux unique de 36 %**, **suppléments handicap, logement en zone tendue et
+**taux unique de 36,5 %**, **suppléments handicap, logement en zone tendue et
 autonomie maintenus au-dessus du revenu universel**, et **aucune tranche
 supérieure**.
 
 | | D1 | D2 | D3 | D4 | D5 | D6 | D7 | D8 | D9 | D10 | Top 1 % | Top 0,1 % |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Solde | +1 549 | +1 357 | +1 852 | +1 652 | +1 613 | +731 | −366 | −1 920 | −4 080 | −7 432 | −8 733 | −37 300 |
-| % dispo | +7,9 % | +5,8 % | +6,9 % | +5,5 % | +4,7 % | +1,8 % | −0,8 % | −3,5 % | −6,0 % | −6,0 % | −3,0 % | −3,6 % |
+| Solde | +1 253 | +886 | +1 244 | +928 | +792 | −165 | −1 278 | −2 628 | −3 787 | −3 635 | −5 054 | −41 810 |
+| % dispo | +6,2 % | +3,6 % | +4,4 % | +2,9 % | +2,2 % | −0,4 % | −2,6 % | −4,6 % | −5,4 % | −3,0 % | −1,7 % | −3,8 % |
 
 Gain décroissant du premier au sixième décile, perte croissante ensuite : le
 profil d'une réforme redistributive ordinaire, qui se défend en une phrase.
@@ -132,8 +132,8 @@ profil d'une réforme redistributive ordinaire, qui se défend en une phrase.
 **La tranche supérieure que le §2 de la revue critique réclamait s'avère
 inutile — et c'est le résultat le plus utile de tout l'exercice.** Le millime
 supérieur acquitte aujourd'hui 30,5 % de ses revenus, le prélèvement
-forfaitaire abritant l'essentiel de son capital. Un taux unique à 36 % est donc
-pour lui une hausse : à 35 % déjà, il est à −2,1 % sans aucune tranche. C'est le
+forfaitaire abritant l'essentiel de son capital. Un taux unique à 36,5 % est donc
+pour lui une hausse, sans aucune tranche. C'est le
 taux de base, et non une concession doctrinale, qui répond à l'objection du
 cadeau aux plus aisés — et la doctrine « un impôt, un taux » en sort intacte.
 
@@ -314,3 +314,37 @@ recomposées, couples sans enfant, personnes seules, fratries — le droit actue
 les traite en étrangers et leur prend la moitié de ce qu'on leur laisse. C'est
 l'effet le plus spectaculaire de la réforme, et celui dont le programme ne
 parlait pas.
+
+---
+
+## 9. Refonte sur séries sourcées — ce que les comptes 2025 ont changé
+
+Les tables précédentes reposaient sur des ordres de grandeur que j'avais
+reconstitués. Elles reposent désormais sur les comptes nationaux 2025 de
+l'Insee, et quatre choses ont bougé.
+
+**L'impôt sur le revenu : 103,6 Md€, non 87.** Je retenais la présentation
+budgétaire là où les comptes nationaux s'imposaient. Seize milliards de
+différence sur ce que l'impôt proportionnel doit remplacer.
+
+**Le taux d'équilibre : 36,5 % et non 36 %.** Deux calibrations indépendantes —
+le bouclage d'ensemble et l'agrégation du modèle par décile — donnent 36,2 % et
+36,5 %. On publie la borne haute, comme annoncé.
+
+**Le déficit de départ : 5,1 % et non 5,8 %.** Le millésime 2025 au lieu de
+2024. Conséquence : sous la règle des 2 %, le déficit repasse sous 3 % en
+quatrième année et non en sixième. Une baisse du taux devient envisageable en
+fin de quinquennat. *Un demi-point de déficit de départ déplace la conclusion
+de deux ans* — c'est l'argument le plus fort en faveur de la datation des
+sources, et je ne l'avais pas vu venir.
+
+**Une divergence entre mes deux modèles, trouvée et corrigée.** Ils ne donnaient
+pas le même taux. Le rapprochement canal par canal a révélé deux erreurs
+réelles : le prélèvement de solidarité sur le capital était sous-compté dans le
+modèle par décile, et le gain de la TVA à taux unique était fixé dans le
+bouclage à 68 Md€ — soit *moins* que ce que le modèle par décile attribuait aux
+seuls ménages, ce qui était impossible. Les deux modèles convergent maintenant à
+trois dixièmes de point.
+
+Reste ce que ce travail ne peut pas faire : ce n'est toujours pas une
+microsimulation. Les treize ménages moyens sont mieux calibrés, pas remplacés.

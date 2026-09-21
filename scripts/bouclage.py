@@ -23,6 +23,15 @@ constante nommée, précisément pour qu'on puisse le contester ligne à ligne.
 
 from __future__ import annotations
 
+# --- Les sources -------------------------------------------------------------
+#
+# Les montants ci-dessous ne sont plus des ordres de grandeur reconstitués : ce
+# sont les comptes nationaux 2025 (Insee, base 2020, données provisoires), sauf
+# les trois lignes explicitement signalées comme estimées. Chacun porte son
+# millésime, et `sources.html` en donne le lien.
+
+MILLESIME = 2025
+
 # --- Démographie ------------------------------------------------------------
 
 ADULTES = 53.0   # millions de personnes de 18 ans et plus
@@ -32,10 +41,13 @@ MINEURS = 13.8   # millions de moins de 18 ans
 # La fusion ne crée pas de recette : elle en reprend. Ces quatre lignes sont ce
 # que le nouvel impôt doit lever avant même d'avoir financé quoi que ce soit.
 
-IMPOT_SUR_LE_REVENU = 87.0
-CSG = 145.0
-CRDS = 9.0
-PRELEVEMENT_DE_SOLIDARITE = 12.0   # prélèvements sociaux non contributifs sur le capital
+IMPOT_SUR_LE_REVENU = 103.6   # Insee, comptes nationaux 2025
+CSG = 156.6                   # Insee, comptes nationaux 2025
+CRDS = 9.3                    # Insee, comptes nationaux 2025
+PRELEVEMENT_DE_SOLIDARITE = 12.0
+"""ESTIMÉ. Le prélèvement de solidarité de 7,5 % sur les revenus du capital ne
+figure pas isolément dans les comptes nationaux. C'est la seule ligne de ce
+bloc qui ne soit pas sourcée, et la plus petite."""
 
 A_REMPLACER = IMPOT_SUR_LE_REVENU + CSG + CRDS + PRELEVEMENT_DE_SOLIDARITE
 
@@ -43,32 +55,43 @@ A_REMPLACER = IMPOT_SUR_LE_REVENU + CSG + CRDS + PRELEVEMENT_DE_SOLIDARITE
 # « L'ensemble des revenus personnels » : activité, remplacement, capital.
 # L'assiette de la CSG en donne la mesure, une fois les niches retirées.
 
-REVENUS_D_ACTIVITE = 1000.0
-PENSIONS_ET_REMPLACEMENT = 400.0
-REVENUS_DU_CAPITAL = 200.0
+# L'assiette se déduit de la CSG : 156,6 Md€ à un taux moyen d'environ 9,2 %
+# supposent une assiette de l'ordre de 1 700 Md€. C'est un contrôle, pas une
+# hypothèse — et il corrige de 100 Md€ l'estimation que nous portions.
+REVENUS_D_ACTIVITE = 1070.0
+PENSIONS_ET_REMPLACEMENT = 425.0
+REVENUS_DU_CAPITAL = 205.0
 
 ASSIETTE = REVENUS_D_ACTIVITE + PENSIONS_ET_REMPLACEMENT + REVENUS_DU_CAPITAL
 
 # --- Les recettes perdues ----------------------------------------------------
 
-C3S = 5.5
-CVAE_RESIDUELLE = 5.0
+C3S = 5.5                     # ESTIMÉ
+CVAE_RESIDUELLE = 5.0         # ESTIMÉ
 IMPOTS_DE_PRODUCTION = C3S + CVAE_RESIDUELLE
 
-BAISSE_DE_L_IS = 18.0          # de 25 % à 17,5 % sur un IS net d'environ 60 Md€
-NICHES_ET_CIR_RECUPERES = 12.0  # CIR ~7, autres niches d'IS ~5
+BAISSE_DE_L_IS = 69.5 * 7.5 / 25   # de 25 % à 17,5 % sur l'IS 2025 (Insee, 69,5 Md€)
+NICHES_ET_CIR_RECUPERES = 12.0     # ESTIMÉ : CIR ~7, autres niches d'IS ~5
 COUT_NET_DE_L_IS = BAISSE_DE_L_IS - NICHES_ET_CIR_RECUPERES
 
 # --- Les recettes nouvelles hors impôt proportionnel -------------------------
 
-GAIN_TVA_TAUX_UNIQUE = 68.0
-"""Passage à 25 % : alignement des taux réduits (~+25) et des 20 % vers 25 %
-(~+55), moins une élasticité de la consommation de l'ordre de 15 %."""
+GAIN_TVA_TAUX_UNIQUE = 80.0
+"""ESTIMÉ, à partir des 208,8 Md€ de TVA 2025 (Insee). Passage à 25 % :
+alignement des taux réduits et relèvement du taux normal, moins une élasticité
+de la consommation de l'ordre de 15 %. C'est la plus grosse des estimations non
+sourcées, et celle qu'un chiffrage officiel devra reprendre en premier.
+
+Elle est recoupée par `scripts/qui_gagne.py`, qui calcule séparément ce que les
+seuls MÉNAGES y perdent : 74 Md€. Le solde revient aux redevables qui ne
+déduisent pas la TVA — banques, assurances, associations. La première version
+de cette constante portait 68, soit moins que la part des ménages seuls : c'est
+ce recoupement qui l'a fait voir."""
 
 # La LVT, elle, ne rapporte rien de net : elle remplace. Ce qu'elle remplace :
-FISCALITE_IMMOBILIERE_SUPPRIMEE = 45.0 + 19.0 + 2.0 + 2.0 + 3.0
-"""Taxes foncières ~45, DMTO ~19, IFI ~2, plus-values immobilières ~2,
-taxe d'habitation sur les résidences secondaires ~3."""
+FISCALITE_IMMOBILIERE_SUPPRIMEE = 44.2 + 16.0 + 2.7 + 2.0 + 3.0
+"""Taxes foncières 44,2 et IFI 2,7 (Insee 2025) ; DMTO ~16, plus-values
+immobilières ~2 et taxe d'habitation sur les résidences secondaires ~3, estimés."""
 
 
 def rendement_de_la_lvt(valeur_des_terrains: float, taux: float,
