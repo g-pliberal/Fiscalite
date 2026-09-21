@@ -93,8 +93,19 @@ hypothèses plutôt que sur les conclusions.
 python scripts/bouclage.py
 ```
 
-Ce script ne produit rien pour le site et n'entre pas dans les vérifications :
-c'est un outil de travail, pas une pièce du dépôt publié.
+`documents/qui-gagne-qui-perd.md` en est la suite : la table par décile et les
+dix cas types, calculés par `scripts/qui_gagne.py`. Ce dernier additionne les
+cinq canaux par lesquels la réforme atteint un ménage — impôt direct,
+transferts, TVA, logement, énergie —, là où le simulateur du site n'en montre
+qu'un. Il imprime d'abord ses propres contrôles : réagrégé, il doit retrouver
+les masses nationales, et ses deux routes de calibration doivent se rejoindre.
+
+```sh
+python scripts/qui_gagne.py
+```
+
+Ces deux scripts ne produisent rien pour le site et n'entrent pas dans les
+vérifications : ce sont des outils de travail, pas des pièces du dépôt publié.
 
 ## Licences
 
