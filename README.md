@@ -1,7 +1,7 @@
 # Programme fiscal — Parti libéral français
 
 Le site qui présente le **chapitre Fiscalité** du programme aux électeurs :
-douze pages statiques, lisibles sans JavaScript, servies telles quelles.
+treize pages statiques, lisibles sans JavaScript, servies telles quelles.
 
 👉 `index.html` — ou, une fois publié,
 <https://g-pliberal.github.io/fiscalite/>
@@ -19,6 +19,7 @@ douze pages statiques, lisibles sans JavaScript, servies telles quelles.
 | `carbone.html` | Prix plancher, dividende carbone, électricité et réseaux. |
 | `transmissions.html` | Successions imposées chez le receveur, transmission d'entreprise, CRUC, exit tax. |
 | `simulateur.html` | Les cinq canaux — impôt, transferts, TVA, foncier, énergie — calculés ensemble pour un ménage. |
+| `qui-gagne.html` | Le solde par décile et pour dix ménages types, les perdants compris, et la méthode. |
 | `calendrier.html` | La trajectoire année par année, la fiche de paie cible, les ordres de grandeur. |
 | `objections.html` | Les huit objections, et les réponses. |
 | `glossaire.html` | Les vingt termes, en clair. |
@@ -30,10 +31,17 @@ l'unique document de ce dépôt à l'origine. Son texte brut est repris tel quel
 dans `documents/note-fiscalite.txt`, pour qu'une phrase du site se retrouve
 d'un `grep`.
 
-**Le site n'ajoute aucun chiffre qui n'y figure pas.** Quand la note dit « à
-calibrer », la page dit « à calibrer » : le taux de l'impôt proportionnel n'est
-pas écrit parce qu'il sort du bouclage budgétaire, et les 120 Md€ de la LVT sont
-donnés pour ce qu'ils sont, un ordre de grandeur à évaluer.
+**Le site n'ajoutait aucun chiffre qui n'y figure pas.** Il en ajoute désormais,
+et à un seul endroit : `qui-gagne.html`, qui publie le solde de la réforme par
+décile et par ménage type. Ces chiffres sortent de `scripts/qui_gagne.py`, dont
+les hypothèses et les contrôles sont décrits sur la page même et dans le pied de
+toutes les autres. Partout ailleurs la règle tient : quand la note dit « à
+calibrer », la page dit « à calibrer ».
+
+Une exception s'est imposée d'elle-même : la note visait un taux « sous 30 % »,
+le chiffrage donne 36 %. Le site publie 36 %, dit que la note disait autre chose,
+et dit pourquoi. Un site qui aurait recopié l'objectif sans refaire l'addition
+aurait été démenti par sa propre page « Qui gagne, qui perd ».
 
 ## D'où vient l'apparence
 
@@ -57,8 +65,8 @@ recopiable en une commande.
 
 Les pages `.html` de la racine sont **écrites par un script** et versionnées :
 le site est statique, il n'y a rien à construire pour le servir. Le script
-existe parce que le bandeau de tête et le pied sont identiques sur douze pages,
-et que douze copies à la main dérivent toujours.
+existe parce que le bandeau de tête et le pied sont identiques sur treize pages,
+et que treize copies à la main dérivent toujours.
 
 ```sh
 python scripts/construire_site.py             # écrit les pages

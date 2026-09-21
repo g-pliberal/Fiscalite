@@ -142,3 +142,29 @@
   text-transform: uppercase; color: var(--sur-creme-doux);
 }
 .calculette summary { color: var(--sur-creme); }
+
+/* Les barres divergentes de la page « Qui gagne, qui perd ». Le SVG est écrit
+   à la fabrication et non par un script : cette page doit se lire sans
+   JavaScript comme les onze autres, et une figure qui n'apparaît qu'avec lui
+   n'est pas une figure, c'est une décoration. */
+.barres { margin: 2rem 0; }
+.barres svg { display: block; width: 100%; height: auto; min-width: 34rem; }
+.barres text { font-family: inherit; }
+.barres .marque.gain { fill: var(--reste); }
+.barres .marque.perte { fill: var(--manque); }
+.barres .zero { stroke: var(--trait-champ); stroke-width: 1; }
+.barres .coupure { stroke: var(--trait); stroke-width: 1; }
+.barres .nom { fill: var(--texte); font-size: 13px; font-weight: 700; }
+.barres .nom.discret { fill: var(--texte-doux); font-weight: 400; }
+/* Le nombre ne prend pas la couleur de sa barre. Un texte vert ou rose sur le
+   vert profond passe sous le plancher de contraste, et la couleur a déjà deux
+   porteurs plus sûrs : le côté du zéro et le signe. */
+.barres .mesure {
+  fill: var(--texte); font-size: 13px; font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.barres .cote, .barres .intitule { fill: var(--texte-tres-doux); font-size: 12px; }
+.barres figcaption {
+  margin-top: 0.75rem; font-size: 0.9375rem; color: var(--texte-doux);
+  max-width: 46rem;
+}

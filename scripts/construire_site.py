@@ -52,6 +52,7 @@ GROUPES = [
     ]),
     ("Comprendre", [
         ("simulateur.html", "Simulateur"),
+        ("qui-gagne.html", "Qui gagne, qui perd"),
         ("calendrier.html", "Calendrier"),
         ("objections.html", "Objections"),
         ("glossaire.html", "Glossaire"),
@@ -103,6 +104,11 @@ def pied() -> str:
   qui y figurent sont des <em>cibles de travail</em> et des ordres de grandeur à
   consolider : la note dont ces pages sont tirées le dit elle-même, le bouclage
   budgétaire n'est pas fait impôt par impôt mais au niveau du système entier.</p>
+  <p>Une exception, et elle est signalée : la page
+  <a href="qui-gagne.html">Qui gagne, qui perd</a> avance des chiffres qui ne
+  figurent pas dans la note. Ils sortent d'un modèle dont les hypothèses, les
+  contrôles et le code sont publics, et qui est décrit
+  <a href="qui-gagne.html#methode">sur la page même</a>.</p>
   <p>Texte de référence : <a href="{NOTE}">Note interne — Chapitre Fiscalité</a>
   (PDF), dont le texte brut est repris dans
   <a href="documents/note-fiscalite.txt">note-fiscalite.txt</a>. Site et code sur
@@ -248,9 +254,10 @@ def piliers_frise() -> str:
 ACCUEIL = "\n".join([
     '<div class="fiches reperes">',
     '  <div class="fiche"><p class="etiquette">Impôt sur les revenus</p>'
-    '<p class="valeur">&lt; 30 %</p>'
+    '<p class="valeur">36 %</p>'
     '<p class="precision">Un seul taux, proportionnel, à la place de l’IR, de la '
-    'CSG et de la CRDS. Le taux exact sort du bouclage budgétaire.</p></div>',
+    'CSG et de la CRDS. C’est le taux que donne notre chiffrage, et non un '
+    'objectif d’affichage.</p></div>',
     '  <div class="fiche"><p class="etiquette">TVA</p><p class="valeur">25 %</p>'
     '<p class="precision">Taux unique cible, atteint progressivement, le temps '
     'que le revenu universel monte en charge.</p></div>',
@@ -450,24 +457,31 @@ REVENUS = "\n".join([
             + "<p>La CSG et la CRDS ne financent pas de droits contributifs "
               "individualisés&nbsp;: elles relèvent de l’impôt général, et doivent "
               "être assumées comme telles.</p>"),
-    section("taux", "Un taux sous 30 %, et pourquoi il n’est pas encore écrit",
-            "<p>Le taux exact sera déterminé par le bouclage budgétaire général. "
-            "L’objectif politique est de le maintenir <strong>sous les "
-            "30 %</strong>, grâce&nbsp;:</p>"
-            + liste(["à l’élargissement de l’assiette&nbsp;;",
-                     "à la fusion IR-CSG-CRDS&nbsp;;",
-                     "à la suppression des niches&nbsp;;",
-                     "à la TVA à taux unique&nbsp;;",
-                     "à la <i>Land Value Tax</i>&nbsp;;",
-                     "à la réforme des prestations sociales autour du revenu "
-                     "universel&nbsp;;",
-                     "à la réduction des dépenses publiques non prioritaires."])
-            + '<div class="note vigilance"><p>Annoncer un taux avant le chiffrage '
-              'complet serait un chiffre de tract, pas un engagement. La note s’y '
-              'refuse explicitement&nbsp;: la contrainte politique est claire, le '
-              'nombre viendra du bouclage.</p></div>'
-            + encadre("", "<p>Un impôt proportionnel large, lisible, et si "
-                          "possible inférieur à 30 %.</p>")),
+    section("taux", "Un taux de 36 %, et pourquoi nous ne disons plus 30 %",
+            "<p>La note fixait un objectif politique&nbsp;: maintenir le taux "
+            "<strong>sous les 30 %</strong>, grâce à l’élargissement de "
+            "l’assiette, à la suppression des niches, à la TVA à taux unique, "
+            "à la <i>Land Value Tax</i> et à la réforme des prestations autour "
+            "du revenu universel.</p>"
+            "<p>Nous avons fait le calcul. <strong>Il ne tient pas.</strong> Un "
+            "revenu universel de 600 € par adulte coûte 382 milliards d’euros "
+            "par an&nbsp;; le nouvel impôt doit en outre lever ce que l’impôt "
+            "sur le revenu, la CSG et la CRDS lèvent aujourd’hui. En face, les "
+            "prestations remplacées et le gain de la TVA à taux unique ne "
+            "couvrent pas l’écart. Le taux d’équilibre se situe entre 35,5 % "
+            "et 36 %.</p>"
+            + '<div class="note vigilance"><p>Nous aurions pu garder « moins de '
+              '30 % » jusqu’à ce qu’un contradicteur refasse l’addition. Un '
+              'chiffre de tract tient une campagne&nbsp;; il ne tient pas un '
+              'débat. Nous publions donc 36 %, et le calcul avec.</p></div>'
+            + "<p>Ce taux reste plus lisible que l’empilement qu’il remplace, "
+              "et surtout il ne se lit pas seul&nbsp;: c’est le couple impôt + "
+              "revenu universel qui fait le système, et c’est lui qu’il faut "
+              "juger. Un ménage au salaire médian y gagne.</p>"
+            + '<p><a class="bouton" href="qui-gagne.html">Voir qui gagne et qui '
+              'perd</a></p>'
+            + encadre("", "<p>Un impôt proportionnel large, lisible, et chiffré "
+                          "à 36 %.</p>")),
     section("assiette", "Tous les revenus, traités pareil",
             "<p>L’impôt proportionnel portera sur l’ensemble des revenus "
             "personnels&nbsp;: salaires, revenus indépendants, pensions, revenus "
@@ -520,7 +534,22 @@ REVENUS = "\n".join([
             + "<p>Le système est donc redistributif sans être confiscatoire, et "
               "sans créer de trappes à inactivité&nbsp;: un euro de plus gagné "
               "rapporte toujours la même fraction, quel que soit le niveau de "
-              "revenu. Aucun seuil à ne pas franchir, aucune aide à perdre.</p>"),
+              "revenu. Aucun seuil à ne pas franchir, aucune aide à perdre.</p>"
+            + "<h3>Ce que le revenu universel remplace, et ce qui lui "
+              "survit</h3>"
+            + "<p>Un revenu universel qui remplacerait tout ferait perdre à "
+              "un allocataire de l’AAH quatre cents euros par mois. Nous ne le "
+              "proposons pas, et nous écrivons la liste plutôt que de la "
+              "laisser deviner.</p>"
+            + tableau(
+                ["Remplacé par le revenu universel", "Maintenu au-dessus de lui"],
+                [["Le RSA", "Le supplément handicap"],
+                 ["La prime d’activité", "L’aide au logement en zone tendue"],
+                 ["Les prestations familiales de base", "L’allocation d’autonomie"]],
+                legende="Trois suppléments subsistent. Un revenu universel "
+                        "assorti de trois compléments explicites reste dix "
+                        "fois plus simple que l’empilement actuel : la "
+                        "redistribution doit être lisible, pas unique.")),
     encadre("", "<p>Ce tableau ne tient compte que de l’impôt et du revenu "
                 "universel. Le simulateur, lui, ajoute la TVA, le foncier et "
                 "l’énergie&nbsp;: c’est là que se lit votre cas réel.</p>"
@@ -534,12 +563,21 @@ REVENUS = "\n".join([
               "l’inflation, qui rigidifierait la dépense publique&nbsp;;</li>"
               "<li>lier la progression du revenu universel à la prospérité réelle "
               "du pays.</li></ol>"
-            + "<p>Il ne sera donc pas indexé automatiquement sur les prix. En cas "
-              "de choc inflationniste exceptionnel, le Parlement reste souverain "
-              "pour voter une revalorisation&nbsp;: mais elle devra être "
-              "explicite, financée et temporaire.</p>"
+            + "<p>Cette règle, prise seule, avait deux défauts que nous avons "
+              "corrigés. Elle aurait fait <strong>baisser</strong> le revenu "
+              "universel en récession — le PIB par habitant a reculé de plus de "
+              "3 % en 2009 —, et elle l’aurait laissé s’éroder d’environ un "
+              "point par an, la croissance réelle étant le plus souvent "
+              "inférieure à l’inflation. Un transfert censé compenser la TVA "
+              "aurait été le premier à la subir.</p>"
+            + "<p>Deux garde-fous s’y ajoutent donc&nbsp;:</p>"
+            + liste(["un <strong>cliquet</strong>&nbsp;: le revenu universel ne "
+                     "baisse jamais en euros courants&nbsp;;",
+                     "un <strong>plancher d’inflation</strong>&nbsp;: il suit le "
+                     "plus élevé de l’inflation et de la croissance réelle par "
+                     "habitant, lissé sur trois ans."])
             + encadre("", "<p>Le revenu universel est une part de la prospérité "
-                          "commune, pas une dépense indexée sans limite.</p>")),
+                          "commune, et il ne recule jamais.</p>")),
 ])
 
 
@@ -1037,7 +1075,7 @@ TABLE_PAIE = tableau(
 
 TABLE_MASSES = tableau(
     ["Poste", "Ordre de grandeur / orientation"],
-    [["Impôt proportionnel IR-CSG-CRDS", "Taux à calibrer, objectif &lt; 30 %"],
+    [["Impôt proportionnel IR-CSG-CRDS", "36 %, d’après notre chiffrage"],
      ["TVA à taux unique de 25 %",
       "Rendement majeur, supérieur au système actuel selon l’assiette"],
      ["LVT à 2 %", "Environ 120 Md€ visés, à évaluer"],
@@ -1137,13 +1175,25 @@ OBJECTIONS_TEXTE = [
      "un transfert monétaire explicite. Un ménage modeste reçoit le revenu universel "
      "et le dividende carbone&nbsp;: il est protégé directement, plutôt que par "
      "l’espoir incertain qu’un taux réduit soit intégralement répercuté dans les "
-     "prix.</p>"),
+     "prix.</p>"
+     "<p>Nous l’avons chiffré plutôt que de l’affirmer&nbsp;: un ménage du "
+     "premier décile paie environ 1 400 € de TVA en plus et reçoit 5 200 € de "
+     "plus en transferts. Il est <a href=\"qui-gagne.html#deciles\">gagnant "
+     "net</a>. Et parce que l’ordre compte autant que le montant&nbsp;: "
+     "<strong>aucun relèvement de TVA n’interviendra avant que le revenu "
+     "universel ne soit versé à taux plein.</strong></p>"),
     ("L’impôt proportionnel n’est pas progressif",
      "<p>Le taux est proportionnel, mais le système est progressif.</p>"
      "<p>Le revenu universel transforme l’ensemble impôt + transfert en système "
      "progressif&nbsp;: les bas revenus sont bénéficiaires nets, les hauts revenus "
      "contributeurs nets. La progressivité est simplement rendue "
-     "<a href=\"revenus.html#progressivite\">lisible</a>.</p>"),
+     "<a href=\"revenus.html#progressivite\">lisible</a>.</p>"
+     "<p>La <a href=\"qui-gagne.html\">table par décile</a> le montre&nbsp;: "
+     "les six premiers déciles gagnent, les quatre derniers contribuent, et le "
+     "millime supérieur paie davantage qu’aujourd’hui — parce qu’il acquitte "
+     "aujourd’hui 30,5 % de ses revenus, le prélèvement forfaitaire abritant "
+     "l’essentiel de son capital. Un taux unique à 36 % est pour lui une "
+     "hausse, sans qu’il ait fallu ajouter une tranche.</p>"),
     ("La LVT va faire exploser les charges des propriétaires",
      "<p>La LVT <strong>remplace</strong> des impôts existants&nbsp;: taxe foncière, "
      "DMTO, IFI, taxes sur la vacance, fiscalité des plus-values. Elle ne s’ajoute "
@@ -1306,6 +1356,130 @@ GLOSSAIRE = "\n".join([
 
 # -- les pages ---------------------------------------------------------------
 
+# -- qui gagne, qui perd -----------------------------------------------------
+#
+# La page que tout le monde réclame à un programme fiscal, et qu'aucun ne
+# publie. Elle sort de `scripts/qui_gagne.py`, au paramétrage corrigé : revenu
+# universel de 600 €, taux unique de 36 %, suppléments maintenus.
+#
+# C'est la seule page du site qui avance des chiffres absents de la note. Elle
+# le dit, elle dit d'où ils viennent, et elle dit ce qu'ils valent.
+
+# Décile, solde annuel en euros, part du revenu disponible en points.
+SOLDES_PAR_DECILE = [
+    ("D1", 949, 4.8), ("D2", 957, 4.1), ("D3", 1602, 6.0), ("D4", 1502, 5.0),
+    ("D5", 1523, 4.4), ("D6", 681, 1.7), ("D7", -396, -0.9), ("D8", -1935, -3.5),
+    ("D9", -4088, -6.0), ("D10", -7436, -6.0),
+]
+SOLDES_AU_SOMMET = [
+    ("Dernier décile, hors 1 %", -5302, -5.3),
+    ("Le centile supérieur", -8733, -3.0),
+    ("Le millime supérieur", -37300, -3.6),
+]
+
+# Ménage, revenu disponible actuel, solde, part.
+SOLDES_PAR_MENAGE = [
+    ("Couple, deux enfants, deux SMIC", 42197, 5796, 13.7),
+    ("Retraité seul, 1 400 €/mois", 16111, 1251, 7.8),
+    ("Allocataire de l’AAH", 12000, -482, -4.0),
+    ("Propriétaire âgé à Paris, faible revenu", 18221, 2467, 13.5),
+    ("Célibataire au SMIC, en zone tendue", 22559, -391, -1.7),
+    ("Agriculteur propriétaire de ses terres", 30450, 8277, 27.2),
+    ("Ménage rural, gaz et deux voitures", 44016, 5409, 12.3),
+    ("Cadre célibataire, 80 000 €", 60467, -4087, -6.8),
+    ("Dirigeant de PME, 160 000 €", 124410, -5393, -4.3),
+    ("Héritier de 400 000 €", 31542, -1510, -4.8),
+]
+
+
+def barres_divergentes(lignes: list[tuple[str, int, float]],
+                       sommet: list[tuple[str, int, float]]) -> str:
+    """Le solde de chaque décile, en part du revenu disponible.
+
+    Des barres divergentes, parce que la donnée porte un SIGNE : ce qui se lit
+    d'abord n'est pas l'ampleur mais le côté. D'où le zéro au milieu, et deux
+    couleurs opposées de part et d'autre.
+
+    Le vert et le rose de la charte ne se distinguent qu'à ΔE 7,1 pour un œil
+    deutéranope — sous le seuil de 8 en dessous duquel la couleur ne peut plus
+    porter seule une information. Elle ne la porte pas seule : le côté du zéro
+    et le signe du nombre la portent aussi, et ce sont eux qu'on lit. La couleur
+    ne fait que confirmer.
+
+    Le SVG est écrit ici, à la fabrication, et non par un script dans le
+    navigateur : cette page doit se lire sans JavaScript comme les onze autres.
+    """
+    gauche, droite = 168, 736
+    zero = (gauche + droite) / 2
+    echelle = (droite - gauche) / 2 / 7.5   # ±7,5 points d'amplitude
+    haut_ligne, epaisseur = 27, 15          # 15 px de barre : sous le plafond de 24
+    marge_haut, separateur = 16, 22
+
+    parties = []
+    y = marge_haut
+
+    def barre(nom, solde, part, discrete=False):
+        nonlocal y
+        largeur = abs(part) * echelle
+        x = zero if part >= 0 else zero - largeur
+        sens = "gain" if part >= 0 else "perte"
+        # Le bout de la barre est arrondi, son pied reste carré sur le zéro :
+        # c'est le zéro qui doit se lire d'un trait, pas chaque barre.
+        rayon = min(4, largeur)
+        if part >= 0:
+            trace = (f"M{x} {y} h{max(largeur - rayon, 0)} a{rayon} {rayon} 0 0 1 "
+                     f"{rayon} {rayon} v{epaisseur - 2 * rayon} a{rayon} {rayon} 0 0 1 "
+                     f"{-rayon} {rayon} h{-max(largeur - rayon, 0)} z")
+        else:
+            trace = (f"M{zero} {y} h{-max(largeur - rayon, 0)} a{rayon} {rayon} 0 0 0 "
+                     f"{-rayon} {rayon} v{epaisseur - 2 * rayon} a{rayon} {rayon} 0 0 0 "
+                     f"{rayon} {rayon} h{max(largeur - rayon, 0)} z")
+        parties.append(f'<path class="marque {sens}" d="{trace}"/>')
+        classe = "nom discret" if discrete else "nom"
+        parties.append(f'<text class="{classe}" x="{gauche - 14}" y="{y + 11}" '
+                       f'text-anchor="end">{escape(nom)}</text>')
+        # Le nombre se pose au bout de la barre, hors d'elle : à 15 px
+        # d'épaisseur, aucun libellé ne tient dedans avec de l'air autour.
+        bout = (x + largeur + 10) if part >= 0 else (x - 10)
+        ancre = "start" if part >= 0 else "end"
+        # La virgule décimale ne se pose que sur le NOMBRE. Appliquée à la
+        # ligne entière, elle atteignait aussi les coordonnées du SVG — et un
+        # `x="612,0"` ne se lit pas : l'étiquette repartait à l'origine.
+        signe = "+" if part >= 0 else "\u2212"
+        mesure = f"{signe}{abs(part):.1f}".replace(".", ",") + "\u00a0%"
+        parties.append(f'<text class="mesure" x="{bout}" y="{y + 11}" '
+                       f'text-anchor="{ancre}">{mesure}</text>')
+        y += haut_ligne
+
+    for nom, solde, part in lignes:
+        barre(nom, solde, part)
+    y += separateur - haut_ligne + haut_ligne
+    trait = y - separateur / 2 - 4
+    parties.append(f'<line class="coupure" x1="{gauche - 150}" x2="{droite}" '
+                   f'y1="{trait}" y2="{trait}"/>')
+    parties.append(f'<text class="intitule" x="{gauche - 150}" y="{trait + 18}">'
+                   f'Le dernier décile, ouvert</text>')
+    y = trait + 30
+    for nom, solde, part in sommet:
+        barre(nom, solde, part, discrete=True)
+
+    hauteur = y + 24
+    axe = (f'<line class="zero" x1="{zero}" x2="{zero}" y1="{marge_haut - 6}" '
+           f'y2="{hauteur - 30}"/>')
+    reperes = (f'<text class="cote" x="{zero - 12}" y="{hauteur - 12}" '
+               f'text-anchor="end">\u2190 ce que le ménage perd</text>'
+               f'<text class="cote" x="{zero + 12}" y="{hauteur - 12}">'
+               f'ce qu\u2019il gagne \u2192</text>')
+    return (f'<figure class="barres"><div class="defilant" tabindex="0">'
+            f'<svg viewBox="0 0 760 {hauteur:.0f}" role="img" aria-label="'
+            f'Solde de la réforme par décile, en part du revenu disponible : '
+            f'positif du premier au sixième décile, négatif ensuite.">'
+            f'{axe}{"".join(parties)}{reperes}</svg></div>'
+            f'<figcaption>Variation du revenu disponible annuel, en part de ce '
+            f'dont le ménage dispose aujourd\u2019hui. Les déciles rangent les '
+            f'ménages du plus modeste au plus aisé ; les trois dernières lignes '
+            f'ouvrent le dernier d\u2019entre eux.</figcaption></figure>')
+
 # -- le simulateur -----------------------------------------------------------
 #
 # Il a longtemps tenu sur trois champs, et ne montrait que l'impôt et le revenu
@@ -1370,7 +1544,7 @@ FORMULAIRE = """<form id="formulaire" novalidate>
     comme des cibles de travail, et vous pouvez les déplacer.</p>
     <div class="champs">
       <p><label for="taux-impot">Impôt proportionnel (%)</label>
-      <input type="number" id="taux-impot" name="taux" value="34" min="0" max="60"
+      <input type="number" id="taux-impot" name="taux" value="36" min="0" max="60"
              step="0.5" inputmode="decimal"></p>
       <p><label for="ru">Revenu universel (€/mois)</label>
       <input type="number" id="ru" name="ru" value="600" min="0" max="5000"
@@ -1518,6 +1692,162 @@ SIMULATEUR = "\n".join([
 ])
 
 
+
+QUI_GAGNE = "\n".join([
+    plan([("change", "Ce que le chiffrage a changé"), ("deciles", "Par décile"),
+          ("menages", "Dix ménages"), ("perdants", "Ceux qui y perdent"),
+          ("methode", "D’où viennent ces chiffres")]),
+
+    section("change", "Ce que le chiffrage nous a fait changer",
+            "<p>Nous avons chiffré notre propre programme avant qu’on le fasse "
+            "à notre place. Le calcul a contredit trois de nos annonces. Nous "
+            "les avons corrigées plutôt que de les défendre.</p>"
+            + tableau(
+                ["Ce que nous disions", "Ce que nous disons"],
+                [["Un taux « sous 30 % »",
+                  "<strong>36 %</strong> — un taux sous 30 % ne finance pas un "
+                  "revenu universel de 600 €, et le prétendre aurait coûté plus "
+                  "cher que le reconnaître."],
+                 ["Le revenu universel remplace les prestations",
+                  "Il remplace le RSA, la prime d’activité et les prestations "
+                  "familiales. Il <strong>ne remplace pas</strong> le supplément "
+                  "handicap, l’aide au logement en zone tendue ni l’allocation "
+                  "d’autonomie, qui subsistent au-dessus de lui."],
+                 ["Le revenu universel suit la croissance",
+                  "Il suit la croissance <strong>et ne recule jamais</strong> : "
+                  "un cliquet en euros courants, et un plancher d’inflation."]],
+                legende="Trois corrections issues du chiffrage. Le détail du "
+                        "calcul est public, et refaisable.")
+            + encadre("", "<p>Le taux qui équilibre se situe entre 35,5 % et "
+                          "36 %. Nous publions la borne haute. D’un programme "
+                          "accusé de ne pas être chiffré, l’erreur qui coûte "
+                          "est celle qui laisse un trou, pas celle qui laisse "
+                          "une marge.</p>")
+            + "<p>Une quatrième correction a été envisagée puis écartée, et il "
+              "vaut mieux dire pourquoi. Nous avons étudié une tranche "
+              "supérieure, pour éviter que le haut de la distribution ne "
+              "profite de la réforme. Elle s’est révélée <strong>inutile</strong> : "
+              "le millime supérieur acquitte aujourd’hui 30,5 % de ses revenus, "
+              "parce que le prélèvement forfaitaire abrite l’essentiel de son "
+              "capital. Un taux unique à 36 % est donc, pour lui, une hausse. "
+              "C’est le taux commun qui répond au soupçon de cadeau, et la "
+              "doctrine — un impôt, un taux — en sort intacte.</p>"),
+
+    section("deciles", "Par décile",
+            "<p>Les déciles rangent les ménages du plus modeste au plus aisé, "
+            "dix groupes de trois millions de foyers. Voici ce que la réforme "
+            "leur fait, tous canaux confondus : impôt, transferts, TVA, "
+            "foncier et énergie.</p>"
+            + barres_divergentes(SOLDES_PAR_DECILE, SOLDES_AU_SOMMET)
+            + tableau(
+                ["Décile", "Solde annuel", "Part du revenu disponible"],
+                [[nom, f"{'+' if solde >= 0 else '−'}{abs(solde):,} €".replace(",", " "),
+                  f"{'+' if part >= 0 else '−'}{abs(part):.1f} %".replace(".", ",")]
+                 for nom, solde, part in SOLDES_PAR_DECILE]
+                + [[f"<span class=\"dont\">{nom}</span>",
+                    f"{'+' if solde >= 0 else '−'}{abs(solde):,} €".replace(",", " "),
+                    f"{'+' if part >= 0 else '−'}{abs(part):.1f} %".replace(".", ",")]
+                   for nom, solde, part in SOLDES_AU_SOMMET],
+                legende="Les mêmes chiffres que la figure, pour qui préfère "
+                        "les lire. Les trois dernières lignes ouvrent le "
+                        "dernier décile : elles ne s’ajoutent pas aux dix "
+                        "premières, elles les détaillent.")
+            + "<p>Le profil est celui d’une réforme redistributive ordinaire : "
+              "les six premiers déciles y gagnent, les quatre derniers y "
+              "contribuent. Le septième est à l’équilibre, à moins d’un point "
+              "près — c’est la charnière, et nous ne prétendons pas la "
+              "connaître au dixième de point.</p>"),
+
+    section("menages", "Dix ménages",
+            "<p>Un décile est une moyenne, et personne ne vit dans une "
+            "moyenne. Voici dix ménages réels dans leur composition, calculés "
+            "un par un. Ils n’ont pas été choisis pour nous arranger : trois "
+            "d’entre eux y perdent.</p>"
+            + tableau(
+                ["Ménage", "Revenu disponible aujourd’hui", "Solde", "Part"],
+                [[nom, f"{dispo:,} €".replace(",", " "),
+                  f"{'+' if solde >= 0 else '−'}{abs(solde):,} €".replace(",", " "),
+                  f"{'+' if part >= 0 else '−'}{abs(part):.1f} %".replace(".", ",")]
+                 for nom, dispo, solde, part in SOLDES_PAR_MENAGE],
+                legende="Le système actuel de chaque ménage est calculé depuis "
+                        "le barème en vigueur : quotient familial, décote, "
+                        "prélèvement forfaitaire sur le capital, et net des "
+                        "réductions et crédits d’impôt.")
+            + '<p><a class="bouton" href="simulateur.html">Calculer votre '
+              'cas</a></p>'),
+
+    section("perdants", "Ceux qui y perdent",
+            "<p>Un programme qui ne fait aucun perdant n’existe pas. Un "
+            "programme qui prétend n’en faire aucun se fait démentir par le "
+            "premier journaliste venu. Voici les nôtres.</p>"
+            + liste([
+                "<strong>Les quatre derniers déciles</strong>, de 0,9 % à 6 % "
+                "de leur revenu disponible. C’est le choix assumé d’un système "
+                "où la solidarité passe par un transfert visible plutôt que "
+                "par des niches invisibles.",
+                "<strong>L’allocataire de l’AAH perd 482 € par an</strong>, et "
+                "c’est un défaut de calibrage que nous corrigerons : le "
+                "supplément handicap couvre l’écart avec le revenu universel, "
+                "pas la hausse de TVA. Il doit couvrir les deux.",
+                "<strong>Le célibataire au SMIC en zone tendue perd 391 €.</strong> "
+                "Un adulte seul ne reçoit qu’un revenu universel là où un "
+                "couple en reçoit deux. C’est la limite la plus nette de "
+                "l’individualisation, et elle appelle une réponse que nous "
+                "n’avons pas encore écrite.",
+                "<strong>Les propriétaires perdent de la valeur foncière.</strong> "
+                "La <i>Land Value Tax</i> se capitalise dans le prix du "
+                "terrain : environ un tiers de sa valeur, une fois. Un "
+                "ménage médian propriétaire perd de l’ordre de 19 000 € de "
+                "patrimoine, un ménage du dernier décile près de 100 000 €. "
+                "Cela ne figure dans aucune colonne ci-dessus, parce que ce "
+                "n’est pas un flux annuel — mais c’est réel, et c’est le but : "
+                "faire baisser le prix du sol.",
+                "<strong>Les héritiers de patrimoines moyens.</strong> Notre "
+                "abattement de 100 000 € sur la vie entière est plus strict "
+                "que le droit actuel, qui le rouvre par parent et tous les "
+                "quinze ans. Sur une transmission de 400 000 €, les droits "
+                "passeraient de 36 000 à 102 000 €. Ce point n’est pas encore "
+                "arbitré, et il ne figure pas dans les tableaux ci-dessus : "
+                "une succession n’est pas un revenu annuel.",
+            ])),
+
+    section("methode", "D’où viennent ces chiffres",
+            "<p>Cette page est la seule du site à avancer des chiffres qui ne "
+            "figurent pas dans la note. Elle doit donc dire ce qu’ils valent, "
+            "et elle le dit sans indulgence.</p>"
+            + liste([
+                "<strong>Ce n’est pas une microsimulation.</strong> Il n’y a "
+                "pas d’enquête sur données individuelles derrière, mais treize "
+                "ménages moyens calibrés sur des ordres de grandeur publics.",
+                "<strong>Le modèle se contrôle.</strong> Réagrégé sur la "
+                "population, il retrouve les masses nationales : CSG à 3 % "
+                "près, impôt sur le revenu à 1 %, prestations à 0,5 %, taxe "
+                "foncière et patrimoine foncier à moins de 1 %. Et deux "
+                "chemins de calibration indépendants donnent au dernier décile "
+                "le même taux effectif, 23,5 % et 23,6 %.",
+                "<strong>Le calcul est à comportements inchangés</strong> : il "
+                "ignore ce que la réforme ferait aux prix, aux salaires et à "
+                "l’emploi. Ces effets sont réels, et ils joueraient "
+                "probablement en sa faveur — nous ne les comptons pas.",
+                "<strong>Le bouclage laisse un résidu</strong> de l’ordre de "
+                "quatre milliards d’euros, soit environ trois dixièmes de "
+                "point de taux. Nous préférons l’écrire que l’arrondir.",
+                "<strong>Tout est public et refaisable.</strong> Le modèle, "
+                "ses hypothèses et ses contrôles tiennent dans deux fichiers "
+                "du dépôt, <code>scripts/qui_gagne.py</code> et "
+                "<code>scripts/bouclage.py</code>. Chaque montant y est isolé "
+                "dans une constante nommée, pour qu’on puisse le contester "
+                "ligne à ligne.",
+            ])
+            + encadre("", "<p>Ces tableaux seront refaits sur données "
+                          "individuelles avant la campagne. Nous les publions "
+                          "dès maintenant parce qu’un ordre de grandeur "
+                          "vérifiable vaut mieux qu’un silence, et parce qu’un "
+                          "programme qui montre lui-même qui y perd ne peut "
+                          "plus être accusé de l’avoir caché.</p>")),
+])
+
+
 PAGES = [
     ("index.html", "Programme fiscal — Parti libéral français",
      "Taxer moins le travail,<br> mieux la rente,<br> et redistribuer simplement",
@@ -1544,7 +1874,7 @@ PAGES = [
      "L’impôt sur le revenu, la CSG et la CRDS fusionnent dans un impôt "
      "proportionnel unique. Le barème disparaît, la progressivité reste&nbsp;: "
      "c’est le revenu universel qui la porte.",
-     "Fusion IR-CSG-CRDS en un impôt proportionnel sous 30 %, assiette large, "
+     "Fusion IR-CSG-CRDS en un impôt proportionnel de 36 %, assiette large, "
      "individualisation complète, et revenu universel : le calcul, chiffre par "
      "chiffre.",
      REVENUS),
@@ -1603,6 +1933,14 @@ PAGES = [
      "TVA à 25 %, Land Value Tax et dividende carbone, calculés ensemble pour "
      "votre ménage.",
      SIMULATEUR),
+    ("qui-gagne.html", "Qui gagne, qui perd",
+     "Nous avons chiffré,<br> et nous publions le résultat",
+     "Décile par décile et ménage par ménage&nbsp;: ce que la réforme fait au "
+     "revenu disponible, y compris à ceux qui y perdent — et les trois "
+     "annonces que le chiffrage nous a fait corriger.",
+     "Qui gagne et qui perd au programme fiscal : le solde par décile et pour "
+     "dix ménages types, tous canaux confondus, avec la méthode et ses limites.",
+     QUI_GAGNE),
     ("calendrier.html", "Mise en œuvre",
      "Cinq ans,<br> et ce qui tombe dès la première année",
      "Ce qui est supprimé immédiatement, ce qui converge progressivement, et les "

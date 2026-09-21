@@ -60,8 +60,18 @@ class Reforme:
 
 CIBLE = Reforme("Le programme tel qu'il est écrit — RU 600 € / taux 34 %", 0.34, 600, 300)
 VARIANTE = Reforme("La variante « sous 30 % » — RU 480 € / taux 30 %", 0.30, 480, 240)
-CORRIGEE = Reforme("Le programme corrigé — RU 600 €, taux 34 %, tranche à 45 %, suppléments maintenus",
-                   0.34, 600, 300, seuil_haut=250_000, taux_haut=0.45, supplements=True)
+CORRIGEE = Reforme("Le programme corrigé — RU 600 €, taux unique de 36 %, suppléments maintenus",
+                   0.36, 600, 300, supplements=True)
+"""Le taux qui boucle vraiment se situe entre 35,5 % et 36 %. On retient la
+borne haute : d'un programme accusé de ne pas être chiffré, l'erreur coûteuse
+est celle qui laisse un trou, pas celle qui laisse une marge.
+
+Et la tranche supérieure, que la revue critique réclamait, s'avère inutile : le
+sommet de la distribution acquitte aujourd'hui 30,5 % de ses revenus, le
+prélèvement forfaitaire abritant l'essentiel de son capital. Un taux unique à
+36 % est donc pour lui une hausse, sans qu'on ait à écorner la doctrine. C'est
+le taux de base, et non une tranche, qui répond à l'objection du cadeau aux
+plus aisés."""
 
 PRIX_CARBONE_ACTUEL = 90.0
 """Prix implicite moyen du carbone sur les usages des ménages aujourd'hui :
@@ -317,6 +327,26 @@ def dividende_carbone(r: Reforme) -> float:
     return recette / adultes
 
 
+# Le dernier décile porte, dans la table, un ménage MOYEN de 163 000 € : aucun
+# de ses membres n'y franchit le seuil d'une tranche supérieure, et l'agrégat
+# calculé sur les déciles ignore donc entièrement son rendement. Il se calcule
+# à part, sur les deux sous-populations qui la franchissent vraiment.
+
+MENAGES_TOP_1 = 0.278e6      # le centile supérieur, millime supérieur exclu
+MENAGES_TOP_MILLIME = 0.0309e6
+REVENU_TOP_1 = 300_000       # moyenne du centile une fois le millime retiré
+REVENU_TOP_MILLIME = 1_500_000
+
+
+def rendement_de_la_tranche(r: Reforme) -> float:
+    """Ce que rapporte la tranche supérieure, en Md€."""
+    if r.taux_haut <= r.taux:
+        return 0.0
+    ecart = r.taux_haut - r.taux
+    return (MENAGES_TOP_1 * max(0, REVENU_TOP_1 - r.seuil_haut) * ecart
+            + MENAGES_TOP_MILLIME * max(0, REVENU_TOP_MILLIME - r.seuil_haut) * ecart) / 1e9
+
+
 def table_par_decile(r: Reforme) -> None:
     dividende = dividende_carbone(r)
     print(f"\n{r.nom} — variation annuelle du revenu disponible, en euros\n")
@@ -338,7 +368,8 @@ def table_par_decile(r: Reforme) -> None:
               f"{c['impôt direct']:>+9,.0f} {c['transferts']:>+9,.0f} {c['TVA']:>+9,.0f} "
               f"{c['logement']:>+9,.0f} {c['carbone']:>+9,.0f} {s:>+9,.0f} "
               f"{s / m.disponible_actuel():>+8.1%}")
-    cout = -sum(m.solde(r, dividende) for m in DECILES) * MENAGES_PAR_DECILE / 1e9
+    cout = (-sum(m.solde(r, dividende) for m in DECILES) * MENAGES_PAR_DECILE / 1e9
+            + rendement_de_la_tranche(r))
     print(f"\n  Solde agrégé sur les ménages : {cout:+,.0f} Md€"
           f" ({'les ménages paient davantage' if cout > 0 else 'coût budgétaire supplémentaire'}).")
     print(f"  Pour mémoire, le système cible fait porter aux ménages les ~17 Md€"

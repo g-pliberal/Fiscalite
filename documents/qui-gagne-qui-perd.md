@@ -114,32 +114,36 @@ central du programme, parce que le taux baisse pour tout le monde tandis que le
 transfert ne baisse que pour ceux qui en vivent. Le slogan « moins de 30 % » est
 donc à abandonner, et il vaut mieux l'abandonner soi-même.
 
-## 4. Le programme corrigé
+## 4. Le programme corrigé — et la tranche supérieure dont il n'a pas besoin
 
-Trois corrections issues de l'audit : revenu universel maintenu à 600 €, **une
-tranche unique à 45 % au-delà de 250 000 €**, et **les suppléments handicap,
-logement en zone tendue et autonomie maintenus au-dessus du revenu universel**.
+Paramètres retenus, publiés sur `qui-gagne.html` : revenu universel de 600 €,
+**taux unique de 36 %**, **suppléments handicap, logement en zone tendue et
+autonomie maintenus au-dessus du revenu universel**, et **aucune tranche
+supérieure**.
 
 | | D1 | D2 | D3 | D4 | D5 | D6 | D7 | D8 | D9 | D10 | Top 1 % | Top 0,1 % |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Solde | +1 169 | +1 317 | +2 082 | +2 102 | +2 243 | +1 541 | +624 | −695 | −2 488 | −4 176 | −19 033 | −144 800 |
-| % dispo | +6,0 % | +5,6 % | +7,8 % | +7,0 % | +6,5 % | +3,9 % | +1,4 % | −1,3 % | −3,6 % | −3,3 % | −6,5 % | −13,9 % |
+| Solde | +949 | +957 | +1 602 | +1 502 | +1 523 | +681 | −396 | −1 935 | −4 088 | −7 436 | −8 733 | −37 300 |
+| % dispo | +4,8 % | +4,1 % | +6,0 % | +5,0 % | +4,4 % | +1,7 % | −0,9 % | −3,5 % | −6,0 % | −6,0 % | −3,0 % | −3,6 % |
 
-La courbe est redressée : gain décroissant du premier au septième décile, perte
-croissante ensuite. C'est le profil d'une réforme redistributive ordinaire, et
-il se défend en une phrase.
+Gain décroissant du premier au sixième décile, perte croissante ensuite : le
+profil d'une réforme redistributive ordinaire, qui se défend en une phrase.
 
-Deux réserves, qui sont des réglages et non des objections :
+**La tranche supérieure que le §2 de la revue critique réclamait s'avère
+inutile — et c'est le résultat le plus utile de tout l'exercice.** Le millime
+supérieur acquitte aujourd'hui 30,5 % de ses revenus, le prélèvement
+forfaitaire abritant l'essentiel de son capital. Un taux unique à 36 % est donc
+pour lui une hausse : à 35 % déjà, il est à −2,1 % sans aucune tranche. C'est le
+taux de base, et non une concession doctrinale, qui répond à l'objection du
+cadeau aux plus aisés — et la doctrine « un impôt, un taux » en sort intacte.
 
-- **Il coûte 11 Md€ de plus que la neutralité**, soit environ 0,7 point de taux
-  proportionnel. Le couple cohérent devient donc *revenu universel de 600 €,
-  taux de 35 %, tranche à 45 %*. Mieux vaut annoncer 35 % et tenir que 30 % et
-  reculer.
-- **La tranche à 45 % dès 250 000 € corrige trop** : le top 0,1 % perd 13,9 %.
-  Le seuil et le taux sont deux molettes. Une tranche à 42 % au-delà de
-  400 000 € ramènerait le sommet autour de la neutralité, ce qui est
-  probablement le bon réglage pour un parti libéral : **la cible n'est pas de
-  faire payer le sommet davantage, elle est qu'il ne gagne pas.**
+Une réserve, qui est un réglage : **le taux d'équilibre se situe entre 35,5 % et
+36 %**, et 36 % laisse une marge d'environ 4 Md€. C'est volontaire. D'un
+programme accusé de ne pas être chiffré, l'erreur coûteuse est celle qui laisse
+un trou, pas celle qui laisse une marge.
+
+(La tranche supérieure reste pertinente **pour les successions**, où le
+croisement du §2 est réel et où aucun taux de base ne le corrige.)
 
 ## 5. Les dix cas types
 
@@ -148,16 +152,16 @@ choisis pour flatter : quatre y perdent.
 
 | Ménage | Dispo. actuel | Solde écrit | % | Solde corrigé | % |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| Couple, 2 enfants, deux SMIC | 42 197 | +5 436 | +12,9 % | +6 636 | +15,7 % |
-| Retraité seul, 1 400 €/mois | 16 111 | +1 587 | +9,9 % | +1 587 | +9,9 % |
+| Couple, 2 enfants, deux SMIC | 42 197 | +5 436 | +12,9 % | +5 796 | +13,7 % |
+| Retraité seul, 1 400 €/mois | 16 111 | +1 587 | +9,9 % | +1 251 | +7,8 % |
 | **Allocataire de l'AAH** | 12 000 | **−5 282** | **−44,0 %** | −482 | −4,0 % |
-| Propriétaire âgé à Paris, faible revenu | 18 221 | +2 847 | +15,6 % | +2 847 | +15,6 % |
-| **Célibataire au SMIC, zone tendue** | 22 559 | **−2 371** | **−10,5 %** | +29 | +0,1 % |
-| Agriculteur propriétaire de ses terres | 30 450 | +8 467 | +27,8 % | +8 917 | +29,3 % |
-| Ménage rural, gaz et deux voitures | 44 016 | +5 629 | +12,8 % | +6 329 | +14,4 % |
-| Cadre célibataire, 80 000 € | 60 467 | −2 487 | −4,1 % | −2 487 | −4,1 % |
-| Dirigeant de PME, 160 000 € | 124 410 | −2 193 | −1,8 % | −2 193 | −1,8 % |
-| Héritier de 400 000 € | 31 542 | −750 | −2,4 % | −750 | −2,4 % |
+| Propriétaire âgé à Paris, faible revenu | 18 221 | +2 847 | +15,6 % | +2 467 | +13,5 % |
+| **Célibataire au SMIC, zone tendue** | 22 559 | **−2 371** | **−10,5 %** | −391 | −1,7 % |
+| Agriculteur propriétaire de ses terres | 30 450 | +8 467 | +27,8 % | +8 277 | +27,2 % |
+| Ménage rural, gaz et deux voitures | 44 016 | +5 629 | +12,8 % | +5 409 | +12,3 % |
+| Cadre célibataire, 80 000 € | 60 467 | −2 487 | −4,1 % | −4 087 | −6,8 % |
+| Dirigeant de PME, 160 000 € | 124 410 | −2 193 | −1,8 % | −5 393 | −4,3 % |
+| Héritier de 400 000 € | 31 542 | −750 | −2,4 % | −1 510 | −4,8 % |
 
 Les taux effectifs de ces dix ménages ne sont pas posés : ils sortent du barème
 en vigueur, décote et prélèvement forfaitaire compris, nets des réductions et
@@ -173,7 +177,13 @@ sera écrite par quelqu'un d'autre.
 *Le célibataire au SMIC en zone tendue perd 10,5 %.* Un adulte seul ne reçoit
 qu'un revenu universel là où un couple en reçoit deux, et l'aide au logement
 qu'il perd vaut la moitié de ce qu'il gagne. Le maintien de l'APL en zone tendue
-le ramène à l'équilibre exact — ce qui montre qu'il n'y a pas de marge.
+ne le ramène qu'à −1,7 % : il n'y a pas de marge, et l'individualisation atteint
+ici sa limite la plus nette. À traiter.
+
+*Et le supplément handicap est mal calibré.* Réglé pour couvrir l'écart entre
+l'AAH et le revenu universel, il laisse l'allocataire perdre les 482 € de TVA
+supplémentaire. Il doit couvrir les deux : c'est une ligne d'arithmétique, et
+c'est le dernier perdant qu'il reste à effacer.
 
 *Le propriétaire âgé de Paris gagne 15,6 %… et perd 163 636 € de valeur de
 terrain.* C'est le cas où la table de flux et la réalité vécue divergent le plus.
@@ -197,18 +207,19 @@ le sens inverse de tout le reste. Voir `revue-critique.md`, §2.
 
 ## 6. Ce qu'il faut faire de tout cela
 
-1. **Abandonner « moins de 30 % »** et annoncer 35 % avec un revenu universel de
-   600 €. La table du §3 montre que la promesse actuelle est la plus coûteuse
-   politiquement des deux.
-2. **Écrire la ligne des suppléments** (handicap, logement en zone tendue,
-   autonomie). Elle vaut 27 Md€ et elle vaut le programme.
-3. **Ajouter une tranche supérieure**, calibrée non pour punir mais pour que le
-   sommet ne gagne pas : autour de 42 % au-delà de 400 000 €.
+1. ~~**Abandonner « moins de 30 % »**~~ — fait. Le site publie 36 %, dit que la
+   note disait autre chose, et dit pourquoi.
+2. ~~**Écrire la ligne des suppléments**~~ — fait, sur `revenus.html`. Reste à
+   la calibrer pour qu'elle couvre aussi la hausse de TVA.
+3. ~~**Ajouter une tranche supérieure**~~ — **écartée, et c'est un gain.** Le
+   taux de base à 36 % suffit à rendre le sommet contributeur net, puisqu'il
+   n'acquitte aujourd'hui que 30,5 %. La doctrine « un impôt, un taux » tient.
 4. **Traiter le patrimoine des très hauts revenus comme un bloc** — IFI,
-   allègement foncier, succession —, puisque c'est par là, et seulement par là,
-   que passe le transfert vers le sommet.
-5. **Publier la ligne « impôt » du top 0,1 %.** Elle dit que la réforme augmente
-   l'imposition des très grands patrimoines de revenus. C'est vrai, c'est
-   contre-intuitif, et c'est votre meilleure réponse.
-6. **Refaire cette table sur données individuelles** avant publication. Ce
-   modèle dit où regarder ; il ne dit pas au centime.
+   allègement foncier, succession. C'est là que passe encore le seul transfert
+   net vers le sommet, et la succession reste non arbitrée.
+5. ~~**Publier la ligne « impôt » du top 0,1 %**~~ — faite, et elle est devenue
+   l'argument central de l'objection n° 2.
+6. **Refaire ces tables sur données individuelles** avant la campagne. Ce
+   modèle dit où regarder ; il ne dit pas au centime, et la page le dit.
+7. **Traiter le célibataire en zone tendue.** C'est le dernier perdant que le
+   programme fabrique sans l'avoir voulu.
