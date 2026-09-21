@@ -51,6 +51,7 @@ GROUPES = [
         ("transmissions.html", "Transmissions"),
     ]),
     ("Comprendre", [
+        ("simulateur.html", "Simulateur"),
         ("calendrier.html", "Calendrier"),
         ("objections.html", "Objections"),
         ("glossaire.html", "Glossaire"),
@@ -299,9 +300,9 @@ ACCUEIL = "\n".join([
     "de 21 %. Le taux marginal, lui, ne bouge pas — il n’y a donc plus de seuil "
     "à redouter, ni de trappe à inactivité.</p>",
     '    <div class="note entree"><p>Le calcul est fait, chiffre par chiffre, '
-    'sur la page des revenus — avec un simulateur qui tourne dans votre '
+    'sur la page des revenus — et le simulateur, qui tourne dans votre '
     'navigateur.</p><p class="actions">'
-    '<a class="bouton" href="revenus.html#calculette">Calculer mon cas</a>'
+    '<a class="bouton" href="simulateur.html">Calculer mon cas</a>'
     '</p></div>',
     '  </div>',
     '</div>',
@@ -430,50 +431,10 @@ TABLE_RU = tableau(
             "un chiffre arrêté.",
 )
 
-CALCULETTE = """<div class="creme calculette" id="calculette">
-  <p class="surtitre">Votre cas</p>
-  <h2 class="serif">Ce que vous paieriez, ce que vous recevriez</h2>
-  <p>Le calcul se fait dans votre navigateur&nbsp;: rien n’est envoyé, rien n’est
-  enregistré. Les deux hypothèses sont celles de l’exemple de la note, et vous
-  pouvez les changer.</p>
-  <form id="formulaire" novalidate>
-    <div class="champs">
-      <p><label for="revenu">Revenu annuel imposable</label>
-      <input type="number" id="revenu" name="revenu" value="30000" min="0"
-             max="100000000" step="100" inputmode="numeric"> </p>
-      <p><label for="taux-impot">Taux de l’impôt (%)</label>
-      <input type="number" id="taux-impot" name="taux" value="25" min="0" max="60"
-             step="0.5" inputmode="decimal"></p>
-      <p><label for="ru">Revenu universel (€/mois)</label>
-      <input type="number" id="ru" name="ru" value="600" min="0" max="5000"
-             step="10" inputmode="numeric"></p>
-    </div>
-  </form>
-  <div class="fiches reperes" id="resultat" aria-live="polite">
-    <div class="fiche"><p class="etiquette">Impôt</p><p class="valeur" id="r-impot">—</p>
-    <p class="precision">Un seul prélèvement, à la place de l’IR, de la CSG et de
-    la CRDS.</p></div>
-    <div class="fiche"><p class="etiquette">Revenu universel</p>
-    <p class="valeur" id="r-ru">—</p>
-    <p class="precision">Versé sans condition, sur l’année.</p></div>
-    <div class="fiche"><p class="etiquette">Solde</p><p class="valeur" id="r-solde">—</p>
-    <p class="precision sens" id="r-sens">—</p></div>
-    <div class="fiche"><p class="etiquette">Taux net effectif</p>
-    <p class="valeur" id="r-taux">—</p>
-    <p class="precision">Ce que vous versez net, rapporté à votre revenu.</p></div>
-  </div>
-  <p class="discret">Le calcul ne tient compte que de l’impôt proportionnel et du
-  revenu universel&nbsp;: ni cotisations contributives, ni TVA, ni dividende
-  carbone, ni revenu universel enfant. C’est le cœur du dispositif, pas votre
-  feuille d’impôt.</p>
-  <noscript><p class="discret">Le simulateur a besoin de JavaScript. Le tableau
-  ci-dessus donne les mêmes chiffres pour sept niveaux de revenu.</p></noscript>
-</div>"""
-
 REVENUS = "\n".join([
     plan([("fusion", "Fusion IR-CSG-CRDS"), ("taux", "Le taux"),
           ("assiette", "L’assiette"), ("individuel", "Individualisation"),
-          ("progressivite", "La progressivité"), ("calculette", "Votre cas"),
+          ("progressivite", "La progressivité"),
           ("indexation", "L’indexation du RU")]),
     section("fusion", "Un impôt à la place de trois",
             "<p>L’impôt sur le revenu, la CSG et la CRDS seront fusionnés dans un "
@@ -560,7 +521,11 @@ REVENUS = "\n".join([
               "sans créer de trappes à inactivité&nbsp;: un euro de plus gagné "
               "rapporte toujours la même fraction, quel que soit le niveau de "
               "revenu. Aucun seuil à ne pas franchir, aucune aide à perdre.</p>"),
-    CALCULETTE,
+    encadre("", "<p>Ce tableau ne tient compte que de l’impôt et du revenu "
+                "universel. Le simulateur, lui, ajoute la TVA, le foncier et "
+                "l’énergie&nbsp;: c’est là que se lit votre cas réel.</p>"
+                '<p><a class="bouton" href="simulateur.html">Ouvrir le '
+                'simulateur</a></p>'),
     section("indexation", "Ce qui fait bouger le revenu universel",
             "<p>Le revenu universel sera indexé sur le <strong>PIB réel par "
             "habitant</strong>, lissé sur trois ans. Trois raisons&nbsp;:</p>"
@@ -1341,6 +1306,218 @@ GLOSSAIRE = "\n".join([
 
 # -- les pages ---------------------------------------------------------------
 
+# -- le simulateur -----------------------------------------------------------
+#
+# Il a longtemps tenu sur trois champs, et ne montrait que l'impôt et le revenu
+# universel. C'était la moitié favorable de la réforme, sur un site dont l'objet
+# est la transparence : la TVA à 25 %, la LVT et le prix du carbone en étaient
+# absents, et c'est par là qu'on l'aurait pris en défaut. Il en montre cinq.
+#
+# Les hypothèses que le lecteur ne peut pas connaître — la part de son panier
+# soumise à TVA, la part du terrain dans la valeur de son logement — ne lui sont
+# pas demandées : elles sont écrites dans `moteur/calculette.js`, en clair, et
+# rappelées sous le résultat.
+
+FORMULAIRE = """<form id="formulaire" novalidate>
+  <fieldset>
+    <legend>Votre foyer</legend>
+    <div class="champs">
+    <p><label for="adultes">Adultes</label>
+    <input type="number" id="adultes" name="adultes" value="2" min="1" max="2"
+           step="1" inputmode="numeric"></p>
+    <p><label for="enfants">Enfants à charge</label>
+    <input type="number" id="enfants" name="enfants" value="2" min="0" max="12"
+           step="1" inputmode="numeric"></p>
+    <p><label for="nature">Nature des revenus</label>
+    <select id="nature" name="nature">
+      <option value="activite">Salaires ou activité</option>
+      <option value="pension">Pensions de retraite</option>
+    </select></p>
+    <p><label for="revenu">Revenus annuels du foyer</label>
+    <input type="number" id="revenu" name="revenu" value="42000" min="0"
+           max="100000000" step="500" inputmode="numeric"></p>
+    <p><label for="capital">Dont revenus du capital</label>
+    <input type="number" id="capital" name="capital" value="0" min="0"
+           max="100000000" step="500" inputmode="numeric"></p>
+    <p><label for="prestations">Prestations reçues (€/mois)</label>
+    <input type="number" id="prestations" name="prestations" value="350" min="0"
+           max="10000" step="10" inputmode="numeric"></p>
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend>Ce que vous dépensez, ce que vous possédez</legend>
+    <div class="champs">
+    <p><label for="epargne">Part du revenu épargnée (%)</label>
+    <input type="number" id="epargne" name="epargne" value="5" min="0" max="90"
+           step="1" inputmode="numeric"></p>
+    <p><label for="logement">Valeur de votre logement</label>
+    <input type="number" id="logement" name="logement" value="0" min="0"
+           max="100000000" step="10000" inputmode="numeric"></p>
+    <p><label for="chauffage">Chauffage</label>
+    <select id="chauffage" name="chauffage">
+      <option value="gaz">Gaz</option>
+      <option value="fioul">Fioul</option>
+      <option value="aucun">Électricité, bois ou réseau</option>
+    </select></p>
+    <p><label for="kilometres">Kilomètres en voiture par an</label>
+    <input type="number" id="kilometres" name="kilometres" value="12000" min="0"
+           max="200000" step="500" inputmode="numeric"></p>
+    </div>
+  </fieldset>
+  <details>
+    <summary>Les hypothèses du programme</summary>
+    <p class="discret">Aucune n’est un chiffre arrêté&nbsp;: la note les donne
+    comme des cibles de travail, et vous pouvez les déplacer.</p>
+    <div class="champs">
+      <p><label for="taux-impot">Impôt proportionnel (%)</label>
+      <input type="number" id="taux-impot" name="taux" value="34" min="0" max="60"
+             step="0.5" inputmode="decimal"></p>
+      <p><label for="ru">Revenu universel (€/mois)</label>
+      <input type="number" id="ru" name="ru" value="600" min="0" max="5000"
+             step="10" inputmode="numeric"></p>
+      <p><label for="ru-enfant">Revenu universel enfant (€/mois)</label>
+      <input type="number" id="ru-enfant" name="ru-enfant" value="300" min="0"
+             max="5000" step="10" inputmode="numeric"></p>
+      <p><label for="tva">TVA (%)</label>
+      <input type="number" id="tva" name="tva" value="25" min="0" max="40"
+             step="0.5" inputmode="decimal"></p>
+      <p><label for="lvt">Land Value Tax (%)</label>
+      <input type="number" id="lvt" name="lvt" value="2" min="0" max="10"
+             step="0.1" inputmode="decimal"></p>
+      <p><label for="carbone">Prix du carbone (€/t)</label>
+      <input type="number" id="carbone" name="carbone" value="200" min="0"
+             max="1000" step="10" inputmode="numeric"></p>
+    </div>
+  </details>
+</form>"""
+
+RESULTAT = """<div class="fiches reperes" id="resultat" aria-live="polite">
+  <div class="fiche"><p class="etiquette">Solde annuel</p>
+  <p class="valeur" id="r-solde">—</p>
+  <p class="precision sens" id="r-sens">—</p></div>
+  <div class="fiche"><p class="etiquette">Part du revenu disponible</p>
+  <p class="valeur" id="r-part">—</p>
+  <p class="precision">Ce que le solde pèse dans ce dont vous disposez
+  aujourd’hui.</p></div>
+  <div class="fiche"><p class="etiquette">Impôt direct seul</p>
+  <p class="valeur" id="r-impot">—</p>
+  <p class="precision">Ce que l’ancien simulateur montrait, et rien de
+  plus.</p></div>
+  <div class="fiche"><p class="etiquette">Valeur de votre terrain</p>
+  <p class="valeur" id="r-capital">—</p>
+  <p class="precision">Une fois, pas chaque année&nbsp;: la LVT se capitalise
+  dans le prix du sol.</p></div>
+</div>"""
+
+CASCADE = """<div class="cascade">
+  <div class="defilant" id="cascade" tabindex="0"></div>
+  <p class="lecture" id="lecture" hidden></p>
+  <p class="aide-clavier">Flèches gauche et droite pour parcourir les marches,
+  Échap pour quitter.</p>
+  <ul class="legende">
+    <li><span class="pastille ecart-plus"></span> Ce que vous gagnez</li>
+    <li><span class="pastille ecart-moins"></span> Ce que vous perdez</li>
+  </ul>
+</div>"""
+
+SIMULATEUR = "\n".join([
+    plan([("votre-cas", "Votre cas"), ("canaux", "Les cinq canaux"),
+          ("hypotheses", "Ce que le calcul suppose"),
+          ("limites", "Ce qu’il ne dit pas")]),
+    section("votre-cas", "Ce que le programme changerait pour vous",
+            "<p>Le calcul se fait dans votre navigateur&nbsp;: rien n’est "
+            "envoyé, rien n’est enregistré, et il n’y a pas de serveur à qui "
+            "vos réponses pourraient partir.</p>"
+            "<p>Il compare deux systèmes fiscaux entiers sur le même ménage. "
+            "Le vôtre d’aujourd’hui est calculé depuis le barème en "
+            "vigueur — décote comprise, et net des réductions et crédits "
+            "d’impôt. Le système cible est celui de la note.</p>"
+            + '<div class="creme calculette" id="calculette">'
+            + FORMULAIRE + RESULTAT + CASCADE
+            + "<p class=\"discret\">La cascade part de zéro et ajoute les cinq "
+              "canaux l’un après l’autre&nbsp;; la dernière colonne est leur "
+              "somme. Survolez une marche, ou parcourez-les au clavier, pour "
+              "lire ce qu’elle recouvre.</p>"
+            + "<noscript>" + tableau(
+                ["Canal", "Effet sur l’année"],
+                [["Impôt direct", "− 10 277 €"],
+                 ["Transferts", "+ 17 400 €"],
+                 ["TVA", "− 2 251 €"],
+                 ["Logement", "0 €"],
+                 ["Énergie", "+ 164 €"],
+                 ["<strong>Solde</strong>", "<strong>+ 5 036 €</strong>"]],
+                legende="Le simulateur a besoin de JavaScript. À défaut, voici "
+                        "le même calcul pour le ménage par défaut du "
+                        "formulaire : deux adultes, deux enfants, 42 000 € de "
+                        "revenus, 350 € de prestations par mois, locataires, "
+                        "chauffage au gaz, 12 000 km par an.") + "</noscript>"
+            + "</div>"),
+    section("canaux", "Les cinq canaux, et pourquoi il en faut cinq",
+            "<p>Une réforme fiscale n’atteint pas un ménage par un seul "
+            "chemin. Ne montrer que l’impôt sur le revenu et le revenu "
+            "universel — ce que faisait ce simulateur jusqu’ici — revient à "
+            "n’en montrer que la moitié favorable&nbsp;:</p>"
+            + tableau(
+                ["Canal", "Aujourd’hui", "Dans le système cible"],
+                [["Impôt direct", "IR, CSG, CRDS, prélèvements sociaux",
+                  "Un impôt proportionnel unique"],
+                 ["Transferts", "RSA, prime d’activité, prestations familiales, APL",
+                  "Le revenu universel, adulte et enfant"],
+                 ["Consommation", "TVA à 20 %, 10 %, 5,5 % et 2,1 %",
+                  "TVA à taux unique de 25 %"],
+                 ["Logement", "Taxe foncière, droits de mutation, IFI",
+                  "Land Value Tax sur le terrain nu"],
+                 ["Énergie", "TICPE et taxes sectorielles",
+                  "Prix plancher du carbone, et dividende rendu"]],
+                legende="Les cinq canaux du simulateur. Les droits de mutation "
+                        "y sont lissés sur la durée moyenne de détention : on "
+                        "les paie tous les quarante ans, et une table annuelle "
+                        "ne saurait les montrer autrement.")
+            + "<p>Le tableau des cas types de la note montre que le classement "
+              "d’un ménage change selon les canaux retenus&nbsp;: un "
+              "propriétaire âgé gagne sur les flux et perd sur son patrimoine, "
+              "un ménage rural perd sur l’énergie et regagne ailleurs. C’est "
+              "pour cela qu’ils sont tous les cinq ici.</p>"),
+    section("hypotheses", "Ce que le calcul suppose",
+            "<p>Trois grandeurs ne vous sont pas demandées, parce que personne "
+            "ne les connaît de mémoire. Elles sont posées, et les voici&nbsp;:</p>"
+            + liste([
+                "<strong>80 %</strong> de votre dépense porte de la "
+                "TVA&nbsp;; le loyer, la santé et l’école n’en portent pas.",
+                "<strong>16,8 %</strong> est le taux moyen que vous supportez "
+                "aujourd’hui, tous taux réduits confondus.",
+                "<strong>La moitié</strong> de la valeur d’un logement est "
+                "celle du terrain — c’est une moyenne nationale, et elle est "
+                "bien plus élevée dans les grandes villes.",
+                "<strong>36 %</strong> est la part de valeur qu’une LVT de 2 % "
+                "retire au terrain, en se capitalisant dans son prix. C’est "
+                "l’argument du programme, et il vaut aussi pour l’assiette de "
+                "l’impôt.",
+                "<strong>421 €</strong> par adulte est le dividende carbone, "
+                "soit la recette du prix plancher rendue aux citoyens.",
+            ])
+            + "<p>Le panier de consommation est tenu constant en volume&nbsp;: "
+              "on compare deux fiscalités sur la même dépense hors taxe, et non "
+              "deux niveaux de vie différents.</p>"),
+    section("limites", "Ce que ce simulateur ne dit pas",
+            "<p>Il calcule un ménage moyen, pas votre feuille d’impôt. Il "
+            "ignore&nbsp;:</p>"
+            + liste([
+                "les cotisations contributives, qui ne changent pas&nbsp;;",
+                "les droits de succession, qui ne sont pas annuels — et qui, "
+                "pour une transmission, pèsent plus lourd que tout le "
+                "reste&nbsp;;",
+                "les effets de la réforme sur les prix, les salaires et "
+                "l’emploi, qui sont réels et qu’aucun calcul à comportements "
+                "inchangés ne peut donner&nbsp;;",
+                "votre situation propre, dès qu’elle sort de la moyenne.",
+            ])
+            + "<p>Un simulateur qui prétendrait davantage mentirait. "
+              "Celui-ci dit d’où viennent ses chiffres, et c’est à cela qu’on "
+              "juge un chiffrage.</p>"),
+])
+
+
 PAGES = [
     ("index.html", "Programme fiscal — Parti libéral français",
      "Taxer moins le travail,<br> mieux la rente,<br> et redistribuer simplement",
@@ -1369,7 +1546,7 @@ PAGES = [
      "c’est le revenu universel qui la porte.",
      "Fusion IR-CSG-CRDS en un impôt proportionnel sous 30 %, assiette large, "
      "individualisation complète, et revenu universel : le calcul, chiffre par "
-     "chiffre, avec un simulateur.",
+     "chiffre.",
      REVENUS),
     ("consommation.html", "Consommation",
      "Une TVA, un taux",
@@ -1417,6 +1594,15 @@ PAGES = [
      "d’entreprise, Compte Retraite Universel Capitalisé, suppression de l’exit "
      "tax.",
      TRANSMISSIONS),
+    ("simulateur.html", "Simulateur",
+     "Ce que ça change<br> pour vous",
+     "Le programme atteint un ménage par cinq canaux&nbsp;: l’impôt, les "
+     "transferts, la TVA, le foncier et l’énergie. Les voici tous les cinq, "
+     "calculés dans votre navigateur.",
+     "Simulateur du programme fiscal : impôt proportionnel, revenu universel, "
+     "TVA à 25 %, Land Value Tax et dividende carbone, calculés ensemble pour "
+     "votre ménage.",
+     SIMULATEUR),
     ("calendrier.html", "Mise en œuvre",
      "Cinq ans,<br> et ce qui tombe dès la première année",
      "Ce qui est supprimé immédiatement, ce qui converge progressivement, et les "
@@ -1496,7 +1682,7 @@ def ecrire(verifier: bool = False) -> int:
             affiche=affiche(surtitre, titre, chapeau),
             corps=corps,
             pied=pied(),
-            script=SCRIPT_CALCULETTE if fichier == "revenus.html" else "",
+            script=SCRIPT_CALCULETTE if fichier == "simulateur.html" else "",
         )
         chemin = RACINE / fichier
         ancien = chemin.read_text(encoding="utf-8") if chemin.exists() else None

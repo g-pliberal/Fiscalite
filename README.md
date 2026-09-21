@@ -1,7 +1,7 @@
 # Programme fiscal — Parti libéral français
 
 Le site qui présente le **chapitre Fiscalité** du programme aux électeurs :
-onze pages statiques, lisibles sans JavaScript, servies telles quelles.
+douze pages statiques, lisibles sans JavaScript, servies telles quelles.
 
 👉 `index.html` — ou, une fois publié,
 <https://g-pliberal.github.io/fiscalite/>
@@ -12,12 +12,13 @@ onze pages statiques, lisibles sans JavaScript, servies telles quelles.
 | --- | --- |
 | `index.html` | Les huit piliers, les quatre chiffres, et la formule du programme. |
 | `principes.html` | Séparer impôt, cotisation et redistribution ; taxer moins les bases productives ; supprimer l'illusion de la gratuité. |
-| `revenus.html` | Fusion IR-CSG-CRDS, taux sous 30 %, assiette, individualisation, revenu universel — avec un simulateur. |
+| `revenus.html` | Fusion IR-CSG-CRDS, taux sous 30 %, assiette, individualisation, revenu universel. |
 | `consommation.html` | La TVA à taux unique cible de 25 %, et sa transition. |
 | `foncier.html` | La *Land Value Tax*, les DMTO supprimés, les reports prévus. |
 | `entreprises.html` | Impôts de production supprimés, IS ramené vers 15-20 %, extinction du CIR. |
 | `carbone.html` | Prix plancher, dividende carbone, électricité et réseaux. |
 | `transmissions.html` | Successions imposées chez le receveur, transmission d'entreprise, CRUC, exit tax. |
+| `simulateur.html` | Les cinq canaux — impôt, transferts, TVA, foncier, énergie — calculés ensemble pour un ménage. |
 | `calendrier.html` | La trajectoire année par année, la fiche de paie cible, les ordres de grandeur. |
 | `objections.html` | Les huit objections, et les réponses. |
 | `glossaire.html` | Les vingt termes, en clair. |
@@ -56,8 +57,8 @@ recopiable en une commande.
 
 Les pages `.html` de la racine sont **écrites par un script** et versionnées :
 le site est statique, il n'y a rien à construire pour le servir. Le script
-existe parce que le bandeau de tête et le pied sont identiques sur onze pages,
-et que onze copies à la main dérivent toujours.
+existe parce que le bandeau de tête et le pied sont identiques sur douze pages,
+et que douze copies à la main dérivent toujours.
 
 ```sh
 python scripts/construire_site.py             # écrit les pages
@@ -106,6 +107,13 @@ python scripts/qui_gagne.py
 
 Ces deux scripts ne produisent rien pour le site et n'entrent pas dans les
 vérifications : ce sont des outils de travail, pas des pièces du dépôt publié.
+
+**`moteur/calculette.js` et `scripts/qui_gagne.py` doivent dire la même chose.**
+Le simulateur du site et le modèle interne appliquent le même barème, les mêmes
+hypothèses et les mêmes cinq canaux ; ils ne diffèrent que sur les grandeurs
+qu'on demande au lecteur plutôt que de les poser. S'ils divergeaient, c'est le
+programme qui serait pris en défaut, pas le script — un écart entre les deux est
+donc une anomalie à corriger, jamais à expliquer.
 
 ## Licences
 

@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- La couleur du bandeau : sur un téléphone, la barre du navigateur la reprend,
+     et la page commence où elle commence. -->
+<meta name="theme-color" content="#0b3d3a">
+<title>Simulateur — Programme fiscal</title>
+<meta name="description" content="Simulateur du programme fiscal : impôt proportionnel, revenu universel, TVA à 25 %, Land Value Tax et dividende carbone, calculés ensemble pour votre ménage.">
+<link rel="icon" href="moteur/icone.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="moteur/icone.svg">
+<!-- La charte vient du dépôt du simulateur de retraite, copiée sans une
+     modification ; site.css ne fait que redéfinir ce qui est propre à ce
+     site-ci. C'est le point de contact prévu par la charte elle-même. -->
+<link rel="stylesheet" href="moteur/style.css">
+<link rel="stylesheet" href="moteur/site.css">
+</head>
+<body>
+<a class="evitement" href="#contenu">Aller au contenu</a>
+<header class="bandeau"><div class="interieur">
+  <p class="nom"><a href="index.html"><span>Programme fiscal</span></a></p>
+  <nav aria-label="Navigation principale"><span class="groupe"><span class="etiquette">Le cap</span><span class="liens"><a href="index.html">Accueil</a><a href="principes.html">Principes</a></span></span><span class="groupe"><span class="etiquette">Les réformes</span><span class="liens"><a href="revenus.html">Revenus</a><a href="consommation.html">TVA</a><a href="foncier.html">Foncier</a><a href="entreprises.html">Entreprises</a><a href="carbone.html">Carbone</a><a href="transmissions.html">Transmissions</a></span></span><span class="groupe"><span class="etiquette">Comprendre</span><span class="liens"><a href="simulateur.html" aria-current="page">Simulateur</a><a href="calendrier.html">Calendrier</a><a href="objections.html">Objections</a><a href="glossaire.html">Glossaire</a></span></span></nav>
+</div></header>
+<main id="contenu" tabindex="-1">
+<div class="affiche"><p class="surtitre">Simulateur</p><h1>Ce que ça change<br> pour vous</h1><p class="chapeau">Le programme atteint un ménage par cinq canaux&nbsp;: l’impôt, les transferts, la TVA, le foncier et l’énergie. Les voici tous les cinq, calculés dans votre navigateur.</p></div>
+<nav class="plan" aria-label="Plan de la page"><p class="etiquette">Sur cette page</p><ol><li><a href="#votre-cas">Votre cas</a></li><li><a href="#canaux">Les cinq canaux</a></li><li><a href="#hypotheses">Ce que le calcul suppose</a></li><li><a href="#limites">Ce qu’il ne dit pas</a></li></ol></nav>
+<h2 id="votre-cas">Ce que le programme changerait pour vous</h2>
+<p>Le calcul se fait dans votre navigateur&nbsp;: rien n’est envoyé, rien n’est enregistré, et il n’y a pas de serveur à qui vos réponses pourraient partir.</p><p>Il compare deux systèmes fiscaux entiers sur le même ménage. Le vôtre d’aujourd’hui est calculé depuis le barème en vigueur — décote comprise, et net des réductions et crédits d’impôt. Le système cible est celui de la note.</p><div class="creme calculette" id="calculette"><form id="formulaire" novalidate>
+  <fieldset>
+    <legend>Votre foyer</legend>
+    <div class="champs">
+    <p><label for="adultes">Adultes</label>
+    <input type="number" id="adultes" name="adultes" value="2" min="1" max="2"
+           step="1" inputmode="numeric"></p>
+    <p><label for="enfants">Enfants à charge</label>
+    <input type="number" id="enfants" name="enfants" value="2" min="0" max="12"
+           step="1" inputmode="numeric"></p>
+    <p><label for="nature">Nature des revenus</label>
+    <select id="nature" name="nature">
+      <option value="activite">Salaires ou activité</option>
+      <option value="pension">Pensions de retraite</option>
+    </select></p>
+    <p><label for="revenu">Revenus annuels du foyer</label>
+    <input type="number" id="revenu" name="revenu" value="42000" min="0"
+           max="100000000" step="500" inputmode="numeric"></p>
+    <p><label for="capital">Dont revenus du capital</label>
+    <input type="number" id="capital" name="capital" value="0" min="0"
+           max="100000000" step="500" inputmode="numeric"></p>
+    <p><label for="prestations">Prestations reçues (€/mois)</label>
+    <input type="number" id="prestations" name="prestations" value="350" min="0"
+           max="10000" step="10" inputmode="numeric"></p>
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend>Ce que vous dépensez, ce que vous possédez</legend>
+    <div class="champs">
+    <p><label for="epargne">Part du revenu épargnée (%)</label>
+    <input type="number" id="epargne" name="epargne" value="5" min="0" max="90"
+           step="1" inputmode="numeric"></p>
+    <p><label for="logement">Valeur de votre logement</label>
+    <input type="number" id="logement" name="logement" value="0" min="0"
+           max="100000000" step="10000" inputmode="numeric"></p>
+    <p><label for="chauffage">Chauffage</label>
+    <select id="chauffage" name="chauffage">
+      <option value="gaz">Gaz</option>
+      <option value="fioul">Fioul</option>
+      <option value="aucun">Électricité, bois ou réseau</option>
+    </select></p>
+    <p><label for="kilometres">Kilomètres en voiture par an</label>
+    <input type="number" id="kilometres" name="kilometres" value="12000" min="0"
+           max="200000" step="500" inputmode="numeric"></p>
+    </div>
+  </fieldset>
+  <details>
+    <summary>Les hypothèses du programme</summary>
+    <p class="discret">Aucune n’est un chiffre arrêté&nbsp;: la note les donne
+    comme des cibles de travail, et vous pouvez les déplacer.</p>
+    <div class="champs">
+      <p><label for="taux-impot">Impôt proportionnel (%)</label>
+      <input type="number" id="taux-impot" name="taux" value="34" min="0" max="60"
+             step="0.5" inputmode="decimal"></p>
+      <p><label for="ru">Revenu universel (€/mois)</label>
+      <input type="number" id="ru" name="ru" value="600" min="0" max="5000"
+             step="10" inputmode="numeric"></p>
+      <p><label for="ru-enfant">Revenu universel enfant (€/mois)</label>
+      <input type="number" id="ru-enfant" name="ru-enfant" value="300" min="0"
+             max="5000" step="10" inputmode="numeric"></p>
+      <p><label for="tva">TVA (%)</label>
+      <input type="number" id="tva" name="tva" value="25" min="0" max="40"
+             step="0.5" inputmode="decimal"></p>
+      <p><label for="lvt">Land Value Tax (%)</label>
+      <input type="number" id="lvt" name="lvt" value="2" min="0" max="10"
+             step="0.1" inputmode="decimal"></p>
+      <p><label for="carbone">Prix du carbone (€/t)</label>
+      <input type="number" id="carbone" name="carbone" value="200" min="0"
+             max="1000" step="10" inputmode="numeric"></p>
+    </div>
+  </details>
+</form><div class="fiches reperes" id="resultat" aria-live="polite">
+  <div class="fiche"><p class="etiquette">Solde annuel</p>
+  <p class="valeur" id="r-solde">—</p>
+  <p class="precision sens" id="r-sens">—</p></div>
+  <div class="fiche"><p class="etiquette">Part du revenu disponible</p>
+  <p class="valeur" id="r-part">—</p>
+  <p class="precision">Ce que le solde pèse dans ce dont vous disposez
+  aujourd’hui.</p></div>
+  <div class="fiche"><p class="etiquette">Impôt direct seul</p>
+  <p class="valeur" id="r-impot">—</p>
+  <p class="precision">Ce que l’ancien simulateur montrait, et rien de
+  plus.</p></div>
+  <div class="fiche"><p class="etiquette">Valeur de votre terrain</p>
+  <p class="valeur" id="r-capital">—</p>
+  <p class="precision">Une fois, pas chaque année&nbsp;: la LVT se capitalise
+  dans le prix du sol.</p></div>
+</div><div class="cascade">
+  <div class="defilant" id="cascade" tabindex="0"></div>
+  <p class="lecture" id="lecture" hidden></p>
+  <p class="aide-clavier">Flèches gauche et droite pour parcourir les marches,
+  Échap pour quitter.</p>
+  <ul class="legende">
+    <li><span class="pastille ecart-plus"></span> Ce que vous gagnez</li>
+    <li><span class="pastille ecart-moins"></span> Ce que vous perdez</li>
+  </ul>
+</div><p class="discret">La cascade part de zéro et ajoute les cinq canaux l’un après l’autre&nbsp;; la dernière colonne est leur somme. Survolez une marche, ou parcourez-les au clavier, pour lire ce qu’elle recouvre.</p><noscript><div class="defilant"><table><caption>Le simulateur a besoin de JavaScript. À défaut, voici le même calcul pour le ménage par défaut du formulaire : deux adultes, deux enfants, 42 000 € de revenus, 350 € de prestations par mois, locataires, chauffage au gaz, 12 000 km par an.</caption><thead><tr><th scope="col">Canal</th><th scope="col">Effet sur l’année</th></tr></thead><tbody><tr><th scope="row">Impôt direct</th><td>− 10 277 €</td></tr><tr><th scope="row">Transferts</th><td>+ 17 400 €</td></tr><tr><th scope="row">TVA</th><td>− 2 251 €</td></tr><tr><th scope="row">Logement</th><td>0 €</td></tr><tr><th scope="row">Énergie</th><td>+ 164 €</td></tr><tr><th scope="row"><strong>Solde</strong></th><td><strong>+ 5 036 €</strong></td></tr></tbody></table></div></noscript></div>
+<h2 id="canaux">Les cinq canaux, et pourquoi il en faut cinq</h2>
+<p>Une réforme fiscale n’atteint pas un ménage par un seul chemin. Ne montrer que l’impôt sur le revenu et le revenu universel — ce que faisait ce simulateur jusqu’ici — revient à n’en montrer que la moitié favorable&nbsp;:</p><div class="defilant"><table><caption>Les cinq canaux du simulateur. Les droits de mutation y sont lissés sur la durée moyenne de détention : on les paie tous les quarante ans, et une table annuelle ne saurait les montrer autrement.</caption><thead><tr><th scope="col">Canal</th><th scope="col">Aujourd’hui</th><th scope="col">Dans le système cible</th></tr></thead><tbody><tr><th scope="row">Impôt direct</th><td>IR, CSG, CRDS, prélèvements sociaux</td><td>Un impôt proportionnel unique</td></tr><tr><th scope="row">Transferts</th><td>RSA, prime d’activité, prestations familiales, APL</td><td>Le revenu universel, adulte et enfant</td></tr><tr><th scope="row">Consommation</th><td>TVA à 20 %, 10 %, 5,5 % et 2,1 %</td><td>TVA à taux unique de 25 %</td></tr><tr><th scope="row">Logement</th><td>Taxe foncière, droits de mutation, IFI</td><td>Land Value Tax sur le terrain nu</td></tr><tr><th scope="row">Énergie</th><td>TICPE et taxes sectorielles</td><td>Prix plancher du carbone, et dividende rendu</td></tr></tbody></table></div><p>Le tableau des cas types de la note montre que le classement d’un ménage change selon les canaux retenus&nbsp;: un propriétaire âgé gagne sur les flux et perd sur son patrimoine, un ménage rural perd sur l’énergie et regagne ailleurs. C’est pour cela qu’ils sont tous les cinq ici.</p>
+<h2 id="hypotheses">Ce que le calcul suppose</h2>
+<p>Trois grandeurs ne vous sont pas demandées, parce que personne ne les connaît de mémoire. Elles sont posées, et les voici&nbsp;:</p><ul>
+  <li><strong>80 %</strong> de votre dépense porte de la TVA&nbsp;; le loyer, la santé et l’école n’en portent pas.</li>
+  <li><strong>16,8 %</strong> est le taux moyen que vous supportez aujourd’hui, tous taux réduits confondus.</li>
+  <li><strong>La moitié</strong> de la valeur d’un logement est celle du terrain — c’est une moyenne nationale, et elle est bien plus élevée dans les grandes villes.</li>
+  <li><strong>36 %</strong> est la part de valeur qu’une LVT de 2 % retire au terrain, en se capitalisant dans son prix. C’est l’argument du programme, et il vaut aussi pour l’assiette de l’impôt.</li>
+  <li><strong>421 €</strong> par adulte est le dividende carbone, soit la recette du prix plancher rendue aux citoyens.</li>
+</ul><p>Le panier de consommation est tenu constant en volume&nbsp;: on compare deux fiscalités sur la même dépense hors taxe, et non deux niveaux de vie différents.</p>
+<h2 id="limites">Ce que ce simulateur ne dit pas</h2>
+<p>Il calcule un ménage moyen, pas votre feuille d’impôt. Il ignore&nbsp;:</p><ul>
+  <li>les cotisations contributives, qui ne changent pas&nbsp;;</li>
+  <li>les droits de succession, qui ne sont pas annuels — et qui, pour une transmission, pèsent plus lourd que tout le reste&nbsp;;</li>
+  <li>les effets de la réforme sur les prix, les salaires et l’emploi, qui sont réels et qu’aucun calcul à comportements inchangés ne peut donner&nbsp;;</li>
+  <li>votre situation propre, dès qu’elle sort de la moyenne.</li>
+</ul><p>Un simulateur qui prétendrait davantage mentirait. Celui-ci dit d’où viennent ses chiffres, et c’est à cela qu’on juge un chiffrage.</p>
+</main>
+<footer>
+  <p><strong>Ce site n'est pas un texte de loi.</strong> Il présente le chapitre
+  Fiscalité du programme du Parti libéral français. Les taux et les rendements
+  qui y figurent sont des <em>cibles de travail</em> et des ordres de grandeur à
+  consolider : la note dont ces pages sont tirées le dit elle-même, le bouclage
+  budgétaire n'est pas fait impôt par impôt mais au niveau du système entier.</p>
+  <p>Texte de référence : <a href="documents/note-fiscalite.pdf">Note interne — Chapitre Fiscalité</a>
+  (PDF), dont le texte brut est repris dans
+  <a href="documents/note-fiscalite.txt">note-fiscalite.txt</a>. Site et code sur
+  <a href="https://github.com/g-pliberal/fiscalite">GitHub</a> (code sous licence Apache 2.0, textes et
+  infographies sous
+  <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr">CC BY-SA 4.0</a>).
+  L'apparence est celle du
+  <a href="https://github.com/g-pliberal/retraitecomptenotionelle">simulateur de
+  retraite</a> du même parti, dont la charte est reprise sans modification.</p>
+  <p class="retour-site">Un site du
+  <a href="https://www.partiliberalfrancais.fr/" target="_top">Parti libéral français</a>.</p>
+</footer>
+<script src="moteur/calculette.js" defer></script>
+</body>
+</html>

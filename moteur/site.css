@@ -90,3 +90,55 @@
 @media (max-width: 48rem) {
   header.bandeau { position: static; }
 }
+
+/* La cascade du simulateur. La charte nomme ses marches `monte` et `descend`,
+   d'après le sens du pont qu'elle décrit ; ici une marche dit si le ménage
+   gagne ou perd, et le sens visuel est l'inverse — un gain monte. On garde donc
+   ses couleurs et on leur donne les noms du sujet, plutôt que de peindre un
+   gain en rouge pour respecter un vocabulaire. */
+.cascade .marche.gain { fill: var(--reste); }
+.cascade .marche.perte { fill: var(--manque); }
+.cascade .valeur.gain { fill: var(--reste); }
+.cascade .valeur.perte { fill: var(--manque); }
+
+/* Sur crème, trois textes de la cascade sont peints pour le vert profond :
+   le liseré du chiffre est celui du fond sombre, et les graduations comme les
+   étiquettes tombent sous le plancher de contraste. Même correction que pour
+   la frise des repères, quelques règles plus haut. */
+.creme .cascade .valeur { stroke: var(--creme); fill: var(--sur-creme); }
+/* Reposées après, parce que `.creme .cascade .valeur` l'emporterait sinon sur
+   `.cascade .valeur.gain` et repeindrait les deux couleurs en une seule. */
+.creme .cascade .valeur.gain { fill: var(--reste); }
+.creme .cascade .valeur.perte { fill: var(--manque); }
+.creme .cascade .graduation,
+.creme .cascade .etiquette { fill: var(--sur-creme-doux); }
+.creme .cascade .etiquette.total { fill: var(--sur-creme); }
+.creme .cascade .survol .cadre { stroke: var(--sur-creme); }
+.creme .cascade .lecture { color: var(--sur-creme); }
+.creme .cascade .lecture .part { color: var(--sur-creme-doux); }
+.creme .cascade .aide-clavier { color: var(--sur-creme-doux); }
+
+/* Les hypothèses du simulateur : elles sont repliées parce qu'on ne les change
+   pas à chaque visite, et visibles parce qu'un simulateur dont on ne peut pas
+   lire les hypothèses ne prouve rien. */
+.calculette details { margin-top: 1.5rem; border-top: 1px solid var(--creme-trait);
+                      padding-top: 0.9rem; }
+.calculette summary { font-weight: 700; cursor: pointer; }
+.calculette details .champs { margin-top: 1rem; }
+
+/* Six colonnes et leurs étiquettes ne se lisent pas dans la largeur d'un
+   téléphone. La charte prévoit qu'une cascade DÉFILE dans sa boîte au lieu de
+   rétrécir ; c'est cette largeur plancher qui le lui fait faire. */
+.cascade svg { min-width: 32rem; }
+
+/* Les deux groupes du formulaire. `<fieldset>` porte une bordure et un padding
+   propres à chaque navigateur, étrangers à la charte ; sa légende devient le
+   titre du groupe, dans la même capitale que les étiquettes voisines. La
+   grille descend dans un `<div>` : un `<legend>` rendu comme cellule de grille
+   ne se place pas de la même façon d'un moteur à l'autre. */
+.calculette fieldset { border: 0; padding: 0; margin: 0 0 1.75rem; min-width: 0; }
+.calculette legend {
+  padding: 0; font-size: 0.9rem; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--sur-creme-doux);
+}
+.calculette summary { color: var(--sur-creme); }
