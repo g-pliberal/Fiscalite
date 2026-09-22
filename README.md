@@ -1,7 +1,7 @@
 # Programme fiscal — Parti libéral français
 
-Le site qui présente le **chapitre Fiscalité** du programme aux électeurs :
-onze pages statiques, lisibles sans JavaScript, servies telles quelles.
+Le site qui présente les **chapitres Fiscalité et Dépense publique** du
+programme aux électeurs : dix-sept pages statiques, lisibles sans JavaScript, servies telles quelles.
 
 👉 `index.html` — ou, une fois publié,
 <https://g-pliberal.github.io/fiscalite/>
@@ -12,12 +12,18 @@ onze pages statiques, lisibles sans JavaScript, servies telles quelles.
 | --- | --- |
 | `index.html` | Les huit piliers, les quatre chiffres, et la formule du programme. |
 | `principes.html` | Séparer impôt, cotisation et redistribution ; taxer moins les bases productives ; supprimer l'illusion de la gratuité. |
-| `revenus.html` | Fusion IR-CSG-CRDS, taux sous 30 %, assiette, individualisation, revenu universel — avec un simulateur. |
+| `revenus.html` | Fusion IR-CSG-CRDS, taux sous 30 %, assiette, individualisation, revenu universel. |
 | `consommation.html` | La TVA à taux unique cible de 25 %, et sa transition. |
 | `foncier.html` | La *Land Value Tax*, les DMTO supprimés, les reports prévus. |
 | `entreprises.html` | Impôts de production supprimés, IS ramené vers 15-20 %, extinction du CIR. |
+| `sante.html` | Le socle universel de santé, la complémentaire rendue facultative, et qui fixe le panier. |
 | `carbone.html` | Prix plancher, dividende carbone, électricité et réseaux. |
 | `transmissions.html` | Successions imposées chez le receveur, transmission d'entreprise, CRUC, exit tax. |
+| `simulateur.html` | Les cinq canaux — impôt, transferts, TVA, foncier, énergie — calculés ensemble pour un ménage. |
+| `qui-gagne.html` | Le solde par décile et pour dix ménages types, les perdants compris, et la méthode. |
+| `solidite.html` | Les sept objections juridiques, les réponses, et les quatre questions encore ouvertes. |
+| `depense.html` | Où vont les 1 714 Md€, la règle des 2 %, les sept leviers et l'écart qui reste. |
+| `sources.html` | D'où vient chaque chiffre, ce qui est estimé, et les errata. |
 | `calendrier.html` | La trajectoire année par année, la fiche de paie cible, les ordres de grandeur. |
 | `objections.html` | Les huit objections, et les réponses. |
 | `glossaire.html` | Les vingt termes, en clair. |
@@ -29,10 +35,17 @@ l'unique document de ce dépôt à l'origine. Son texte brut est repris tel quel
 dans `documents/note-fiscalite.txt`, pour qu'une phrase du site se retrouve
 d'un `grep`.
 
-**Le site n'ajoute aucun chiffre qui n'y figure pas.** Quand la note dit « à
-calibrer », la page dit « à calibrer » : le taux de l'impôt proportionnel n'est
-pas écrit parce qu'il sort du bouclage budgétaire, et les 120 Md€ de la LVT sont
-donnés pour ce qu'ils sont, un ordre de grandeur à évaluer.
+**Le site n'ajoutait aucun chiffre qui n'y figure pas.** Il en ajoute désormais,
+et à un seul endroit : `qui-gagne.html`, qui publie le solde de la réforme par
+décile et par ménage type. Ces chiffres sortent de `scripts/qui_gagne.py`, dont
+les hypothèses et les contrôles sont décrits sur la page même et dans le pied de
+toutes les autres. Partout ailleurs la règle tient : quand la note dit « à
+calibrer », la page dit « à calibrer ».
+
+Une exception s'est imposée d'elle-même : la note visait un taux « sous 30 % »,
+le chiffrage donne 36 %. Le site publie 36 %, dit que la note disait autre chose,
+et dit pourquoi. Un site qui aurait recopié l'objectif sans refaire l'addition
+aurait été démenti par sa propre page « Qui gagne, qui perd ».
 
 ## D'où vient l'apparence
 
@@ -56,8 +69,8 @@ recopiable en une commande.
 
 Les pages `.html` de la racine sont **écrites par un script** et versionnées :
 le site est statique, il n'y a rien à construire pour le servir. Le script
-existe parce que le bandeau de tête et le pied sont identiques sur onze pages,
-et que onze copies à la main dérivent toujours.
+existe parce que le bandeau de tête et le pied sont identiques sur dix-sept pages,
+et que dix-sept copies à la main dérivent toujours.
 
 ```sh
 python scripts/construire_site.py             # écrit les pages
@@ -93,8 +106,27 @@ hypothèses plutôt que sur les conclusions.
 python scripts/bouclage.py
 ```
 
-Ce script ne produit rien pour le site et n'entre pas dans les vérifications :
-c'est un outil de travail, pas une pièce du dépôt publié.
+`documents/qui-gagne-qui-perd.md` en est la suite : la table par décile et les
+dix cas types, calculés par `scripts/qui_gagne.py`. Ce dernier additionne les
+cinq canaux par lesquels la réforme atteint un ménage — impôt direct,
+transferts, TVA, logement, énergie —, là où le simulateur du site n'en montre
+qu'un. Il imprime d'abord ses propres contrôles : réagrégé, il doit retrouver
+les masses nationales, et ses deux routes de calibration doivent se rejoindre.
+
+```sh
+python scripts/qui_gagne.py
+python scripts/depense.py      # la trajectoire du chapitre Dépense publique
+```
+
+Ces deux scripts ne produisent rien pour le site et n'entrent pas dans les
+vérifications : ce sont des outils de travail, pas des pièces du dépôt publié.
+
+**`moteur/calculette.js` et `scripts/qui_gagne.py` doivent dire la même chose.**
+Le simulateur du site et le modèle interne appliquent le même barème, les mêmes
+hypothèses et les mêmes cinq canaux ; ils ne diffèrent que sur les grandeurs
+qu'on demande au lecteur plutôt que de les poser. S'ils divergeaient, c'est le
+programme qui serait pris en défaut, pas le script — un écart entre les deux est
+donc une anomalie à corriger, jamais à expliquer.
 
 ## Licences
 

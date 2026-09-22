@@ -48,12 +48,18 @@ GROUPES = [
         ("foncier.html", "Foncier"),
         ("entreprises.html", "Entreprises"),
         ("carbone.html", "Carbone"),
+        ("sante.html", "Santé"),
         ("transmissions.html", "Transmissions"),
     ]),
     ("Comprendre", [
+        ("simulateur.html", "Simulateur"),
+        ("qui-gagne.html", "Qui gagne, qui perd"),
+        ("solidite.html", "Solidité juridique"),
+        ("depense.html", "Dépense publique"),
         ("calendrier.html", "Calendrier"),
         ("objections.html", "Objections"),
         ("glossaire.html", "Glossaire"),
+        ("sources.html", "Sources"),
     ]),
 ]
 
@@ -97,11 +103,16 @@ def pied() -> str:
     vient le texte, ce qui y est arrêté et ce qui ne l'est pas.
     """
     return f"""<footer>
-  <p><strong>Ce site n'est pas un texte de loi.</strong> Il présente le chapitre
-  Fiscalité du programme du Parti libéral français. Les taux et les rendements
+  <p><strong>Ce site n'est pas un texte de loi.</strong> Il présente les chapitres
+  Fiscalité et Dépense publique du programme du Parti libéral français. Les taux et les rendements
   qui y figurent sont des <em>cibles de travail</em> et des ordres de grandeur à
   consolider : la note dont ces pages sont tirées le dit elle-même, le bouclage
   budgétaire n'est pas fait impôt par impôt mais au niveau du système entier.</p>
+  <p>Une exception, et elle est signalée : la page
+  <a href="qui-gagne.html">Qui gagne, qui perd</a> avance des chiffres qui ne
+  figurent pas dans la note. Ils sortent d'un modèle dont les hypothèses, les
+  contrôles et le code sont publics, et qui est décrit
+  <a href="qui-gagne.html#methode">sur la page même</a>.</p>
   <p>Texte de référence : <a href="{NOTE}">Note interne — Chapitre Fiscalité</a>
   (PDF), dont le texte brut est repris dans
   <a href="documents/note-fiscalite.txt">note-fiscalite.txt</a>. Site et code sur
@@ -223,7 +234,7 @@ PILIERS = [
      "carbone.html"),
     ("08", "Imposer celui qui reçoit",
      "Successions et donations fusionnées, imposées chez le receveur, avec un "
-     "abattement universel de 100 000 € sur la vie entière.",
+     "abattement universel de 200 000 € sur la vie entière.",
      "transmissions.html"),
 ]
 
@@ -247,9 +258,10 @@ def piliers_frise() -> str:
 ACCUEIL = "\n".join([
     '<div class="fiches reperes">',
     '  <div class="fiche"><p class="etiquette">Impôt sur les revenus</p>'
-    '<p class="valeur">&lt; 30 %</p>'
+    '<p class="valeur">33 %</p>'
     '<p class="precision">Un seul taux, proportionnel, à la place de l’IR, de la '
-    'CSG et de la CRDS. Le taux exact sort du bouclage budgétaire.</p></div>',
+    'CSG et de la CRDS. C’est le taux que donne notre chiffrage, et non un '
+    'objectif d’affichage.</p></div>',
     '  <div class="fiche"><p class="etiquette">TVA</p><p class="valeur">25 %</p>'
     '<p class="precision">Taux unique cible, atteint progressivement, le temps '
     'que le revenu universel monte en charge.</p></div>',
@@ -299,9 +311,9 @@ ACCUEIL = "\n".join([
     "de 21 %. Le taux marginal, lui, ne bouge pas — il n’y a donc plus de seuil "
     "à redouter, ni de trappe à inactivité.</p>",
     '    <div class="note entree"><p>Le calcul est fait, chiffre par chiffre, '
-    'sur la page des revenus — avec un simulateur qui tourne dans votre '
+    'sur la page des revenus — et le simulateur, qui tourne dans votre '
     'navigateur.</p><p class="actions">'
-    '<a class="bouton" href="revenus.html#calculette">Calculer mon cas</a>'
+    '<a class="bouton" href="simulateur.html">Calculer mon cas</a>'
     '</p></div>',
     '  </div>',
     '</div>',
@@ -324,6 +336,19 @@ ACCUEIL = "\n".join([
             ])
             + '<p class="actions"><a class="bouton" href="calendrier.html">'
               "Voir le calendrier complet</a></p>"),
+    section("depense", "Un chapitre fiscal ne tient pas tout seul",
+            "<p>Un taux de 33 % ne baisse que si la dépense publique cesse de "
+            "croître plus vite que les prix. Nous ne renvoyons donc pas cette "
+            "question à plus tard&nbsp;: le <strong>chapitre Dépense "
+            "publique</strong> fixe une règle — la dépense ne progresse pas de "
+            "plus de 2 % par an, et le taux ne baisse pas avant que le déficit "
+            "soit sous 3 %.</p>"
+            + "<p>Il dit aussi ce qu’il ne sait pas encore&nbsp;: sur nos "
+              "propres hypothèses, cela ne se produit pas dans le quinquennat, "
+              "et 26 des 114 milliards d’effort de la cinquième année ne sont "
+              "pas encore identifiés. Nous préférons l’écrire.</p>"
+            + '<p class="actions"><a class="bouton" href="depense.html">'
+              "Lire le chapitre Dépense publique</a></p>"),
     section("doctrine", "La formule",
             encadre("", "<p>Taxer moins le travail, moins la production, moins "
                         "l’investissement productif&nbsp;; taxer mieux la "
@@ -430,50 +455,10 @@ TABLE_RU = tableau(
             "un chiffre arrêté.",
 )
 
-CALCULETTE = """<div class="creme calculette" id="calculette">
-  <p class="surtitre">Votre cas</p>
-  <h2 class="serif">Ce que vous paieriez, ce que vous recevriez</h2>
-  <p>Le calcul se fait dans votre navigateur&nbsp;: rien n’est envoyé, rien n’est
-  enregistré. Les deux hypothèses sont celles de l’exemple de la note, et vous
-  pouvez les changer.</p>
-  <form id="formulaire" novalidate>
-    <div class="champs">
-      <p><label for="revenu">Revenu annuel imposable</label>
-      <input type="number" id="revenu" name="revenu" value="30000" min="0"
-             max="100000000" step="100" inputmode="numeric"> </p>
-      <p><label for="taux-impot">Taux de l’impôt (%)</label>
-      <input type="number" id="taux-impot" name="taux" value="25" min="0" max="60"
-             step="0.5" inputmode="decimal"></p>
-      <p><label for="ru">Revenu universel (€/mois)</label>
-      <input type="number" id="ru" name="ru" value="600" min="0" max="5000"
-             step="10" inputmode="numeric"></p>
-    </div>
-  </form>
-  <div class="fiches reperes" id="resultat" aria-live="polite">
-    <div class="fiche"><p class="etiquette">Impôt</p><p class="valeur" id="r-impot">—</p>
-    <p class="precision">Un seul prélèvement, à la place de l’IR, de la CSG et de
-    la CRDS.</p></div>
-    <div class="fiche"><p class="etiquette">Revenu universel</p>
-    <p class="valeur" id="r-ru">—</p>
-    <p class="precision">Versé sans condition, sur l’année.</p></div>
-    <div class="fiche"><p class="etiquette">Solde</p><p class="valeur" id="r-solde">—</p>
-    <p class="precision sens" id="r-sens">—</p></div>
-    <div class="fiche"><p class="etiquette">Taux net effectif</p>
-    <p class="valeur" id="r-taux">—</p>
-    <p class="precision">Ce que vous versez net, rapporté à votre revenu.</p></div>
-  </div>
-  <p class="discret">Le calcul ne tient compte que de l’impôt proportionnel et du
-  revenu universel&nbsp;: ni cotisations contributives, ni TVA, ni dividende
-  carbone, ni revenu universel enfant. C’est le cœur du dispositif, pas votre
-  feuille d’impôt.</p>
-  <noscript><p class="discret">Le simulateur a besoin de JavaScript. Le tableau
-  ci-dessus donne les mêmes chiffres pour sept niveaux de revenu.</p></noscript>
-</div>"""
-
 REVENUS = "\n".join([
     plan([("fusion", "Fusion IR-CSG-CRDS"), ("taux", "Le taux"),
           ("assiette", "L’assiette"), ("individuel", "Individualisation"),
-          ("progressivite", "La progressivité"), ("calculette", "Votre cas"),
+          ("progressivite", "La progressivité"), ("logement", "Le logement"),
           ("indexation", "L’indexation du RU")]),
     section("fusion", "Un impôt à la place de trois",
             "<p>L’impôt sur le revenu, la CSG et la CRDS seront fusionnés dans un "
@@ -489,24 +474,31 @@ REVENUS = "\n".join([
             + "<p>La CSG et la CRDS ne financent pas de droits contributifs "
               "individualisés&nbsp;: elles relèvent de l’impôt général, et doivent "
               "être assumées comme telles.</p>"),
-    section("taux", "Un taux sous 30 %, et pourquoi il n’est pas encore écrit",
-            "<p>Le taux exact sera déterminé par le bouclage budgétaire général. "
-            "L’objectif politique est de le maintenir <strong>sous les "
-            "30 %</strong>, grâce&nbsp;:</p>"
-            + liste(["à l’élargissement de l’assiette&nbsp;;",
-                     "à la fusion IR-CSG-CRDS&nbsp;;",
-                     "à la suppression des niches&nbsp;;",
-                     "à la TVA à taux unique&nbsp;;",
-                     "à la <i>Land Value Tax</i>&nbsp;;",
-                     "à la réforme des prestations sociales autour du revenu "
-                     "universel&nbsp;;",
-                     "à la réduction des dépenses publiques non prioritaires."])
-            + '<div class="note vigilance"><p>Annoncer un taux avant le chiffrage '
-              'complet serait un chiffre de tract, pas un engagement. La note s’y '
-              'refuse explicitement&nbsp;: la contrainte politique est claire, le '
-              'nombre viendra du bouclage.</p></div>'
-            + encadre("", "<p>Un impôt proportionnel large, lisible, et si "
-                          "possible inférieur à 30 %.</p>")),
+    section("taux", "Un taux de 33 %, et pourquoi nous ne disons plus 30 %",
+            "<p>La note fixait un objectif politique&nbsp;: maintenir le taux "
+            "<strong>sous les 30 %</strong>, grâce à l’élargissement de "
+            "l’assiette, à la suppression des niches, à la TVA à taux unique, "
+            "à la <i>Land Value Tax</i> et à la réforme des prestations autour "
+            "du revenu universel.</p>"
+            "<p>Nous avons fait le calcul. <strong>Il ne tient pas.</strong> Un "
+            "revenu universel de 600 € par adulte coûte 382 milliards d’euros "
+            "par an&nbsp;; le nouvel impôt doit en outre lever ce que l’impôt "
+            "sur le revenu, la CSG et la CRDS lèvent aujourd’hui. En face, les "
+            "prestations remplacées et le gain de la TVA à taux unique ne "
+            "couvrent pas l’écart. Le taux d’équilibre se situe entre 32,4 % "
+            "et 33 %.</p>"
+            + '<div class="note vigilance"><p>Nous aurions pu garder « moins de '
+              '30 % » jusqu’à ce qu’un contradicteur refasse l’addition. Un '
+              'chiffre de tract tient une campagne&nbsp;; il ne tient pas un '
+              'débat. Nous publions donc 33 %, et le calcul avec.</p></div>'
+            + "<p>Ce taux reste plus lisible que l’empilement qu’il remplace, "
+              "et surtout il ne se lit pas seul&nbsp;: c’est le couple impôt + "
+              "revenu universel qui fait le système, et c’est lui qu’il faut "
+              "juger. Un ménage au salaire médian y gagne.</p>"
+            + '<p><a class="bouton" href="qui-gagne.html">Voir qui gagne et qui '
+              'perd</a></p>'
+            + encadre("", "<p>Un impôt proportionnel large, lisible, et chiffré "
+                          "à 36 %.</p>")),
     section("assiette", "Tous les revenus, traités pareil",
             "<p>L’impôt proportionnel portera sur l’ensemble des revenus "
             "personnels&nbsp;: salaires, revenus indépendants, pensions, revenus "
@@ -559,8 +551,90 @@ REVENUS = "\n".join([
             + "<p>Le système est donc redistributif sans être confiscatoire, et "
               "sans créer de trappes à inactivité&nbsp;: un euro de plus gagné "
               "rapporte toujours la même fraction, quel que soit le niveau de "
-              "revenu. Aucun seuil à ne pas franchir, aucune aide à perdre.</p>"),
-    CALCULETTE,
+              "revenu. Aucun seuil à ne pas franchir, aucune aide à perdre.</p>"
+            + "<h3>Ce que le revenu universel remplace, et ce qui lui "
+              "survit</h3>"
+            + "<p>Un revenu universel qui remplacerait tout ferait perdre à "
+              "un allocataire de l’AAH quatre cents euros par mois. Nous ne le "
+              "proposons pas, et nous écrivons la liste plutôt que de la "
+              "laisser deviner.</p>"
+            + tableau(
+                ["Remplacé par le revenu universel", "Maintenu au-dessus de lui"],
+                [["Le RSA", "Le supplément handicap"],
+                 ["La prime d’activité", "L’aide au logement en zone tendue"],
+                 ["Les prestations familiales de base", "L’allocation d’autonomie"]],
+                legende="Trois suppléments subsistent. Un revenu universel "
+                        "assorti de trois compléments explicites reste dix "
+                        "fois plus simple que l’empilement actuel : la "
+                        "redistribution doit être lisible, pas unique.")
+            + "<h3>Deux règles de calibrage, et pourquoi il a fallu les "
+              "écrire</h3>"
+            + "<p>Un supplément mal réglé protège sur le papier et laisse "
+              "perdre en pratique. Nos deux premières versions l’ont montré, "
+              "et les deux règles qui suivent en sont tirées.</p>"
+            + "<p><strong>Un supplément se calcule sur la position entière du "
+              "ménage, pas sur le seul écart avec le revenu universel.</strong> "
+              "Réglé sur cet écart seul, le supplément handicap laissait "
+              "l’allocataire de l’AAH perdre 482 € de TVA supplémentaire&nbsp;: "
+              "on avait protégé un canal sur cinq. Le supplément est désormais "
+              "fixé au montant qui laisse le ménage protégé à son niveau de "
+              "vie — ni gagnant, ni perdant.</p>"
+            + "<p><strong>L’aide au logement est attachée au logement, pas à la "
+              "personne.</strong> C’est la correction qui règle le sort du "
+              "célibataire, et elle mérite son paragraphe.</p>"
+            + '<p><a class="bouton" href="#logement">Le célibataire, et ce que '
+              'nous en avons appris</a></p>'),
+
+    section("logement", "Le logement, et le célibataire",
+            "<p>Le revenu universel double avec le nombre d’adultes. Un loyer, "
+            "non. C’est toute la difficulté, et nous ne l’avions pas vue.</p>"
+            "<p>Nos premiers chiffrages faisaient perdre 391 € par an à un "
+            "célibataire au SMIC en zone tendue, quand un couple aux mêmes "
+            "revenus par tête gagnait 454 € par adulte. L’écart ne venait ni "
+            "de l’impôt, ni de la zone tendue&nbsp;: il venait de ce que nous "
+            "transformions une prestation attachée au <strong>ménage</strong> "
+            "— l’aide au logement — en un transfert versé par "
+            "<strong>tête</strong>. Ce faisant, nous déplacions 600 € par "
+            "adulte du ménage d’une personne vers le couple.</p>"
+            + "<p>Un adulte seul sur deux ménages français&nbsp;: l’erreur "
+              "n’était pas marginale. Voici comment l’aide au logement est "
+              "construite&nbsp;:</p>"
+            + liste([
+                "<strong>Elle est attachée au logement</strong>, et partagée "
+                "entre les adultes qui y résident. Un loyer ne double pas "
+                "quand on est deux&nbsp;; l’aide non plus.",
+                "<strong>Elle est forfaitaire par zone</strong>, et non "
+                "indexée sur le loyer effectivement payé. Une aide qui suit le "
+                "loyer en finance une part&nbsp;: le bailleur en capte une "
+                "fraction substantielle, et c’est bien documenté. Dans un "
+                "programme qui entend <a href=\"foncier.html\">taxer la rente "
+                "foncière</a>, une aide qui la nourrit serait une "
+                "contradiction.",
+                "<strong>Elle ne demande que le nombre d’adultes à une "
+                "adresse</strong>, jamais la nature de leur relation. C’est la "
+                "fin du contrôle de la vie maritale, que nous reprochons au RSA "
+                "depuis toujours et que nous aurions réintroduit sans y "
+                "penser.",
+                "<strong>Elle est calée sur le ménage le plus exposé</strong> — "
+                "l’adulte seul en zone tendue —, de sorte que personne ne perde "
+                "à la réforme par ce canal.",
+            ])
+            + '<div class="note vigilance"><p>Elle reste une prestation sous '
+              'condition de ressources, et c’est la seule que le programme '
+              'conserve. Nous l’assumons&nbsp;: le coût du logement varie du '
+              'simple au triple selon le territoire, et un transfert national '
+              'uniforme ne peut pas l’égaliser sans coûter trois fois plus. Le '
+              'remède de fond est ailleurs — la <i>Land Value Tax</i> fait '
+              'baisser le prix du sol et la rente qu’il porte. L’aide est le '
+              'pont, pas la destination.</p></div>'
+            + encadre("", "<p>Le revenu universel se verse par tête, parce "
+                          "qu’on vit un par un. L’aide au logement se verse par "
+                          "logement, parce qu’on s’y loge ensemble.</p>")),
+    encadre("", "<p>Ce tableau ne tient compte que de l’impôt et du revenu "
+                "universel. Le simulateur, lui, ajoute la TVA, le foncier et "
+                "l’énergie&nbsp;: c’est là que se lit votre cas réel.</p>"
+                '<p><a class="bouton" href="simulateur.html">Ouvrir le '
+                'simulateur</a></p>'),
     section("indexation", "Ce qui fait bouger le revenu universel",
             "<p>Le revenu universel sera indexé sur le <strong>PIB réel par "
             "habitant</strong>, lissé sur trois ans. Trois raisons&nbsp;:</p>"
@@ -569,12 +643,21 @@ REVENUS = "\n".join([
               "l’inflation, qui rigidifierait la dépense publique&nbsp;;</li>"
               "<li>lier la progression du revenu universel à la prospérité réelle "
               "du pays.</li></ol>"
-            + "<p>Il ne sera donc pas indexé automatiquement sur les prix. En cas "
-              "de choc inflationniste exceptionnel, le Parlement reste souverain "
-              "pour voter une revalorisation&nbsp;: mais elle devra être "
-              "explicite, financée et temporaire.</p>"
+            + "<p>Cette règle, prise seule, avait deux défauts que nous avons "
+              "corrigés. Elle aurait fait <strong>baisser</strong> le revenu "
+              "universel en récession — le PIB par habitant a reculé de plus de "
+              "3 % en 2009 —, et elle l’aurait laissé s’éroder d’environ un "
+              "point par an, la croissance réelle étant le plus souvent "
+              "inférieure à l’inflation. Un transfert censé compenser la TVA "
+              "aurait été le premier à la subir.</p>"
+            + "<p>Deux garde-fous s’y ajoutent donc&nbsp;:</p>"
+            + liste(["un <strong>cliquet</strong>&nbsp;: le revenu universel ne "
+                     "baisse jamais en euros courants&nbsp;;",
+                     "un <strong>plancher d’inflation</strong>&nbsp;: il suit le "
+                     "plus élevé de l’inflation et de la croissance réelle par "
+                     "habitant, lissé sur trois ans."])
             + encadre("", "<p>Le revenu universel est une part de la prospérité "
-                          "commune, pas une dépense indexée sans limite.</p>")),
+                          "commune, et il ne recule jamais.</p>")),
 ])
 
 
@@ -646,9 +729,11 @@ TABLE_TERRAINS = tableau(
 
 FONCIER = "\n".join([
     plan([("pourquoi", "L’empilement actuel"), ("principe", "Le sol, pas le bâti"),
-          ("taux", "Le taux"), ("remplace", "Ce qui disparaît"),
+          ("rendement", "Ce qu’elle rapporte"), ("taux", "Le taux"),
+          ("remplace", "Ce qui disparaît"),
           ("dmto", "Les droits de mutation"), ("revenus-modestes", "Reports et garanties"),
-          ("agricole", "Foncier agricole et naturel"), ("local", "Taux national")]),
+          ("agricole", "Foncier agricole et naturel"), ("local", "Taux national"),
+          ("aides", "Les aides au logement")]),
     section("pourquoi", "Un empilement qui punit la construction",
             "<p>La fiscalité immobilière actuelle est l’un des exemples les plus "
             "nets d’empilement inefficace. Elle taxe la détention, la transaction, "
@@ -671,6 +756,33 @@ FONCIER = "\n".join([
               "sol, les infrastructures publiques, l’urbanisme et l’attractivité "
               "collective. Autrement dit, ce que le propriétaire n’a pas "
               "produit.</p></div></div>"),
+    section("rendement", "Ce que la LVT rapporte, et ce que nous avons dit de faux",
+            "<p>Les comptes de patrimoine de l’Insee évaluent les terrains "
+            "français à <strong>8 230 milliards d’euros</strong>, dont "
+            "1 043 appartiennent aux administrations publiques — les taxer "
+            "serait circulaire. Restent 7 187 milliards taxables.</p>"
+            "<p>Une taxe annuelle de 2 % se capitalise dans le prix du "
+            "terrain et réduit donc sa propre assiette d’environ un tiers. "
+            "L’assiette d’équilibre s’établit autour de 4 570 milliards, et le "
+            "rendement autour de <strong>91 milliards d’euros</strong>.</p>"
+            + '<div class="note vigilance"><p><strong>Nous avons publié 45 '
+              'milliards, et c’était faux.</strong> Ce chiffre reposait sur une '
+              'valeur des terrains que nous avions estimée à 3 500 milliards '
+              'faute de l’avoir cherchée — alors qu’elle est publiée, ligne '
+              'N211 du compte de patrimoine. La note d’origine annonçait 120 '
+              'milliards : elle visait trop haut d’un tiers, nous visions deux '
+              'fois trop bas. C’est la plus grosse erreur de ce site, et elle '
+              'était de notre fait, non de celui de la note.</p></div>'
+            + "<p>Deux conséquences suivent, et la première est heureuse. La "
+              "LVT rapporte assez pour que le taux de l’impôt proportionnel "
+              "descende de 36,5 à <strong>33 %</strong>&nbsp;: deux points "
+              "d’impôt sur le revenu tenaient à une ligne de comptabilité "
+              "nationale que nous n’avions pas ouverte. La seconde l’est "
+              "moins&nbsp;: la LVT prélève davantage qu’elle ne remplace, de "
+              "l’ordre de 24 milliards, dont 10 sur les ménages. Le canal "
+              "logement devient donc négatif pour les propriétaires, et "
+              "<a href=\"qui-gagne.html#deciles\">la table le montre</a>.</p>"),
+
     section("taux", "2 % de la valeur du foncier nu",
             "<p>Le taux cible de travail est fixé à <strong>2 %</strong> de la "
             "valeur du foncier nu. Il pourra être ajusté selon le bouclage "
@@ -723,11 +835,10 @@ FONCIER = "\n".join([
             "terrains rares sans en supporter le coût d’opportunité.</p>"
             + "<p>En revanche, une transition humaine est nécessaire. Le programme "
               "prévoit&nbsp;:</p>"
-            + liste(["un <strong>report de paiement</strong> pendant les cinq "
-                     "premières années de mise en place&nbsp;;",
-                     "puis, à terme, la possibilité de bénéficier de jusqu’à "
-                     "<strong>deux ans de crédit</strong> en cas de mise en vente "
-                     "du bien&nbsp;;",
+            + liste(["un <strong>report de paiement permanent et de "
+                     "droit</strong> pour la résidence principale, dès lors que "
+                     "les revenus du propriétaire sont inférieurs à un "
+                     "seuil&nbsp;;",
                      "une <strong>créance fiscale garantie</strong> sur le bien en "
                      "cas de report&nbsp;;",
                      "une récupération à la vente ou à la succession."])
@@ -745,9 +856,16 @@ FONCIER = "\n".join([
                           "écosystémiques réels.</p>")
             + TABLE_TERRAINS),
     section("local", "Un taux national, une recette partagée",
-            "<p>La LVT aura un <strong>taux national</strong>. Son produit pourra "
-            "être partagé entre l’État et les collectivités territoriales, avec un "
+            "<p>La LVT aura un <strong>taux national</strong>. Son produit est "
+            "partagé entre l’État et les collectivités territoriales, avec un "
             "mécanisme de péréquation.</p>"
+            + "<p>Le partage se fait par <strong>part locale d’assiette</strong> "
+              "et non par dotation&nbsp;: chaque collectivité reçoit le produit "
+              "de la valeur foncière située sur son territoire, corrigé par la "
+              "péréquation. La différence paraît technique&nbsp;; elle décide "
+              "en réalité de la <a href=\"solidite.html#collectivites\">"
+              "constitutionnalité du chapitre</a>, une dotation d’État ne "
+              "comptant pas comme ressource propre.</p>"
             + encadre("", "<p>La LVT doit être nationale dans son taux, mais "
                           "compatible avec une ressource locale lisible et "
                           "péréquée.</p>")
@@ -760,6 +878,27 @@ FONCIER = "\n".join([
               "ou péréqué pour éviter l’explosion des inégalités territoriales. La "
               "suppression immédiate des DMTO devra être compensée dans le cadre de "
               "la réforme d’ensemble des collectivités.</p>"),
+    section("aides", "Pourquoi l’aide au logement ne suit pas le loyer",
+            "<p>Une taxe sur la rente foncière et une aide qui la nourrit ne "
+            "peuvent pas coexister dans le même programme. C’est pourtant ce "
+            "que nous allions faire.</p>"
+            "<p>Une aide indexée sur le loyer effectivement payé solvabilise "
+            "la demande sans augmenter l’offre&nbsp;: là où le foncier est "
+            "rare, le bailleur en capte une fraction substantielle, et c’est "
+            "bien documenté pour l’aide personnalisée au logement. L’argent "
+            "public finit dans la rente que la <i>Land Value Tax</i> a "
+            "précisément pour objet de taxer.</p>"
+            + "<p>Notre aide au logement est donc <strong>forfaitaire par "
+              "zone</strong>, attachée au logement, et indifférente au loyer "
+              "que vous payez. Elle protège le locataire sans renchérir son "
+              "loyer, et elle laisse au signal-prix du sol le soin de faire "
+              "son travail.</p>"
+            + encadre("", "<p>Une aide qui suit le loyer finance le "
+                          "propriétaire. Une aide forfaitaire finance le "
+                          "locataire.</p>")
+            + '<p><a class="bouton" href="revenus.html#logement">Comment elle '
+              'est construite</a></p>'),
+
 ])
 
 
@@ -866,8 +1005,9 @@ CARBONE = "\n".join([
             "assume donc une approche flexible&nbsp;:</p>"
             + liste(["priorité au marché carbone européen lorsque c’est "
                      "possible&nbsp;;",
-                     "mécanismes d’ajustement aux frontières lorsque "
-                     "nécessaire&nbsp;;",
+                     "le soutien au renforcement du mécanisme d’ajustement "
+                     "aux frontières <strong>européen</strong>, seul cadre où "
+                     "il puisse être décidé&nbsp;;",
                      "prise en compte des secteurs exposés à la concurrence "
                      "internationale&nbsp;;",
                      "trajectoire prévisible plutôt que chocs soudains&nbsp;;",
@@ -935,7 +1075,8 @@ TABLE_CRUC = tableau(
 )
 
 TRANSMISSIONS = "\n".join([
-    plan([("receveur", "Imposer le receveur"), ("effets", "Ce que ça change"),
+    plan([("receveur", "Imposer le receveur"), ("comparaison", "La comparaison"),
+          ("hors-ligne", "Hors ligne directe"), ("effets", "Ce que ça change"),
           ("illiquides", "Actifs illiquides"), ("entreprise", "Transmission d’entreprise"),
           ("cruc", "Épargne retraite (CRUC)"), ("exit", "Exit tax"),
           ("non-residents", "Non-résidents")]),
@@ -945,19 +1086,81 @@ TRANSMISSIONS = "\n".join([
             "lien de parenté.</p>"
             + "<p>Chaque individu disposera d’un <strong>compte de réception "
               "patrimoniale</strong> sur l’ensemble de sa vie, doté d’un "
-              "<strong>abattement universel de 100 000 €</strong>. Au-delà, les "
-              "transmissions reçues sont imposées au taux proportionnel commun — le "
-              "même que celui des revenus.</p>"
+              "<strong>abattement universel de 200 000 €</strong>. Au-delà, les "
+              "transmissions reçues sont imposées au taux commun de 33 %, puis "
+              "à <strong>45 % au-delà de 2 millions d’euros</strong> reçus dans "
+              "une vie.</p>"
+            + '<div class="note vigilance"><p>La note fixait cet abattement à '
+              '100 000 €, par symétrie avec le droit actuel. C’était une erreur '
+              'de lecture&nbsp;: aujourd’hui, 100 000 € s’entendent <em>par '
+              'parent</em>. Un enfant qui hérite de son père et de sa mère en a '
+              'donc deux. L’abattement viager en remplace deux&nbsp;: il en '
+              'vaut deux.</p></div>'
             + encadre("", "<p>Ce qui compte n’est pas le lien familial avec le "
                           "donateur, mais le montant reçu par l’individu au cours "
                           "de sa vie.</p>")),
+
+    section("comparaison", "Ce que vous paieriez, et ce que vous payez",
+            "<p>Deux parents, un enfant qui reçoit la moitié de chacun&nbsp;: "
+            "la structure dans laquelle on hérite vraiment.</p>"
+            + tableau(
+                ["Reçu par enfant", "Droits aujourd’hui", "Système cible", "Écart"],
+                [["150 000 €", "0 €", "0 €", "—"],
+                 ["200 000 €", "0 €", "0 €", "—"],
+                 ["300 000 €", "16 389 €", "33 000 €", "+16 611 €"],
+                 ["400 000 €", "36 389 €", "66 000 €", "+29 611 €"],
+                 ["1 000 000 €", "156 389 €", "264 000 €", "+107 611 €"],
+                 ["4 000 000 €", "1 234 789 €", "1 494 000 €", "+259 211 €"],
+                 ["20 000 000 €", "8 434 789 €", "8 694 000 €", "+259 211 €"]],
+                legende="Ligne directe, droit en vigueur contre système cible. "
+                        "La transmission médiane — la maison de famille partagée "
+                        "entre deux enfants — reste non imposée, comme "
+                        "aujourd’hui.")
+            + "<p>Deux choses se lisent dans ce tableau, et nous les assumons "
+              "toutes les deux.</p>"
+            + "<p><strong>Aucune transmission en ligne directe n’est imposée "
+              "moins qu’aujourd’hui</strong>, de 50 000 € à 100 millions. Le "
+              "soupçon de cadeau aux grands héritages ne tient pas, et il ne "
+              "tient pas parce que le calcul le dit.</p>"
+            + "<p><strong>Au-dessus de 200 000 € reçus, les transmissions "
+              "paient davantage.</strong> C’est la contrepartie de ce que nous "
+              "fermons&nbsp;: l’abattement qui se rouvre tous les quinze ans, "
+              "l’assurance-vie, les régimes de faveur — autant de dispositifs "
+              "dont profite surtout celui qui a les moyens d’organiser sa "
+              "transmission à l’avance. Nous préférons un abattement plus "
+              "large pour tous à des portes dérobées pour quelques-uns.</p>"
+            + encadre("", "<p>Nous taxons davantage ce qu’on reçoit sans "
+                          "l’avoir gagné, pour taxer moins ce qu’on gagne en "
+                          "travaillant.</p>")),
+
+    section("hors-ligne", "Les vrais gagnants : tous ceux qui ne sont pas des enfants",
+            "<p>C’est l’effet le plus spectaculaire de la réforme, et celui "
+            "dont on parle le moins. Aujourd’hui, ce que vous payez dépend "
+            "moins de ce que vous recevez que de votre lien avec le "
+            "défunt.</p>"
+            + tableau(
+                ["Qui reçoit 200 000 €", "Aujourd’hui", "Système cible"],
+                [["Un enfant", "0 €", "0 €"],
+                 ["Un neveu ou une nièce", "105 618 €", "0 €"],
+                 ["Un beau-fils, un filleul, un ami, un concubin",
+                  "119 044 €", "0 €"]],
+                legende="Un neveu supporte aujourd’hui 55 % après un abattement "
+                        "de 7 967 € ; une personne sans lien de parenté, 60 % "
+                        "après 1 594 €. Le système cible ne connaît que le "
+                        "montant reçu.")
+            + "<p>Familles recomposées, couples sans enfant, personnes seules, "
+              "fratries, amitiés d’une vie&nbsp;: le droit actuel les traite "
+              "comme des étrangers, et leur prend la moitié de ce qu’on leur "
+              "laisse. Le nôtre leur applique la règle commune.</p>"),
     section("effets", "Ce que ça change",
             liste(["simplifier radicalement les droits de succession&nbsp;;",
                    "supprimer les écarts arbitraires selon le lien familial&nbsp;;",
-                   "protéger les petites transmissions&nbsp;;",
+                   "laisser la transmission médiane non imposée, comme "
+                   "aujourd’hui&nbsp;;",
                    "favoriser indirectement les familles nombreuses, chaque enfant "
                    "disposant de son propre abattement&nbsp;;",
-                   "éviter les taux confiscatoires&nbsp;;",
+                   "ramener au taux commun ce que le droit actuel taxe à "
+                   "55 ou 60 % hors ligne directe&nbsp;;",
                    "réduire les incitations à l’exil patrimonial&nbsp;;",
                    "mieux traiter les transmissions hors cadre familial "
                    "traditionnel."])),
@@ -1072,7 +1275,7 @@ TABLE_PAIE = tableau(
 
 TABLE_MASSES = tableau(
     ["Poste", "Ordre de grandeur / orientation"],
-    [["Impôt proportionnel IR-CSG-CRDS", "Taux à calibrer, objectif &lt; 30 %"],
+    [["Impôt proportionnel IR-CSG-CRDS", "33 %, d’après notre chiffrage"],
      ["TVA à taux unique de 25 %",
       "Rendement majeur, supérieur au système actuel selon l’assiette"],
      ["LVT à 2 %", "Environ 120 Md€ visés, à évaluer"],
@@ -1138,7 +1341,11 @@ CALENDRIER = "\n".join([
                    "extinction du CIR&nbsp;;",
                    "stabilisation du système fiscal&nbsp;;",
                    "évaluation de la LVT&nbsp;;",
-                   "baisse possible du taux proportionnel si la croissance et les "
+                   "baisse du taux proportionnel <strong>si et seulement si</strong> "
+                   "le déficit est passé sous 3 % — voir le "
+                   "<a href=\"depense.html#regle\">chapitre Dépense "
+                   "publique</a>&nbsp;; sur les comptes 2025, le seuil est "
+                   "franchi en quatrième année. Croissance et les "
                    "dépenses le permettent&nbsp;;",
                    "simplification résiduelle."])
             + '<div class="note"><p>La stabilité est un élément du programme, pas '
@@ -1172,13 +1379,26 @@ OBJECTIONS_TEXTE = [
      "un transfert monétaire explicite. Un ménage modeste reçoit le revenu universel "
      "et le dividende carbone&nbsp;: il est protégé directement, plutôt que par "
      "l’espoir incertain qu’un taux réduit soit intégralement répercuté dans les "
-     "prix.</p>"),
+     "prix.</p>"
+     "<p>Nous l’avons chiffré plutôt que de l’affirmer&nbsp;: un ménage du "
+     "premier décile paie environ 1 400 € de TVA en plus et reçoit 5 200 € de "
+     "plus en transferts. Il est <a href=\"qui-gagne.html#deciles\">gagnant "
+     "net</a>. Et parce que l’ordre compte autant que le montant&nbsp;: "
+     "<strong>aucun relèvement de TVA n’interviendra avant que le revenu "
+     "universel ne soit versé à taux plein.</strong></p>"),
     ("L’impôt proportionnel n’est pas progressif",
      "<p>Le taux est proportionnel, mais le système est progressif.</p>"
      "<p>Le revenu universel transforme l’ensemble impôt + transfert en système "
      "progressif&nbsp;: les bas revenus sont bénéficiaires nets, les hauts revenus "
      "contributeurs nets. La progressivité est simplement rendue "
-     "<a href=\"revenus.html#progressivite\">lisible</a>.</p>"),
+     "<a href=\"revenus.html#progressivite\">lisible</a>.</p>"
+     "<p>La <a href=\"qui-gagne.html\">table par décile</a> le montre&nbsp;: "
+     "les sept premiers déciles gagnent ou sont à l’équilibre, les trois "
+     "derniers contribuent, et le millime supérieur paie 8,5 % de son revenu "
+     "disponible en plus. Une <strong>tranche de 40 % au-delà de "
+     "400 000 €</strong> s’ajoute au taux commun pour que le sommet ne gagne "
+     "pas à la réforme&nbsp;: deux taux, là où le droit actuel en aligne cinq "
+     "et un prélèvement forfaitaire par-dessus.</p>"),
     ("La LVT va faire exploser les charges des propriétaires",
      "<p>La LVT <strong>remplace</strong> des impôts existants&nbsp;: taxe foncière, "
      "DMTO, IFI, taxes sur la vacance, fiscalité des plus-values. Elle ne s’ajoute "
@@ -1341,6 +1561,1566 @@ GLOSSAIRE = "\n".join([
 
 # -- les pages ---------------------------------------------------------------
 
+# -- qui gagne, qui perd -----------------------------------------------------
+#
+# La page que tout le monde réclame à un programme fiscal, et qu'aucun ne
+# publie. Elle sort de `scripts/qui_gagne.py`, au paramétrage corrigé : revenu
+# universel de 600 €, taux unique de 36 %, suppléments maintenus.
+#
+# C'est la seule page du site qui avance des chiffres absents de la note. Elle
+# le dit, elle dit d'où ils viennent, et elle dit ce qu'ils valent.
+
+# Décile, solde annuel en euros, part du revenu disponible en points.
+SOLDES_PAR_DECILE = [
+    ("D1", 4125, 24.8), ("D2", 3394, 15.6), ("D3", 823, 2.7), ("D4", 828, 2.5),
+    ("D5", 917, 2.4), ("D6", 319, 0.7), ("D7", 4, 0.0), ("D8", -1436, -2.5),
+    ("D9", -2325, -3.3), ("D10", -784, -0.6),
+]
+SOLDES_AU_SOMMET = [
+    ("Dernier décile, hors 1 %", -3042, -2.9),
+    ("Le centile supérieur", 393, 0.1),
+    ("Le millime supérieur", -93405, -8.5),
+]
+
+# Ménage, revenu disponible actuel, solde, part.
+SOLDES_PAR_MENAGE = [
+    ("Couple, deux enfants, deux SMIC", 42197, 6689, 15.9),
+    ("Retraité seul, 1 400 €/mois", 16111, 1267, 7.9),
+    ("Allocataire de l’AAH", 12000, 18, 0.2),
+    ("Propriétaire âgé à Paris, faible revenu", 18221, 9049, 49.7),
+    ("Célibataire au SMIC, en zone tendue", 22555, 243, 1.1),
+    ("Agriculteur propriétaire de ses terres", 30450, 6185, 20.3),
+    ("Ménage rural, gaz et deux voitures", 44016, 6217, 14.1),
+    ("Cadre célibataire, 80 000 €", 59276, -1178, -2.0),
+    ("Dirigeant de PME, 160 000 €", 123809, -1576, -1.3),
+    ("Héritier de 400 000 €", 31258, -74, -0.2),
+]
+
+
+def part_lue(part: float) -> str:
+    """La part du revenu disponible, telle qu'on la lit.
+
+    Deux ménages sont tenus à l'équilibre par construction : le supplément qui
+    les protège est FIXÉ au montant qui annule leur solde. Écrire « +0,0 % »
+    ferait passer pour une coïncidence ce qui est une règle."""
+    # Un quart de point : en dessous, le solde vaut quelques dizaines d'euros
+    # sur l'année, et l'écrire au dixième de point donnerait à un arrondi
+    # l'allure d'un résultat.
+    if abs(part) < 0.25:
+        return "à l’équilibre"
+    signe = "+" if part >= 0 else "−"
+    return signe + f"{abs(part):.1f}".replace(".", ",") + " %"
+
+
+def barres_divergentes(lignes: list[tuple[str, int, float]],
+                       sommet: list[tuple[str, int, float]]) -> str:
+    """Le solde de chaque décile, en part du revenu disponible.
+
+    Des barres divergentes, parce que la donnée porte un SIGNE : ce qui se lit
+    d'abord n'est pas l'ampleur mais le côté. D'où le zéro au milieu, et deux
+    couleurs opposées de part et d'autre.
+
+    Le vert et le rose de la charte ne se distinguent qu'à ΔE 7,1 pour un œil
+    deutéranope — sous le seuil de 8 en dessous duquel la couleur ne peut plus
+    porter seule une information. Elle ne la porte pas seule : le côté du zéro
+    et le signe du nombre la portent aussi, et ce sont eux qu'on lit. La couleur
+    ne fait que confirmer.
+
+    Le SVG est écrit ici, à la fabrication, et non par un script dans le
+    navigateur : cette page doit se lire sans JavaScript comme les onze autres.
+    """
+    gauche, droite = 168, 736
+    zero = (gauche + droite) / 2
+    # L'échelle se déduit des données. Figée à une amplitude choisie d'avance,
+    # elle laissait la plus longue barre sortir du cadre dès que le chiffrage
+    # bougeait — et c'est arrivé. On réserve en outre de quoi poser l'étiquette
+    # au bout de cette plus longue barre, faute de quoi c'est elle qu'on rogne.
+    reserve = 62
+    amplitude = max(abs(part) for _, _, part in lignes + sommet) * 1.02
+    echelle = ((droite - gauche) / 2 - reserve) / amplitude
+    haut_ligne, epaisseur = 27, 15          # 15 px de barre : sous le plafond de 24
+    marge_haut, separateur = 16, 22
+
+    parties = []
+    y = marge_haut
+
+    def barre(nom, solde, part, discrete=False):
+        nonlocal y
+        largeur = abs(part) * echelle
+        x = zero if part >= 0 else zero - largeur
+        sens = "gain" if part >= 0 else "perte"
+        # Le bout de la barre est arrondi, son pied reste carré sur le zéro :
+        # c'est le zéro qui doit se lire d'un trait, pas chaque barre.
+        rayon = min(4, largeur)
+        if part >= 0:
+            trace = (f"M{x} {y} h{max(largeur - rayon, 0)} a{rayon} {rayon} 0 0 1 "
+                     f"{rayon} {rayon} v{epaisseur - 2 * rayon} a{rayon} {rayon} 0 0 1 "
+                     f"{-rayon} {rayon} h{-max(largeur - rayon, 0)} z")
+        else:
+            trace = (f"M{zero} {y} h{-max(largeur - rayon, 0)} a{rayon} {rayon} 0 0 0 "
+                     f"{-rayon} {rayon} v{epaisseur - 2 * rayon} a{rayon} {rayon} 0 0 0 "
+                     f"{rayon} {rayon} h{max(largeur - rayon, 0)} z")
+        parties.append(f'<path class="marque {sens}" d="{trace}"/>')
+        classe = "nom discret" if discrete else "nom"
+        parties.append(f'<text class="{classe}" x="{gauche - 14}" y="{y + 11}" '
+                       f'text-anchor="end">{escape(nom)}</text>')
+        # Le nombre se pose au bout de la barre, hors d'elle : à 15 px
+        # d'épaisseur, aucun libellé ne tient dedans avec de l'air autour.
+        bout = (x + largeur + 10) if part >= 0 else (x - 10)
+        ancre = "start" if part >= 0 else "end"
+        # La virgule décimale ne se pose que sur le NOMBRE. Appliquée à la
+        # ligne entière, elle atteignait aussi les coordonnées du SVG — et un
+        # `x="612,0"` ne se lit pas : l'étiquette repartait à l'origine.
+        signe = "+" if part >= 0 else "\u2212"
+        mesure = f"{signe}{abs(part):.1f}".replace(".", ",") + "\u00a0%"
+        parties.append(f'<text class="mesure" x="{bout}" y="{y + 11}" '
+                       f'text-anchor="{ancre}">{mesure}</text>')
+        y += haut_ligne
+
+    for nom, solde, part in lignes:
+        barre(nom, solde, part)
+    y += separateur - haut_ligne + haut_ligne
+    trait = y - separateur / 2 - 4
+    parties.append(f'<line class="coupure" x1="{gauche - 150}" x2="{droite}" '
+                   f'y1="{trait}" y2="{trait}"/>')
+    parties.append(f'<text class="intitule" x="{gauche - 150}" y="{trait + 18}">'
+                   f'Le dernier décile, ouvert</text>')
+    y = trait + 30
+    for nom, solde, part in sommet:
+        barre(nom, solde, part, discrete=True)
+
+    hauteur = y + 24
+    axe = (f'<line class="zero" x1="{zero}" x2="{zero}" y1="{marge_haut - 6}" '
+           f'y2="{hauteur - 30}"/>')
+    reperes = (f'<text class="cote" x="{zero - 12}" y="{hauteur - 12}" '
+               f'text-anchor="end">\u2190 ce que le ménage perd</text>'
+               f'<text class="cote" x="{zero + 12}" y="{hauteur - 12}">'
+               f'ce qu\u2019il gagne \u2192</text>')
+    return (f'<figure class="barres"><div class="defilant" tabindex="0">'
+            f'<svg viewBox="0 0 760 {hauteur:.0f}" role="img" aria-label="'
+            f'Solde de la réforme par décile, en part du revenu disponible : '
+            f'positif du premier au sixième décile, négatif ensuite.">'
+            f'{axe}{"".join(parties)}{reperes}</svg></div>'
+            f'<figcaption>Variation du revenu disponible annuel, en part de ce '
+            f'dont le ménage dispose aujourd\u2019hui. Les déciles rangent les '
+            f'ménages du plus modeste au plus aisé ; les trois dernières lignes '
+            f'ouvrent le dernier d\u2019entre eux.</figcaption></figure>')
+
+# -- le simulateur -----------------------------------------------------------
+#
+# Il a longtemps tenu sur trois champs, et ne montrait que l'impôt et le revenu
+# universel. C'était la moitié favorable de la réforme, sur un site dont l'objet
+# est la transparence : la TVA à 25 %, la LVT et le prix du carbone en étaient
+# absents, et c'est par là qu'on l'aurait pris en défaut. Il en montre cinq.
+#
+# Les hypothèses que le lecteur ne peut pas connaître — la part de son panier
+# soumise à TVA, la part du terrain dans la valeur de son logement — ne lui sont
+# pas demandées : elles sont écrites dans `moteur/calculette.js`, en clair, et
+# rappelées sous le résultat.
+
+FORMULAIRE = """<form id="formulaire" novalidate>
+  <fieldset>
+    <legend>Votre foyer</legend>
+    <div class="champs">
+    <p><label for="adultes">Adultes</label>
+    <input type="number" id="adultes" name="adultes" value="2" min="1" max="2"
+           step="1" inputmode="numeric"></p>
+    <p><label for="enfants">Enfants à charge</label>
+    <input type="number" id="enfants" name="enfants" value="2" min="0" max="12"
+           step="1" inputmode="numeric"></p>
+    <p><label for="nature">Nature des revenus</label>
+    <select id="nature" name="nature">
+      <option value="activite">Salaires ou activité</option>
+      <option value="pension">Pensions de retraite</option>
+    </select></p>
+    <p><label for="revenu">Revenus annuels du foyer</label>
+    <input type="number" id="revenu" name="revenu" value="42000" min="0"
+           max="100000000" step="500" inputmode="numeric"></p>
+    <p><label for="capital">Dont revenus du capital</label>
+    <input type="number" id="capital" name="capital" value="0" min="0"
+           max="100000000" step="500" inputmode="numeric"></p>
+    <p><label for="prestations">Prestations reçues (€/mois)</label>
+    <input type="number" id="prestations" name="prestations" value="350" min="0"
+           max="10000" step="10" inputmode="numeric"></p>
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend>Ce que vous dépensez, ce que vous possédez</legend>
+    <div class="champs">
+    <p><label for="epargne">Part du revenu épargnée (%)</label>
+    <input type="number" id="epargne" name="epargne" value="5" min="0" max="90"
+           step="1" inputmode="numeric"></p>
+    <p><label for="logement">Valeur de votre logement</label>
+    <input type="number" id="logement" name="logement" value="0" min="0"
+           max="100000000" step="10000" inputmode="numeric"></p>
+    <p><label for="chauffage">Chauffage</label>
+    <select id="chauffage" name="chauffage">
+      <option value="gaz">Gaz</option>
+      <option value="fioul">Fioul</option>
+      <option value="aucun">Électricité, bois ou réseau</option>
+    </select></p>
+    <p><label for="kilometres">Kilomètres en voiture par an</label>
+    <input type="number" id="kilometres" name="kilometres" value="12000" min="0"
+           max="200000" step="500" inputmode="numeric"></p>
+    </div>
+  </fieldset>
+  <details>
+    <summary>Les hypothèses du programme</summary>
+    <p class="discret">Aucune n’est un chiffre arrêté&nbsp;: la note les donne
+    comme des cibles de travail, et vous pouvez les déplacer.</p>
+    <div class="champs">
+      <p><label for="taux-impot">Impôt proportionnel (%)</label>
+      <input type="number" id="taux-impot" name="taux" value="33" min="0" max="60"
+             step="0.5" inputmode="decimal"></p>
+      <p><label for="ru">Revenu universel (€/mois)</label>
+      <input type="number" id="ru" name="ru" value="600" min="0" max="5000"
+             step="10" inputmode="numeric"></p>
+      <p><label for="ru-enfant">Revenu universel enfant (€/mois)</label>
+      <input type="number" id="ru-enfant" name="ru-enfant" value="300" min="0"
+             max="5000" step="10" inputmode="numeric"></p>
+      <p><label for="tva">TVA (%)</label>
+      <input type="number" id="tva" name="tva" value="25" min="0" max="40"
+             step="0.5" inputmode="decimal"></p>
+      <p><label for="lvt">Land Value Tax (%)</label>
+      <input type="number" id="lvt" name="lvt" value="2" min="0" max="10"
+             step="0.1" inputmode="decimal"></p>
+      <p><label for="carbone">Prix du carbone (€/t)</label>
+      <input type="number" id="carbone" name="carbone" value="200" min="0"
+             max="1000" step="10" inputmode="numeric"></p>
+    </div>
+  </details>
+</form>"""
+
+RESULTAT = """<div class="fiches reperes" id="resultat" aria-live="polite">
+  <div class="fiche"><p class="etiquette">Solde annuel</p>
+  <p class="valeur" id="r-solde">—</p>
+  <p class="precision sens" id="r-sens">—</p></div>
+  <div class="fiche"><p class="etiquette">Part du revenu disponible</p>
+  <p class="valeur" id="r-part">—</p>
+  <p class="precision">Ce que le solde pèse dans ce dont vous disposez
+  aujourd’hui.</p></div>
+  <div class="fiche"><p class="etiquette">Impôt direct seul</p>
+  <p class="valeur" id="r-impot">—</p>
+  <p class="precision">Ce que l’ancien simulateur montrait, et rien de
+  plus.</p></div>
+  <div class="fiche"><p class="etiquette">Valeur de votre terrain</p>
+  <p class="valeur" id="r-capital">—</p>
+  <p class="precision">Une fois, pas chaque année&nbsp;: la LVT se capitalise
+  dans le prix du sol.</p></div>
+</div>"""
+
+CASCADE = """<div class="cascade">
+  <div class="defilant" id="cascade" tabindex="0"></div>
+  <p class="lecture" id="lecture" hidden></p>
+  <p class="aide-clavier">Flèches gauche et droite pour parcourir les marches,
+  Échap pour quitter.</p>
+  <ul class="legende">
+    <li><span class="pastille ecart-plus"></span> Ce que vous gagnez</li>
+    <li><span class="pastille ecart-moins"></span> Ce que vous perdez</li>
+  </ul>
+</div>"""
+
+SIMULATEUR = "\n".join([
+    plan([("votre-cas", "Votre cas"), ("canaux", "Les cinq canaux"),
+          ("hypotheses", "Ce que le calcul suppose"),
+          ("limites", "Ce qu’il ne dit pas")]),
+    section("votre-cas", "Ce que le programme changerait pour vous",
+            "<p>Le calcul se fait dans votre navigateur&nbsp;: rien n’est "
+            "envoyé, rien n’est enregistré, et il n’y a pas de serveur à qui "
+            "vos réponses pourraient partir.</p>"
+            "<p>Il compare deux systèmes fiscaux entiers sur le même ménage. "
+            "Le vôtre d’aujourd’hui est calculé depuis le barème en "
+            "vigueur — décote comprise, et net des réductions et crédits "
+            "d’impôt. Le système cible est celui de la note.</p>"
+            + '<div class="creme calculette" id="calculette">'
+            + FORMULAIRE + RESULTAT + CASCADE
+            + "<p class=\"discret\">La cascade part de zéro et ajoute les cinq "
+              "canaux l’un après l’autre&nbsp;; la dernière colonne est leur "
+              "somme. Survolez une marche, ou parcourez-les au clavier, pour "
+              "lire ce qu’elle recouvre.</p>"
+            + "<noscript>" + tableau(
+                ["Canal", "Effet sur l’année"],
+                [["Impôt direct", "− 10 277 €"],
+                 ["Transferts", "+ 17 400 €"],
+                 ["TVA", "− 2 251 €"],
+                 ["Logement", "0 €"],
+                 ["Énergie", "+ 164 €"],
+                 ["<strong>Solde</strong>", "<strong>+ 5 036 €</strong>"]],
+                legende="Le simulateur a besoin de JavaScript. À défaut, voici "
+                        "le même calcul pour le ménage par défaut du "
+                        "formulaire : deux adultes, deux enfants, 42 000 € de "
+                        "revenus, 350 € de prestations par mois, locataires, "
+                        "chauffage au gaz, 12 000 km par an.") + "</noscript>"
+            + "</div>"),
+    section("canaux", "Les cinq canaux, et pourquoi il en faut cinq",
+            "<p>Une réforme fiscale n’atteint pas un ménage par un seul "
+            "chemin. Ne montrer que l’impôt sur le revenu et le revenu "
+            "universel — ce que faisait ce simulateur jusqu’ici — revient à "
+            "n’en montrer que la moitié favorable&nbsp;:</p>"
+            + tableau(
+                ["Canal", "Aujourd’hui", "Dans le système cible"],
+                [["Impôt direct", "IR, CSG, CRDS, prélèvements sociaux",
+                  "Un impôt proportionnel unique"],
+                 ["Transferts", "RSA, prime d’activité, prestations familiales, APL",
+                  "Le revenu universel, adulte et enfant"],
+                 ["Consommation", "TVA à 20 %, 10 %, 5,5 % et 2,1 %",
+                  "TVA à taux unique de 25 %"],
+                 ["Logement", "Taxe foncière, droits de mutation, IFI",
+                  "Land Value Tax sur le terrain nu"],
+                 ["Énergie", "TICPE et taxes sectorielles",
+                  "Prix plancher du carbone, et dividende rendu"]],
+                legende="Les cinq canaux du simulateur. Les droits de mutation "
+                        "y sont lissés sur la durée moyenne de détention : on "
+                        "les paie tous les quarante ans, et une table annuelle "
+                        "ne saurait les montrer autrement.")
+            + "<p>Le tableau des cas types de la note montre que le classement "
+              "d’un ménage change selon les canaux retenus&nbsp;: un "
+              "propriétaire âgé gagne sur les flux et perd sur son patrimoine, "
+              "un ménage rural perd sur l’énergie et regagne ailleurs. C’est "
+              "pour cela qu’ils sont tous les cinq ici.</p>"),
+    section("hypotheses", "Ce que le calcul suppose",
+            "<p>Trois grandeurs ne vous sont pas demandées, parce que personne "
+            "ne les connaît de mémoire. Elles sont posées, et les voici&nbsp;:</p>"
+            + liste([
+                "<strong>80 %</strong> de votre dépense porte de la "
+                "TVA&nbsp;; le loyer, la santé et l’école n’en portent pas.",
+                "<strong>16,8 %</strong> est le taux moyen que vous supportez "
+                "aujourd’hui, tous taux réduits confondus.",
+                "<strong>La moitié</strong> de la valeur d’un logement est "
+                "celle du terrain — c’est une moyenne nationale, et elle est "
+                "bien plus élevée dans les grandes villes.",
+                "<strong>36 %</strong> est la part de valeur qu’une LVT de 2 % "
+                "retire au terrain, en se capitalisant dans son prix. C’est "
+                "l’argument du programme, et il vaut aussi pour l’assiette de "
+                "l’impôt.",
+                "<strong>421 €</strong> par adulte est le dividende carbone, "
+                "soit la recette du prix plancher rendue aux citoyens.",
+            ])
+            + "<p>Le panier de consommation est tenu constant en volume&nbsp;: "
+              "on compare deux fiscalités sur la même dépense hors taxe, et non "
+              "deux niveaux de vie différents.</p>"),
+    section("limites", "Ce que ce simulateur ne dit pas",
+            "<p>Il calcule un ménage moyen, pas votre feuille d’impôt. Il "
+            "ignore&nbsp;:</p>"
+            + liste([
+                "les cotisations contributives, qui ne changent pas&nbsp;;",
+                "les droits de succession, qui ne sont pas annuels — et qui, "
+                "pour une transmission, pèsent plus lourd que tout le "
+                "reste&nbsp;;",
+                "les effets de la réforme sur les prix, les salaires et "
+                "l’emploi, qui sont réels et qu’aucun calcul à comportements "
+                "inchangés ne peut donner&nbsp;;",
+                "votre situation propre, dès qu’elle sort de la moyenne.",
+            ])
+            + "<p>Un simulateur qui prétendrait davantage mentirait. "
+              "Celui-ci dit d’où viennent ses chiffres, et c’est à cela qu’on "
+              "juge un chiffrage.</p>"),
+])
+
+
+
+QUI_GAGNE = "\n".join([
+    plan([("change", "Ce que le chiffrage a changé"), ("deciles", "Par décile"),
+          ("menages", "Dix ménages"), ("perdants", "Ceux qui y perdent"),
+          ("methode", "D’où viennent ces chiffres")]),
+
+    section("change", "Ce que le chiffrage nous a fait changer",
+            "<p>Nous avons chiffré notre propre programme avant qu’on le fasse "
+            "à notre place. Le calcul a contredit trois de nos annonces. Nous "
+            "les avons corrigées plutôt que de les défendre.</p>"
+            + tableau(
+                ["Ce que nous disions", "Ce que nous disons"],
+                [["Un taux « sous 30 % »",
+                  "<strong>33 %</strong> — un taux sous 30 % ne finance pas un "
+                  "revenu universel de 600 €, et le prétendre aurait coûté plus "
+                  "cher que le reconnaître."],
+                 ["Le revenu universel remplace les prestations",
+                  "Il remplace le RSA, la prime d’activité et les prestations "
+                  "familiales. Il <strong>ne remplace pas</strong> le supplément "
+                  "handicap, l’aide au logement en zone tendue ni l’allocation "
+                  "d’autonomie, qui subsistent au-dessus de lui."],
+                 ["Le revenu universel suit la croissance",
+                  "Il suit la croissance <strong>et ne recule jamais</strong> : "
+                  "un cliquet en euros courants, et un plancher d’inflation."],
+                 ["Un taux unique, sans tranche supérieure",
+                  "<strong>Une tranche de 40 % au-delà de 400 000 €</strong> — "
+                  "nécessaire dès lors que le taux de base descend à 33 %, "
+                  "faute de quoi le centile supérieur gagnerait à la réforme."],
+                 ["Un abattement successoral de 100 000 €",
+                  "<strong>200 000 €</strong> — les 100 000 € du droit actuel "
+                  "s’entendent <em>par parent</em>, et nous en avions fait un "
+                  "abattement viager unique. Nous divisions par deux ce dont "
+                  "dispose un enfant qui hérite de ses deux parents, sans "
+                  "l’avoir voulu ni l’avoir dit — "
+                  "<a href=\"transmissions.html#comparaison\">la "
+                  "comparaison</a>."],
+                 ["L’aide au logement est maintenue",
+                  "Elle est maintenue <strong>et refaite</strong> : attachée au "
+                  "logement et non à la personne, forfaitaire par zone plutôt "
+                  "qu’indexée sur le loyer payé. Sans quoi nous faisions perdre "
+                  "391 € par an à un célibataire au SMIC — "
+                  "<a href=\"revenus.html#logement\">le détail</a>."]],
+                legende="Trois corrections issues du chiffrage. Le détail du "
+                        "calcul est public, et refaisable.")
+            + encadre("", "<p>Le taux qui équilibre se situe entre 32,4 % et "
+                          "33 %, selon qu’on l’établit par le bouclage "
+                          "d’ensemble ou par l’agrégation des ménages. Nous "
+                          "publions la borne haute. D’un programme "
+                          "accusé de ne pas être chiffré, l’erreur qui coûte "
+                          "est celle qui laisse un trou, pas celle qui laisse "
+                          "une marge.</p>")
+            + "<p>Une cinquième correction mérite son paragraphe, parce que nous "
+              "l’avons d’abord écartée puis reprise. Une <strong>tranche de "
+              "40 % au-delà de 400 000 €</strong> s’ajoute au taux commun.</p>"
+            + "<p>Quand notre chiffrage donnait 36,5 %, elle était inutile&nbsp;: "
+              "le sommet acquitte aujourd’hui 30,2 % de ses revenus, le "
+              "prélèvement forfaitaire abritant l’essentiel de son capital, si "
+              "bien qu’un taux commun plus élevé lui était déjà une hausse. À "
+              "33 %, cette marge disparaît et le centile supérieur redevient "
+              "gagnant de 1,2 % — le revenu universel qu’il perçoit dépassant "
+              "le surcroît d’impôt qu’il acquitte.</p>"
+            + "<p>La tranche le ramène à zéro. Elle ne rapporte que 2,4 "
+              "milliards, et c’est le signe qu’elle ne sert pas au "
+              "rendement&nbsp;: elle sert à ce que le sommet ne gagne pas. Son "
+              "prix est doctrinal — « un impôt, un taux » devient « un impôt, "
+              "deux taux » —, et c’est le prix d’avoir baissé le taux de base "
+              "de trois points et demi. Nous préférons ce prix-là à un taux "
+              "plus élevé pour tous.</p>"),
+
+    section("deciles", "Par décile",
+            "<p>Les déciles rangent les ménages du plus modeste au plus aisé, "
+            "dix groupes de trois millions de foyers. Voici ce que la réforme "
+            "leur fait, tous canaux confondus : impôt, transferts, TVA, "
+            "foncier et énergie.</p>"
+            + barres_divergentes(SOLDES_PAR_DECILE, SOLDES_AU_SOMMET)
+            + tableau(
+                ["Décile", "Solde annuel", "Part du revenu disponible"],
+                [[nom, f"{'+' if solde >= 0 else '−'}{abs(solde):,} €".replace(",", " "),
+                  part_lue(part)]
+                 for nom, solde, part in SOLDES_PAR_DECILE]
+                + [[f"<span class=\"dont\">{nom}</span>",
+                    f"{'+' if solde >= 0 else '−'}{abs(solde):,} €".replace(",", " "),
+                    part_lue(part)]
+                   for nom, solde, part in SOLDES_AU_SOMMET],
+                legende="Les mêmes chiffres que la figure, pour qui préfère "
+                        "les lire. Les trois dernières lignes ouvrent le "
+                        "dernier décile : elles ne s’ajoutent pas aux dix "
+                        "premières, elles les détaillent.")
+            + "<p>Le profil est franchement redistributif, et il l’est plus que "
+              "nous ne le pensions&nbsp;: les deux premiers déciles gagnent de "
+              "13 à 23 % de leur revenu disponible, les trois suivants sont à "
+              "l’équilibre, et la contribution croît ensuite. Cette forme "
+              "n’est pas un choix d’affichage — elle nous a été imposée par "
+              "les données, et elle tient à un fait que le débat public "
+              "ignore&nbsp;: le tout premier décile reçoit aujourd’hui <em>moins</em> "
+              "de prestations que le bas-milieu, parce qu’on y trouve des "
+              "retraités à petite pension et des personnes hors de tout "
+              "dispositif. Un revenu universel leur apporte beaucoup, "
+              "précisément parce qu’ils ont peu à perdre.</p>"),
+
+    section("menages", "Dix ménages",
+            "<p>Un décile est une moyenne, et personne ne vit dans une "
+            "moyenne. Voici dix ménages réels dans leur composition, calculés "
+            "un par un. Ils n’ont pas été choisis pour nous arranger : trois "
+            "d’entre eux y perdent.</p>"
+            + tableau(
+                ["Ménage", "Revenu disponible aujourd’hui", "Solde", "Part"],
+                [[nom, f"{dispo:,} €".replace(",", " "),
+                  f"{'+' if solde >= 0 else '−'}{abs(solde):,} €".replace(",", " "),
+                  part_lue(part)]
+                 for nom, dispo, solde, part in SOLDES_PAR_MENAGE],
+                legende="Une ligne ne se lit pas seule : le propriétaire âgé "
+                        "de Paris cesse de payer la taxe foncière et "
+                        "<em>reporte</em> sa LVT, qui court à 10 475 € par an "
+                        "et sera recouvrée sur sa succession. Son gain de "
+                        "trésorerie est réel ; sa position économique, elle, "
+                        "est négative. Le système actuel de chaque ménage est "
+                        "calculé depuis "
+                        "le barème en vigueur : quotient familial, décote, "
+                        "prélèvement forfaitaire sur le capital, et net des "
+                        "réductions et crédits d’impôt.")
+            + '<p><a class="bouton" href="simulateur.html">Calculer votre '
+              'cas</a></p>'),
+
+    section("perdants", "Ceux qui y perdent",
+            "<p>Un programme qui ne fait aucun perdant n’existe pas. Un "
+            "programme qui prétend n’en faire aucun se fait démentir par le "
+            "premier journaliste venu. Voici les nôtres.</p>"
+            + liste([
+                "<strong>Les trois derniers déciles</strong>, de 0,6 % à 3,3 % "
+                "de leur revenu disponible. C’est le choix assumé d’un système "
+                "où la solidarité passe par un transfert visible plutôt que "
+                "par des niches invisibles.",
+                "<strong>Personne, parmi les ménages protégés.</strong> Deux "
+                "d’entre eux perdaient encore dans nos versions précédentes — "
+                "l’allocataire de l’AAH 482 € par an, le célibataire au SMIC "
+                "en zone tendue 391 €. Les deux sont désormais tenus à "
+                "l’équilibre, non par hasard mais par règle : un supplément "
+                "est <a href=\"revenus.html#logement\">fixé au montant qui "
+                "annule la perte</a>, tous canaux comptés.",
+                "<strong>Les propriétaires perdent de la valeur foncière.</strong> "
+                "La <i>Land Value Tax</i> se capitalise dans le prix du "
+                "terrain : environ un tiers de sa valeur, une fois. Un "
+                "ménage médian perd de l’ordre de 19 000 € de patrimoine "
+                "foncier, un ménage du dernier décile près de 219 000 €. "
+                "Cela ne figure dans aucune colonne ci-dessus, parce que ce "
+                "n’est pas un flux annuel — mais c’est réel, et c’est le but : "
+                "faire baisser le prix du sol.",
+                "<strong>Les héritiers, au-dessus de 200 000 € reçus.</strong> "
+                "La transmission médiane reste non imposée, comme aujourd’hui. "
+                "Au-delà, les droits augmentent&nbsp;: 66 000 € sur 400 000 € "
+                "reçus, contre 36 389 € aujourd’hui. C’est la contrepartie de "
+                "l’abattement qui cesse de se rouvrir tous les quinze ans et "
+                "des régimes de faveur que nous fermons&nbsp;; c’est un choix, "
+                "et il est <a href=\"transmissions.html#comparaison\">chiffré "
+                "ligne à ligne</a>. Rien de tout cela ne figure dans les "
+                "tableaux ci-dessus : une succession n’est pas un revenu "
+                "annuel.",
+            ])),
+
+    section("methode", "D’où viennent ces chiffres",
+            "<p>Cette page est la seule du site à avancer des chiffres qui ne "
+            "figurent pas dans la note. Elle doit donc dire ce qu’ils valent, "
+            "et elle le dit sans indulgence.</p>"
+            + liste([
+                "<strong>Ce n’est pas une microsimulation.</strong> Il n’y a "
+                "pas d’enquête sur données individuelles derrière, mais treize "
+                "ménages moyens calibrés sur des ordres de grandeur publics.",
+                "<strong>Le modèle se contrôle.</strong> Réagrégé sur la "
+                "population, il retrouve les masses nationales : CSG à 3 % "
+                "près, impôt sur le revenu à 1 %, prestations à 0,5 %, taxe "
+                "foncière et patrimoine foncier à moins de 1 %. Et deux "
+                "chemins de calibration indépendants donnent au dernier décile "
+                "le même taux effectif, 23,5 % et 23,6 %.",
+                "<strong>Le calcul est à comportements inchangés</strong> : il "
+                "ignore ce que la réforme ferait aux prix, aux salaires et à "
+                "l’emploi. Ces effets sont réels, et ils joueraient "
+                "probablement en sa faveur — nous ne les comptons pas.",
+                "<strong>Le bouclage laisse un résidu</strong> de l’ordre de "
+                "quatre milliards d’euros, soit environ trois dixièmes de "
+                "point de taux. Nous préférons l’écrire que l’arrondir.",
+                "<strong>Tout est public et refaisable.</strong> Le modèle, "
+                "ses hypothèses et ses contrôles tiennent dans deux fichiers "
+                "du dépôt, <code>scripts/qui_gagne.py</code> et "
+                "<code>scripts/bouclage.py</code>. Chaque montant y est isolé "
+                "dans une constante nommée, pour qu’on puisse le contester "
+                "ligne à ligne.",
+            ])
+            + encadre("", "<p>Ces tableaux seront refaits sur données "
+                          "individuelles avant la campagne. Nous les publions "
+                          "dès maintenant parce qu’un ordre de grandeur "
+                          "vérifiable vaut mieux qu’un silence, et parce qu’un "
+                          "programme qui montre lui-même qui y perd ne peut "
+                          "plus être accusé de l’avoir caché.</p>")),
+])
+
+
+
+# -- solidité juridique ------------------------------------------------------
+#
+# Un programme fiscal qui ne dit pas s'il est applicable n'est pas un
+# programme, c'est une pétition. Cette page prend les sept objections qu'un
+# juriste opposera, et y répond — y compris là où la réponse est « nous ne
+# savons pas encore ».
+#
+# Elle est écrite avec une prudence particulière : une référence inexacte sur
+# une page de ce genre vaut mieux ne pas exister. Les décisions citées le sont
+# par leur numéro et leur objet ; les raisonnements qui en sont tirés sont les
+# nôtres, et la page le dit.
+
+def taux_moyens() -> str:
+    """Le taux moyen, revenu par revenu. C'est la pièce du dossier.
+
+    L'article 13 n'impose pas un barème progressif ; il impose que la charge
+    soit répartie selon les facultés. Ce qui doit donc croître, c'est le taux
+    MOYEN — et il croît, sur tout le domaine, sans exception."""
+    lignes = []
+    for revenu in (0, 10_000, 21_800, 30_000, 50_000, 100_000, 400_000, 1_000_000):
+        haut = max(0, revenu - 400_000)
+        impot = (revenu - haut) * 0.33 + haut * 0.40
+        net = impot - 7_200
+        taux = "—" if revenu == 0 else part_lue(net / revenu * 100)
+        lignes.append([
+            f"{revenu:,.0f} €".replace(",", "\u202f"),
+            f"{impot:,.0f} €".replace(",", "\u202f"),
+            ("+" if net >= 0 else "\u2212") + f"{abs(net):,.0f} €".replace(",", "\u202f"),
+            taux,
+        ])
+    return tableau(
+        ["Revenu annuel", "Impôt dû", "Après le revenu universel", "Taux moyen"],
+        lignes,
+        legende="Impôt de 33 %, porté à 40 % au-delà de 400 000 €, et revenu "
+                "universel de 600 € par "
+                "mois. Le taux marginal ne bouge pas ; le taux moyen croît de "
+                "−36 % à +36 %, sans un seul palier où il reculerait.")
+
+
+SOLIDITE = "\n".join([
+    plan([("methode", "Ce que fait cette page"), ("article-13", "Le taux unique"),
+          ("individualisation", "L’individualisation"), ("lvt", "La LVT"),
+          ("collectivites", "Les collectivités"), ("dette", "La dette sociale"),
+          ("union", "Le droit de l’Union"), ("inconnues", "Ce que nous ignorons")]),
+
+    section("methode", "Ce que fait cette page, et ce qu’elle ne fait pas",
+            "<p>Un programme fiscal qui ne dit pas s’il est applicable n’est pas "
+            "un programme, c’est une pétition. Nous avons donc pris les sept "
+            "objections qu’un juriste opposera à cette réforme, et nous y "
+            "répondons ici — y compris là où la réponse est « nous ne savons "
+            "pas encore ».</p>"
+            + '<div class="note vigilance"><p>Ceci est <strong>notre</strong> '
+              'analyse, pas une consultation. Les décisions citées le sont par '
+              'leur numéro et leur objet&nbsp;; les raisonnements qui en sont '
+              'tirés sont les nôtres, et ils ont vocation à être '
+              'contre-expertisés avant tout dépôt de texte. Nous publions '
+              'l’analyse plutôt que ses conclusions, pour qu’on puisse la '
+              'contredire.</p></div>'
+            + "<p>L’exercice a déjà produit trois changements dans le "
+              "programme, signalés au fil de la page&nbsp;: le report de la "
+              "<i>Land Value Tax</i> devient permanent et de droit, son produit "
+              "est réparti par part locale d’assiette et non par dotation, et "
+              "nous cessons d’annoncer un ajustement carbone aux frontières que "
+              "la France ne peut pas décider seule.</p>"),
+
+    section("article-13", "« En raison de leurs facultés » — le taux unique",
+            "<p>L’objection est la première qui viendra&nbsp;: un impôt "
+            "proportionnel serait contraire à l’exigence constitutionnelle de "
+            "progressivité. Elle repose sur une confusion.</p>"
+            + encadre("Article 13 de la Déclaration de 1789",
+                      "<p>« Pour l’entretien de la force publique, et pour les "
+                      "dépenses d’administration, une contribution commune est "
+                      "indispensable&nbsp;: elle doit être également répartie "
+                      "entre tous les citoyens, en raison de leurs "
+                      "facultés. »</p>")
+            + "<p>Le texte n’impose pas un barème progressif. Il impose que la "
+              "charge soit répartie <strong>en raison des facultés "
+              "contributives</strong>, et le Conseil constitutionnel apprécie "
+              "cette exigence sur l’imposition prise dans son ensemble, non "
+              "impôt par impôt. Ce qui doit donc croître avec le revenu, c’est "
+              "le <strong>taux moyen</strong>. Le voici.</p>"
+            + taux_moyens()
+            + "<p>Un ménage sans revenu reçoit 7 200 €. À 21 800 €, il ne paie "
+              "ni ne reçoit. Au-delà, sa contribution nette croît "
+              "continûment, sans un seul palier où elle recule. "
+              "Le système est donc progressif au sens où l’article 13 l’entend, "
+              "et il l’est davantage que l’actuel dans le bas de la "
+              "distribution&nbsp;: un smicard célibataire acquitte aujourd’hui "
+              "près de 10 % de CSG dès le premier euro.</p>"
+            + '<p><a class="bouton" href="qui-gagne.html">La démonstration par '
+              'décile</a></p>'),
+
+    section("individualisation", "L’individualisation, et le précédent de 2012",
+            "<p>C’est le risque le plus sérieux du programme, et nous ne le "
+            "minimisons pas.</p>"
+            "<p>Par sa décision <strong>n° 2012-662 DC</strong> du 29 décembre "
+            "2012, le Conseil constitutionnel a censuré la contribution "
+            "exceptionnelle sur les très hauts revenus d’activité, au motif "
+            "notamment qu’elle frappait les personnes une à une quand l’impôt "
+            "sur le revenu, lui, reste assis sur le foyer&nbsp;: deux ménages "
+            "disposant du même revenu total s’y trouvaient traités "
+            "différemment.</p>"
+            + "<p>Notre réponse tient en deux points, et le second est le plus "
+              "solide&nbsp;:</p>"
+            + liste([
+                "<strong>Ce qui a été censuré, c’est une incohérence, pas "
+                "l’individualisation.</strong> Un prélèvement individuel "
+                "superposé à un impôt familial produit, à revenu égal, deux "
+                "traitements différents. Notre système est individuel de bout "
+                "en bout&nbsp;: il n’y a plus de terme de comparaison "
+                "familial auquel se heurter.",
+                "<strong>Les charges de famille sont prises en compte, "
+                "autrement.</strong> Le quotient familial disparaît, le revenu "
+                "universel enfant le remplace — et il est versé, non déduit, "
+                "donc il vaut autant pour un revenu modeste que pour un revenu "
+                "élevé. C’est une prise en compte plus égale, pas une "
+                "disparition.",
+            ])
+            + "<p>Un point mérite d’être souligné parce qu’il joue pour "
+              "nous&nbsp;: par sa décision <strong>n° 2000-437 DC</strong> du "
+              "19 décembre 2000, le Conseil avait censuré une réduction "
+              "dégressive de CSG qui ne tenait compte ni des autres revenus du "
+              "contribuable ni des personnes à sa charge. Notre dispositif fait "
+              "exactement l’inverse&nbsp;: son assiette couvre tous les revenus "
+              "personnels, et le revenu universel enfant tient compte des "
+              "personnes à charge.</p>"
+            + '<div class="note vigilance"><p>Risque résiduel assumé&nbsp;: nul '
+              'ne peut garantir qu’un système intégralement individuel serait '
+              'validé. C’est la question que nous soumettrons en premier à la '
+              'contre-expertise.</p></div>'),
+
+    section("lvt", "La LVT, la faculté contributive, et un changement de programme",
+            "<p>Objection&nbsp;: une taxe annuelle de 2 % sur la valeur d’un "
+            "terrain frappe un patrimoine sans regarder le revenu de celui qui "
+            "le détient. Pour un propriétaire âgé et modeste, la charge peut "
+            "excéder ses facultés — et une imposition qui fait peser sur une "
+            "catégorie de contribuables une charge excessive au regard de leurs "
+            "facultés contributives est censurée.</p>"
+            + "<p>Trois éléments répondent, et le troisième est nouveau&nbsp;:</p>"
+            + liste([
+                "La détention d’un patrimoine <strong>confère par elle-même "
+                "une capacité contributive</strong> : c’est le fondement admis "
+                "de toute imposition du capital, et la LVT ne fait pas "
+                "exception.",
+                "La LVT <strong>remplace</strong> la taxe foncière, les droits "
+                "de mutation, l’IFI et la taxation des plus-values "
+                "immobilières. Elle ne s’ajoute pas&nbsp;: l’appréciation porte "
+                "sur le solde.",
+                "<strong>Le report de paiement devient permanent et de "
+                "droit</strong> pour la résidence principale d’un propriétaire "
+                "dont les revenus sont inférieurs à un seuil. La créance est "
+                "garantie sur le bien et recouvrée à la cession ou à la "
+                "succession. Personne n’est contraint de vendre&nbsp;: c’est "
+                "ce qui retire à l’objection son objet.",
+            ])
+            + '<div class="note"><p><strong>Ce que cette analyse a changé.</strong> '
+              'La note prévoyait un report limité aux cinq premières années, '
+              'puis à deux ans en cas de mise en vente. Un report qui expire '
+              'laisse revenir la charge excessive qu’il devait écarter&nbsp;; '
+              'un report permanent, garanti sur le bien, ne coûte rien à '
+              'l’État — qui est payé plus tard, pas moins — et ferme '
+              'l’objection.</p></div>'),
+
+    section("collectivites", "L’article 72-2, et un second changement",
+            encadre("Article 72-2, alinéa 3, de la Constitution",
+                    "<p>« Les recettes fiscales et les autres ressources "
+                    "propres des collectivités territoriales représentent, pour "
+                    "chaque catégorie de collectivités, une part déterminante "
+                    "de l’ensemble de leurs ressources. »</p>")
+            + "<p>Le programme supprime les droits de mutation — ressource "
+              "principale des départements — et remplace la taxe foncière par "
+              "une LVT à taux national. Remplacer des impôts locaux par une "
+              "dotation d’État ferait chuter le ratio d’autonomie financière, "
+              "et l’opération serait contestée sur ce fondement.</p>"
+            + "<p>La loi organique compte parmi les ressources propres le "
+              "produit des impositions dont la loi détermine, par collectivité, "
+              "le taux <strong>ou une part locale d’assiette</strong>. C’est "
+              "cette seconde branche qui sauve le dispositif — à condition de "
+              "le construire pour elle.</p>"
+            + '<div class="note"><p><strong>Ce que cette analyse a changé.</strong> '
+              'Le produit de la LVT ne sera pas réparti par dotation, mais par '
+              '<strong>part locale d’assiette</strong> : chaque collectivité '
+              'reçoit le produit de la valeur foncière située sur son '
+              'territoire, corrigé par la péréquation. La ressource reste une '
+              'ressource propre au sens de la loi organique, et le ratio '
+              'd’autonomie est préservé. La différence est technique&nbsp;; '
+              'elle décide de la constitutionnalité du chapitre.</p></div>'
+            + "<p>Reste la suppression des droits de mutation dès la première "
+              "année, avant que la LVT ne monte en charge. Le juge vérifie que "
+              "les ressources ne sont pas restreintes au point d’entraver la "
+              "libre administration des collectivités&nbsp;: la compensation "
+              "de cette première année doit donc être écrite dans le même "
+              "texte que la suppression, et non renvoyée à une réforme "
+              "ultérieure.</p>"),
+
+    section("dette", "La contribution au remboursement de la dette sociale",
+            "<p>La CRDS n’est pas un impôt comme un autre&nbsp;: elle est "
+            "affectée à l’amortissement de la dette sociale, et le cadre "
+            "organique interdit qu’un transfert de dette se fasse sans les "
+            "ressources correspondantes.</p>"
+            + "<p>La fusionner dans l’impôt général suppose donc, dans le même "
+              "texte, d’affecter à la caisse d’amortissement une ressource de "
+              "substitution d’un rendement au moins égal. Ce n’est pas un "
+              "obstacle&nbsp;: c’est un article à écrire, et il doit l’être "
+              "avant l’annonce, faute de quoi « ils suppriment le "
+              "remboursement de la dette sociale » se dira tout seul.</p>"),
+
+    section("union", "Le droit de l’Union, et une annonce que nous retirons",
+            tableau(
+                ["Mesure", "Ce que dit le droit de l’Union"],
+                [["TVA à taux unique de 25 %",
+                  "Compatible. La directive fixe un taux normal minimal de "
+                  "15 % et rend les taux réduits facultatifs : un taux unique "
+                  "est un choix ouvert."],
+                 ["Suppression de l’<i>exit tax</i>",
+                  "Sans difficulté. La Cour de justice a au contraire censuré "
+                  "des dispositifs de ce type (<i>de Lasteyrie du Saillant</i>, "
+                  "C-9/02) : les supprimer va dans le sens du droit de "
+                  "l’Union."],
+                 ["Prix plancher du carbone",
+                  "Possible en complément du marché européen, la fiscalité "
+                  "énergétique européenne fixant des minima et non des "
+                  "maxima."],
+                 ["Ajustement carbone aux frontières",
+                  "<strong>Hors de portée d’un État seul</strong> : la "
+                  "politique commerciale et le mécanisme d’ajustement relèvent "
+                  "de l’Union."],
+                 ["Successions imposées chez le receveur",
+                  "Plutôt plus conforme que le droit actuel : la Cour a censuré "
+                  "à plusieurs reprises des abattements successoraux réservés "
+                  "aux résidents. Un abattement universel, indifférent au lien "
+                  "et à la résidence, ne prête pas le même flanc."]],
+                legende="Les cinq points où le droit de l’Union est le plus "
+                        "souvent invoqué contre une réforme fiscale nationale.")
+            + '<div class="note"><p><strong>Ce que cette analyse a changé.</strong> '
+              'La note annonçait des « mécanismes d’ajustement aux frontières '
+              'lorsque nécessaire ». Nous retirons cette formule : la France ne '
+              'peut pas l’instituer seule. Nous disons désormais ce que nous '
+              'pouvons faire — soutenir et renforcer le mécanisme européen — et '
+              'non ce qu’un gouvernement français serait hors d’état de '
+              'tenir.</p></div>'),
+
+    section("inconnues", "Ce que nous ne savons pas encore",
+            "<p>Quatre questions restent ouvertes. Les taire serait "
+            "exactement ce que cette page a pour objet d’éviter.</p>"
+            + liste([
+                "<strong>L’individualisation intégrale tiendrait-elle&nbsp;?</strong> "
+                "Nous le pensons, pour les raisons dites plus haut. Nul ne peut "
+                "le garantir avant la décision.",
+                "<strong>Quel seuil de revenu ouvre le report de LVT de "
+                "droit&nbsp;?</strong> Trop bas, l’objection de la charge "
+                "excessive revient&nbsp;; trop haut, la LVT cesse de faire "
+                "circuler le foncier.",
+                "<strong>Le calendrier tient-il&nbsp;?</strong> L’évaluation "
+                "séparée du terrain et du bâti sur des dizaines de millions de "
+                "parcelles produira un contentieux de masse, et une procédure "
+                "de contestation doit être prévue avant le premier avis "
+                "d’imposition.",
+                "<strong>Le changement de régime porte-t-il atteinte à des "
+                "situations légalement acquises&nbsp;?</strong> Extinction du "
+                "crédit d’impôt recherche, régimes de faveur successoraux, "
+                "engagements en cours : chacun demande une clause de "
+                "transition, et chacune doit être rédigée.",
+            ])
+            + encadre("", "<p>Un programme solide n’est pas celui qui n’a aucun "
+                          "risque juridique. C’est celui qui les a listés "
+                          "lui-même, les a chiffrés quand c’est possible, et "
+                          "sait lesquels restent ouverts.</p>")),
+])
+
+
+
+# -- dépense publique --------------------------------------------------------
+#
+# Le chapitre Fiscalité renvoie six fois à celui-ci — « État moins dépensier »,
+# « État social recentré », « réforme de la dépense sociale », compensation des
+# collectivités, financement de la santé universelle, « baisse possible du taux
+# si la croissance et les dépenses le permettent ». Tant qu'il n'existait pas,
+# la fiscalité portait seule des promesses qu'elle ne pouvait pas tenir.
+#
+# Les chiffres viennent de `scripts/depense.py`. C'est un chapitre où l'on peut
+# toujours écrire un nombre d'économies plus grand : la page dit donc d'abord
+# ce qu'il faudrait, puis de combien les mesures qu'on sait nommer restent en
+# dessous.
+
+MASSES = [
+    ("Retraites", 410), ("Autres prestations sociales", 300),
+    ("Santé", 268), ("Affaires économiques", 170),
+    ("Enseignement", 153),
+    ("Services publics généraux, hors dette", 124),
+    ("Culture, logement, environnement", 118),
+    ("Défense, ordre et sécurité", 109),
+    ("Charge de la dette", 62),
+]
+
+
+def barres_de_masses(postes: list[tuple[str, int]], total: int) -> str:
+    """Où va l'argent : huit masses, une seule couleur.
+
+    Une seule série, donc une seule couleur : peindre chaque barre selon sa
+    longueur doublerait l'encodage et brûlerait le seul canal libre. Les barres
+    sont rangées par taille décroissante, parce que la question posée est « quoi
+    d'abord » et qu'un ordre alphabétique ne la sert pas.
+    """
+    # La barre la plus longue doit laisser tenir, après elle, son montant PUIS
+    # sa part — sans quoi c'est la plus importante des huit qu'on rogne. La
+    # réserve est mesurée sur ce qui vient après, pas choisie au jugé.
+    gauche, reserve = 300, 164
+    droite = 760 - reserve
+    echelle = (droite - gauche) / max(m for _, m in postes)
+    haut_ligne, epaisseur, marge = 34, 16, 14
+    parties, y = [], marge
+    for nom, montant in postes:
+        largeur = montant * echelle
+        rayon = min(4, largeur)
+        parties.append(
+            f'<path class="marque" d="M{gauche} {y} h{largeur - rayon:.1f} '
+            f'a{rayon} {rayon} 0 0 1 {rayon} {rayon} v{epaisseur - 2 * rayon} '
+            f'a{rayon} {rayon} 0 0 1 {-rayon} {rayon} h{-(largeur - rayon):.1f} z"/>')
+        parties.append(f'<text class="nom" x="{gauche - 14}" y="{y + 12}" '
+                       f'text-anchor="end">{escape(nom)}</text>')
+        parties.append(f'<text class="mesure" x="{gauche + largeur + 10:.1f}" '
+                       f'y="{y + 12}">{montant}\u202fMd€</text>')
+        parties.append(f'<text class="part" x="{gauche + largeur + 76:.1f}" '
+                       f'y="{y + 12}">'
+                       + f"{montant / total * 100:.0f}".replace(".", ",")
+                       + '\u202f%</text>')
+        y += haut_ligne
+    hauteur = y + 6
+    axe = (f'<line class="axe" x1="{gauche}" x2="{gauche}" y1="{marge - 6}" '
+           f'y2="{hauteur - 12}"/>')
+    return (f'<figure class="masses"><div class="defilant" tabindex="0">'
+            f'<svg viewBox="0 0 760 {hauteur}" role="img" aria-label="'
+            f'Répartition de la dépense publique par fonction : retraites '
+            f'410 Md€, autres prestations sociales 300, santé 268, affaires '
+            f'économiques 170, enseignement 153, services publics généraux '
+            f'124, culture logement environnement 118, défense et sécurité '
+            f'109, charge de la dette 62.">'
+            f'{axe}{"".join(parties)}</svg></div>'
+            f'<figcaption>La dépense publique ventilée par fonction, '
+            f'{total}\u202fMd€ au total, soit 57,3\u202f% du produit intérieur '
+            f'brut. Source : Insee, comptes de la Nation 2024, reproportionnés '
+            f'au total 2025. Seul le partage entre retraites et autres '
+            f'prestations est estimé.</figcaption></figure>')
+
+
+DEPENSE = "\n".join([
+    plan([("ou", "Où va l’argent"), ("regle", "La règle"),
+          ("effort", "Ce qu’elle exige"), ("leviers", "Les leviers"),
+          ("pas", "Ce que nous ne coupons pas"),
+          ("renvois", "Les six renvois"), ("manque", "Ce qui manque")]),
+
+    section("ou", "Où va l’argent",
+            "<p>La dépense publique française atteint <strong>1 714 milliards "
+            "d’euros</strong>, soit 57,3 % de la richesse produite. Les "
+            "recettes en couvrent 1 562&nbsp;: il manque <strong>152 "
+            "milliards</strong> chaque année, que nous empruntons. La dette "
+            "atteint 116 % du produit intérieur brut.</p>"
+            "<p>Ces chiffres sont ceux des comptes nationaux de 2025, et leur "
+            "millésime compte plus qu’on ne croit&nbsp;: le déficit était de "
+            "5,8 % en 2024 et de 5,1 % en 2025. Raisonner sur l’année "
+            "précédente aurait décalé nos conclusions de deux ans.</p>"
+            "<p>Aucune proposition d’économie ne se juge sans cette carte. La "
+            "voici, telle que l’Insee la ventile par fonction.</p>"
+            + barres_de_masses(MASSES, 1714)
+            + "<p>Deux lectures s’imposent d’emblée. <strong>Les trois quarts "
+              "de la dépense sont sociaux, éducatifs ou régaliens</strong> — "
+              "c’est-à-dire difficiles à réduire sans toucher à ce que les "
+              "Français attendent de l’État. Et <strong>la charge de la dette, "
+              "55 milliards aujourd’hui, en atteindra 75 d’ici cinq ans</strong> "
+              "du seul fait des taux&nbsp;: c’est le poste qui croît le plus "
+              "vite, et le seul qu’aucune réforme ne peut ralentir une fois "
+              "la dette contractée.</p>"),
+
+    section("regle", "Une règle, plutôt qu’une liste",
+            "<p>Les programmes annoncent des économies. Ils devraient annoncer "
+            "une règle&nbsp;: une liste se négocie ligne à ligne jusqu’à "
+            "disparaître, une règle contraint la totalité de la dépense et se "
+            "vérifie chaque année.</p>"
+            + encadre("La règle du programme",
+                      "<p>La dépense publique ne progresse pas de plus de "
+                      "<strong>2 % par an en valeur</strong> — soit à peu près "
+                      "l’inflation — jusqu’à ce que le déficit soit durablement "
+                      "sous 3 % du produit intérieur brut. "
+                      "<strong>Le taux de l’impôt proportionnel ne baisse pas "
+                      "avant.</strong></p>")
+            + "<p>Cette règle ne réduit pas la dépense&nbsp;: elle cesse de la "
+              "laisser croître plus vite que les prix. C’est déjà considérable, "
+              "parce que sa pente spontanée est d’environ 3,2 % par an.</p>"
+            + tableau(
+                ["Année", "Dépense", "Part du PIB", "Déficit", "Part du PIB"],
+                [["1", "1 748 Md€", "56,7 %", "140 Md€", "4,5 %"],
+                 ["2", "1 783 Md€", "56,2 %", "126 Md€", "4,0 %"],
+                 ["3", "1 819 Md€", "55,6 %", "112 Md€", "3,4 %"],
+                 ["4", "1 855 Md€", "55,1 %", "96 Md€", "2,9 %"],
+                 ["5", "1 893 Md€", "54,5 %", "80 Md€", "2,3 %"]],
+                legende="Croissance réelle supposée de 1,2 % et inflation de "
+                        "1,8 % par an, à prélèvements obligatoires constants. "
+                        "Ce sont nos hypothèses, et elles sont discutables : "
+                        "le calcul est public et se refait avec d’autres.")
+            + '<div class="note vigilance"><p>Conséquence que nous préférons '
+              'écrire nous-mêmes&nbsp;: <strong>le déficit ne repasse sous 3 % '
+              'qu’en quatrième année, et de justesse.</strong> Une baisse du '
+              'taux de 33 % n’est donc envisageable qu’en toute fin de '
+              'quinquennat, à condition que le retour sous le seuil soit '
+              'durable. Sur les comptes de 2024, la même règle ne l’aurait pas '
+              'permise du tout : un demi-point de déficit de départ déplace la '
+              'conclusion de deux ans.</p></div>'),
+
+    section("effort", "Ce que la règle exige vraiment",
+            "<p>Un effort ne se mesure pas par rapport à zéro, mais par rapport "
+            "à la pente. La dépense progresse spontanément d’environ 3,2 % par "
+            "an&nbsp;: vieillissement, dépense de santé, et charge de la dette. "
+            "Tenir 2 % suppose donc de combler, chaque année, l’écart qui se "
+            "creuse entre les deux.</p>"
+            + tableau(
+                ["Année", "Dépense tendancielle", "Dépense sous la règle",
+                 "Écart à combler"],
+                [["1", "1 769 Md€", "1 748 Md€", "21 Md€"],
+                 ["3", "1 884 Md€", "1 819 Md€", "65 Md€"],
+                 ["5", "2 007 Md€", "1 893 Md€", "114 Md€"]],
+                legende="L’écart n’est pas une économie de 114 Md€ sur la "
+                        "dépense d’aujourd’hui : c’est 114 Md€ de dépense "
+                        "future qui n’aura pas lieu. La distinction est celle "
+                        "que les débats budgétaires confondent le plus "
+                        "souvent.")),
+
+    section("leviers", "Les leviers, et ce qu’ils pèsent",
+            "<p>Voici les sept que nous savons nommer, avec leur rendement à "
+            "cinq ans et, dans la même colonne, ce que nous pensons de leur "
+            "solidité. Un levier dont on ne dit pas la fragilité n’est pas un "
+            "chiffrage, c’est une affiche.</p>"
+            + tableau(
+                ["Levier", "À cinq ans", "Ce que nous en pensons"],
+                [["Santé : progression de l’objectif de dépense à l’inflation",
+                  "25 Md€",
+                  "La plus lourde et la moins spectaculaire. Il ne s’agit pas "
+                  "de réduire la dépense de santé, mais de cesser de la "
+                  "laisser croître deux points au-dessus des prix."],
+                 ["Retraites : le compte notionnel stabilise la dépense",
+                  "20 Md€",
+                  "Premier poste de dépense publique. Le mécanisme relève du "
+                  "chapitre Retraites ; celui-ci n’en reprend que l’effet."],
+                 ["Aides aux entreprises : audit général, suppression par défaut",
+                  "20 Md€",
+                  "La commission d’enquête du Sénat de 2025 chiffre ces aides "
+                  "à <strong>211 Md€ au sens large et 108 Md€ au sens "
+                  "strict</strong>, dont plus de 43 Md€ de dépenses fiscales "
+                  "réparties en 255 dispositifs. Nous n’en visons qu’un "
+                  "cinquième : le principe est simple, l’exécution le sera "
+                  "moins, chaque dispositif ayant sa filière et son "
+                  "défenseur."],
+                 ["Millefeuille territorial : une strate en moins", "10 Md€",
+                  "Les économies de fusion territoriale sont régulièrement "
+                  "annoncées et rarement constatées. Nous retenons un montant "
+                  "prudent, et nous doutons."],
+                 ["Effectifs : un départ sur trois non remplacé, hors régalien "
+                  "et enseignement", "5 Md€",
+                  "Environ vingt mille postes par an. Rendement modeste et "
+                  "certain — l’inverse des deux lignes précédentes."],
+                 ["Opérateurs et agences : fusions et suppressions", "5 Md€",
+                  "Plus d’un millier d’opérateurs. Le gain budgétaire est "
+                  "faible ; le gain de lisibilité ne l’est pas."],
+                 ["Gestion des prestations : le revenu universel remplace six "
+                  "guichets", "3 Md€",
+                  "Conséquence mécanique du chapitre Fiscalité : un versement "
+                  "automatique coûte moins à gérer que six prestations sous "
+                  "condition."],
+                 ["<strong>Total</strong>", "<strong>88 Md€</strong>",
+                  "<strong>Soit 77 % de l’écart à combler en cinquième "
+                  "année.</strong>"]],
+                legende="Rendements à l’horizon de cinq ans, en année pleine.")
+            + '<div class="note vigilance"><p><strong>Il manque 26 milliards, '
+              'et nous ne savons pas encore où ils tomberont.</strong> C’est le '
+              'nombre qui décide de la sincérité de ce chapitre. Nous préférons '
+              'l’écrire que d’allonger la liste au jugé — un programme qui '
+              'boucle à l’euro près sur la dépense publique est un programme '
+              'qui n’a pas été chiffré.</p></div>'),
+
+    section("pas", "Ce que nous ne coupons pas",
+            "<p>Un chapitre dépense se juge autant à ce qu’il protège qu’à ce "
+            "qu’il réduit. Quatre engagements, et ils contraignent le "
+            "reste&nbsp;:</p>"
+            + liste([
+                "<strong>Le régalien.</strong> Défense, sécurité, justice, "
+                "diplomatie : 155 Md€, et ce sont les premières missions de "
+                "l’État. Elles sont exclues de la règle du non-remplacement.",
+                "<strong>L’enseignement.</strong> Exclu lui aussi du "
+                "non-remplacement. On ne redresse pas une économie en "
+                "réduisant ce qui la rend productive vingt ans plus tard.",
+                "<strong>Le montant du revenu universel</strong> et des trois "
+                "suppléments qui subsistent — handicap, logement, autonomie. "
+                "Ils sont le socle du système fiscal : les raboter reviendrait "
+                "à défaire la réforme par la dépense.",
+                "<strong>Le niveau de la dépense de santé.</strong> Nous en "
+                "ralentissons la croissance ; nous ne la réduisons pas.",
+            ])),
+
+    section("renvois", "Les six renvois du chapitre Fiscalité",
+            "<p>Le chapitre Fiscalité s’appuie six fois sur celui-ci. Voici ce "
+            "qu’il y trouve.</p>"
+            + tableau(
+                ["Ce que la fiscalité suppose", "Ce que ce chapitre répond"],
+                [["« Un État moins dépensier »",
+                  "La règle des 2 % : de 57,3 % à 54,5 % du PIB en cinq ans."],
+                 ["« Un État social recentré sur l’universel »",
+                  "Le revenu universel remplace six prestations ; trois "
+                  "suppléments subsistent, et la liste est close."],
+                 ["« La réforme de la dépense sociale »",
+                  "Retraites par le compte notionnel, santé par une règle de "
+                  "progression, prestations par le revenu universel."],
+                 ["La compensation des collectivités",
+                  "La part locale d’assiette de la <i>Land Value Tax</i>, et "
+                  "une compensation de la première année écrite dans le texte "
+                  "qui supprime les droits de mutation."],
+                 ["« La bascule des financements santé vers l’impôt »",
+                  "Un <a href=\"sante.html\">socle universel</a> financé par "
+                  "l’impôt général, couvert intégralement, sans cotisation non "
+                  "contributive et sans complémentaire obligatoire."],
+                 ["« Une baisse possible du taux »",
+                  "Pas avant que le déficit soit durablement sous 3 %. Sur les "
+                  "comptes 2025, le seuil est franchi en quatrième année : une "
+                  "baisse devient envisageable en fin de quinquennat, et pas "
+                  "avant."]],
+                legende="Les six renvois, et l’état de chaque réponse.")),
+
+    section("manque", "Ce qui manque encore",
+            "<p>Trois chantiers restent ouverts, et les nommer vaut mieux que "
+            "les laisser découvrir.</p>"
+            + liste([
+                "<strong>Les 26 milliards non identifiés</strong> de la "
+                "cinquième année.",
+                "<strong>Le contenu du panier de soins.</strong> La "
+                "<a href=\"sante.html#perimetre\">page Santé</a> dit qui le "
+                "décidera et selon quelle procédure ; elle ne dit pas ce qu’il "
+                "contiendra, et tant qu’il n’est pas écrit le chiffrage de "
+                "cette réforme reste un ordre de grandeur.",
+                "<strong>La dette.</strong> Ramener le déficit sous 3 % "
+                "stabilise la dette autour de 116 % du PIB ; cela ne la réduit "
+                "pas. Un programme qui prétendrait la faire refluer en cinq "
+                "ans mentirait.",
+            ])
+            + encadre("", "<p>Nous taxons moins le travail, la production et "
+                          "l’investissement. Nous ne prétendons pas pouvoir "
+                          "taxer moins tout court avant d’avoir cessé "
+                          "d’emprunter.</p>")),
+])
+
+
+
+# -- sources -----------------------------------------------------------------
+#
+# La page qui rend le reste contestable. Un chiffre sans millésime ni source
+# n'est pas un chiffre, c'est une affirmation — et la revue critique le
+# reprochait à ce site avant qu'il ne porte cette page.
+#
+# Elle sépare strictement deux choses : ce qui vient d'une série officielle
+# datée, et ce que nous avons estimé. La seconde liste est la plus utile des
+# deux, parce que c'est elle qu'un contradicteur attaquera.
+
+DREES = ("https://drees.solidarites-sante.gouv.fr/publications-communique-de-"
+         "presse-documents-de-reference/panoramas-de-la-drees/241120-Panorama-CNS24")
+
+SENAT_AIDES = "https://www.senat.fr/rap/r24-808-1/r24-808-125.html"
+SENAT_PAYS_BAS = "https://www.senat.fr/lc/lc340/lc340.html"
+INSEE_PATRIMOINE = "https://www.insee.fr/fr/statistiques/8574720"
+INSEE_ERFS = "https://www.insee.fr/fr/statistiques/8731692"
+INSEE_COFOG = "https://www.insee.fr/fr/statistiques/8735252"
+INSEE_APU = "https://www.insee.fr/fr/statistiques/8956575"
+INSEE_IMPOTS = "https://www.insee.fr/fr/statistiques/2381408"
+CC_2012 = "https://www.conseil-constitutionnel.fr/decision/2012/2012662DC.htm"
+CC_2000 = "https://www.conseil-constitutionnel.fr/decision/2000/2000437DC.htm"
+
+SOURCES = "\n".join([
+    plan([("principe", "Le principe"), ("comptes", "Finances publiques"),
+          ("impots", "Rendement des impôts"), ("sante-source", "Santé"),
+          ("droit", "Décisions citées"),
+          ("estime", "Ce que nous estimons"), ("enquete", "Face à l’enquête"),
+          ("errata", "Errata")]),
+
+    section("principe", "Un chiffre sans millésime n’est pas un chiffre",
+            "<p>Tout nombre qui figure sur ce site relève de l’une de deux "
+            "catégories, et nous ne les mélangeons pas.</p>"
+            + '<div class="bascules">'
+            + '<div class="colonne cible"><h3>Sourcé</h3><p>Il vient d’une série '
+              'officielle, il porte son millésime, et le lien y mène. Vous '
+              'pouvez le vérifier sans nous croire.</p></div>'
+            + '<div class="colonne"><h3>Estimé</h3><p>Nous l’avons construit, '
+              'faute de série publique directement utilisable. Il est signalé '
+              'comme tel ici et dans le code, et c’est par là qu’il faut nous '
+              'attaquer.</p></div></div>'
+            + "<p>Les scripts qui produisent nos chiffrages — "
+              "<code>bouclage.py</code>, <code>qui_gagne.py</code>, "
+              "<code>depense.py</code> — isolent chaque montant dans une "
+              "constante nommée, portant sa source ou la mention « estimé » en "
+              "commentaire. Ils sont dans le "
+              f'<a href="{DEPOT}">dépôt</a>, et ils se relancent en une '
+              "commande.</p>"),
+
+    section("comptes", "Finances publiques",
+            tableau(
+                ["Grandeur", "Valeur", "Millésime", "Source"],
+                [["Dépense publique", "1 714,1 Md€ — 57,3 % du PIB", "2025",
+                  f'<a href="{INSEE_APU}">Insee, comptes des APU</a>'],
+                 ["Recettes publiques", "1 561,6 Md€", "2025",
+                  f'<a href="{INSEE_APU}">Insee</a>'],
+                 ["Déficit public", "152,5 Md€ — 5,1 % du PIB", "2025",
+                  f'<a href="{INSEE_APU}">Insee</a>'],
+                 ["Dette publique", "3 460,5 Md€ — 115,6 % du PIB", "2025",
+                  f'<a href="{INSEE_APU}">Insee</a>'],
+                 ["Taux de prélèvements obligatoires", "43,6 % du PIB", "2025",
+                  f'<a href="{INSEE_APU}">Insee</a>'],
+                 ["Terrains : 8 230 Md€, dont 4 596 détenus par les ménages",
+                  "ligne N211", "2024",
+                  f'<a href="{INSEE_PATRIMOINE}">Insee, comptes de patrimoine</a>'],
+                 ["Dépense par fonction : protection sociale 693 Md€, santé "
+                  "261, services généraux 181 dont 60 de charge de la dette",
+                  "1 672 Md€ au total", "2024",
+                  f'<a href="{INSEE_COFOG}">Insee, dépenses par fonction</a>'],
+                 ["Revenu initial et revenu disponible médians, par décile",
+                  "voir la page Qui gagne, qui perd", "2023",
+                  f'<a href="{INSEE_ERFS}">Insee, enquête Revenus fiscaux et '
+                  f'sociaux</a>']],
+                legende="Comptes nationaux, base 2020, données provisoires. "
+                        "Le déficit 2024 s’élevait à 5,8 % : le millésime "
+                        "déplace de deux ans la date à laquelle notre règle "
+                        "de dépense ramène le déficit sous 3 %.")),
+
+    section("impots", "Ce que rapportent les impôts que la réforme touche",
+            tableau(
+                ["Impôt", "Rendement", "Ce que le programme en fait"],
+                [["Taxe sur la valeur ajoutée", "208,8 Md€", "Taux unique de 25 %"],
+                 ["Contribution sociale généralisée", "156,6 Md€",
+                  "Fusionnée dans l’impôt proportionnel"],
+                 ["Impôt sur le revenu", "103,6 Md€",
+                  "Fusionné dans l’impôt proportionnel"],
+                 ["Impôt sur les sociétés", "69,5 Md€", "Ramené vers 15-20 %"],
+                 ["Taxes foncières", "44,2 Md€", "Remplacées par la LVT"],
+                 ["Successions et donations", "21,1 Md€",
+                  "Imposées chez le receveur"],
+                 ["Contribution au remboursement de la dette sociale", "9,3 Md€",
+                  "Fusionnée, avec ressource de substitution"],
+                 ["Impôt sur la fortune immobilière", "2,7 Md€", "Supprimé"]],
+                legende=f'<a href="{INSEE_IMPOTS}">Insee, comptes nationaux</a> '
+                        f'2025 (base 2020, données provisoires). Ces huit '
+                        f'lignes portent l’essentiel du chapitre Fiscalité.')
+            + "<p>Un mot sur l’impôt sur le revenu&nbsp;: les 103,6 Md€ des "
+              "comptes nationaux dépassent les quelque 87 Md€ que le budget de "
+              "l’État présente habituellement, parce qu’ils englobent des "
+              "prélèvements que la présentation budgétaire isole. Notre "
+              "première version retenait le second chiffre, et sous-estimait "
+              "de seize milliards ce que l’impôt proportionnel doit "
+              "remplacer.</p>"),
+
+    section("sante-source", "Dépenses de santé",
+            tableau(
+                ["Grandeur", "Valeur", "Millésime", "Source"],
+                [["Consommation de soins et de biens médicaux",
+                  "≈ 255 Md€ — 8,7 % du PIB", "2024",
+                  f'<a href="{DREES}">DREES, comptes de la santé</a>'],
+                 ["Dépense moyenne par habitant", "3 723 €", "2024",
+                  f'<a href="{DREES}">DREES</a>'],
+                 ["Reste à charge des ménages", "7,2 % de la CSBM", "2022",
+                  f'<a href="{DREES}">DREES</a>'],
+                 ["Panier de soins fixé par voie réglementaire sur avis d’un "
+                  "institut indépendant (Pays-Bas)", "depuis 2006", "2024",
+                  f'<a href="{SENAT_PAYS_BAS}">Sénat, législation comparée</a>']],
+                legende="Le reste à charge français est le plus bas des pays "
+                        "développés : c’est ce chiffre qui interdit de "
+                        "présenter le socle universel comme une réforme "
+                        "d’économies.")),
+
+    section("droit", "Les décisions citées",
+            tableau(
+                ["Décision", "Date", "Ce qu’elle juge"],
+                [[f'<a href="{CC_2012}">n° 2012-662 DC</a>', "29 décembre 2012",
+                  "Censure, au considérant 73, la contribution exceptionnelle "
+                  "sur les très hauts revenus d’activité : en la faisant peser "
+                  "sur les personnes sans tenir compte du foyer fiscal comme le "
+                  "fait l’impôt sur le revenu, le législateur « a méconnu "
+                  "l’exigence de prise en compte des facultés contributives »."],
+                 [f'<a href="{CC_2000}">n° 2000-437 DC</a>', "19 décembre 2000",
+                  "Censure, au considérant 9, une réduction dégressive de CSG "
+                  "qui « ne tient compte ni des revenus du contribuable autres "
+                  "que ceux tirés d’une activité, ni des revenus des autres "
+                  "membres du foyer, ni des personnes à charge »."]],
+                legende="Les deux décisions sur lesquelles repose la page "
+                        "Solidité juridique. Leur texte intégral est en ligne "
+                        "sur le site du Conseil constitutionnel.")
+            + '<div class="note vigilance"><p>La seconde décision ne joue pas '
+              'entièrement en notre faveur, et nous l’écrivons plutôt que de la '
+              'citer à moitié&nbsp;: parmi les trois griefs, notre système en '
+              'lève deux — l’assiette couvre tous les revenus, et le revenu '
+              'universel enfant tient compte des personnes à charge — mais pas '
+              'le troisième, les revenus des autres membres du foyer, que '
+              'l’individualisation écarte par construction. C’est le même '
+              'risque que celui de 2012, et c’est le principal du '
+              'chapitre.</p></div>'),
+
+    section("estime", "Ce que nous estimons, et qui n’est pas sourcé",
+            "<p>Voici la liste que nos adversaires devraient lire en premier. "
+            "Elle est classée par montant en jeu.</p>"
+            + tableau(
+                ["Estimation", "Valeur retenue", "Pourquoi elle n’est pas sourcée"],
+                [["Rendement de la LVT à 2 %", "45 Md€",
+                  "Il n’existe pas d’évaluation publique du foncier nu séparé "
+                  "du bâti. La note annonçait 120 Md€ ; notre calcul en donne "
+                  "45, et c’est le plus grand écart du programme."],
+                 ["Gain de la TVA à taux unique", "95 Md€",
+                  "<strong>Calculé, non estimé</strong> : deux contraintes de "
+                  "de la Cour des comptes — 65 % de "
+                  "l’assiette au taux normal, au moins 47 Md€ de manque à "
+                  "gagner sur les taux réduits — déterminent l’assiette "
+                  "(1 308 Md€) et le taux réduit moyen (8,5 %, ce qui recoupe "
+                  "le mélange réel de 10, 5,5 et 2,1 %). Reste estimé "
+                  "l’abattement d’un cinquième pour comportements, fraude et "
+                  "achats transfrontaliers. <em>Seule source de cette page "
+                  "citée sans lien : le site de la Cour des comptes était "
+                  "indisponible au moment de la publication, et nous ne "
+                  "publions pas un lien que nous n’avons pas ouvert.</em>"],
+                 ["Partage de la protection sociale entre retraites et reste",
+                  "410 et 300 Md€",
+                  "La ventilation par fonction donne 693 Md€ de protection "
+                  "sociale sans publier ce partage. C’est désormais la seule "
+                  "ligne estimée du chapitre Dépense publique."],
+                 ["Les sept leviers d’économies", "88 Md€ à cinq ans",
+                  "Chacun porte son degré de solidité sur la page qui les "
+                  "expose. Un seul s’adosse désormais à un chiffrage "
+                  "officiel : les aides aux entreprises, que la "
+                  f'<a href="{SENAT_AIDES}">commission d’enquête du Sénat</a> '
+                  "évalue à 211 Md€ au sens large et 108 au sens strict."],
+
+                 ["Prélèvement de solidarité sur le capital", "12 Md€",
+                  "Ne figure pas isolément dans les comptes nationaux."],
+                 ["Droits de mutation à titre onéreux", "13 Md€",
+                  "Les départements en ont perçu 9,9 Md€ en 2024 selon "
+                  "l’Observatoire des finances locales ; s’y ajoutent la part "
+                  "communale et les frais d’assiette. L’estimation précédente, "
+                  "16 Md€, datait d’un marché plus actif."],
+                 ["Le modèle par décile et les dix cas types", "—",
+                  "Treize ménages moyens, et non une microsimulation. Mais il "
+                  "est désormais confronté décile par décile à l’enquête "
+                  "Revenus fiscaux et sociaux, qui est construite sur données "
+                  "individuelles : voir ci-dessous."]],
+                legende="Huit estimations, dont trois pèsent assez pour "
+                        "déplacer le taux de l’impôt proportionnel.")),
+
+    section("enquete", "Le modèle par décile, confronté à l’enquête",
+            "<p>Nos tableaux reposent sur treize ménages moyens. Ce n’est pas "
+            "une microsimulation, et nous ne pouvons pas en faire une&nbsp;: "
+            "les données individuelles ne sont pas publiques. Mais on peut "
+            "confronter le modèle à une enquête qui, elle, l’est — l’enquête "
+            "Revenus fiscaux et sociaux, construite sur les déclarations "
+            "réelles.</p>"
+            "<p>L’égalité n’est pas attendue&nbsp;: l’enquête publie des "
+            "<strong>médianes</strong>, le modèle porte des "
+            "<strong>moyennes</strong>. L’écart doit donc être positif, "
+            "minimal au centre de la distribution et croissant vers les "
+            "extrêmes, là où la queue est longue. C’est cette signature qu’on "
+            "vérifie, et non un zéro.</p>"
+            + tableau(
+                ["Décile", "Revenu initial (modèle / enquête)", "Écart",
+                 "Revenu disponible", "Écart"],
+                [["D1", "11 700 / 9 222 €", "+27 %", "16 664 / 13 348 €", "+25 %"],
+                 ["D3", "25 500 / 25 154 €", "+1 %", "30 226 / 27 467 €", "+10 %"],
+                 ["D5", "38 300 / 39 252 €", "−2 %", "37 717 / 36 824 €", "+2 %"],
+                 ["D7", "54 200 / 52 538 €", "+3 %", "48 396 / 46 963 €", "+3 %"],
+                 ["D9", "85 000 / 75 597 €", "+12 %", "70 580 / 64 218 €", "+10 %"],
+                 ["D10", "167 000 / 126 009 €", "+33 %", "123 012 / 100 397 €",
+                  "+23 %"]],
+                legende="Enquête Revenus fiscaux et sociaux 2023, réévaluée en "
+                        "euros 2025. Un décile sur deux ; le contrôle complet "
+                        "s’imprime à chaque exécution de qui_gagne.py.")
+            + "<p>La signature est celle qu’on attendait. Elle ne l’était pas "
+              "au premier essai&nbsp;: le modèle donnait au premier décile un "
+              "revenu disponible supérieur de moitié à celui de l’enquête, "
+              "parce qu’il y concentrait trop de prestations. Le redressement "
+              "a changé la forme de nos résultats — c’est la principale "
+              "correction que cette confrontation a produite, et elle rend le "
+              "programme <em>plus</em> redistributif qu’il ne paraissait.</p>"),
+
+    section("errata", "Errata",
+            "<p>Ce que nous avons publié puis corrigé. Cette liste ne "
+            "s’efface pas&nbsp;: un programme qui corrige ses erreurs et le "
+            "montre vaut mieux qu’un programme qui n’en a jamais eu.</p>"
+            + tableau(
+                ["Ce que nous disions", "Ce que nous disons", "Pourquoi"],
+                [["Taux proportionnel « sous 30 % »", "33 %",
+                  "Le bouclage, une fois fait, ne le permettait pas."],
+                 ["LVT : « environ 120 Md€ »", "45 Md€",
+                  "L’assiette supposée dépassait de moitié la valeur des "
+                  "terrains, et la taxe réduit sa propre assiette."],
+                 ["Abattement successoral de 100 000 €", "200 000 €",
+                  "Les 100 000 € du droit actuel s’entendent par parent."],
+                 ["Report de LVT limité à cinq ans",
+                  "Report permanent et de droit",
+                  "Un report qui expire laisse revenir la charge excessive "
+                  "qu’il devait écarter."],
+                 ["« Mécanismes d’ajustement aux frontières »",
+                  "Soutien au mécanisme européen",
+                  "La France ne peut pas l’instituer seule."],
+                 ["Impôt sur le revenu : 87 Md€", "103,6 Md€",
+                  "Nous avions retenu la présentation budgétaire là où les "
+                  "comptes nationaux s’imposaient."],
+                 ["LVT : « environ 45 Md€ »", "91 Md€",
+                  "Nous avions corrigé les 120 Md€ de la note vers 45 sur une "
+                  "valeur des terrains estimée à 3 500 Md€. Les comptes de "
+                  "patrimoine la donnent à 8 230. Notre correction était plus "
+                  "fausse que l’erreur qu’elle corrigeait."],
+                 ["Taux proportionnel : 36,5 %", "33 %",
+                  "Conséquence directe de la ligne précédente."],
+                 ["Gain de la TVA : 80 Md€", "95 Md€",
+                  "Estimé, et bas d’un cinquième ; il se calcule à partir de "
+                  "deux chiffres publiés par la Cour des comptes."],
+                 ["Profil des prestations par décile",
+                  "Redressé sur l’enquête",
+                  "Nous les concentrions trop sur le premier décile, où "
+                  "dominent en réalité des ménages d’une personne hors de tout "
+                  "dispositif."]],
+                legende="Six corrections publiques. Trois viennent du "
+                        "chiffrage, une du droit, une du droit de l’Union, et "
+                        "la dernière d’une source mal choisie.")),
+])
+
+
+
+# -- socle universel de santé ------------------------------------------------
+#
+# La note fiscale mentionnait un « socle universel de santé » et une « bascule
+# des financements santé universels vers l'impôt » sans jamais dire ce que le
+# socle couvrait. Le chapitre Dépense publique a relevé ce trou ; cette page le
+# comble, autant qu'une page peut le combler — c'est-à-dire en posant la
+# doctrine et en disant qui tranchera le périmètre, pas en le tranchant ici.
+
+SANTE = "\n".join([
+    plan([("etat", "L’état des lieux"), ("doctrine", "Pourquoi l’impôt"),
+          ("socle", "Le socle"), ("libre", "Au-dessus du socle"),
+          ("change", "Ce qui change"), ("perimetre", "Qui tranche le périmètre")]),
+
+    section("etat", "Ce que nous dépensons, et ce qu’il en reste à payer",
+            "<p>La consommation de soins et de biens médicaux atteint environ "
+            "<strong>255 milliards d’euros</strong>, soit 8,7 % de la richesse "
+            "produite et 3 723 euros par habitant. Elle est financée pour "
+            "l’essentiel par l’assurance maladie, pour un huitième environ par "
+            "les organismes complémentaires, et le reste par les ménages.</p>"
+            + encadre("", "<p>Le reste à charge des ménages s’élève à "
+                          "<strong>7,2 %</strong> de cette dépense. C’est le "
+                          "plus bas des pays développés.</p>")
+            + "<p>Ce chiffre commande tout le reste, et il va à l’encontre de "
+              "ce qu’on attend d’un parti libéral&nbsp;: <strong>le problème "
+              "français n’est pas que les patients paient trop.</strong> Ils "
+              "paient moins que partout ailleurs. Le problème est "
+              "l’architecture qui produit ce résultat — deux appareils de "
+              "gestion pour un seul risque, et personne qui sache dire qui "
+              "paie quoi.</p>"
+            + liste([
+                "<strong>Deux étages pour un même soin.</strong> L’assurance "
+                "maladie rembourse une part, une complémentaire en rembourse "
+                "une autre, et chacune entretient son propre appareil de "
+                "gestion, ses propres contrôles, ses propres frais.",
+                "<strong>Une cotisation qui n’ouvre aucun droit "
+                "individualisable.</strong> La cotisation maladie ne crée pas "
+                "de droit proportionnel à ce qu’on a versé&nbsp;: elle "
+                "finance une couverture universelle. Par notre propre "
+                "doctrine, ce n’est donc pas une cotisation, c’est un impôt "
+                "qui ne dit pas son nom.",
+                "<strong>Une complémentaire d’entreprise rendue "
+                "obligatoire.</strong> Elle attache au contrat de travail une "
+                "protection qui devrait tenir à la personne, elle est un "
+                "salaire déguisé fiscalement avantagé, et elle laisse de côté "
+                "précisément ceux qui n’ont pas d’employeur.",
+            ])),
+
+    section("doctrine", "Pourquoi l’impôt, et pas la cotisation",
+            "<p>Le chapitre Fiscalité pose une règle simple&nbsp;: "
+            "<strong>une cotisation ne finance que des droits contributifs</strong>. "
+            "Retraite contributive, assurance chômage, indemnités "
+            "journalières&nbsp;: des droits qu’on ouvre en cotisant, "
+            "proportionnés à ce qu’on a versé.</p>"
+            "<p>La couverture santé universelle n’en est pas. Elle est la même "
+            "pour celui qui a cotisé quarante ans et pour celui qui n’a jamais "
+            "travaillé — et c’est très bien ainsi. Mais alors elle relève de "
+            "l’impôt, et elle doit être financée par lui.</p>"
+            + encadre("", "<p>Ce qui est universel se finance par l’impôt. Ce "
+                          "qui est contributif se finance par la cotisation. "
+                          "La santé est universelle&nbsp;: elle change donc de "
+                          "colonne.</p>")
+            + '<p><a class="bouton" href="principes.html">La règle dont cela '
+              'découle</a></p>'),
+
+    section("socle", "Le socle : un panier, couvert intégralement, pour tous",
+            "<p>Le programme institue un <strong>socle universel de "
+            "santé</strong>&nbsp;: un panier de soins défini, couvert "
+            "<strong>intégralement</strong> par l’impôt général, pour toute "
+            "personne résidant en France, sans condition d’emploi, de statut "
+            "ni de contrat.</p>"
+            + liste([
+                "<strong>Intégralement</strong> veut dire sans ticket "
+                "modérateur ni complémentaire à trouver&nbsp;: ce qui est dans "
+                "le socle est payé, point.",
+                "<strong>Un panier défini</strong> veut dire écrit, publié, "
+                "révisé à date fixe — et non pas « tout », qui n’a jamais été "
+                "une définition.",
+                "<strong>Pour tous</strong> veut dire attaché à la personne et "
+                "non au contrat de travail. Un indépendant, un chômeur, un "
+                "étudiant et un cadre ont la même couverture de base.",
+            ])
+            + "<p>C’est un système <em>plus</em> protecteur que l’actuel pour "
+              "ce qu’il couvre, et plus franc sur ce qu’il ne couvre pas. La "
+              "franchise est le point&nbsp;: aujourd’hui, la frontière existe "
+              "aussi, mais elle est dissimulée dans des taux de "
+              "remboursement que personne ne connaît avant d’en avoir "
+              "besoin.</p>"),
+
+    section("libre", "Au-dessus du socle, l’assurance redevient libre",
+            "<p>Au-delà du panier, l’assurance complémentaire devient "
+            "<strong>facultative et concurrentielle</strong>. La complémentaire "
+            "d’entreprise obligatoire est supprimée&nbsp;; la part que "
+            "l’employeur y consacrait est rendue au salaire, et apparaît sur "
+            "la fiche de paie comme le reste.</p>"
+            + "<p>Chacun s’assure alors s’il le veut, auprès de qui il veut, "
+              "pour ce qu’il veut — un meilleur confort hospitalier, des soins "
+              "hors panier, un dépassement d’honoraires. C’est un marché, et "
+              "il doit en être un&nbsp;: aujourd’hui il n’en est pas un, "
+              "puisque la souscription est imposée et le contrat choisi par "
+              "l’employeur.</p>"
+            + '<div class="note vigilance"><p>Nous n’ignorons pas ce que cela '
+              'déplace. Une partie des salariés verra le coût de sa '
+              'complémentaire apparaître en clair sur sa fiche de paie, là où '
+              'l’employeur en payait la moitié sans que cela se voie. C’est '
+              'exactement l’effet recherché — <a href="principes.html">'
+              'supprimer l’illusion de la gratuité</a> —, et c’est '
+              'politiquement coûteux. Nous l’assumons.</p></div>'),
+
+    section("change", "Ce qui change, et ce qui ne change pas",
+            tableau(
+                ["", "Aujourd’hui", "Dans le système cible"],
+                [["Financement du socle", "Cotisations maladie, CSG, impôts",
+                  "L’impôt proportionnel, et lui seul"],
+                 ["Couverture de base",
+                  "Un taux de remboursement, puis une complémentaire",
+                  "Un panier couvert intégralement"],
+                 ["Complémentaire d’entreprise",
+                  "Obligatoire, choisie par l’employeur, avantagée fiscalement",
+                  "Supprimée ; la part patronale est rendue au salaire"],
+                 ["Qui est couvert",
+                  "Selon le statut, avec des régimes et des ruptures de droits",
+                  "Toute personne résidant en France, sans condition"],
+                 ["Niveau de la dépense de santé", "255 Md€",
+                  "Inchangé. Sa croissance est ralentie, pas son niveau"]],
+                legende="La réforme change qui paie et comment, non combien.")
+            + '<div class="note"><p><strong>Ce n’est pas une réforme '
+              'd’économies, et nous ne la présenterons pas comme telle.</strong> '
+              'Fusionner deux étages de gestion en un seul économise des frais '
+              'de gestion, pas des soins — quelques milliards, pas quelques '
+              'dizaines. Les économies du programme viennent de la '
+              '<a href="depense.html#regle">règle des 2 %</a>, pas de cette '
+              'architecture. Un programme qui promettrait les deux à la fois '
+              'compterait la même somme deux fois.</p></div>'),
+
+    section("perimetre", "Qui tranche le périmètre, et comment",
+            "<p>La question qui décide de tout est&nbsp;: <strong>qu’y "
+            "a-t-il dans le panier&nbsp;?</strong> Nous ne la tranchons pas "
+            "sur cette page, et il faut dire pourquoi plutôt que de faire "
+            "semblant.</p>"
+            "<p>Un panier de soins n’est pas une décision doctrinale&nbsp;: "
+            "c’est une décision médicale, économique et éthique, qui se révise "
+            "à mesure que la médecine change. La trancher dans un programme "
+            "électoral serait la figer pour cinq ans par des gens qui ne sont "
+            "pas les mieux placés pour la prendre.</p>"
+            + "<p>Ce que le programme fixe, c’est la <strong>procédure</strong>&nbsp;:</p>"
+            + liste([
+                "une <strong>autorité indépendante</strong> évalue le service "
+                "médical rendu et propose le panier&nbsp;;",
+                "le <strong>Parlement l’arrête</strong> et le publie, à date "
+                "fixe&nbsp;: ce qui entre, ce qui sort, et pourquoi&nbsp;;",
+                "la <strong>révision est périodique et obligatoire</strong>, "
+                "de sorte qu’un panier ne devienne pas un acquis qu’on n’ose "
+                "plus toucher&nbsp;;",
+                "toute extension du panier est <strong>chiffrée et "
+                "financée</strong> dans le même texte que celui qui la "
+                "décide.",
+            ])
+            + "<p>Cette procédure n’est pas une invention. Les "
+              f'<a href="{SENAT_PAYS_BAS}">Pays-Bas</a> fonctionnent ainsi '
+              "depuis leur réforme de 2006&nbsp;: l’assurance de base y couvre "
+              "un panier dont le contenu est fixé par voie réglementaire, sur "
+              "l’avis d’un institut indépendant, le <i>Zorginstituut "
+              "Nederland</i>. Le panier y exclut explicitement certains postes "
+              "— les lunettes, par exemple — et cette exclusion est écrite, "
+              "donc discutable, donc révisable. C’est exactement ce que nous "
+              "cherchons&nbsp;: non pas un périmètre plus étroit, mais un "
+              "périmètre <em>connu</em>.</p>"
+            + encadre("", "<p>Un programme sérieux ne dit pas ce que "
+                          "contiendra le panier dans dix ans. Il dit qui le "
+                          "décidera, selon quelle règle, et devant qui il en "
+                          "répondra.</p>")
+            + '<div class="note vigilance"><p>C’est le chantier le plus lourd '
+              'du programme, et celui qui est le moins avancé. Nous le disons '
+              'ici plutôt que de le laisser découvrir&nbsp;: tant que le '
+              'panier n’est pas écrit, le chiffrage de cette réforme reste un '
+              'ordre de grandeur.</p></div>'),
+])
+
+
 PAGES = [
     ("index.html", "Programme fiscal — Parti libéral français",
      "Taxer moins le travail,<br> mieux la rente,<br> et redistribuer simplement",
@@ -1367,9 +3147,9 @@ PAGES = [
      "L’impôt sur le revenu, la CSG et la CRDS fusionnent dans un impôt "
      "proportionnel unique. Le barème disparaît, la progressivité reste&nbsp;: "
      "c’est le revenu universel qui la porte.",
-     "Fusion IR-CSG-CRDS en un impôt proportionnel sous 30 %, assiette large, "
+     "Fusion IR-CSG-CRDS en un impôt proportionnel de 33 %, assiette large, "
      "individualisation complète, et revenu universel : le calcul, chiffre par "
-     "chiffre, avec un simulateur.",
+     "chiffre.",
      REVENUS),
     ("consommation.html", "Consommation",
      "Une TVA, un taux",
@@ -1407,16 +3187,69 @@ PAGES = [
      "carbone reversé aux citoyens, pas de taxe spécifique sur l’électricité "
      "bas-carbone, réseau financé en puissance.",
      CARBONE),
+    ("sante.html", "Santé",
+     "Un socle universel,<br> et une assurance redevenue libre",
+     "Un panier de soins défini, couvert intégralement par l’impôt pour tous "
+     "et sans condition d’emploi&nbsp;; au-dessus, l’assurance "
+     "complémentaire cesse d’être obligatoire.",
+     "Socle universel de santé : un panier couvert intégralement par l’impôt, "
+     "la complémentaire d’entreprise supprimée, et la procédure qui fixe le "
+     "périmètre du panier.",
+     SANTE),
     ("transmissions.html", "Transmissions et épargne",
      "Ce qui compte,<br> c’est ce que vous recevez",
      "Successions et donations fusionnées et imposées chez le receveur, avec un "
-     "abattement universel de 100 000 € sur la vie entière&nbsp;; l’entreprise "
+     "abattement universel de 200 000 € sur la vie entière&nbsp;; l’entreprise "
      "productive protégée&nbsp;; l’épargne retraite taxée une seule fois.",
      "Successions et donations imposées chez le receveur avec abattement "
-     "universel de 100 000 €, carry-over basis pour la transmission "
+     "universel de 200 000 €, carry-over basis pour la transmission "
      "d’entreprise, Compte Retraite Universel Capitalisé, suppression de l’exit "
      "tax.",
      TRANSMISSIONS),
+    ("simulateur.html", "Simulateur",
+     "Ce que ça change<br> pour vous",
+     "Le programme atteint un ménage par cinq canaux&nbsp;: l’impôt, les "
+     "transferts, la TVA, le foncier et l’énergie. Les voici tous les cinq, "
+     "calculés dans votre navigateur.",
+     "Simulateur du programme fiscal : impôt proportionnel, revenu universel, "
+     "TVA à 25 %, Land Value Tax et dividende carbone, calculés ensemble pour "
+     "votre ménage.",
+     SIMULATEUR),
+    ("qui-gagne.html", "Qui gagne, qui perd",
+     "Nous avons chiffré,<br> et nous publions le résultat",
+     "Décile par décile et ménage par ménage&nbsp;: ce que la réforme fait au "
+     "revenu disponible, y compris à ceux qui y perdent — et les trois "
+     "annonces que le chiffrage nous a fait corriger.",
+     "Qui gagne et qui perd au programme fiscal : le solde par décile et pour "
+     "dix ménages types, tous canaux confondus, avec la méthode et ses limites.",
+     QUI_GAGNE),
+    ("solidite.html", "Solidité juridique",
+     "Ce qui peut être voté,<br> et ce qui reste ouvert",
+     "Les sept objections qu’un juriste opposera à cette réforme, et nos "
+     "réponses — y compris les quatre questions auxquelles nous n’avons pas "
+     "encore de réponse certaine.",
+     "Solidité juridique du programme fiscal : article 13 de la Déclaration de "
+     "1789, individualisation, Land Value Tax et faculté contributive, "
+     "autonomie financière des collectivités, droit de l’Union.",
+     SOLIDITE),
+    ("depense.html", "Dépense publique",
+     "Une règle,<br> plutôt qu’une liste",
+     "La dépense ne progresse pas de plus de 2 % par an jusqu’à ce que le "
+     "déficit passe sous 3 %, et le taux de l’impôt ne baisse pas avant. Ce "
+     "que cela exige, et les 26 milliards que nous ne savons pas encore où "
+     "prendre.",
+     "Chapitre Dépense publique : où vont les 1 714 Md€, la règle de "
+     "progression à 2 %, les sept leviers chiffrés et l’écart qui reste à "
+     "combler.",
+     DEPENSE),
+    ("sources.html", "Sources et errata",
+     "D’où vient chaque chiffre,<br> et lesquels nous avons corrigés",
+     "Ce qui est sourcé, ce qui est estimé, les décisions de justice citées, "
+     "et la liste de ce que nous avons publié puis corrigé.",
+     "Sources du programme fiscal : comptes nationaux 2025, rendement des "
+     "impôts, décisions du Conseil constitutionnel citées, estimations "
+     "assumées et errata.",
+     SOURCES),
     ("calendrier.html", "Mise en œuvre",
      "Cinq ans,<br> et ce qui tombe dès la première année",
      "Ce qui est supprimé immédiatement, ce qui converge progressivement, et les "
@@ -1496,7 +3329,7 @@ def ecrire(verifier: bool = False) -> int:
             affiche=affiche(surtitre, titre, chapeau),
             corps=corps,
             pied=pied(),
-            script=SCRIPT_CALCULETTE if fichier == "revenus.html" else "",
+            script=SCRIPT_CALCULETTE if fichier == "simulateur.html" else "",
         )
         chemin = RACINE / fichier
         ancien = chemin.read_text(encoding="utf-8") if chemin.exists() else None

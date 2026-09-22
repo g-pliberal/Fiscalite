@@ -88,17 +88,27 @@ droits de succession sur la maison de vos parents » et « ils font économiser
 transmissions » et « éviter les taux confiscatoires ». La contradiction est
 documentable en une capture d'écran.
 
-**Ce qu'il faut faire.** Trois corrections, toutes peu coûteuses :
+**Fait.** Les trois corrections sont appliquées, et la première avait une
+justification plus simple que celle que j'avançais :
 
-- **Relever l'abattement viager à 250 000 €** (l'ordre de grandeur d'un
-  patrimoine médian transmis). Le discours « protéger les petites
-  transmissions » redevient vrai.
-- **Ajouter un second taux au-delà d'un seuil élevé** — par exemple 45 % au-delà
-  de 2 M€ reçus dans la vie. Deux taux sur un compte viager restent infiniment
-  plus simples que le barème actuel × six liens de parenté, et l'attaque
-  « cadeau aux héritiers de 20 M€ » tombe.
-- **Publier le tableau ci-dessus**, corrigé. Un programme qui montre lui-même
-  qui paie plus ne peut plus être accusé de l'avoir caché.
+- **Abattement viager porté à 200 000 €**, non parce que c'est l'ordre de
+  grandeur d'un patrimoine médian, mais parce que **les 100 000 € du droit
+  actuel s'entendent par parent**. Un enfant qui hérite de ses deux parents en
+  a deux. L'abattement viager en remplace deux : il en vaut deux. La règle se
+  dit en une phrase, et c'est ce qui la rend défendable.
+- **Second taux de 45 % au-delà de 2 M€ reçus dans la vie.** Résultat vérifié
+  par balayage de 50 000 € à 100 M€ : *aucune transmission en ligne directe
+  n'est imposée moins qu'aujourd'hui.* L'attaque « cadeau aux grands
+  héritages » ne tombe pas par un argument, elle tombe par le calcul.
+- **Le tableau est publié** sur `transmissions.html`, écarts compris — y
+  compris le fait qu'au-dessus de 200 000 € reçus, les droits augmentent.
+
+Une asymétrie mérite d'être notée, parce qu'elle sera relevée : une seconde
+tranche est nécessaire ici alors qu'elle ne l'était pas pour les revenus. Elle
+s'explique en une ligne. Le sommet acquitte aujourd'hui 30,5 % de ses *revenus*
+— un taux commun de 36 % lui est donc déjà une hausse. Il acquitte jusqu'à 45 %
+de ce qu'il *reçoit* — le même taux commun lui serait un cadeau. Le principe ne
+change pas, seule la conclusion diffère.
 
 Et rappeler ce que la réforme améliore vraiment, qui est aujourd'hui tu : un
 neveu paie 55 %, un tiers 60 %, avec un abattement de 1 594 €. Le système cible
@@ -106,7 +116,17 @@ les ramène au taux commun. Pour les familles recomposées, les couples sans
 enfant, les beaux-enfants, c'est une baisse massive. C'est le meilleur argument
 du chapitre et il n'est écrit nulle part.
 
-## 3. Les 120 Md€ de LVT sont environ le double du possible
+## 3. ~~Les 120 Md€ de LVT sont environ le double du possible~~ — j'avais tort
+
+> **Correction.** Ce paragraphe était faux, et c'est la plus grosse erreur de
+> tout cet audit. J'estimais la valeur des terrains à 3 500 Md€ faute de
+> l'avoir cherchée : les comptes de patrimoine de l'Insee la publient, ligne
+> N211, à **8 230 Md€** (dont 4 596 aux ménages, 1 043 aux administrations).
+> Le rendement de la LVT est d'environ **91 Md€**, non 45. La note visait trop
+> haut d'un tiers ; je visais deux fois trop bas. Conséquence : le taux de
+> l'impôt proportionnel descend de 36,5 % à 34,5 %. Le texte d'origine est
+> conservé ci-dessous, parce qu'un audit qui efface ses erreurs ne vaut pas
+> mieux que le programme qu'il audite.
 
 La valeur de l'ensemble des terrains en France est de l'ordre de **3 500 Md€**.
 Les 120 Md€ annoncés à 2 % supposent une assiette de **6 000 Md€**, soit 1,7
@@ -286,7 +306,10 @@ est une attaque imparable contre un outil dont l'objet même est la transparence
 → Ajouter les trois volets manquants (consommation, foncier détenu, énergie),
 ou, à défaut, afficher au-dessus du résultat ce qu'il ne comprend pas.
 
-**Les sources.** Aucun chiffre du site n'est référencé. Pour un programme qui
+**Les sources.** ~~Aucun chiffre du site n'est référencé.~~ — `sources.html`
+sépare désormais ce qui est sourcé de ce qui est estimé, cite les deux décisions
+du Conseil constitutionnel avec leur considérant, et tient un errata de six
+corrections publiques. Pour mémoire, le texte d'origine : Pour un programme qui
 veut être « béton », chaque nombre doit porter sa source, son millésime et son
 lien : voies et moyens, comptes de la Nation, rapports de la Cour des comptes.
 → Une page `sources.html`, un appel de note par chiffre, et une page d'errata
@@ -297,7 +320,9 @@ menti : il prouve qu'on corrige.
 (« État moins dépensier », « État social recentré », « réforme de la dépense
 sociale », compensation des collectivités, financement de la santé universelle).
 Tant qu'il n'existe pas, la fiscalité porte seule des promesses qu'elle ne peut
-pas tenir.
+pas tenir. — **Écrit depuis** : `depense.html`, et les six renvois y ont chacun
+leur réponse. Il reste un chantier que ce chapitre ouvre sans le refermer : le
+périmètre du socle universel de santé, qui mérite son propre texte.
 
 ## 9. Cinq points techniques qui feront perdre une semaine chacun
 
@@ -347,8 +372,8 @@ figurer dans le programme, avec les décisions citées, avant qu'on la réclame.
 
 **Avant toute communication publique**
 
-1. Faire et publier le bouclage d'ensemble ; trancher entre « sous 30 % » et
-   « 600 € » (§1).
+1. ~~Faire et publier le bouclage d'ensemble ; trancher entre « sous 30 % » et
+   « 600 € »~~ — fait : 36 %, publié avec le calcul (§1).
 2. Corriger les 120 Md€ de LVT et trancher le sort de la taxe foncière (§3).
 3. Relever l'abattement successoral et ajouter un taux supérieur (§2).
 4. Écrire la liste de ce que le RU remplace, et des suppléments qui subsistent (§6).
